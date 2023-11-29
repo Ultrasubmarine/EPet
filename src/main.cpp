@@ -6,11 +6,25 @@
 //
 
 #include <iostream>
+#include "Game.hpp"
+
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "---Hello, I'm your EPet <3---\n";
     
-    
+    Game myGame;
+    system("clear");
+
+    char x = 0;
+    while(x != 'e')
+    {
+        myGame.Loop();
+        
+        std::cin>>x;
+        if(x == 'w')
+            myGame.SetState(Game::State::Wait);
+        if(x == 'a')
+            myGame.SetState(Game::State::Active);
+    }
     return 0;
 }
