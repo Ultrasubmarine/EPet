@@ -11,14 +11,11 @@
 #include <stdio.h>
 #include <string>
 
+class Timer;
 struct PetAvatar
 {
     std::string view = "-----------------\n\n\n       ^  ^\n      (. .)          \n\n   I'm awake :)\n\n-----------------";
 
-};
-class Timer
-{
-    float currTime;
 };
 
 class Game
@@ -31,7 +28,7 @@ public:
     };
     
     Game();
-    ~Game(){ delete _timer;};
+    ~Game();
     
     void Loop();
     

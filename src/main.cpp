@@ -10,11 +10,11 @@
 
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    
+  
     Game myGame;
     system("clear");
 
+    //TODO ADD thread to not blocking input
     char x = 0;
     while(x != 'e')
     {
@@ -25,6 +25,8 @@ int main(int argc, const char * argv[]) {
             myGame.SetState(Game::State::Wait);
         if(x == 'a')
             myGame.SetState(Game::State::Active);
+        
+  
     }
     return 0;
 }

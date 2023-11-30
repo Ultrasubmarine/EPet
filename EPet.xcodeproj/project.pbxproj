@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		024F4BC22B151C0500E6064A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BBB2B151B0400E6064A /* main.cpp */; };
 		024F4BC52B152E8B00E6064A /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BC32B152E8B00E6064A /* Game.cpp */; };
+		024F4BC82B1929B000E6064A /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BC62B1929B000E6064A /* Timer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		024F4BBB2B151B0400E6064A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		024F4BC32B152E8B00E6064A /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = src/Game.cpp; sourceTree = "<group>"; };
 		024F4BC42B152E8B00E6064A /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Game.hpp; path = src/Game.hpp; sourceTree = "<group>"; };
+		024F4BC62B1929B000E6064A /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = src/Timer.cpp; sourceTree = "<group>"; };
+		024F4BC72B1929B000E6064A /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Timer.hpp; path = src/Timer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,8 @@
 		024F4BAF2B151B0400E6064A = {
 			isa = PBXGroup;
 			children = (
+				024F4BC62B1929B000E6064A /* Timer.cpp */,
+				024F4BC72B1929B000E6064A /* Timer.hpp */,
 				024F4BC32B152E8B00E6064A /* Game.cpp */,
 				024F4BC42B152E8B00E6064A /* Game.hpp */,
 				024F4BBB2B151B0400E6064A /* main.cpp */,
@@ -116,6 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024F4BC82B1929B000E6064A /* Timer.cpp in Sources */,
 				024F4BC22B151C0500E6064A /* main.cpp in Sources */,
 				024F4BC52B152E8B00E6064A /* Game.cpp in Sources */,
 			);

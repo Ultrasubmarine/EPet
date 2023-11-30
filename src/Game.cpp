@@ -8,10 +8,17 @@
 #include "Game.hpp"
 #include <iostream>
 
+#include "Timer.hpp"
+
 Game::Game() //: _currentState(State::Active)
 {
     _timer = new Timer();
     SetState(State::Active);
+}
+
+Game::~Game()
+{
+    delete _timer;    
 }
 
 void Game::SetState(State newState)
@@ -60,5 +67,6 @@ void Game::Loop()
     else
     {
         std::cout << "wait state";
-    }
+    }    
+    _timer->PrintTime();
 }
