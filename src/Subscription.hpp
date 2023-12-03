@@ -12,37 +12,52 @@
 #include <list>
 #include <functional>
 
-class Signal;
-
-
-template<class T>
-class Subscription2
-{
-    std::function<void(T)> f;
-};
-
-//template<class T>
-class Subscription
-{
-    std::function<void()> _callBack;
-    Signal *_signal;
-    
-public:
-    Subscription(std::function<void()> callBack);
-    
-    void Call() const;
-    void Reset();
-};
-
-
+template<typename T>
 class Signal
 {
-    std::list<const Subscription*> _subscribers;
-    Subscription2<int> s;
 public:
-    void Broadcast();
+    class Subscription
+    {
+        std::function<void(T)> _callBack;
+        Signal<T> _signal;
+    public:
+        Subscription(std::function<void(T)>  callBack): _callBack(callBack){};
+        
+        void Call(T data) const {_callBack(data);};
+        void Reset() { _signal->Unsubscribe(this);};
+    };
+private:
+    std::list<const Subscription*> _subscribers;
+public:
+    void Broadcast(T data);
     
-    Subscription* Subscribe(std::function<void()> callBack);
-    void Unsubscribe(const Subscription *subscriber);
+    Signal<T>::Subscription* Subscribe(std::function<void(T)>  callBack);
+    void Unsubscribe(const Signal<T>::Subscription *subscriber);
+};
+
+
+
+template<typename T>
+void Signal<T>::Broadcast(T data)
+{
+    for(const auto& s: _subscribers)
+    {
+        s->Call(data);
+    };
+};
+
+template<typename T>
+typename Signal<T>::Subscription* Signal<T>::Subscribe(std::function<void(T)>  callBack)
+{
+    auto s = new Signal<T>::Subscription(callBack);
+    _subscribers.push_back(s);
+    return s;
+};
+
+template<typename T>
+void Signal<T>::Unsubscribe(const Signal<T>::Subscription *subscriber)
+{
+    _subscribers.remove(subscriber);
+    delete subscriber;
 };
 #endif /* Subscription_hpp */
