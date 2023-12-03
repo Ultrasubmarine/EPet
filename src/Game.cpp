@@ -9,10 +9,12 @@
 #include <iostream>
 
 #include "Timer.hpp"
-
+#include "Schedule.hpp"
 Game::Game() //: _currentState(State::Active)
 {
     _timer = new Timer();
+    _schedule = new Schedule(_timer);
+    
     SetState(State::Active);
 }
 

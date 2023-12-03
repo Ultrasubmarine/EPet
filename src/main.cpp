@@ -8,12 +8,12 @@
 #include <iostream>
 #include "Game.hpp"
 
-
 int main(int argc, const char * argv[]) {
   
     Game myGame;
     system("clear");
 
+    
     //TODO ADD thread to not blocking input
     char x = 0;
     while(x != 'e')

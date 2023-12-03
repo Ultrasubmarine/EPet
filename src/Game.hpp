@@ -12,6 +12,7 @@
 #include <string>
 
 class Timer;
+class Schedule;
 struct PetAvatar
 {
     std::string view = "-----------------\n\n\n       ^  ^\n      (. .)          \n\n   I'm awake :)\n\n-----------------";
@@ -37,6 +38,7 @@ public:
         
     //TODO passive list
     Timer* _timer;
+    Schedule* _schedule;
     
 private:
     State _currentState;

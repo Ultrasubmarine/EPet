@@ -11,13 +11,27 @@
 #include <stdio.h>
 #include <chrono>
 
+#include "Subscription.hpp"
+
 class Timer
 {
     std::chrono::steady_clock::time_point _startTime;
+    
     //TODO Add std::chrono::system_clock to represent real clock forPet schedule;
+    std::chrono::steady_clock::time_point _lastCallTime;
+    
+    Signal _onTimeUpdated;
+    
 public:
     Timer();
     
-    void PrintTime();    
+    //Subscribers  _;
+   //  Subscribe()
+    // Unscribe();
+    void PrintTime();
+    
+    Signal& GetOnTimeUpdatedSignal() {return _onTimeUpdated;};
+    
+    
 };
 #endif /* Timer_hpp */
