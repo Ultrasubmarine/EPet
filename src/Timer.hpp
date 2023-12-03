@@ -20,7 +20,7 @@ class Timer
     //TODO Add std::chrono::system_clock to represent real clock forPet schedule;
     std::chrono::steady_clock::time_point _lastCallTime;
     
-    Signal<int> _onTimeUpdated;
+    Signal<void> _onTimeUpdated;
     
 public:
     Timer();
@@ -30,7 +30,7 @@ public:
     // Unscribe();
     void PrintTime();
     
-    Signal<int>& GetOnTimeUpdatedSignal() {return _onTimeUpdated;};
+    Signal<void>& GetOnTimeUpdatedSignal() {return _onTimeUpdated;};
     
     
 };

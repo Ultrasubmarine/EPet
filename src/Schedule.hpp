@@ -16,7 +16,7 @@
 
 class Schedule
 {
-    Signal<int>::Subscription* _onTimeUpdate;
+    Signal<void>::Subscription* _onTimeUpdate;
     
 public:
     Schedule(Timer* t);

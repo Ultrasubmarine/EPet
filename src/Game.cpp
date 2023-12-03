@@ -20,6 +20,7 @@ Game::Game() //: _currentState(State::Active)
 
 Game::~Game()
 {
+    delete _schedule;
     delete _timer;    
 }
 
