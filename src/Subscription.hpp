@@ -21,24 +21,29 @@
 template<typename...Args>
 class Signal
 {
-public:
-    class Subscription
+    class _Subscription
     {
         std::function<void(Args...)> _callBack;
         Signal<Args...> *_signal;
     public:
-        Subscription(std::function<void(Args...)>  callBack): _callBack(callBack){};
-        
+
+        _Subscription(std::function<void(Args...)>  callBack, Signal<Args...>* signal): _callBack(callBack),
+                                                                                        _signal(signal) {};
         void Call(Args...args) const {_callBack(args...);};
         void Reset() { _signal->Unsubscribe(this);};
     };
+public:
+    using Subscription = std::weak_ptr<_Subscription>;
+    
+    ~Signal();
 private:
-    std::list<const Subscription*> _subscribers;
+    std::list<std::shared_ptr<_Subscription>> _subscribers;
 public:
     void Broadcast(Args... data);
     
-    Signal<Args...>::Subscription* Subscribe(std::function<void(Args...)>  callBack);
-    void Unsubscribe(const Signal<Args...>::Subscription *subscriber);
+    Signal<Args...>::Subscription Subscribe(std::function<void(Args...)> callBack);
+    void Unsubscribe(Signal<Args...>::Subscription subscriber);
+    void Unsubscribe(Signal<Args...>::_Subscription* subscriber);
 };
 
 template<typename ...Args>
@@ -51,18 +56,38 @@ void Signal<Args...>::Broadcast(Args... data)
 };
 
 template<typename ...Args>
-typename Signal<Args...>::Subscription* Signal<Args...>::Subscribe(std::function<void(Args...)>  callBack)
+typename Signal<Args...>::Subscription Signal<Args...>::Subscribe(std::function<void(Args...)> callBack)
 {
-    auto s = new Signal<Args...>::Subscription(callBack);
+    auto s = std::make_shared<Signal<Args...>::_Subscription>(callBack, this);
     _subscribers.push_back(s);
-    return s;
+    return Signal<Args...>::Subscription(s);
 };
 
 template<typename ...Args>
-void Signal<Args...>::Unsubscribe(const Signal<Args...>::Subscription *subscriber)
+void Signal<Args...>::Unsubscribe(const Signal<Args...>::Subscription subscriber)
 {
-    _subscribers.remove(subscriber);
-    delete subscriber;
+    if(auto ptr = subscriber.lock())
+    {
+        this->Unsubscribe(subscriber.lock());
+    }
+};
+
+template<typename ...Args>
+void Signal<Args...>::Unsubscribe(Signal<Args...>::_Subscription* subscriber)
+{
+    auto it = std::find_if(_subscribers.begin(), _subscribers.end(),
+                           [subscriber](auto& ptr){ return ptr.get() == subscriber; });
+
+    if(it != _subscribers.end())
+    {
+        _subscribers.erase(it);
+    }
+}
+
+template<typename ...Args>
+Signal<Args...>::~Signal()
+{
+    _subscribers.clear();
 };
 
 
@@ -72,19 +97,27 @@ template<>
 class Signal<void>
 {
 public:
-    class Subscription
+    class _Subscription
     {
         std::function<void()> _callBack;
         Signal<void> *_signal;
     public:
-        Subscription(std::function<void()>  callBack): _callBack(callBack){};
-        
+
+        _Subscription(std::function<void()>  callBack, Signal<void> *signal): _callBack(callBack),                                                                                                                                                           _signal(signal) {};
         void Call() const {_callBack();};
-        void Reset() { _signal->Unsubscribe(this);};
+        void Reset() { };//_signal->Unsubscribe(this);};
     };
-private:
-    std::list<const Subscription*> _subscribers;
 public:
+    using Subscription = std::weak_ptr<_Subscription>;
+
+private:
+    std::list<std::shared_ptr<_Subscription>> _subscribers;
+public:
+    ~Signal()
+    {
+        _subscribers.clear();
+    };
+
     void Broadcast()
     {
         for(const auto& s: _subscribers)
@@ -92,18 +125,31 @@ public:
             s->Call();
         };
     };
-    
-    Signal<void>::Subscription* Subscribe(std::function<void()>  callBack)
+
+    Signal<void>::Subscription Subscribe(std::function<void()>  callBack)
     {
-        auto s = new Signal<void>::Subscription(callBack);
+        auto s = std::make_shared<_Subscription>(callBack, this);
         _subscribers.push_back(s);
-        return s;
+        return Signal<void>::Subscription(s);
     };
-    
-    void Unsubscribe(const Signal<void>::Subscription *subscriber)
+
+    void Unsubscribe(Signal<void>::Subscription subscriber)
     {
-        _subscribers.remove(subscriber);
-        delete subscriber;
+        if(auto s = subscriber.lock())
+        {
+            Unsubscribe(s);
+        }
+        
+    };
+    void Unsubscribe(Signal<void>::_Subscription* subscriber)
+    {
+        auto it = std::find_if(_subscribers.begin(), _subscribers.end(),
+                               [subscriber](auto ptr){ return ptr.get() == subscriber; });
+
+        if(it != _subscribers.end())
+        {
+            _subscribers.erase(it);
+        }
     };
 };
 #endif /* Subscription_hpp */

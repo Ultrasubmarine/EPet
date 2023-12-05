@@ -19,5 +19,5 @@ void Timer::PrintTime()
     std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - _startTime);
     std::cout<<std::endl<<"time has passed: "<<time_span.count()<<std::endl;
     
-    _onTimeUpdated.Broadcast();
+    _onTimeUpdated.Broadcast(3);
 }
