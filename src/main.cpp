@@ -37,6 +37,15 @@ int main(int argc, const char * argv[]) {
 //        bool ok= true;
 //    }
     //TODO ADD thread to not blocking input
+    
+    std::function<void(void)> f;
+    f = [](){std::cout<<"\n try without void\n";};  // ok
+    f = [](void){std::cout<<"\n try with void\n";}; // ok
+    
+    f();     // ok
+    //f(void); // error
+    
+    
     char x = 0;
     while(x != 'e')
     {

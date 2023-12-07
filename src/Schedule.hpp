@@ -17,7 +17,7 @@
 class Schedule
 {
     Signal<int>::Subscription _onTimeUpdate;
-    Signal<int>::Subscription _g;
+    Signal<>::Subscription _g;
     // _f;
     
  //   Signal<void>::_Subscription g;

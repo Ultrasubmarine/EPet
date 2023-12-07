@@ -20,4 +20,5 @@ void Timer::PrintTime()
     std::cout<<std::endl<<"time has passed: "<<time_span.count()<<std::endl;
     
     _onTimeUpdated.Broadcast(3);
+    _onTimeUpdatedWithoutParametrs.Broadcast();
 }

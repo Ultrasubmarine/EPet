@@ -21,6 +21,7 @@ class Timer
     std::chrono::steady_clock::time_point _lastCallTime;
     
     Signal<int> _onTimeUpdated;
+    Signal<> _onTimeUpdatedWithoutParametrs;
     
 public:
     Timer();
@@ -31,6 +32,7 @@ public:
     void PrintTime();
     
     Signal<int>& GetOnTimeUpdatedSignal() {return _onTimeUpdated;};
+    Signal<>& GetOnTimeUpdatedSignalWithoutParametrs() {return _onTimeUpdatedWithoutParametrs;};
     
     
 };

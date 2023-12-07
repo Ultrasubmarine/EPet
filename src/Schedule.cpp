@@ -11,7 +11,9 @@ Schedule::Schedule(Timer *t)
 {
   //  auto callback =[this](){ this->CalculatePoop();};
    // _g.Reset();
-    _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](int a){ this->CalculatePoop(); });//this->DeleteSubscription();
+    _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](int a){ this->CalculatePoop();});
+    
+    _g = t->GetOnTimeUpdatedSignalWithoutParametrs().Subscribe([this](){std::cout<<"omg. work\n";});//this->DeleteSubscription();
     _onTimeUpdate.lock()->Reset();
   
 }
