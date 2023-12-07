@@ -48,11 +48,13 @@ public:
 template<typename ...Args>
 void Signal<Args...>::Broadcast(Args... data)
 {
-    //TODO: change to make passible unsubscribes inside of Callback
-    for(const auto& s: _subscribers)
+    //cycle with the ability to unsubscribe inside Call()
+    for (auto it = _subscribers.begin(); it != _subscribers.end(); )
     {
-        s->Call(data...);
-    };
+        auto currenteIt = it;
+        it++;
+        (*currenteIt)->Call(data...);
+    }
 };
 
 template<typename ...Args>
