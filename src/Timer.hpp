@@ -13,26 +13,21 @@
 
 #include "Subscription.hpp"
 
+//TODO: Add std::chrono::system_clock to represent real clock forPet schedule;
 class Timer
 {
     std::chrono::steady_clock::time_point _startTime;
-    
-    //TODO Add std::chrono::system_clock to represent real clock forPet schedule;
     std::chrono::steady_clock::time_point _lastCallTime;
     
-    Signal<int> _onTimeUpdated;
-    Signal<> _onTimeUpdatedWithoutParametrs;
+    Signal<double> _onTimeUpdated;
     
 public:
     Timer();
     
-    //Subscribers  _;
-   //  Subscribe()
-    // Unscribe();
+    void Update();
     void PrintTime();
     
-    Signal<int>& GetOnTimeUpdatedSignal() {return _onTimeUpdated;};
-    Signal<>& GetOnTimeUpdatedSignalWithoutParametrs() {return _onTimeUpdatedWithoutParametrs;};
+    Signal<double>& GetOnTimeUpdatedSignal() {return _onTimeUpdated;};
     
     
 };

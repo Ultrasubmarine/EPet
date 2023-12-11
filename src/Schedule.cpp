@@ -6,21 +6,22 @@
 //
 
 #include "Schedule.hpp"
+#include "RequestList.hpp"
 
-Schedule::Schedule(Timer *t)
+void Schedule::Update(double dt)
 {
-  //  auto callback =[this](){ this->CalculatePoop();};
-   // _g.Reset();
-    _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](int a){ this->CalculatePoop();});
-    
-    _g = t->GetOnTimeUpdatedSignalWithoutParametrs().Subscribe([this](){std::cout<<"q connect\n";
-        this->_g.lock()->Reset();
-    });
-    _gg = t->GetOnTimeUpdatedSignalWithoutParametrs().Subscribe([this](){std::cout<<"qq connect\n";
-    });
-    
-    _onTimeUpdate.lock()->Reset();
-  
+    //poop
+    _lastPoop += dt;
+    if(_lastPoop > _poopDelay)
+    {
+        _requestList->AddRequest(RequestType::Poop);
+        _lastPoop = 0;
+    }
+}
+
+Schedule::Schedule(Timer *t, RequestList *r): _requestList(r)
+{
+    _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](double dt){ this->Update(dt);});
 }
 
 void Schedule::DeleteSubscription()

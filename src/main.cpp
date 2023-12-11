@@ -20,38 +20,13 @@ int main(int argc, const char * argv[]) {
     Game myGame;
     system("clear");
 
-//    std::weak_ptr<A> testA;
-//    char ch;
-//    {
-//        std::shared_ptr<A> testA_shrd_ptr = std::make_shared<A>();
-//        testA = std::weak_ptr<A>(testA_shrd_ptr);
-//        
-//        std::cin>>ch;
-//    }
-//    
-//    if(testA.lock())
-//    {
-//        bool wtf = true;
-//    }
-//    else{
-//        bool ok= true;
-//    }
-    //TODO ADD thread to not blocking input
-    
-    std::function<void(void)> f;
-    f = [](){std::cout<<"\n try without void\n";};  // ok
-    f = [](void){std::cout<<"\n try with void\n";}; // ok
-    
-    f();     // ok
-    //f(void); // error
-    
     
     char x = 0;
     while(x != 'e')
     {
         myGame.Loop();
         
-        std::cin>>x;
+       // std::cin>>x;
         if(x == 'w')
             myGame.SetState(Game::State::Wait);
         if(x == 'a')

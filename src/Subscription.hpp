@@ -17,7 +17,7 @@
 /// Use Signal<...Args>::Subscription - in your listener to subscribe on signal
 /// Use Signal<> - if your callback has no parameters
 
-//TODO think about memory
+//TODO: think about memory
 template<typename...Args>
 class Signal
 {

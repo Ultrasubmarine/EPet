@@ -14,23 +14,22 @@
 #include "Timer.hpp"
 #include "Subscription.hpp"
 
+class RequestList;
+
 class Schedule
 {
-    Signal<int>::Subscription _onTimeUpdate;
-    Signal<>::Subscription _g;
-    Signal<>::Subscription _gg;
-    // _f;
+    Signal<double>::Subscription _onTimeUpdate;
+
+    RequestList *_requestList;
     
- //   Signal<void>::_Subscription g;
-   // Signal<void>::SubscriptionPtr
-   // Signal<void>::Subscription
+    
+    double _lastPoop;
+    const double _poopDelay = 15.0;
+    
 public:
-    Schedule(Timer* t);
-    void CalculatePoop()
-    {
-        std::cout<<"poop";
-    };
-    
+    Schedule(Timer *t, RequestList *r);
+  
+    void Update(double dt);
     void DeleteSubscription();
 };
 #endif /* Schedule_hpp */

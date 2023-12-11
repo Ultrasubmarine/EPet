@@ -10,10 +10,13 @@
 
 #include "Timer.hpp"
 #include "Schedule.hpp"
+#include "RequestList.hpp"
+
 Game::Game() //: _currentState(State::Active)
 {
     _timer = new Timer();
-    _schedule = new Schedule(_timer);
+    _requestList = new RequestList();
+    _schedule = new Schedule(_timer, _requestList);
     
     SetState(State::Active);
 }
@@ -21,6 +24,7 @@ Game::Game() //: _currentState(State::Active)
 Game::~Game()
 {
     delete _schedule;
+    delete _requestList;
     delete _timer;    
 }
 
@@ -62,6 +66,11 @@ inline void Game::UploadActiveObjects()
 void Game::Loop()
 {
     system("clear");
+    
+    _timer->Update();
+    _timer->PrintTime();
+    
+    _requestList->Print();
     
     if(_currentState == State::Active)
     {

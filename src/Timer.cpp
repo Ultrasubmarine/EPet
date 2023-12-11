@@ -11,14 +11,20 @@
 Timer::Timer()
 {
     _startTime = std::chrono::steady_clock::now();
+    _lastCallTime = _startTime;
 }
 
+void Timer::Update()
+{
+    auto currentTime =std::chrono::steady_clock::now();
+    std::chrono::duration<double> dt= std::chrono::duration_cast<std::chrono::duration<double>>(currentTime - _lastCallTime);
+    _lastCallTime = currentTime;
+    
+    _onTimeUpdated.Broadcast(dt.count());
+}
 
 void Timer::PrintTime()
 {
-    std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - _startTime);
-    std::cout<<std::endl<<"time has passed: "<<time_span.count()<<std::endl;
-    
-    _onTimeUpdated.Broadcast(3);
-    _onTimeUpdatedWithoutParametrs.Broadcast();
+    std::chrono::duration<double> time = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - _startTime);
+    std::cout<<std::endl<<"time: "<<time.count()<<std::endl;
 }

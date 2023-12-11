@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02277A7C2B277751009F72E9 /* RequestList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02277A7A2B277751009F72E9 /* RequestList.cpp */; };
 		022F0BE52B1CD0E9002D8046 /* Schedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022F0BE32B1CD0E9002D8046 /* Schedule.cpp */; };
 		024F4BC22B151C0500E6064A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BBB2B151B0400E6064A /* main.cpp */; };
 		024F4BC52B152E8B00E6064A /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BC32B152E8B00E6064A /* Game.cpp */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02277A7A2B277751009F72E9 /* RequestList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RequestList.cpp; path = src/RequestList.cpp; sourceTree = "<group>"; };
+		02277A7B2B277751009F72E9 /* RequestList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = RequestList.hpp; path = src/RequestList.hpp; sourceTree = "<group>"; };
 		022F0BE12B1CC5A0002D8046 /* Subscription.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Subscription.hpp; path = src/Subscription.hpp; sourceTree = "<group>"; };
 		022F0BE32B1CD0E9002D8046 /* Schedule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Schedule.cpp; path = src/Schedule.cpp; sourceTree = "<group>"; };
 		022F0BE42B1CD0E9002D8046 /* Schedule.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Schedule.hpp; path = src/Schedule.hpp; sourceTree = "<group>"; };
@@ -51,6 +54,8 @@
 		024F4BAF2B151B0400E6064A = {
 			isa = PBXGroup;
 			children = (
+				02277A7A2B277751009F72E9 /* RequestList.cpp */,
+				02277A7B2B277751009F72E9 /* RequestList.hpp */,
 				022F0BE32B1CD0E9002D8046 /* Schedule.cpp */,
 				022F0BE42B1CD0E9002D8046 /* Schedule.hpp */,
 				022F0BE12B1CC5A0002D8046 /* Subscription.hpp */,
@@ -132,6 +137,7 @@
 				024F4BC22B151C0500E6064A /* main.cpp in Sources */,
 				022F0BE52B1CD0E9002D8046 /* Schedule.cpp in Sources */,
 				024F4BC52B152E8B00E6064A /* Game.cpp in Sources */,
+				02277A7C2B277751009F72E9 /* RequestList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
