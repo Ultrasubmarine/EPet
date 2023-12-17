@@ -15,6 +15,7 @@ class Timer;
 class Schedule;
 class RequestList;
 class View;
+class FrameRate;
 
 class Game
 {
@@ -28,5 +29,6 @@ public:
     RequestList *_requestList;
     Schedule *_schedule;
     View *_view;
+    FrameRate *_frameRate;
 };
 #endif /* Game_hpp */

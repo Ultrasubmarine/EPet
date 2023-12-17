@@ -12,13 +12,8 @@
 
 int main(int argc, const char * argv[]) {
   
-    Game myGame;
+    Game myGame;    
+    myGame.Loop();
     
-    char x = 0;
-    while(x != 'e')
-    {
-        myGame.Loop();
-        std::cin>>x;
-    }
     return 0;
 }

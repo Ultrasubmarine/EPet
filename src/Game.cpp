@@ -12,10 +12,11 @@
 #include "Schedule.hpp"
 #include "RequestList.hpp"
 #include "View.hpp"
+#include "FrameRate.hpp"
 
 #include "PetInfo.hpp"
 
-std::string tmpAvatar = "-----------------\n\n\n       ^  ^\n      (. .)          \n\n   I'm awake :)\n\n-----------------";
+std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
 
 
 Game::Game() //: _currentState(State::Active)
@@ -29,6 +30,9 @@ Game::Game() //: _currentState(State::Active)
     _requestList = new RequestList();
     _schedule = new Schedule(_timer, _requestList);
     _view = new View(_requestList);
+    _frameRate = new FrameRate();
+    
+    _frameRate->SetFixedFrame(5);
 }
 
 Game::~Game()
@@ -43,12 +47,19 @@ Game::~Game()
 
 void Game::Loop()
 {
-    system("clear");
+    _frameRate->FirstInitialization();
     
-    _timer->Update();
-    _timer->PrintTime();
-    
-    _requestList->Print();
-    _timer->PrintTime();
-    _view->Draw();
+    while(true)
+    {
+        system("clear");
+        _timer->Update();
+        _timer->PrintTime();
+        
+        _requestList->Print();
+        _view->Update();
+        _view->Draw();
+        
+        std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
+        _frameRate->WaitFrame();
+    }
 }

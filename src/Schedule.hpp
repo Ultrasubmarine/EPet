@@ -23,7 +23,7 @@ class Schedule
     RequestList *_requestList;
     
     double _lastPoop;
-    const double _poopDelay = 15.0;
+    const double _poopDelay = 5.0;
     
 public:
     Schedule(Timer *t, RequestList *r);

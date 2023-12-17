@@ -19,6 +19,14 @@ class View
 public:
     View(RequestList *requestList):_requestList(requestList) {};
     void Draw();
+    void Update();
+    
+// tmp simple animation
+private:
+    bool _moveRignt = true;
+    std::string _tab =" ";
+    
+    void CalculateAnimation();
     
 };
 #endif /* View_hpp */
