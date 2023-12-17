@@ -14,43 +14,19 @@
 class Timer;
 class Schedule;
 class RequestList;
-
-struct PetAvatar
-{
-    std::string view = "-----------------\n\n\n       ^  ^\n      (. .)          \n\n   I'm awake :)\n\n-----------------";
-
-};
+class View;
 
 class Game
 {
-public:
-    enum State
-    {
-        Active,
-        Wait
-    };
-    
+public:    
     Game();
     ~Game();
     
     void Loop();
-    
-    //TODO active list
-    PetAvatar* _avatar;
         
-    //TODO passive list
     Timer *_timer;
     RequestList *_requestList;
     Schedule *_schedule;
-    
-private:
-    State _currentState;
-    
-    inline void LoadActiveObjects();
-    inline void UploadActiveObjects();
-    
-public:
-    void SetState(State newState);
-    
+    View *_view;
 };
 #endif /* Game_hpp */

@@ -11,56 +11,34 @@
 #include "Timer.hpp"
 #include "Schedule.hpp"
 #include "RequestList.hpp"
+#include "View.hpp"
+
+#include "PetInfo.hpp"
+
+std::string tmpAvatar = "-----------------\n\n\n       ^  ^\n      (. .)          \n\n   I'm awake :)\n\n-----------------";
+
 
 Game::Game() //: _currentState(State::Active)
 {
+    //TODO: if PetInfo has save - load
+    //...
+    //Create new one
+    PetInfo::Instance().SetAvatar(tmpAvatar);
+    
     _timer = new Timer();
     _requestList = new RequestList();
     _schedule = new Schedule(_timer, _requestList);
-    
-    SetState(State::Active);
+    _view = new View(_requestList);
 }
 
 Game::~Game()
 {
+    delete _view;
     delete _schedule;
     delete _requestList;
-    delete _timer;    
-}
-
-void Game::SetState(State newState)
-{
-    switch (newState) {
-        case State::Active:
-        {
-            // load all active objects
-            // open window
-            LoadActiveObjects();
-            break;
-        }
-        case State::Wait:
-        {
-            UploadActiveObjects();
-            break;
-        }
-        default:
-            break;
-    }
-    _currentState = newState;
-}
-
-inline void Game::LoadActiveObjects()
-{
-    _avatar = new PetAvatar();
-}
-
-inline void Game::UploadActiveObjects()
-{
-    if(_avatar)
-    {
-        delete _avatar;
-        _avatar = nullptr;
-    }
+    delete _timer;
+    
+    PetInfo::Instance().Destroy();
 }
 
 void Game::Loop()
@@ -71,14 +49,6 @@ void Game::Loop()
     _timer->PrintTime();
     
     _requestList->Print();
-    
-    if(_currentState == State::Active)
-    {
-        std::cout << _avatar->view;
-    }
-    else
-    {
-        std::cout << "wait state";
-    }    
     _timer->PrintTime();
+    _view->Draw();
 }

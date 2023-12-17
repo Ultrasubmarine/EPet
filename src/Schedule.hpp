@@ -22,7 +22,6 @@ class Schedule
 
     RequestList *_requestList;
     
-    
     double _lastPoop;
     const double _poopDelay = 15.0;
     

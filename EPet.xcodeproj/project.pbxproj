@@ -12,6 +12,8 @@
 		024F4BC22B151C0500E6064A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BBB2B151B0400E6064A /* main.cpp */; };
 		024F4BC52B152E8B00E6064A /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BC32B152E8B00E6064A /* Game.cpp */; };
 		024F4BC82B1929B000E6064A /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BC62B1929B000E6064A /* Timer.cpp */; };
+		02D74EEF2B2F3F4C007F1632 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D74EED2B2F3F4C007F1632 /* View.cpp */; };
+		02D74EF22B2F403A007F1632 /* PetInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D74EF02B2F403A007F1632 /* PetInfo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +31,7 @@
 /* Begin PBXFileReference section */
 		02277A7A2B277751009F72E9 /* RequestList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RequestList.cpp; path = src/RequestList.cpp; sourceTree = "<group>"; };
 		02277A7B2B277751009F72E9 /* RequestList.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = RequestList.hpp; path = src/RequestList.hpp; sourceTree = "<group>"; };
-		022F0BE12B1CC5A0002D8046 /* Subscription.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Subscription.hpp; path = src/Subscription.hpp; sourceTree = "<group>"; };
+		022F0BE12B1CC5A0002D8046 /* Subscription.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Subscription.hpp; sourceTree = "<group>"; };
 		022F0BE32B1CD0E9002D8046 /* Schedule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Schedule.cpp; path = src/Schedule.cpp; sourceTree = "<group>"; };
 		022F0BE42B1CD0E9002D8046 /* Schedule.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Schedule.hpp; path = src/Schedule.hpp; sourceTree = "<group>"; };
 		024F4BB82B151B0400E6064A /* EPet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EPet; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +40,11 @@
 		024F4BC42B152E8B00E6064A /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Game.hpp; path = src/Game.hpp; sourceTree = "<group>"; };
 		024F4BC62B1929B000E6064A /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = src/Timer.cpp; sourceTree = "<group>"; };
 		024F4BC72B1929B000E6064A /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Timer.hpp; path = src/Timer.hpp; sourceTree = "<group>"; };
+		02D74EED2B2F3F4C007F1632 /* View.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = View.cpp; path = src/View.cpp; sourceTree = "<group>"; };
+		02D74EEE2B2F3F4C007F1632 /* View.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = View.hpp; path = src/View.hpp; sourceTree = "<group>"; };
+		02D74EF02B2F403A007F1632 /* PetInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PetInfo.cpp; path = src/PetInfo.cpp; sourceTree = "<group>"; };
+		02D74EF12B2F403A007F1632 /* PetInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = PetInfo.hpp; path = src/PetInfo.hpp; sourceTree = "<group>"; };
+		02D74EF52B2F4450007F1632 /* Singleton.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Singleton.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,11 +61,15 @@
 		024F4BAF2B151B0400E6064A = {
 			isa = PBXGroup;
 			children = (
+				02D74EF32B2F42B9007F1632 /* patterns */,
+				02D74EF02B2F403A007F1632 /* PetInfo.cpp */,
+				02D74EF12B2F403A007F1632 /* PetInfo.hpp */,
+				02D74EED2B2F3F4C007F1632 /* View.cpp */,
+				02D74EEE2B2F3F4C007F1632 /* View.hpp */,
 				02277A7A2B277751009F72E9 /* RequestList.cpp */,
 				02277A7B2B277751009F72E9 /* RequestList.hpp */,
 				022F0BE32B1CD0E9002D8046 /* Schedule.cpp */,
 				022F0BE42B1CD0E9002D8046 /* Schedule.hpp */,
-				022F0BE12B1CC5A0002D8046 /* Subscription.hpp */,
 				024F4BC62B1929B000E6064A /* Timer.cpp */,
 				024F4BC72B1929B000E6064A /* Timer.hpp */,
 				024F4BC32B152E8B00E6064A /* Game.cpp */,
@@ -74,6 +85,16 @@
 				024F4BB82B151B0400E6064A /* EPet */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		02D74EF32B2F42B9007F1632 /* patterns */ = {
+			isa = PBXGroup;
+			children = (
+				022F0BE12B1CC5A0002D8046 /* Subscription.hpp */,
+				02D74EF52B2F4450007F1632 /* Singleton.hpp */,
+			);
+			name = patterns;
+			path = src/patterns;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,8 +154,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D74EEF2B2F3F4C007F1632 /* View.cpp in Sources */,
 				024F4BC82B1929B000E6064A /* Timer.cpp in Sources */,
 				024F4BC22B151C0500E6064A /* main.cpp in Sources */,
+				02D74EF22B2F403A007F1632 /* PetInfo.cpp in Sources */,
 				022F0BE52B1CD0E9002D8046 /* Schedule.cpp in Sources */,
 				024F4BC52B152E8B00E6064A /* Game.cpp in Sources */,
 				02277A7C2B277751009F72E9 /* RequestList.cpp in Sources */,
