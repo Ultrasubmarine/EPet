@@ -16,6 +16,11 @@ void View::Draw()
     printf("-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------",_tab.c_str(),_tab.c_str());
     
     
+    //Draw Tamagotchi stats
+    std::cout <<"\n   PET STATS:   \n";
+    std::cout <<"   Happy:" << PetInfo::Instance().GetHappy()<<"/"<<PetInfo::Instance().GetMaxHappy()<<std::endl;
+    std::cout <<"   Food:" << PetInfo::Instance().GetFood()<<"/"<<PetInfo::Instance().GetMaxFood()<<std::endl;
+    std::cout <<"   year: "<<PetInfo::Instance().GetYear()<<std::endl;
   //  std::cout << PetInfo::Instance().GetAvatar();
 };
 

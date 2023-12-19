@@ -18,7 +18,6 @@
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
 
-
 Game::Game() //: _currentState(State::Active)
 {
     //TODO: if PetInfo has save - load
