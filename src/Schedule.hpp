@@ -10,11 +10,22 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <functional>
 
 #include "Timer.hpp"
 #include "Subscription.hpp"
 
 class RequestList;
+
+
+struct Parameter
+{
+    double _delay;
+    double _currentDelay;
+    std::function<void()> _callback;
+    
+    bool Update(double dt);
+};
 
 class Schedule
 {
@@ -22,8 +33,9 @@ class Schedule
 
     RequestList *_requestList;
     
-    double _lastPoop;
-    const double _poopDelay = 5.0;
+    Parameter _foodDecrease;
+    Parameter _happyDecrease;
+    Parameter _poopSpawn;
     
 public:
     Schedule(Timer *t, RequestList *r);

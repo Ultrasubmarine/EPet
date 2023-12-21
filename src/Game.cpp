@@ -24,6 +24,8 @@ Game::Game() //: _currentState(State::Active)
     //...
     //Create new one
     PetInfo::Instance().SetAvatar(tmpAvatar);
+    PetInfo::Instance().SetFood(5);
+    PetInfo::Instance().SetHappy(3);
     
     _timer = new Timer();
     _requestList = new RequestList();
