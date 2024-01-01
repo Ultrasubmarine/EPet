@@ -13,6 +13,21 @@
 
 #include "Singleton.hpp"
 
+class stat
+{
+    int _parametr;
+    int _max;
+    
+    void OnChange();
+
+public:
+    bool Increase();
+    bool Decrease();
+    
+    int Get();
+    bool Set();
+};
+
 class PetInfo : public Singleton<PetInfo>
 {
     int _food = 0;
