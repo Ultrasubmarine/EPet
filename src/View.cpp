@@ -18,9 +18,9 @@ void View::Draw()
     
     //Draw Tamagotchi stats
     std::cout <<"\n   PET STATS:   \n";
-    std::cout <<"   Happy:" << PetInfo::Instance().GetHappy()<<"/"<<PetInfo::Instance().GetMaxHappy()<<std::endl;
-    std::cout <<"   Food:" << PetInfo::Instance().GetFood()<<"/"<<PetInfo::Instance().GetMaxFood()<<std::endl;
-    std::cout <<"   year: "<<PetInfo::Instance().GetYear()<<std::endl;
+    std::cout <<"   Happy:" << PetInfo::Instance().GetParametr(Happy)<<"/"<<PetInfo::Instance().GetParametrMax(Happy)<<std::endl;
+    std::cout <<"   Food:" << PetInfo::Instance().GetParametr(Food)<<"/"<<PetInfo::Instance().GetParametrMax(Food)<<std::endl;
+    std::cout <<"   year: "<< PetInfo::Instance().GetParametr(Year)<<std::endl;
   //  std::cout << PetInfo::Instance().GetAvatar();
 };
 

@@ -10,53 +10,60 @@
 
 #include <stdio.h>
 #include <string>
+#include <map>
 
 #include "Singleton.hpp"
 
-class stat
+enum PetParameters
 {
-    int _parametr;
-    int _max;
-    
-    void OnChange();
-
-public:
-    bool Increase();
-    bool Decrease();
-    
-    int Get();
-    bool Set();
+    Food,
+    Happy,
+    Year
 };
 
 class PetInfo : public Singleton<PetInfo>
 {
-    int _food = 0;
-    int _happy = 0;
-    int _year = 0;
+    class _Parametr
+    {
+        int _parametr;
+        const int _max;
+        const int _min;
+        
+        void OnChange();
+
+    public:
+        _Parametr(int value, int max, int min = 0);
+        
+        bool Increase();
+        bool Decrease();
+        
+        int Get() const { return _parametr;};
+        int GetMax() const { return _max;};
+        int GetMin() const { return _min;};
+        
+        bool Set(int value);
+    };
     
-    const int _happyMax = 5;
-    const int _foodMax = 5;
-    
+    std::map<PetParameters, _Parametr> _parametrs;
     std::string _avatar;
+    
 protected:
-    PetInfo() = default;
+    PetInfo();
     ~PetInfo() = default;
     
 public:
 
+    const int GetParametr(PetParameters name) const;
+    const int GetParametrMax(PetParameters name) const;
+    const int GetParametrMin(PetParameters name) const;
+    
+    bool SetParametr(PetParameters name, int value);
+    
+    bool DecreaseParametr(PetParameters name);
+    bool IncreaseParametr(PetParameters name);
+    
     const std::string& GetAvatar() const { return _avatar;};
     void SetAvatar(std::string& avatar);
-    
-    int GetMaxHappy() const { return _happyMax;};
-    int GetHappy() const { return _happy;};
-    void SetHappy(int happy);
-    
-    int GetMaxFood() const { return _foodMax;};
-    int GetFood() const { return _food;};
-    void SetFood(int food);
-    
-    int GetYear() const { return _year;};
-    void SetYear(int year);
     
     //TODO: add functions Save() Load()
     friend Singleton<PetInfo>;

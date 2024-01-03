@@ -33,10 +33,10 @@ Schedule::Schedule(Timer *t, RequestList *r): _requestList(r)
 {
     _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](double dt){ this->Update(dt);});
     
-    _foodDecrease._delay = 5;
+    _foodDecrease._delay = 1;
     _foodDecrease._currentDelay = _foodDecrease._delay;
     _foodDecrease._callback = [this]()
-                                {   PetInfo::Instance().SetFood(PetInfo::Instance().GetFood()-1);
+                                {   PetInfo::Instance().DecreaseParametr(Food);
                                     _foodDecrease._currentDelay = _foodDecrease._delay;
                                 };
     
@@ -48,10 +48,10 @@ Schedule::Schedule(Timer *t, RequestList *r): _requestList(r)
                                     _poopSpawn._currentDelay = _poopSpawn._delay;
                                 };
     
-    _happyDecrease._delay = 5;
+    _happyDecrease._delay = 1;
     _happyDecrease._currentDelay = _happyDecrease._delay;
     _happyDecrease._callback = [this]()
-                                {   PetInfo::Instance().SetHappy(PetInfo::Instance().GetHappy()-1);
+                                {   PetInfo::Instance().DecreaseParametr(Happy);
                                     _happyDecrease._currentDelay = _happyDecrease._delay;
                                 };
 }
@@ -61,3 +61,4 @@ void Schedule::DeleteSubscription()
     _onTimeUpdate.lock()->Reset();
     
 }
+    
