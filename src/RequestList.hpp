@@ -14,7 +14,8 @@
 enum class RequestType
 {
     Poop,
-    Hangry
+    Hangry,
+    Sick
 };
 
 class RequestList
@@ -26,6 +27,7 @@ public:
     bool RemoveRequest(RequestType type); //return true if success
     
     std::vector<RequestType> GetAllRequests() { return _requests;};
+    int GetRequestsAmount(RequestType type) const;
     
 //Debug function
     void Print();

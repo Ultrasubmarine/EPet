@@ -13,6 +13,7 @@
 #include <map>
 
 #include "Singleton.hpp"
+#include "Subscription.hpp"
 
 enum PetParameters
 {
@@ -28,8 +29,6 @@ class PetInfo : public Singleton<PetInfo>
         int _parametr;
         const int _max;
         const int _min;
-        
-        void OnChange();
 
     public:
         _Parametr(int value, int max, int min = 0);
@@ -45,6 +44,7 @@ class PetInfo : public Singleton<PetInfo>
     };
     
     std::map<PetParameters, _Parametr> _parametrs;
+    std::map<PetParameters, Signal<int> > _parametrsSignals;
     std::string _avatar;
     
 protected:
@@ -64,6 +64,8 @@ public:
     
     const std::string& GetAvatar() const { return _avatar;};
     void SetAvatar(std::string& avatar);
+    
+    Signal<int>* GetParameterSignal(PetParameters name);
     
     //TODO: add functions Save() Load()
     friend Singleton<PetInfo>;

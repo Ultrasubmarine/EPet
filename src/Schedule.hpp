@@ -25,17 +25,22 @@ struct Parameter
     std::function<void()> _callback;
     
     bool Update(double dt);
+    void Reset();
 };
 
 class Schedule
 {
     Signal<double>::Subscription _onTimeUpdate;
-
+    Signal<int>::Subscription _onFoodChanged;
+    
     RequestList *_requestList;
     
     Parameter _foodDecrease;
     Parameter _happyDecrease;
     Parameter _poopSpawn;
+    Parameter _sickSpawn;
+    
+    void SickUpdate();
     
 public:
     Schedule(Timer *t, RequestList *r);
