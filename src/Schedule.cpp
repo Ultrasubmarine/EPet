@@ -40,16 +40,12 @@ void Event::Reset()
 
 void Schedule::Update(double dt)
 {
-    for(auto& type: _currentEventsTypes)
+    for(auto& e: _events)
     {
-       if(_events[type]->Condition())
-       {
-           _events[type]->Update(dt);
-       }
+       if(e.second->Condition())
+           e.second->Update(dt);
        else
-       {
-           _events[type]->Reset();
-       }
+           e.second->Reset();
     }
 }
 
@@ -58,10 +54,11 @@ Schedule::Schedule(Timer *t, RequestList *r): _requestList(r)
     _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](double dt){ this->Update(dt);});
     
     //TODO load from file or calculate
-    _currentEventsTypes = { ScheduleEvents::FoodDecrease, ScheduleEvents::HappyDecrease, ScheduleEvents::PoopSpawn, ScheduleEvents::SickSpawn};
+    _currentEventsTypes = { ScheduleEvents::HappyDecrease, ScheduleEvents::FoodDecrease, ScheduleEvents::PoopSpawn, ScheduleEvents::SickSpawn, ScheduleEvents::Death};
+    
     for(auto& type : _currentEventsTypes)
     {
-        _events[type] = CreateEvent(type);
+        _events.insert( {type, CreateEvent(type)});
     }
 }
 
@@ -84,18 +81,23 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
                 PetInfo::Instance().DecreaseParametr(Food);
                 _events[ScheduleEvents::FoodDecrease]->Reset(); };
             break;
+            
         case ScheduleEvents::HappyDecrease :
             delay = 1;
             callback = [this](){
                 PetInfo::Instance().DecreaseParametr(Happy);
                 _events[ScheduleEvents::HappyDecrease]->Reset(); };
             break;
+            
         case ScheduleEvents::PoopSpawn :
             delay = 1;
             callback = [this](){
                 _requestList->AddRequest(RequestType::Poop);
                 _events[ScheduleEvents::PoopSpawn]->Reset();  };
+            condition = [this](){
+                return _requestList->GetRequestsAmount(RequestType::Poop) < 3 ;};
             break;
+            
         case ScheduleEvents::SickSpawn :
             delay = 3;
             callback = [this](){
@@ -104,7 +106,21 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
                     _requestList->AddRequest(RequestType::Sick);
                 }
                 _events[ScheduleEvents::SickSpawn]->Reset(); };
+            condition = [this](){
+                return PetInfo::Instance().GetParametr(Food) == 0;};
             break;
+            
+        case ScheduleEvents::Death :
+            delay = 3;
+            callback = [this](){
+                if(PetInfo::Instance().GetIsLive())
+                {
+                    PetInfo::Instance().SetIsLive(false);
+                } };
+            condition = [this](){
+                return _requestList->GetRequestsAmount(RequestType::Sick) == MAX_SICK && PetInfo::Instance().GetIsLive(); };
+            break;
+            
         default:
             std::cout<<"didn't found event to schedule"; // TODO assert
             break;

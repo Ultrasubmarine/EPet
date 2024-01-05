@@ -47,6 +47,8 @@ class PetInfo : public Singleton<PetInfo>
     std::map<PetParameters, Signal<int> > _parametrsSignals;
     std::string _avatar;
     
+    bool _isLive = true;
+    
 protected:
     PetInfo();
     ~PetInfo() = default;
@@ -64,6 +66,9 @@ public:
     
     const std::string& GetAvatar() const { return _avatar;};
     void SetAvatar(std::string& avatar);
+    
+    const bool GetIsLive() const { return _isLive;};
+    void SetIsLive(bool value) { _isLive = value; };
     
     Signal<int>* GetParameterSignal(PetParameters name);
     

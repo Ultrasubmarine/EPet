@@ -12,9 +12,15 @@
 
 void View::Draw()
 {
+    if(PetInfo::Instance().GetIsLive())
+    {
     //DEFAULT HUMSTER TAMAGOTCHI AVATAR
     printf("-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------",_tab.c_str(),_tab.c_str());
-    
+    }
+    else
+    {
+        printf("-----------------\n\n\n%s ^  ^\n%s(x x)          \n\n   I'm dead :(\n\n-----------------",_tab.c_str(),_tab.c_str());
+    }
     
     //Draw Tamagotchi stats
     std::cout <<"\n   PET STATS:   \n";
@@ -26,7 +32,8 @@ void View::Draw()
 
 void View::Update()
 {
-    CalculateAnimation();
+    if(PetInfo::Instance().GetIsLive())
+        CalculateAnimation();
 };
 
 

@@ -44,8 +44,8 @@ enum ScheduleEvents
     FoodDecrease,
     HappyDecrease,
     PoopSpawn,
-    SickSpawn
-    
+    SickSpawn,
+    Death    
 };
 
 class Schedule
