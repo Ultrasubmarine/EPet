@@ -13,21 +13,21 @@ PetInfo::_Parametr::_Parametr(int value, int max, int min) : _max(max), _min(min
     Set(value);
 }
 
-bool PetInfo::_Parametr::Increase()
+bool PetInfo::_Parametr::Increase(int increaseValue)
 {
-    if(_parametr < _max)
+    if(_parametr + increaseValue <= _max)
     {
-        _parametr++;
+        _parametr += increaseValue;
         return true;
     }
     return false;
 }
 
-bool PetInfo::_Parametr::Decrease()
+bool PetInfo::_Parametr::Decrease(int decreaseValue)
 {
-    if(_parametr > _min)
+    if(_parametr - decreaseValue >= _min)
     {
-        _parametr--;
+        _parametr -= decreaseValue;
         return true;
     }
     return false;
@@ -102,7 +102,7 @@ bool PetInfo::SetParametr(PetParameters name, int value)
     return false;
 }
 
-bool PetInfo::DecreaseParametr(PetParameters name)
+bool PetInfo::DecreaseParametr(PetParameters name, int decreaseValue)
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
@@ -116,7 +116,7 @@ bool PetInfo::DecreaseParametr(PetParameters name)
     return false;
 }
 
-bool PetInfo::IncreaseParametr(PetParameters name)
+bool PetInfo::IncreaseParametr(PetParameters name, int increaseValue)
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {

@@ -12,6 +12,7 @@
 
 Event::Event(double delay, std::function<void()> callback, std::function<bool()> condition):
  _delay(delay),
+_currentDelay(delay),
  _callback(callback),
  _condition(condition)
 {

@@ -33,8 +33,8 @@ class PetInfo : public Singleton<PetInfo>
     public:
         _Parametr(int value, int max, int min = 0);
         
-        bool Increase();
-        bool Decrease();
+        bool Increase(int increaseValue = 1);
+        bool Decrease(int decreaseValue = 1);
         
         int Get() const { return _parametr;};
         int GetMax() const { return _max;};
@@ -61,8 +61,8 @@ public:
     
     bool SetParametr(PetParameters name, int value);
     
-    bool DecreaseParametr(PetParameters name);
-    bool IncreaseParametr(PetParameters name);
+    bool DecreaseParametr(PetParameters name, int decreaseValue = 1);
+    bool IncreaseParametr(PetParameters name, int increaseValue = 1);
     
     const std::string& GetAvatar() const { return _avatar;};
     void SetAvatar(std::string& avatar);
