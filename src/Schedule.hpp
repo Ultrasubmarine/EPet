@@ -55,11 +55,6 @@ class Schedule
     
     RequestList *_requestList;
     
-//    Event _foodDecrease;
-//    Event _happyDecrease;
-//    Event _poopSpawn;
-//    Event _sickSpawn;
-    
     std::map<ScheduleEvents, std::unique_ptr<Event>> _events;
     std::vector<ScheduleEvents> _currentEventsTypes;
     
