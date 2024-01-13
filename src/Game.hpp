@@ -16,14 +16,18 @@ class Schedule;
 class RequestList;
 class View;
 class FrameRate;
+class Input;
 
 class Game
 {
+private:
+    void CheckInput(Input* i);
+    
 public:    
     Game();
     ~Game();
     
-    void Loop();
+    void Loop(Input* i);
         
     Timer *_timer;
     RequestList *_requestList;

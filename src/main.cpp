@@ -6,34 +6,37 @@
 //
 
 #include <iostream>
-#include "Game.hpp"
-#include "PetInfo.hpp"
 #include <thread>
-#include <mutex>
 
-void Input()
-{
-    while(true)
-    {
-        char c;
-        std::cin>>c;
-        std::cout<<"print: "<<c<<std::endl;
-    }
-}
+#include "Game.hpp"
+#include "Input.hpp"
 
-void Loop()
+void MainThread(Input* i)
 {
     Game myGame;
-    myGame.Loop();
+    myGame.Loop(i);
+}
+
+void InputThread(Input* i)
+{
+    char c = ' ';
+    while(c != 'a')
+    {
+        c = std::getchar();
+        i->AddEvent(c);
+    }
 }
 
 int main(int argc, const char * argv[])
 {
-    std::thread inputThread(&Input);
-    std::thread gameThread(&Loop);
+    Input* my = new Input();
     
+    std::thread inputThread(&InputThread, my);
+    std::thread mainThread(&MainThread, my);
+    
+    mainThread.join();
     inputThread.join();
-    gameThread.join();
-   
+    
+    delete my;
     return 0;
 }

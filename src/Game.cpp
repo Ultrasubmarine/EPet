@@ -13,6 +13,7 @@
 #include "RequestList.hpp"
 #include "View.hpp"
 #include "FrameRate.hpp"
+#include "Input.hpp"
 
 #include "PetInfo.hpp"
 
@@ -44,13 +45,16 @@ Game::~Game()
     PetInfo::Instance().Destroy();
 }
 
-void Game::Loop()
+void Game::Loop(Input* i)
 {
     _frameRate->FirstInitialization();
     
     while(true)
     {
         system("clear");
+        
+        CheckInput(i);
+        
         _timer->Update();
         _timer->PrintTime();
         
@@ -60,5 +64,27 @@ void Game::Loop()
         
         std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
         _frameRate->WaitFrame();
+    }
+}
+
+void Game::CheckInput(Input* i)
+{
+    auto e = i->GetEvent();
+    
+    switch (e) {
+        case 'f': // food
+            PetInfo::Instance().IncreaseParametr(PetParameters::Food);
+            break;
+        case 'h': // happy
+            PetInfo::Instance().IncreaseParametr(PetParameters::Happy);
+            break;
+        case 'p': // poop
+            _requestList->RemoveRequest(RequestType::Poop);
+            break;
+        case 's': //sick
+            _requestList->RemoveRequest(RequestType::Sick);
+            break;
+        default:
+            break;
     }
 }

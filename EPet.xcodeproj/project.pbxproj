@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02277A7C2B277751009F72E9 /* RequestList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02277A7A2B277751009F72E9 /* RequestList.cpp */; };
 		022F0BE52B1CD0E9002D8046 /* Schedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022F0BE32B1CD0E9002D8046 /* Schedule.cpp */; };
+		024486752B51ECF7001B9691 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024486732B51ECF7001B9691 /* Input.cpp */; };
 		024F4BC22B151C0500E6064A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BBB2B151B0400E6064A /* main.cpp */; };
 		024F4BC52B152E8B00E6064A /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BC32B152E8B00E6064A /* Game.cpp */; };
 		024F4BC82B1929B000E6064A /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024F4BC62B1929B000E6064A /* Timer.cpp */; };
@@ -35,6 +36,8 @@
 		022F0BE12B1CC5A0002D8046 /* Subscription.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Subscription.hpp; sourceTree = "<group>"; };
 		022F0BE32B1CD0E9002D8046 /* Schedule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Schedule.cpp; path = src/Schedule.cpp; sourceTree = "<group>"; };
 		022F0BE42B1CD0E9002D8046 /* Schedule.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Schedule.hpp; path = src/Schedule.hpp; sourceTree = "<group>"; };
+		024486732B51ECF7001B9691 /* Input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Input.cpp; path = src/Input.cpp; sourceTree = "<group>"; };
+		024486742B51ECF7001B9691 /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Input.hpp; path = src/Input.hpp; sourceTree = "<group>"; };
 		024F4BB82B151B0400E6064A /* EPet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EPet; sourceTree = BUILT_PRODUCTS_DIR; };
 		024F4BBB2B151B0400E6064A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		024F4BC32B152E8B00E6064A /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = src/Game.cpp; sourceTree = "<group>"; };
@@ -64,6 +67,8 @@
 		024F4BAF2B151B0400E6064A = {
 			isa = PBXGroup;
 			children = (
+				024486732B51ECF7001B9691 /* Input.cpp */,
+				024486742B51ECF7001B9691 /* Input.hpp */,
 				02D74EF32B2F42B9007F1632 /* patterns */,
 				02D74EF02B2F403A007F1632 /* PetInfo.cpp */,
 				02D74EF12B2F403A007F1632 /* PetInfo.hpp */,
@@ -162,6 +167,7 @@
 				02D74EEF2B2F3F4C007F1632 /* View.cpp in Sources */,
 				024F4BC82B1929B000E6064A /* Timer.cpp in Sources */,
 				024F4BC22B151C0500E6064A /* main.cpp in Sources */,
+				024486752B51ECF7001B9691 /* Input.cpp in Sources */,
 				02D74EF22B2F403A007F1632 /* PetInfo.cpp in Sources */,
 				022F0BE52B1CD0E9002D8046 /* Schedule.cpp in Sources */,
 				02D74EF92B2F6DEC007F1632 /* FrameRate.cpp in Sources */,

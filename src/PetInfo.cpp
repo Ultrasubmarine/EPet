@@ -15,7 +15,11 @@ PetInfo::_Parametr::_Parametr(int value, int max, int min) : _max(max), _min(min
 
 bool PetInfo::_Parametr::Increase(int increaseValue)
 {
-    if(_parametr + increaseValue <= _max)
+    if(_parametr == _max)
+    {
+        return false;
+    }
+    else if(_parametr + increaseValue <= _max)
     {
         _parametr += increaseValue;
         return true;
@@ -25,7 +29,11 @@ bool PetInfo::_Parametr::Increase(int increaseValue)
 
 bool PetInfo::_Parametr::Decrease(int decreaseValue)
 {
-    if(_parametr - decreaseValue >= _min)
+    if(_parametr == _min)
+    {
+        return false;
+    }
+    else if(_parametr - decreaseValue >= _min)
     {
         _parametr -= decreaseValue;
         return true;
