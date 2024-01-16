@@ -9,22 +9,7 @@
 #define Input_hpp
 
 #include <stdio.h>
-#include <queue>
-#include <mutex>
 
-class Input
-{
-    std::mutex inputMutex;
-    std::queue<char> events;
-    
-public:
-    void AddEvent(char c);
-    char GetEvent(); // return -1 if empty;
-};
-
-/// make extra thread for catching events.
-/// return - object wich is registring all events;
-//Input* InitInput();
-
+bool stdinHasData();
 
 #endif /* Input_hpp */

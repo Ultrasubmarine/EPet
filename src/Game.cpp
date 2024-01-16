@@ -45,7 +45,7 @@ Game::~Game()
     PetInfo::Instance().Destroy();
 }
 
-void Game::Loop(Input* i)
+void Game::Loop()
 {
     _frameRate->FirstInitialization();
     
@@ -53,7 +53,7 @@ void Game::Loop(Input* i)
     {
         system("clear");
         
-        CheckInput(i);
+        CheckInput();
         
         _timer->Update();
         _timer->PrintTime();
@@ -67,11 +67,16 @@ void Game::Loop(Input* i)
     }
 }
 
-void Game::CheckInput(Input* i)
+void Game::CheckInput()
 {
-    auto e = i->GetEvent();
+    int keyCode = {0};
+    if (stdinHasData())
+    {
+        keyCode = std::cin.get();
+        //std::cout << "You pressed '" << keyCode << "'\n";
+    }
     
-    switch (e) {
+    switch (keyCode) {
         case 'f': // food
             PetInfo::Instance().IncreaseParametr(PetParameters::Food);
             break;
