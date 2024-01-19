@@ -22,6 +22,13 @@ enum PetParameters
     Year
 };
 
+enum PetState
+{
+    usual,
+    sleep,
+    dead
+};
+
 class PetInfo : public Singleton<PetInfo>
 {
     class _Parametr
@@ -47,7 +54,8 @@ class PetInfo : public Singleton<PetInfo>
     std::map<PetParameters, Signal<int> > _parametrsSignals;
     std::string _avatar;
     
-    bool _isLive = true;
+    //bool _isLive = true;
+    PetState _state = PetState::usual;
     
 protected:
     PetInfo();
@@ -67,8 +75,10 @@ public:
     const std::string& GetAvatar() const { return _avatar;};
     void SetAvatar(std::string& avatar);
     
-    const bool GetIsLive() const { return _isLive;};
-    void SetIsLive(bool value) { _isLive = value; };
+    const bool GetIsLive() const { return _state!=PetState::dead;};
+    
+    void SetState(PetState state) { _state = state; };
+    PetState GetState() {return _state;};
     
     Signal<int>* GetParameterSignal(PetParameters name);
     

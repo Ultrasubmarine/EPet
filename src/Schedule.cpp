@@ -41,12 +41,26 @@ void Event::Reset()
 
 void Schedule::Update(double dt)
 {
-    for(auto& e: _events)
+    if(!PetInfo::Instance().GetIsLive())
     {
-       if(e.second->Condition())
-           e.second->Update(dt);
-       else
-           e.second->Reset();
+        return;
+    }
+    
+    //checo sleep mode
+    if(CheckSpeep())
+    {
+        PetInfo::Instance().SetState(PetState::sleep);
+    }
+    else
+    {
+        PetInfo::Instance().SetState(PetState::usual);
+        for(auto& e: _events)
+        {
+           if(e.second->Condition())
+               e.second->Update(dt);
+           else
+               e.second->Reset();
+        }
     }
 }
 
@@ -61,6 +75,35 @@ Schedule::Schedule(Timer *t, RequestList *r): _requestList(r)
     {
         _events.insert( {type, CreateEvent(type)});
     }
+}
+
+#include <format>
+#include <ctime>
+
+bool Schedule::CheckSpeep()
+{
+    using namespace std::chrono;
+    
+    hh_mm_ss wakeUp {std::chrono::hours(9) + std::chrono::minutes(22)} ;
+    hh_mm_ss goToSleep {std::chrono::hours(22) + std::chrono::minutes(16)} ;
+    
+    //uts - london time
+    auto tp = system_clock::now();
+    auto dp = floor<days>(tp);
+    
+    hh_mm_ss time{floor<seconds>(tp-dp)};
+    auto h = time.hours();
+    auto M = time.minutes();
+    
+    auto sleep = goToSleep.to_duration();
+    auto current =time.to_duration();
+    
+    if(time.to_duration() > wakeUp.to_duration() && time.to_duration() < goToSleep.to_duration())
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void Schedule::DeleteSubscription()
@@ -112,11 +155,11 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
             break;
             
         case ScheduleEvents::Death :
-            delay = 3;
+            delay = 1000;
             callback = [this](){
                 if(PetInfo::Instance().GetIsLive())
                 {
-                    PetInfo::Instance().SetIsLive(false);
+                    PetInfo::Instance().SetState(PetState::dead);
                 } };
             condition = [this](){
                 return _requestList->GetRequestsAmount(RequestType::Sick) == MAX_SICK && PetInfo::Instance().GetIsLive(); };

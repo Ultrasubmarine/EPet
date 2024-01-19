@@ -56,11 +56,13 @@ class Schedule
     RequestList *_requestList;
     
     std::map<ScheduleEvents, std::unique_ptr<Event>> _events;
+    
     std::vector<ScheduleEvents> _currentEventsTypes;
     
 public:
     Schedule(Timer *t, RequestList *r);
   
+    bool CheckSpeep();
     void Update(double dt);
     void DeleteSubscription();
     

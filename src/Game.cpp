@@ -57,10 +57,10 @@ void Game::Loop()
         
         _timer->Update();
         _timer->PrintTime();
-        
-        _requestList->Print();
+               
         _view->Update();
         _view->Draw();
+        _requestList->Print();
         
         std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
         _frameRate->WaitFrame();
