@@ -28,3 +28,4 @@ void Timer::PrintTime()
     std::chrono::duration<double> time = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - _startTime);
     std::cout<<std::endl<<"time: "<<time.count()<<std::endl;
 }
+
