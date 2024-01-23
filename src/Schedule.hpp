@@ -45,7 +45,8 @@ enum ScheduleEvents
     HappyDecrease,
     PoopSpawn,
     SickSpawn,
-    Death    
+    Death,
+    Birthday,
 };
 
 class Schedule
@@ -55,10 +56,9 @@ class Schedule
     
     RequestList *_requestList;
     
-    std::map<ScheduleEvents, std::unique_ptr<Event>> _events;
-    
+    std::map<ScheduleEvents, std::unique_ptr<Event>> _events;    
     std::vector<ScheduleEvents> _currentEventsTypes;
-    
+
 public:
     Schedule(Timer *t, RequestList *r);
   

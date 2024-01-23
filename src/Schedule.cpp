@@ -9,14 +9,12 @@
 #include "RequestList.hpp"
 #include "PetInfo.hpp"
 
-
 Event::Event(double delay, std::function<void()> callback, std::function<bool()> condition):
  _delay(delay),
 _currentDelay(delay),
  _callback(callback),
  _condition(condition)
 {
-    
 }
 
 bool Event::Update(double dt)
@@ -51,7 +49,7 @@ void Schedule::Update(double dt)
     {
         PetInfo::Instance().SetState(PetState::sleep);
     }
-    else
+    else if(PetInfo::Instance().GetIsLive())
     {
         PetInfo::Instance().SetState(PetState::usual);
         for(auto& e: _events)
@@ -69,7 +67,7 @@ Schedule::Schedule(Timer *t, RequestList *r): _requestList(r)
     _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](double dt){ this->Update(dt);});
     
     //TODO load from file or calculate
-    _currentEventsTypes = { ScheduleEvents::HappyDecrease, ScheduleEvents::FoodDecrease, ScheduleEvents::PoopSpawn, ScheduleEvents::SickSpawn, ScheduleEvents::Death};
+    _currentEventsTypes = { ScheduleEvents::HappyDecrease, ScheduleEvents::FoodDecrease, ScheduleEvents::PoopSpawn, ScheduleEvents::SickSpawn, ScheduleEvents::Death, ScheduleEvents::Birthday};
     
     for(auto& type : _currentEventsTypes)
     {
@@ -165,6 +163,15 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
                 return _requestList->GetRequestsAmount(RequestType::Sick) == MAX_SICK && PetInfo::Instance().GetIsLive(); };
             break;
             
+        case ScheduleEvents::Birthday :
+            delay = 5;
+            callback = [this](){
+                if(PetInfo::Instance().GetIsLive())
+                {
+                    PetInfo::Instance().IncreaseParametr(Year);
+                    _events[ScheduleEvents::Birthday]->Reset();
+                } };
+            break;
         default:
             std::cout<<"didn't found event to schedule"; // TODO assert
             break;

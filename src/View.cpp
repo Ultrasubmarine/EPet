@@ -15,13 +15,13 @@ void View::Draw()
     switch ( PetInfo::Instance().GetState()) {
         case PetState::usual:
             //DEFAULT HUMSTER TAMAGOTCHI AVATAR
-            printf("-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------",_tab.c_str(),_tab.c_str());
+            printf("-----------------\n\n\n%s ^  ^\n%s(. %s.)          \n\n   I'm awake :)\n\n-----------------",_tab.c_str(), _tab.c_str(), _size.c_str());
             break;
         case PetState::sleep:
-            printf("-----------------\n\n\n%s ^  ^\n%s(- -) zZz      \n\n   --zzz--    \n\n-----------------",_tab.c_str(),_tab.c_str());
+            printf("-----------------\n\n\n%s ^  ^\n%s(- %s-) zZz      \n\n   --zzz--    \n\n-----------------",_tab.c_str(), _tab.c_str(), _size.c_str());
             break;
         case PetState::dead:
-            printf("-----------------\n\n\n%s ^  ^\n%s(x x)          \n\n   I'm dead :(\n\n-----------------",_tab.c_str(),_tab.c_str());
+            printf("-----------------\n\n\n%s ^  ^\n%s(x %sx)          \n\n   I'm dead :(\n\n-----------------",_tab.c_str(), _tab.c_str(), _size.c_str());
             break;
         default:
             break;
@@ -40,6 +40,9 @@ void View::Update()
 {
     if(PetInfo::Instance().GetState() == PetState::usual)
         CalculateAnimation();
+    
+    if( PetInfo::Instance().GetParametr(Year) >= 2 )
+        _size = " ";
 };
 
 

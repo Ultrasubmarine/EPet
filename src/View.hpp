@@ -25,6 +25,7 @@ public:
 private:
     bool _moveRignt = true;
     std::string _tab =" ";
+    std::string _size ="";
     
     void CalculateAnimation();
     
