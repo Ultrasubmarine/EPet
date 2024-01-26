@@ -59,3 +59,4 @@ Dependencies/
 .accio/
 
 iOSInjectionProject/
+*.xcbkptlist
