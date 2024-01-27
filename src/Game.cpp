@@ -28,8 +28,8 @@ Game::Game() //: _currentState(State::Active)
     
     _timer = new Timer();
     _requestList = new RequestList();
-    _schedule = new Schedule(_timer, _requestList);
-    _view = new View(_requestList);
+    _schedule = new Schedule(_requestList);
+    _view = new View();
     _frameRate = new FrameRate();
     
     _frameRate->SetFixedFrame(5);
@@ -57,7 +57,8 @@ void Game::Loop()
         
         _timer->Update();
         _timer->PrintTime();
-               
+            
+        _schedule->Update(_frameRate->GetDeltaTime());
         _view->Update();
         _view->Draw();
         _requestList->Print();

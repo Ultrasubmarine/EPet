@@ -9,7 +9,7 @@
 #include "RequestList.hpp"
 #include "Pet.hpp"
 
-Event::Event(double delay, std::function<void()> callback, std::function<bool()> condition):
+Schedule::Event::Event(double delay, std::function<void()> callback, std::function<bool()> condition):
  _delay(delay),
 _currentDelay(delay),
  _callback(callback),
@@ -17,7 +17,7 @@ _currentDelay(delay),
 {
 }
 
-bool Event::Update(double dt)
+bool Schedule::Event::Update(double dt)
 {
     _currentDelay -= dt;
     if(_currentDelay < 0.0001)
@@ -28,11 +28,11 @@ bool Event::Update(double dt)
     return false;
 }
 
-bool Event::Condition()
+bool Schedule::Event::Condition()
 {
     return _condition();
 }
-void Event::Reset()
+void Schedule::Event::Reset()
 {
     _currentDelay = _delay;
 }
@@ -62,12 +62,17 @@ void Schedule::Update(double dt)
     }
 }
 
-Schedule::Schedule(Timer *t, RequestList *r): _requestList(r)
+Schedule::Schedule(RequestList *r): _requestList(r)
 {
-    _onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](double dt){ this->Update(dt);});
+    //_onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](double dt){ this->Update(dt);});
     
     //TODO load from file or calculate
-    _currentEventsTypes = { ScheduleEvents::HappyDecrease, ScheduleEvents::FoodDecrease, ScheduleEvents::PoopSpawn, ScheduleEvents::SickSpawn, ScheduleEvents::Death, ScheduleEvents::Birthday};
+    _currentEventsTypes = { Event::Type::HappyDecrease,
+                            Event::Type::FoodDecrease,
+                            Event::Type::PoopSpawn,
+                            Event::Type::SickSpawn,
+                            Event::Type::Death,
+                            Event::Type::Birthday};
     
     for(auto& type : _currentEventsTypes)
     {
@@ -104,12 +109,7 @@ bool Schedule::CheckSpeep()
     return true;
 }
 
-void Schedule::DeleteSubscription()
-{
-    _onTimeUpdate.lock()->Reset();
-}
-
-std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
+std::unique_ptr<Schedule::Event> Schedule::CreateEvent(Event::Type type)
 {
     double delay;
     std::function<void()> callback;
@@ -117,42 +117,42 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
           
     switch (type)
     {
-        case ScheduleEvents::FoodDecrease :
+        case Event::Type::FoodDecrease :
             delay = 1;
             callback = [this](){
                 Pet::Instance().DecreaseParametr(Pet::Food);
-                _events[ScheduleEvents::FoodDecrease]->Reset(); };
+                _events[Event::Type::FoodDecrease]->Reset(); };
             break;
             
-        case ScheduleEvents::HappyDecrease :
+        case Event::Type::HappyDecrease :
             delay = 1;
             callback = [this](){
                 Pet::Instance().DecreaseParametr(Pet::Happy);
-                _events[ScheduleEvents::HappyDecrease]->Reset(); };
+                _events[Event::Type::HappyDecrease]->Reset(); };
             break;
             
-        case ScheduleEvents::PoopSpawn :
+        case Event::Type::PoopSpawn :
             delay = 1;
             callback = [this](){
                 _requestList->AddRequest(RequestType::Poop);
-                _events[ScheduleEvents::PoopSpawn]->Reset();  };
+                _events[Event::Type::PoopSpawn]->Reset();  };
             condition = [this](){
                 return _requestList->GetRequestsAmount(RequestType::Poop) < 3 ;};
             break;
             
-        case ScheduleEvents::SickSpawn :
+        case Event::Type::SickSpawn :
             delay = 3;
             callback = [this](){
                 if(_requestList->GetRequestsAmount(RequestType::Sick) < MAX_SICK)
                 {
                     _requestList->AddRequest(RequestType::Sick);
                 }
-                _events[ScheduleEvents::SickSpawn]->Reset(); };
+                _events[Event::Type::SickSpawn]->Reset(); };
             condition = [this](){
                 return Pet::Instance().GetParametr(Pet::Food) == 0;};
             break;
             
-        case ScheduleEvents::Death :
+        case Event::Type::Death :
             delay = 1000;
             callback = [this](){
                 if(Pet::Instance().GetIsLive())
@@ -163,13 +163,13 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
                 return _requestList->GetRequestsAmount(RequestType::Sick) == MAX_SICK && Pet::Instance().GetIsLive(); };
             break;
             
-        case ScheduleEvents::Birthday :
+        case Event::Type::Birthday :
             delay = 5;
             callback = [this](){
                 if(Pet::Instance().GetIsLive())
                 {
                     Pet::Instance().IncreaseParametr(Pet::Year);
-                    _events[ScheduleEvents::Birthday]->Reset();
+                    _events[Event::Type::Birthday]->Reset();
                 } };
             break;
         default:

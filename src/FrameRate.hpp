@@ -16,15 +16,14 @@
 class FrameRate
 {
     bool _fixedFrameRate = false;
+    int _fps;
     
     std::chrono::nanoseconds _delta;
     std::chrono::nanoseconds _fixedDelta;
     
     std::chrono::time_point<std::chrono::steady_clock> _lastClock, _nowClock;
     
-    int _fps;
 public:
-     
     void FirstInitialization();
     void SetFixedFrame(int fps);
     void WaitFrame();

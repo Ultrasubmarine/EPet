@@ -10,14 +10,9 @@
 
 #include <stdio.h>
 
-class RequestList;
-
 class View
 {
-    RequestList *_requestList;
-    
 public:
-    View(RequestList *requestList):_requestList(requestList) {};
     void Draw();
     void Update();
     
@@ -27,7 +22,6 @@ private:
     std::string _tab =" ";
     std::string _size ="";
     
-    void CalculateAnimation();
-    
+    void CalculateAnimation();    
 };
 #endif /* View_hpp */

@@ -1,4 +1,5 @@
 //
+//
 //  PetInfo.cpp
 //  EPet
 //
@@ -23,7 +24,6 @@ bool Pet::_ParameterData::Increase(int increaseValue)
         _current = _current + increaseValue >= _max? _max: _current + increaseValue;
         return true;
     }
-    
 }
 
 bool Pet::_ParameterData::Decrease(int decreaseValue)

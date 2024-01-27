@@ -26,11 +26,10 @@ public:
     bool AddRequest(RequestType type); //return true if success
     bool RemoveRequest(RequestType type); //return true if success
     
-    std::vector<RequestType> GetAllRequests() { return _requests;};
+    const std::vector<RequestType>& GetAllRequests() const { return _requests;};
     int GetRequestsAmount(RequestType type) const;
     
 //Debug function
     void Print();
-    
 };
 #endif /* RequestQueue_hpp */

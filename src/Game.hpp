@@ -31,7 +31,9 @@ public:
     Timer *_timer;
     RequestList *_requestList;
     Schedule *_schedule;
-    View *_view;
     FrameRate *_frameRate;
+    
+    //tmp
+    View *_view;
 };
 #endif /* Game_hpp */

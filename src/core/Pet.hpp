@@ -9,11 +9,11 @@
 #define PetStats_hpp
 
 #include <stdio.h>
-#include <string>
 #include <map>
 
 #include "Singleton.hpp"
 #include "Subscription.hpp"
+
 
 class Pet : public Singleton<Pet>
 {
