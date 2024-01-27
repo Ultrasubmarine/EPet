@@ -23,7 +23,7 @@
 #include <sys/socket.h>
 #endif
 
-bool stdinHasData()
+bool StdinHasData()
 {
 #   if defined(OS_WIN)
     // this works by harnessing Windows' black magic:

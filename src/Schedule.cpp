@@ -7,7 +7,7 @@
 
 #include "Schedule.hpp"
 #include "RequestList.hpp"
-#include "PetInfo.hpp"
+#include "Pet.hpp"
 
 Event::Event(double delay, std::function<void()> callback, std::function<bool()> condition):
  _delay(delay),
@@ -39,7 +39,7 @@ void Event::Reset()
 
 void Schedule::Update(double dt)
 {
-    if(!PetInfo::Instance().GetIsLive())
+    if(!Pet::Instance().GetIsLive())
     {
         return;
     }
@@ -47,11 +47,11 @@ void Schedule::Update(double dt)
     //checo sleep mode
     if(CheckSpeep())
     {
-        PetInfo::Instance().SetState(PetState::sleep);
+        Pet::Instance().SetState(Pet::State::Sleep);
     }
-    else if(PetInfo::Instance().GetIsLive())
+    else if(Pet::Instance().GetIsLive())
     {
-        PetInfo::Instance().SetState(PetState::usual);
+        Pet::Instance().SetState(Pet::State::Usual);
         for(auto& e: _events)
         {
            if(e.second->Condition())
@@ -120,14 +120,14 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
         case ScheduleEvents::FoodDecrease :
             delay = 1;
             callback = [this](){
-                PetInfo::Instance().DecreaseParametr(Food);
+                Pet::Instance().DecreaseParametr(Pet::Food);
                 _events[ScheduleEvents::FoodDecrease]->Reset(); };
             break;
             
         case ScheduleEvents::HappyDecrease :
             delay = 1;
             callback = [this](){
-                PetInfo::Instance().DecreaseParametr(Happy);
+                Pet::Instance().DecreaseParametr(Pet::Happy);
                 _events[ScheduleEvents::HappyDecrease]->Reset(); };
             break;
             
@@ -149,26 +149,26 @@ std::unique_ptr<Event> Schedule::CreateEvent(ScheduleEvents type)
                 }
                 _events[ScheduleEvents::SickSpawn]->Reset(); };
             condition = [this](){
-                return PetInfo::Instance().GetParametr(Food) == 0;};
+                return Pet::Instance().GetParametr(Pet::Food) == 0;};
             break;
             
         case ScheduleEvents::Death :
             delay = 1000;
             callback = [this](){
-                if(PetInfo::Instance().GetIsLive())
+                if(Pet::Instance().GetIsLive())
                 {
-                    PetInfo::Instance().SetState(PetState::dead);
+                    Pet::Instance().SetState(Pet::State::Dead);
                 } };
             condition = [this](){
-                return _requestList->GetRequestsAmount(RequestType::Sick) == MAX_SICK && PetInfo::Instance().GetIsLive(); };
+                return _requestList->GetRequestsAmount(RequestType::Sick) == MAX_SICK && Pet::Instance().GetIsLive(); };
             break;
             
         case ScheduleEvents::Birthday :
             delay = 5;
             callback = [this](){
-                if(PetInfo::Instance().GetIsLive())
+                if(Pet::Instance().GetIsLive())
                 {
-                    PetInfo::Instance().IncreaseParametr(Year);
+                    Pet::Instance().IncreaseParametr(Pet::Year);
                     _events[ScheduleEvents::Birthday]->Reset();
                 } };
             break;

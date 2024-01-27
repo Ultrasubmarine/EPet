@@ -5,71 +5,64 @@
 //  Created by marina porkhunova on 17.12.2023.
 //
 
-#include "PetInfo.hpp"
+#include "Pet.hpp"
 
-
-PetInfo::_Parametr::_Parametr(int value, int max, int min) : _max(max), _min(min), _parametr(0)
+Pet::_ParameterData::_ParameterData(int value, int max, int min) : _max(max), _min(min), _current(0)
 {
     Set(value);
 }
 
-bool PetInfo::_Parametr::Increase(int increaseValue)
+bool Pet::_ParameterData::Increase(int increaseValue)
 {
-    if(_parametr == _max)
+    if(_current == _max)
     {
         return false;
     }
-    else if(_parametr + increaseValue <= _max)
+    else
     {
-        _parametr += increaseValue;
+        _current = _current + increaseValue >= _max? _max: _current + increaseValue;
         return true;
     }
-    return false;
+    
 }
 
-bool PetInfo::_Parametr::Decrease(int decreaseValue)
+bool Pet::_ParameterData::Decrease(int decreaseValue)
 {
-    if(_parametr == _min)
+    if(_current == _min)
     {
         return false;
     }
-    else if(_parametr - decreaseValue >= _min)
+    else
     {
-        _parametr -= decreaseValue;
+        _current = _current - decreaseValue <= _min? _min: _current - decreaseValue;
         return true;
     }
-    return false;
 }
 
-bool PetInfo::_Parametr::Set(int value)
+bool Pet::_ParameterData::Set(int value)
 {
     if(value <= _max && value >= _min)
     {
-        _parametr = value;
+        _current = value;
         return true;
     }
     return false;
 }
 
 
-PetInfo::PetInfo()
+Pet::Pet()
 {
-    _parametrs.insert({Happy, _Parametr(5,5)});
+    _parametrs.insert({Happy, _ParameterData(5,5)});
     _parametrsSignals.insert({Happy, Signal<int>()});
     
-    _parametrs.insert({Food, _Parametr(4,5)});
+    _parametrs.insert({Food, _ParameterData(4,5)});
     _parametrsSignals.insert({Food, Signal<int>()});
     
-    _parametrs.insert({Year, _Parametr(1,INT_MAX)});
+    _parametrs.insert({Year, _ParameterData(1,INT_MAX)});
     _parametrsSignals.insert({Year, Signal<int>()});
 }
 
-void PetInfo::SetAvatar(std::string& avatar)
-{
-    _avatar = avatar;
-}
-
-const int PetInfo::GetParametr(PetParameters name) const
+const int Pet::GetParametr(Parameter name) const
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
@@ -78,7 +71,7 @@ const int PetInfo::GetParametr(PetParameters name) const
     return -1;
 }
 
-const int PetInfo::GetParametrMax(PetParameters name) const
+const int Pet::GetParametrMax(Parameter name) const
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
@@ -87,7 +80,7 @@ const int PetInfo::GetParametrMax(PetParameters name) const
     return -1;
 }
 
-const int PetInfo::GetParametrMin(PetParameters name) const
+const int Pet::GetParametrMin(Parameter name) const
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
@@ -96,49 +89,49 @@ const int PetInfo::GetParametrMin(PetParameters name) const
     return -1;
 }
 
-bool PetInfo::SetParametr(PetParameters name, int value)
+bool Pet::SetParametr(Parameter name, int value)
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
         auto change = it->second.Set(value);
         if(change)
         {
-           // _parametrsSignals[name].Broadcast(it->second.Get());
+            _parametrsSignals[name].Broadcast(it->second.Get());
         }
         return change;
     }
     return false;
 }
 
-bool PetInfo::DecreaseParametr(PetParameters name, int decreaseValue)
+bool Pet::DecreaseParametr(Parameter name, int decreaseValue)
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
         auto change = it->second.Decrease();
         if(change)
         {
-         //   _parametrsSignals[name].Broadcast(it->second.Get());
+            _parametrsSignals[name].Broadcast(it->second.Get());
         }
         return change;
     }
     return false;
 }
 
-bool PetInfo::IncreaseParametr(PetParameters name, int increaseValue)
+bool Pet::IncreaseParametr(Parameter name, int increaseValue)
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
         auto change = it->second.Increase();
         if(change)
         {
-         //   _parametrsSignals[name].Broadcast(it->second.Get());
+            _parametrsSignals[name].Broadcast(it->second.Get());
         }
         return change;
     }
     return false;
 }
 
-Signal<int>* PetInfo::GetParameterSignal(PetParameters name)
+Signal<int>* Pet::GetParameterSignal(Parameter name)
 {
     if(auto it = _parametrsSignals.find(name); it != _parametrsSignals.end())
     {

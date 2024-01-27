@@ -10,6 +10,6 @@
 
 #include <stdio.h>
 
-bool stdinHasData();
+bool StdinHasData();
 
 #endif /* Input_hpp */

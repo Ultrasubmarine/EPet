@@ -8,19 +8,19 @@
 #include <iostream>
 
 #include "View.hpp"
-#include "PetInfo.hpp"
+#include "Pet.hpp"
 
 void View::Draw()
 {
-    switch ( PetInfo::Instance().GetState()) {
-        case PetState::usual:
+    switch ( Pet::Instance().GetState()) {
+        case Pet::State::Usual:
             //DEFAULT HUMSTER TAMAGOTCHI AVATAR
             printf("-----------------\n\n\n%s ^  ^\n%s(. %s.)          \n\n   I'm awake :)\n\n-----------------",_tab.c_str(), _tab.c_str(), _size.c_str());
             break;
-        case PetState::sleep:
+        case Pet::State::Sleep:
             printf("-----------------\n\n\n%s ^  ^\n%s(- %s-) zZz      \n\n   --zzz--    \n\n-----------------",_tab.c_str(), _tab.c_str(), _size.c_str());
             break;
-        case PetState::dead:
+        case Pet::State::Dead:
             printf("-----------------\n\n\n%s ^  ^\n%s(x %sx)          \n\n   I'm dead :(\n\n-----------------",_tab.c_str(), _tab.c_str(), _size.c_str());
             break;
         default:
@@ -30,18 +30,18 @@ void View::Draw()
     
     //Draw Tamagotchi stats
     std::cout <<"\n   PET STATS:   \n";
-    std::cout <<"   Happy:" << PetInfo::Instance().GetParametr(Happy)<<"/"<<PetInfo::Instance().GetParametrMax(Happy)<<std::endl;
-    std::cout <<"   Food:" << PetInfo::Instance().GetParametr(Food)<<"/"<<PetInfo::Instance().GetParametrMax(Food)<<std::endl;
-    std::cout <<"   year: "<< PetInfo::Instance().GetParametr(Year)<<std::endl;
+    std::cout <<"   Happy:" << Pet::Instance().GetParametr(Pet::Happy)<<"/"<<Pet::Instance().GetParametrMax(Pet::Happy)<<std::endl;
+    std::cout <<"   Food:" << Pet::Instance().GetParametr(Pet::Food)<<"/"<<Pet::Instance().GetParametrMax(Pet::Food)<<std::endl;
+    std::cout <<"   year: "<< Pet::Instance().GetParametr(Pet::Year)<<std::endl;
   //  std::cout << PetInfo::Instance().GetAvatar();
 };
 
 void View::Update()
 {
-    if(PetInfo::Instance().GetState() == PetState::usual)
+    if(Pet::Instance().GetState() == Pet::State::Usual)
         CalculateAnimation();
     
-    if( PetInfo::Instance().GetParametr(Year) >= 2 )
+    if( Pet::Instance().GetParametr(Pet::Year) >= 2 )
         _size = " ";
 };
 

@@ -15,7 +15,7 @@
 #include "FrameRate.hpp"
 #include "Input.hpp"
 
-#include "PetInfo.hpp"
+#include "Pet.hpp"
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
 
@@ -24,7 +24,7 @@ Game::Game() //: _currentState(State::Active)
     //TODO: if PetInfo has save - load
     //...
     //Create new one
-    PetInfo::Instance().SetAvatar(tmpAvatar);
+   // PetInfo::Instance().SetAvatar(tmpAvatar);
     
     _timer = new Timer();
     _requestList = new RequestList();
@@ -42,7 +42,7 @@ Game::~Game()
     delete _requestList;
     delete _timer;
     
-    PetInfo::Instance().Destroy();
+    Pet::Instance().Destroy();
 }
 
 void Game::Loop()
@@ -70,7 +70,7 @@ void Game::Loop()
 void Game::CheckInput()
 {
     int keyCode = {0};
-    if (stdinHasData())
+    if (StdinHasData())
     {
         keyCode = std::cin.get();
         //std::cout << "You pressed '" << keyCode << "'\n";
@@ -78,10 +78,10 @@ void Game::CheckInput()
     
     switch (keyCode) {
         case 'f': // food
-            PetInfo::Instance().IncreaseParametr(PetParameters::Food);
+            Pet::Instance().IncreaseParametr(Pet::Parameter::Food);
             break;
         case 'h': // happy
-            PetInfo::Instance().IncreaseParametr(PetParameters::Happy);
+            Pet::Instance().IncreaseParametr(Pet::Parameter::Happy);
             break;
         case 'p': // poop
             _requestList->RemoveRequest(RequestType::Poop);
