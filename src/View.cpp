@@ -48,7 +48,6 @@ void View::Update()
     }
 };
 
-
 void View::CalculateAnimation()
 {
     if(_moveRignt)

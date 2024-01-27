@@ -9,12 +9,11 @@
 #define Schedule_hpp
 
 #include <stdio.h>
-#include <iostream>
 #include <functional>
 
+#include <memory>
 #include <vector>
 #include <map>
-#include <memory>
 
 #include "Subscription.hpp"
 
@@ -37,7 +36,7 @@ class Schedule
             Birthday
         };
         
-        Event(double delay, std::function<void()> callback, std::function<bool()> condition = [](){return true;});
+        Event(Type type, double delay, std::function<void()> callback, std::function<bool()> condition = [](){return true;});
         
         Type _type;
         double _delay;
@@ -50,8 +49,6 @@ class Schedule
         void Reset();
     };
     
- //   Signal<double>::Subscription _onTimeUpdate;
-    
     RequestList *_requestList;
     
     std::map<Event::Type, std::unique_ptr<Event>> _events;
@@ -61,10 +58,10 @@ public:
     Schedule(RequestList *r);
   
     void Update(double dt);
-    bool CheckSpeep();
+    bool CheckSleep();
     
 private:
-    //Factory Methods
+    //Factory Method
     std::unique_ptr<Event> CreateEvent(Event::Type type);
     
 };

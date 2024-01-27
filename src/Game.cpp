@@ -21,10 +21,9 @@ std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n  
 
 Game::Game() //: _currentState(State::Active)
 {
-    //TODO: if PetInfo has save - load
+    //TODO: if Pet has save - load
     //...
     //Create new one
-   // PetInfo::Instance().SetAvatar(tmpAvatar);
     
     _timer = new Timer();
     _requestList = new RequestList();

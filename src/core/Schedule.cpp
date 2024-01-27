@@ -9,9 +9,10 @@
 #include "RequestList.hpp"
 #include "Pet.hpp"
 
-Schedule::Event::Event(double delay, std::function<void()> callback, std::function<bool()> condition):
+Schedule::Event::Event(Type type, double delay, std::function<void()> callback, std::function<bool()> condition):
+ _type(type),
  _delay(delay),
-_currentDelay(delay),
+ _currentDelay(delay),
  _callback(callback),
  _condition(condition)
 {
@@ -32,6 +33,7 @@ bool Schedule::Event::Condition()
 {
     return _condition();
 }
+
 void Schedule::Event::Reset()
 {
     _currentDelay = _delay;
@@ -43,15 +45,15 @@ void Schedule::Update(double dt)
     {
         return;
     }
-    
-    //checo sleep mode
-    if(CheckSpeep())
+
+    if(CheckSleep())
     {
         Pet::Instance().SetState(Pet::State::Sleep);
     }
-    else if(Pet::Instance().GetIsLive())
+    else
     {
         Pet::Instance().SetState(Pet::State::Usual);
+        
         for(auto& e: _events)
         {
            if(e.second->Condition())
@@ -64,8 +66,6 @@ void Schedule::Update(double dt)
 
 Schedule::Schedule(RequestList *r): _requestList(r)
 {
-    //_onTimeUpdate = t->GetOnTimeUpdatedSignal().Subscribe( [this](double dt){ this->Update(dt);});
-    
     //TODO load from file or calculate
     _currentEventsTypes = { Event::Type::HappyDecrease,
                             Event::Type::FoodDecrease,
@@ -83,7 +83,7 @@ Schedule::Schedule(RequestList *r): _requestList(r)
 #include <format>
 #include <ctime>
 
-bool Schedule::CheckSpeep()
+bool Schedule::CheckSleep()
 {
     using namespace std::chrono;
     
@@ -108,6 +108,8 @@ bool Schedule::CheckSpeep()
 
     return true;
 }
+
+#include <iostream>
 
 std::unique_ptr<Schedule::Event> Schedule::CreateEvent(Event::Type type)
 {
@@ -177,6 +179,6 @@ std::unique_ptr<Schedule::Event> Schedule::CreateEvent(Event::Type type)
             break;
     }
     
-    return std::make_unique<Event>(delay,callback,condition);
+    return std::make_unique<Event>(type, delay, callback, condition);
 }
     

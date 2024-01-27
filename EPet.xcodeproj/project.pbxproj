@@ -83,12 +83,9 @@
 		02CC74522B658F34009DC280 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				02CC745E2B658F34009DC280 /* Input.hpp */,
-				02CC74532B658F34009DC280 /* Input.cpp */,
+				02CC74722B659905009DC280 /* system */,
 				02CC74552B658F34009DC280 /* patterns */,
 				02CC74662B658FA7009DC280 /* core */,
-				02CC74592B658F34009DC280 /* FrameRate.hpp */,
-				02CC74702B659002009DC280 /* FrameRate.cpp */,
 				02CC745D2B658F34009DC280 /* View.hpp */,
 				02CC745B2B658F34009DC280 /* View.cpp */,
 				02CC745C2B658F34009DC280 /* Timer.hpp */,
@@ -120,6 +117,17 @@
 				02CC74692B658FA7009DC280 /* Schedule.cpp */,
 			);
 			path = core;
+			sourceTree = "<group>";
+		};
+		02CC74722B659905009DC280 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				02CC74592B658F34009DC280 /* FrameRate.hpp */,
+				02CC74702B659002009DC280 /* FrameRate.cpp */,
+				02CC745E2B658F34009DC280 /* Input.hpp */,
+				02CC74532B658F34009DC280 /* Input.cpp */,
+			);
+			path = system;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
