@@ -10,11 +10,11 @@
 #include "Pet.hpp"
 
 Schedule::Event::Event(Type type, double delay, std::function<void()> callback, std::function<bool()> condition):
- _type(type),
- _delay(delay),
- _currentDelay(delay),
- _callback(callback),
- _condition(condition)
+_type(type),
+_delay(delay),
+_currentDelay(delay),
+_callback(callback),
+_condition(condition)
 {
 }
 
@@ -45,7 +45,7 @@ void Schedule::Update(double dt)
     {
         return;
     }
-
+    
     if(CheckSleep())
     {
         Pet::Instance().SetState(Pet::State::Sleep);
@@ -56,10 +56,10 @@ void Schedule::Update(double dt)
         
         for(auto& e: _events)
         {
-           if(e.second->Condition())
-               e.second->Update(dt);
-           else
-               e.second->Reset();
+            if(e.second->Condition())
+                e.second->Update(dt);
+            else
+                e.second->Reset();
         }
     }
 }
@@ -68,11 +68,11 @@ Schedule::Schedule(RequestList *r): _requestList(r)
 {
     //TODO load from file or calculate
     _currentEventsTypes = { Event::Type::HappyDecrease,
-                            Event::Type::FoodDecrease,
-                            Event::Type::PoopSpawn,
-                            Event::Type::SickSpawn,
-                            Event::Type::Death,
-                            Event::Type::Birthday};
+        Event::Type::FoodDecrease,
+        Event::Type::PoopSpawn,
+        Event::Type::SickSpawn,
+        Event::Type::Death,
+        Event::Type::Birthday};
     
     for(auto& type : _currentEventsTypes)
     {
@@ -105,7 +105,7 @@ bool Schedule::CheckSleep()
     {
         return false;
     }
-
+    
     return true;
 }
 
@@ -116,7 +116,7 @@ std::unique_ptr<Schedule::Event> Schedule::CreateEvent(Event::Type type)
     double delay;
     std::function<void()> callback;
     std::function<bool()> condition = [](){return true;};
-          
+    
     switch (type)
     {
         case Event::Type::FoodDecrease :
@@ -181,4 +181,4 @@ std::unique_ptr<Schedule::Event> Schedule::CreateEvent(Event::Type type)
     
     return std::make_unique<Event>(type, delay, callback, condition);
 }
-    
+

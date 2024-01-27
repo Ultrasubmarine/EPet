@@ -56,7 +56,7 @@ void Game::Loop()
         
         _timer->Update();
         _timer->PrintTime();
-            
+        
         _schedule->Update(_frameRate->GetDeltaTime());
         _view->Update();
         _view->Draw();

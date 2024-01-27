@@ -33,7 +33,7 @@ void FrameRate::WaitFrame()
     
     _delta = _nowClock - _lastClock;
     
-        
+    
     if(_fixedFrameRate)
     {
         auto wait = _fixedDelta - _delta;
@@ -44,7 +44,7 @@ void FrameRate::WaitFrame()
             std::this_thread::sleep_for(wait);
         }
     }
-  
+    
     _lastClock = std::chrono::steady_clock::now();
 }
 

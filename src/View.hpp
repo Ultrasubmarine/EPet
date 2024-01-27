@@ -16,7 +16,7 @@ public:
     void Draw();
     void Update();
     
-// tmp simple animation
+    // tmp simple animation
 private:
     bool _moveRignt = true;
     std::string _tab =" ";

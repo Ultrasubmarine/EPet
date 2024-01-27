@@ -29,7 +29,7 @@ public:
     const std::vector<RequestType>& GetAllRequests() const { return _requests;};
     int GetRequestsAmount(RequestType type) const;
     
-//Debug function
+    //Debug function
     void Print();
 };
 #endif /* RequestQueue_hpp */

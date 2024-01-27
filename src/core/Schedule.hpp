@@ -53,10 +53,10 @@ class Schedule
     
     std::map<Event::Type, std::unique_ptr<Event>> _events;
     std::vector<Event::Type> _currentEventsTypes;
-
+    
 public:
     Schedule(RequestList *r);
-  
+    
     void Update(double dt);
     bool CheckSleep();
     

@@ -14,6 +14,6 @@
 int main(int argc, const char *argv[]) {
     Game myGame;
     myGame.Loop();
-
+    
     return 0;
 }

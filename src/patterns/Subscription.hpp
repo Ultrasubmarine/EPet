@@ -26,13 +26,13 @@ class Signal
         std::function<void(Args...)> _callBack;
         Signal<Args...> *_signal;
     public:
-
+        
         _Subscription(std::function<void(Args...)>  callBack, Signal<Args...> *signal): _callBack(callBack),
-                                                                                        _signal(signal) {};
+        _signal(signal) {};
         void Call(Args...args) const {_callBack(args...);};
         void Reset() { _signal->Unsubscribe(this);};
     };
-
+    
     std::list<std::shared_ptr<_Subscription>> _subscribers;
 public:
     using Subscription = std::weak_ptr<_Subscription>;
@@ -79,7 +79,7 @@ void Signal<Args...>::Unsubscribe(Signal<Args...>::_Subscription *subscriber)
 {
     auto it = std::find_if(_subscribers.begin(), _subscribers.end(),
                            [subscriber](auto& ptr){ return ptr.get() == subscriber; });
-
+    
     if(it != _subscribers.end())
     {
         _subscribers.erase(it);

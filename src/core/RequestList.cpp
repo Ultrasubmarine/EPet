@@ -28,7 +28,7 @@ bool RequestList::RemoveRequest(RequestType type)
 int RequestList::GetRequestsAmount(RequestType type) const
 {
     int amount = 0;
-
+    
     auto it = std::find(_requests.begin(), _requests.end(), type);
     while(it != _requests.end())
     {
@@ -53,26 +53,26 @@ void RequestList::Print()
         switch (r)
         {
             case RequestType::Poop:
-                {
-                    std::cout<<"    poop\n";
-                    break;
-                }
+            {
+                std::cout<<"    poop\n";
+                break;
+            }
             case RequestType::Hangry:
-                {
-                    std::cout<<"    hangry\n";
-                    break;
-                }
+            {
+                std::cout<<"    hangry\n";
+                break;
+            }
             case RequestType::Sick:
-                {
-                    std::cout<<"    sick\n";
-                    break;
-                }
+            {
+                std::cout<<"    sick\n";
+                break;
+            }
             default:
-                {
-                    std::cout<<"    ???\n";
-                    break;
-                }
+            {
+                std::cout<<"    ???\n";
+                break;
+            }
         }
     }
 }
-    
+
