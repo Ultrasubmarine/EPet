@@ -16,6 +16,8 @@
 		02CC746E2B658FA7009DC280 /* RequestList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CC74682B658FA7009DC280 /* RequestList.cpp */; };
 		02CC746F2B658FA7009DC280 /* Schedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CC74692B658FA7009DC280 /* Schedule.cpp */; };
 		02CC74712B659002009DC280 /* FrameRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CC74702B659002009DC280 /* FrameRate.cpp */; };
+		02CCA8E32B8FB6DF00A2F3A8 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CCA8E12B8FB6DF00A2F3A8 /* Scene.cpp */; };
+		02CCA8E62B8FB88400A2F3A8 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CCA8E42B8FB88400A2F3A8 /* SceneManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +53,10 @@
 		02CC746B2B658FA7009DC280 /* Schedule.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Schedule.hpp; sourceTree = "<group>"; };
 		02CC746C2B658FA7009DC280 /* Pet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pet.hpp; sourceTree = "<group>"; };
 		02CC74702B659002009DC280 /* FrameRate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameRate.cpp; sourceTree = "<group>"; };
+		02CCA8E12B8FB6DF00A2F3A8 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		02CCA8E22B8FB6DF00A2F3A8 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		02CCA8E42B8FB88400A2F3A8 /* SceneManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneManager.cpp; sourceTree = "<group>"; };
+		02CCA8E52B8FB88400A2F3A8 /* SceneManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,10 @@
 				02CC74682B658FA7009DC280 /* RequestList.cpp */,
 				02CC746B2B658FA7009DC280 /* Schedule.hpp */,
 				02CC74692B658FA7009DC280 /* Schedule.cpp */,
+				02CCA8E12B8FB6DF00A2F3A8 /* Scene.cpp */,
+				02CCA8E22B8FB6DF00A2F3A8 /* Scene.hpp */,
+				02CCA8E42B8FB88400A2F3A8 /* SceneManager.cpp */,
+				02CCA8E52B8FB88400A2F3A8 /* SceneManager.hpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -195,6 +205,8 @@
 				02CC746F2B658FA7009DC280 /* Schedule.cpp in Sources */,
 				02CC74712B659002009DC280 /* FrameRate.cpp in Sources */,
 				02CC74642B658F34009DC280 /* main.cpp in Sources */,
+				02CCA8E62B8FB88400A2F3A8 /* SceneManager.cpp in Sources */,
+				02CCA8E32B8FB6DF00A2F3A8 /* Scene.cpp in Sources */,
 				02CC74652B658F34009DC280 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
