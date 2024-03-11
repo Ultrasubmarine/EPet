@@ -8,7 +8,7 @@
 #include "Scene.hpp"
 #include <iostream>
 
-Scene::Scene(std::string& id, std::string& nextSceneId) : _id(id), _nextSceneId(nextSceneId)
+Scene::Scene(std::string& id) : _id(id)
 {
     std::cout<<"Scene: "<<_id<<" was created";
 }

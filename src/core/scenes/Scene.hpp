@@ -19,19 +19,19 @@ struct Objects
 
 class Scene
 {
+protected:
     const std::string _id;
-    std::string _nextSceneId;
-    
     std::vector<Objects> _objects;
     
 public:
-    Scene(std::string& id, std::string& nextSceneId);
-    ~Scene();
+    Scene(std::string& id);
+    virtual ~Scene();
         
-  //  virtual void Update();
+    virtual void Start() {};
+    virtual void Update(double dt){};
+    virtual void Render(){}; // TODO: temp place and temp virtual
     
     const std::string& GetSceneId() { return _id;} const;
-    const std::string& GetNextSceneId() { return _nextSceneId;} const;    
 };
 
 #endif /* Scene_hpp */

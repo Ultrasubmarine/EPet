@@ -16,6 +16,9 @@
 #include "Input.hpp"
 
 #include "Pet.hpp"
+#include "SceneManager.hpp"
+#include "Scene.hpp"
+#include "Subscription.hpp"
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
 
@@ -28,15 +31,17 @@ Game::Game() //: _currentState(State::Active)
     _timer = new Timer();
     _requestList = new RequestList();
     _schedule = new Schedule(_requestList);
-    _view = new View();
+    //_view = new View();
     _frameRate = new FrameRate();
     
     _frameRate->SetFixedFrame(5);
+    
+    SceneManager::Instance().Init();
 }
 
 Game::~Game()
 {
-    delete _view;
+   // delete _view;
     delete _schedule;
     delete _requestList;
     delete _timer;
@@ -51,19 +56,23 @@ void Game::Loop()
     while(true)
     {
         system("clear");
-        
+
         CheckInput();
         
         _timer->Update();
         _timer->PrintTime();
-        
+
         _schedule->Update(_frameRate->GetDeltaTime());
-        _view->Update();
-        _view->Draw();
+        
+        SceneManager::Instance().GetCurrentScene()->Update(_frameRate->GetDeltaTime());
+        SceneManager::Instance().GetCurrentScene()->Render(); // use scene from sceneManager Instanc because we couldn't be sure that it's the same scenes as previous
+
         _requestList->Print();
         
+        std::cout<<"Scene: "<<SceneManager::Instance().GetCurrentScene()->GetSceneId()<<std::endl;
         std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
         _frameRate->WaitFrame();
+        
     }
 }
 
@@ -76,9 +85,14 @@ void Game::CheckInput()
         //std::cout << "You pressed '" << keyCode << "'\n";
     }
     
+    if(SceneManager::Instance().GetCurrentScene()->GetSceneId() != DEFAULT_SCENE)
+    {
+        return;
+    }
+    
     switch (keyCode) {
         case 'f': // food
-            Pet::Instance().IncreaseParametr(Pet::Parameter::Food);
+            SceneManager::Instance().LoadScene(FEED_SCENE);
             break;
         case 'h': // happy
             Pet::Instance().IncreaseParametr(Pet::Parameter::Happy);

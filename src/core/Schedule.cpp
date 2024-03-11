@@ -120,21 +120,21 @@ std::unique_ptr<Schedule::Event> Schedule::CreateEvent(Event::Type type)
     switch (type)
     {
         case Event::Type::FoodDecrease :
-            delay = 1;
+            delay = 5;
             callback = [this](){
                 Pet::Instance().DecreaseParametr(Pet::Food);
                 _events[Event::Type::FoodDecrease]->Reset(); };
             break;
             
         case Event::Type::HappyDecrease :
-            delay = 1;
+            delay = 5;
             callback = [this](){
                 Pet::Instance().DecreaseParametr(Pet::Happy);
                 _events[Event::Type::HappyDecrease]->Reset(); };
             break;
             
         case Event::Type::PoopSpawn :
-            delay = 1;
+            delay = 10;
             callback = [this](){
                 _requestList->AddRequest(RequestType::Poop);
                 _events[Event::Type::PoopSpawn]->Reset();  };
@@ -143,7 +143,7 @@ std::unique_ptr<Schedule::Event> Schedule::CreateEvent(Event::Type type)
             break;
             
         case Event::Type::SickSpawn :
-            delay = 3;
+            delay = 13;
             callback = [this](){
                 if(_requestList->GetRequestsAmount(RequestType::Sick) < MAX_SICK)
                 {

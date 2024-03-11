@@ -107,7 +107,7 @@ bool Pet::DecreaseParametr(Parameter name, int decreaseValue)
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
-        auto change = it->second.Decrease();
+        auto change = it->second.Decrease(decreaseValue);
         if(change)
         {
             _parametrsSignals[name].Broadcast(it->second.Get());
@@ -121,7 +121,7 @@ bool Pet::IncreaseParametr(Parameter name, int increaseValue)
 {
     if(auto it = _parametrs.find(name); it != _parametrs.end())
     {
-        auto change = it->second.Increase();
+        auto change = it->second.Increase(increaseValue);
         if(change)
         {
             _parametrsSignals[name].Broadcast(it->second.Get());

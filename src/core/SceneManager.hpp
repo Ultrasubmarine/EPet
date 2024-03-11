@@ -15,21 +15,22 @@
 #include "Subscription.hpp"
 
 #define DEFAULT_SCENE "default"
+#define FEED_SCENE "food"
+
 class Scene;
 
 class SceneManager: public Singleton<SceneManager>
 {
     Scene* _currentScene;
     
-    Signal<> OnCreate;
-    Signal<> OnDestroy;
+    Signal<Scene*> OnCreate;
+    Signal<Scene*> OnDestroy;
     
     void DeleteScene();    
 public:
     void Init();
     
-    void LoadScene(std::string id, std::string nextId = std::string(DEFAULT_SCENE));
-    
+    void LoadScene(std::string id);
     Scene* GetCurrentScene() {return _currentScene;};
 };
 #endif /* SceneManager_hpp */
