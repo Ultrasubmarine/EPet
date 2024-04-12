@@ -13,12 +13,12 @@
 
 FeedScene::FeedScene(std::string& id, int foodId) : Scene(id), _foodId(foodId)
 {
-    std::cout<<"FeedScene: "<<_id<<" with food:"<<_foodId<<" was created";
+//    std::cout<<"FeedScene: "<<_id<<" with food:"<<_foodId<<" was created";
 }
 
 FeedScene::~FeedScene()
 {
-    std::cout<<"FeedScene: "<<_id<<" with food:"<<_foodId<<" was deleted";
+//    std::cout<<"FeedScene: "<<_id<<" with food:"<<_foodId<<" was deleted";
 }
 
 void FeedScene::Start()

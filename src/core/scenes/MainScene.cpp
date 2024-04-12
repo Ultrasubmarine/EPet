@@ -11,12 +11,12 @@
 
 MainScene::MainScene(std::string& id) : Scene(id)
 {
-    std::cout<<"MainScene: "<<_id<<" was created";
+ //   std::cout<<"MainScene: "<<_id<<" was created";
 }
 
 MainScene::~MainScene()
 {
-    std::cout<<"MainScene: "<<_id<<" was deleted";
+ //   std::cout<<"MainScene: "<<_id<<" was deleted";
 }
 
 void MainScene::Update(double dt)

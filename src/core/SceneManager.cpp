@@ -11,6 +11,7 @@
 #include "Scene.hpp"
 #include "MainScene.hpp"
 #include "FeedScene.hpp"
+#include "LambdaScene.hpp"
 
 void SceneManager::Init()
 {

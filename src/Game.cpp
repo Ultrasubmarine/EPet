@@ -29,11 +29,14 @@ Game::Game() //: _currentState(State::Active)
     //Create new one
     
     _timer = new Timer();
+    
+    //TODO: wrap this two to smth. it's game logic entities. but Game() manages other layer.
     _requestList = new RequestList();
     _schedule = new Schedule(_requestList);
+    //TODO end
+    
     //_view = new View();
     _frameRate = new FrameRate();
-    
     _frameRate->SetFixedFrame(5);
     
     SceneManager::Instance().Init();
@@ -102,7 +105,7 @@ void Game::CheckInput()
             break;
         case 's': //sick
             _requestList->RemoveRequest(RequestType::Sick);
-            break;
+            break;            
         default:
             break;
     }

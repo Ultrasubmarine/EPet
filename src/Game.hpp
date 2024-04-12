@@ -9,7 +9,6 @@
 #define Game_hpp
 
 #include <stdio.h>
-#include <string>
 
 class Timer;
 class Schedule;

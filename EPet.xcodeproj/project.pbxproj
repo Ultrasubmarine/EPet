@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0211491A2BC9B56900DBD244 /* LambdaScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 021149182BC9B56900DBD244 /* LambdaScene.cpp */; };
 		027278702B9F809D00819663 /* FeedScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0272786E2B9F809D00819663 /* FeedScene.cpp */; };
 		027278732B9F848E00819663 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027278712B9F848E00819663 /* MainScene.cpp */; };
 		02CC74612B658F34009DC280 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CC74532B658F34009DC280 /* Input.cpp */; };
@@ -35,6 +36,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		021149182BC9B56900DBD244 /* LambdaScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LambdaScene.cpp; sourceTree = "<group>"; };
+		021149192BC9B56900DBD244 /* LambdaScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LambdaScene.hpp; sourceTree = "<group>"; };
 		024F4BB82B151B0400E6064A /* EPet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EPet; sourceTree = BUILT_PRODUCTS_DIR; };
 		0272786E2B9F809D00819663 /* FeedScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FeedScene.cpp; sourceTree = "<group>"; };
 		0272786F2B9F809D00819663 /* FeedScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FeedScene.hpp; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 				0272786F2B9F809D00819663 /* FeedScene.hpp */,
 				027278712B9F848E00819663 /* MainScene.cpp */,
 				027278722B9F848E00819663 /* MainScene.hpp */,
+				021149182BC9B56900DBD244 /* LambdaScene.cpp */,
+				021149192BC9B56900DBD244 /* LambdaScene.hpp */,
 			);
 			path = scenes;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02CC74632B658F34009DC280 /* View.cpp in Sources */,
+				0211491A2BC9B56900DBD244 /* LambdaScene.cpp in Sources */,
 				02CC74612B658F34009DC280 /* Input.cpp in Sources */,
 				02CC74622B658F34009DC280 /* Timer.cpp in Sources */,
 				02CC746D2B658FA7009DC280 /* Pet.cpp in Sources */,

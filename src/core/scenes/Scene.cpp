@@ -10,10 +10,10 @@
 
 Scene::Scene(std::string& id) : _id(id)
 {
-    std::cout<<"Scene: "<<_id<<" was created";
+ //   std::cout<<"Scene: "<<_id<<" was created";
 }
 
 Scene::~Scene()
 {
-    std::cout<<"Scene: "<<_id<<" was deleted";
+//    std::cout<<"Scene: "<<_id<<" was deleted";
 }
