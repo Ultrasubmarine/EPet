@@ -19,14 +19,20 @@
 #include "SceneManager.hpp"
 #include "Scene.hpp"
 #include "Subscription.hpp"
+#include "Window.hpp"
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
+bool Input();
 
 Game::Game() //: _currentState(State::Active)
 {
     //TODO: if Pet has save - load
     //...
     //Create new one
+    
+    _window = new Window();
+   // if(!_window)
+    //    return;
     
     _timer = new Timer();
     
@@ -56,24 +62,26 @@ void Game::Loop()
 {
     _frameRate->FirstInitialization();
     
-    while(true)
+    bool isPlay = true;
+    while(isPlay)
     {
-        system("clear");
+       // system("clear");
 
-        CheckInput();
+        //CheckInput();
+        isPlay = Input();
         
-        _timer->Update();
-        _timer->PrintTime();
-
-        _schedule->Update(_frameRate->GetDeltaTime());
-        
-        SceneManager::Instance().GetCurrentScene()->Update(_frameRate->GetDeltaTime());
-        SceneManager::Instance().GetCurrentScene()->Render(); // use scene from sceneManager Instanc because we couldn't be sure that it's the same scenes as previous
-
-        _requestList->Print();
-        
-        std::cout<<"Scene: "<<SceneManager::Instance().GetCurrentScene()->GetSceneId()<<std::endl;
-        std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
+//        _timer->Update();
+//        _timer->PrintTime();
+//
+//        _schedule->Update(_frameRate->GetDeltaTime());
+//
+//        SceneManager::Instance().GetCurrentScene()->Update(_frameRate->GetDeltaTime());
+//        SceneManager::Instance().GetCurrentScene()->Render(); // use scene from sceneManager Instanc because we couldn't be sure that it's the same scenes as previous
+//
+//        _requestList->Print();
+//
+//        std::cout<<"Scene: "<<SceneManager::Instance().GetCurrentScene()->GetSceneId()<<std::endl;
+//        std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
         _frameRate->WaitFrame();
         
     }
@@ -109,4 +117,17 @@ void Game::CheckInput()
         default:
             break;
     }
+}
+
+
+#include <SDL2/SDL.h>
+bool Input()
+{
+    static SDL_Event event;
+    if(SDL_PollEvent(&event) )
+    {
+        if(event.type == SDL_QUIT)
+            return false;
+    }
+    return true;
 }

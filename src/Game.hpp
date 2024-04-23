@@ -15,6 +15,7 @@ class Schedule;
 class RequestList;
 class View;
 class FrameRate;
+class Window;
 
 class Game
 {
@@ -27,6 +28,7 @@ public:
     
     void Loop();
         
+    Window *_window;
     Timer *_timer;
     RequestList *_requestList;
     Schedule *_schedule;
