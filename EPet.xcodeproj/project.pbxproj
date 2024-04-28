@@ -120,9 +120,9 @@
 		02D24A542BD84124008E7DCF /* system */ = {
 			isa = PBXGroup;
 			children = (
-				02D24A552BD84124008E7DCF /* Input.cpp */,
 				02D24A562BD84124008E7DCF /* FrameRate.hpp */,
 				02D24A572BD84124008E7DCF /* FrameRate.cpp */,
+				02D24A552BD84124008E7DCF /* Input.cpp */,
 				02D24A582BD84124008E7DCF /* Input.hpp */,
 			);
 			name = system;

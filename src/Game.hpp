@@ -27,7 +27,7 @@ public:
     ~Game();
     
     void Loop();
-        
+    
     Window *_window;
     Timer *_timer;
     RequestList *_requestList;

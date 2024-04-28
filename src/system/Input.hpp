@@ -8,8 +8,6 @@
 #ifndef Input_hpp
 #define Input_hpp
 
-#include <stdio.h>
-
-bool StdinHasData();
+bool Input();
 
 #endif /* Input_hpp */

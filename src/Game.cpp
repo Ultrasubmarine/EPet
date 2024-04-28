@@ -90,7 +90,7 @@ void Game::Loop()
 void Game::CheckInput()
 {
     int keyCode = {0};
-    if (StdinHasData())
+    //fif (StdinHasData())
     {
         keyCode = std::cin.get();
         //std::cout << "You pressed '" << keyCode << "'\n";
@@ -117,17 +117,4 @@ void Game::CheckInput()
         default:
             break;
     }
-}
-
-
-#include <SDL2/SDL.h>
-bool Input()
-{
-    static SDL_Event event;
-    if(SDL_PollEvent(&event) )
-    {
-        if(event.type == SDL_QUIT)
-            return false;
-    }
-    return true;
 }
