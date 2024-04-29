@@ -58,6 +58,7 @@
 #define MIDDLE_KEY SDLK_s
 #define RIGHT_KEY SDLK_d
 
+#include <map>
 void PrintKeyInfo( SDL_KeyboardEvent *key );
 
 struct Key
@@ -69,8 +70,13 @@ struct Key
     };
     
     State state;
+    const uint unicode;
     const char *name;
+    
 };
+
+//scancode - key name 
+std::map<std::string, Key> inputTable;
 
 
 bool Input()
