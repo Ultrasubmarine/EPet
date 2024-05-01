@@ -61,45 +61,58 @@
 #include <map>
 void PrintKeyInfo( SDL_KeyboardEvent *key );
 
-struct Key
+
+
+
+//scancode - key name
+//std::map<std::string, Key> inputTable;
+
+Input::Input()
 {
-    enum State
-    {
-        pressed,
-        released
+    _listeningKeys = {
+        {'a', "BUTTON_A"},
+        {'b', "BUTTON_B"},
+        {'d', "BUTTON_D"}
     };
-    
-    State state;
-    const uint unicode;
-    const char *name;
-    
-};
+}
 
-//scancode - key name 
-std::map<std::string, Key> inputTable;
-
-
-bool Input()
+void Input::Update()
 {
+
+    _eventsPool.clear();
+//#if USE_SDL
     static SDL_Event event;
     if(SDL_PollEvent(&event) )
     {
+        auto key_iter = _listeningKeys.find(event.key.keysym.sym);
+        if(key_iter == _listeningKeys.end())
+            return;
+        
+        KeyEvent k;
+        k.name= event.key.keysym.sym;
         switch (event.type)
         {
-            case SDL_QUIT:
-                return false;
+           // case SDL_QUIT:
             case SDL_KEYDOWN:
+            {
+                k.state = KeyEvent::State::Pressed;
+                break;
+            }
             case SDL_KEYUP:
             {
-                if(event.key.keysym.sym == 'a')
-                    PrintKeyInfo( &event.key);
+                k.state = KeyEvent::State::Released;
                 break;
             }
         }
+        
+        _eventsPool.push_back(k);
     }
-    return true;
+//#endif
+    
+    
+   // if(event.key.keysym.sym == 'a')
+    //    PrintKeyInfo( &event.key);
 }
-
 
 /* Print all information about a key event */
     void PrintKeyInfo( SDL_KeyboardEvent *key ){

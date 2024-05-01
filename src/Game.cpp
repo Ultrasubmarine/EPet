@@ -22,7 +22,7 @@
 #include "Window.hpp"
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
-bool Input();
+//bool Input();
 
 Game::Game() //: _currentState(State::Active)
 {
@@ -35,6 +35,7 @@ Game::Game() //: _currentState(State::Active)
     //    return;
     
     _timer = new Timer();
+    _input = new class Input();
     
     //TODO: wrap this two to smth. it's game logic entities. but Game() manages other layer.
     _requestList = new RequestList();
@@ -65,10 +66,21 @@ void Game::Loop()
     bool isPlay = true;
     while(isPlay)
     {
+        _input->Update();
+        
+     //   system("clear");
+        for(auto& key : _input->Get())
+        {
+            std::cout<< key.name;
+            if(key.state== KeyEvent::State::Pressed)
+                std::cout<<" [Pressed]\n";
+            if(key.state== KeyEvent::State::Released)
+                std::cout<<" [Released]\n";
+        }
        // system("clear");
 
         //CheckInput();
-        isPlay = Input();
+        //isPlay = Input();
         
 //        _timer->Update();
 //        _timer->PrintTime();
