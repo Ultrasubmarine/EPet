@@ -19,7 +19,7 @@
 #include "SceneManager.hpp"
 #include "Scene.hpp"
 #include "Subscription.hpp"
-#include "Window.hpp"
+#include "SDLWindow.hpp"
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
 //bool Input();
@@ -29,8 +29,9 @@ Game::Game() //: _currentState(State::Active)
     //TODO: if Pet has save - load
     //...
     //Create new one
-    
-    _window = new Window();
+    //"[HAMSTERGOTCHI]"
+    _window = new SDLWindow();
+    _window->CreateWindow();
    // if(!_window)
     //    return;
     

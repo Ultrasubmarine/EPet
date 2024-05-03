@@ -11,7 +11,7 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
-class Window
+class SDLWindow
 {
     static const int DEFAULT_WIDTH = 600;
     static const int DEFAULT_HEIGHT = 600;
@@ -22,8 +22,8 @@ class Window
     SDL_Window* _window;
     
 public:
-    Window();
-    ~Window();
+    SDLWindow();
+    ~SDLWindow();
     
     SDL_Window* GetWindow() const { return _window;};
     
