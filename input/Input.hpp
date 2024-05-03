@@ -12,17 +12,7 @@
 #include <vector>
 #include <map>
 
-struct KeyEvent
-{
-    enum State
-    {
-        Pressed,
-        Released
-    };
-    
-    std::string name;
-    State state;
-};
+
 
 class Input
 {   

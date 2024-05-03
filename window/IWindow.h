@@ -25,8 +25,8 @@ public:
     
     virtual void HandleEvent() = 0;
     
-    virtual int GetHeight() = 0;
-    virtual int GetWidth() = 0;
+    virtual int GetHeight() const = 0;
+    virtual int GetWidth() const = 0;
     
     // TODO: has focus;
     // TODO: smth with render;

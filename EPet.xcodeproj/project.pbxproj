@@ -22,9 +22,9 @@
 		02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A662BD84124008E7DCF /* Schedule.cpp */; };
 		02D24A7D2BD84125008E7DCF /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A682BD84124008E7DCF /* SceneManager.cpp */; };
 		02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A6B2BD84124008E7DCF /* Timer.cpp */; };
-		02D24A812BD8416F008E7DCF /* SDLWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A7F2BD8416F008E7DCF /* SDLWindow.cpp */; };
 		02D24A852BD841D9008E7DCF /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D24A832BD841D9008E7DCF /* SDL2.framework */; };
 		02D24A862BD841D9008E7DCF /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D24A842BD841D9008E7DCF /* SDL2_ttf.framework */; };
+		02D24A922BE5604C008E7DCF /* SDLWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A8F2BE5600C008E7DCF /* SDLWindow.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,11 +60,12 @@
 		02D24A6E2BD84125008E7DCF /* Subscription.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Subscription.hpp; sourceTree = "<group>"; };
 		02D24A6F2BD84125008E7DCF /* Singleton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Singleton.hpp; sourceTree = "<group>"; };
 		02D24A702BD84125008E7DCF /* Timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Timer.hpp; path = src/Timer.hpp; sourceTree = "<group>"; };
-		02D24A7F2BD8416F008E7DCF /* SDLWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLWindow.cpp; path = ../SDLWindow.cpp; sourceTree = "<group>"; };
-		02D24A802BD8416F008E7DCF /* SDLWindow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SDLWindow.hpp; path = ../SDLWindow.hpp; sourceTree = "<group>"; };
 		02D24A832BD841D9008E7DCF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		02D24A842BD841D9008E7DCF /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
-		02D24A8C2BE556E6008E7DCF /* IWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IWindow.h; path = src/IWindow.h; sourceTree = "<group>"; };
+		02D24A8C2BE556E6008E7DCF /* IWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWindow.h; sourceTree = "<group>"; };
+		02D24A8F2BE5600C008E7DCF /* SDLWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SDLWindow.cpp; path = ../../SDLWindow.cpp; sourceTree = "<group>"; };
+		02D24A912BE5601C008E7DCF /* SDLWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLWindow.hpp; sourceTree = "<group>"; };
+		02D24A942BE5613B008E7DCF /* InputEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputEvents.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +84,8 @@
 		02BFA8E32BD840970074A6D4 = {
 			isa = PBXGroup;
 			children = (
-				02D24A8C2BE556E6008E7DCF /* IWindow.h */,
-				02D24A7F2BD8416F008E7DCF /* SDLWindow.cpp */,
-				02D24A802BD8416F008E7DCF /* SDLWindow.hpp */,
+				02D24A932BE56100008E7DCF /* input */,
+				02D24A8D2BE56001008E7DCF /* window */,
 				02D24A592BD84124008E7DCF /* core */,
 				02D24A512BD84124008E7DCF /* Game.cpp */,
 				02D24A532BD84124008E7DCF /* Game.hpp */,
@@ -124,8 +124,6 @@
 			children = (
 				02D24A562BD84124008E7DCF /* FrameRate.hpp */,
 				02D24A572BD84124008E7DCF /* FrameRate.cpp */,
-				02D24A552BD84124008E7DCF /* Input.cpp */,
-				02D24A582BD84124008E7DCF /* Input.hpp */,
 			);
 			name = system;
 			path = src/system;
@@ -180,6 +178,26 @@
 				02D24A832BD841D9008E7DCF /* SDL2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02D24A8D2BE56001008E7DCF /* window */ = {
+			isa = PBXGroup;
+			children = (
+				02D24A8C2BE556E6008E7DCF /* IWindow.h */,
+				02D24A912BE5601C008E7DCF /* SDLWindow.hpp */,
+				02D24A8F2BE5600C008E7DCF /* SDLWindow.cpp */,
+			);
+			path = window;
+			sourceTree = "<group>";
+		};
+		02D24A932BE56100008E7DCF /* input */ = {
+			isa = PBXGroup;
+			children = (
+				02D24A552BD84124008E7DCF /* Input.cpp */,
+				02D24A582BD84124008E7DCF /* Input.hpp */,
+				02D24A942BE5613B008E7DCF /* InputEvents.h */,
+			);
+			path = input;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,8 +268,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D24A922BE5604C008E7DCF /* SDLWindow.cpp in Sources */,
 				02D24A782BD84125008E7DCF /* FeedScene.cpp in Sources */,
-				02D24A812BD8416F008E7DCF /* SDLWindow.cpp in Sources */,
 				02D24A712BD84125008E7DCF /* View.cpp in Sources */,
 				02D24A772BD84125008E7DCF /* Scene.cpp in Sources */,
 				02D24A722BD84125008E7DCF /* Game.cpp in Sources */,
