@@ -66,6 +66,7 @@
 		02D24A8F2BE5600C008E7DCF /* SDLWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SDLWindow.cpp; path = ../../SDLWindow.cpp; sourceTree = "<group>"; };
 		02D24A912BE5601C008E7DCF /* SDLWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLWindow.hpp; sourceTree = "<group>"; };
 		02D24A942BE5613B008E7DCF /* InputEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputEvents.h; sourceTree = "<group>"; };
+		02D24A952BE9513C008E7DCF /* InputKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputKeys.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +197,7 @@
 				02D24A552BD84124008E7DCF /* Input.cpp */,
 				02D24A582BD84124008E7DCF /* Input.hpp */,
 				02D24A942BE5613B008E7DCF /* InputEvents.h */,
+				02D24A952BE9513C008E7DCF /* InputKeys.h */,
 			);
 			path = input;
 			sourceTree = "<group>";
