@@ -12,17 +12,26 @@
 #include <vector>
 #include <map>
 
+#include "Singleton.hpp"
+#include "InputEvents.h"
+#include "InputKeys.h"
 
+//struct VirtualInputTable
+//{
+//    std::string name;
+//    InputKey;
+//};
 
-class Input
+class Input : public Singleton<Input>
 {   
     std::vector<KeyEvent> _eventsPool;
-    std::map<int, std::string> _listeningKeys;
+    std::map<InputKey, std::string> _listeningKeys;
     
 public:
     Input();
     ~Input() = default;
     
+    //void AddEvent(Event);
     void Update();
     
     // table wich contains listening keycode and name of virtual keys map<

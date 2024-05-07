@@ -47,7 +47,7 @@ enum InputKey
     NUM_8 = SDLK_8, // '8'
     NUM_9 = SDLK_9, // '9',
     COLON = SDLK_COLON, // ':'
-    SEMICOLON = SDLK_SEMICOLON //';'
+    SEMICOLON = SDLK_SEMICOLON, //';'
     LESS = SDLK_LESS, // '<'
     EQUALS = SDLK_EQUALS, // '='
     GREATER = SDLK_GREATER, // '>'
@@ -293,7 +293,6 @@ enum InputKey
 //    SDLK_ENDCALL = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_ENDCALL)
 };
 
-InputKey::Y
 #endif /* InputKeys_h */
 
 

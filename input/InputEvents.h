@@ -8,6 +8,7 @@
 #ifndef InputEvents_h
 #define InputEvents_h
 
+
 enum KeyState
 {
     Pressed,
@@ -16,8 +17,8 @@ enum KeyState
 
 struct KeyEvent
 {
-    std::string name;
-    KeyState state;
+    std::string Name;
+    KeyState State;
 };
 
 //TODO: mouse events. window events

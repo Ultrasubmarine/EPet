@@ -83,30 +83,30 @@ void Input::Update()
 //#if USE_SDL
     static SDL_Event event;
     if(SDL_PollEvent(&event) )
-    {
-        auto key_iter = _listeningKeys.find(event.key.keysym.sym);
-        if(key_iter == _listeningKeys.end())
-            return;
+    {}
+//        auto key_iter = _listeningKeys.find(event.key.keysym.sym);
+//        if(key_iter == _listeningKeys.end())
+//            return;
+//
+//        KeyEvent k;
+//        k.name= event.key.keysym.sym;
+//        switch (event.type)
+//        {
+//           // case SDL_QUIT:
+//            case SDL_KEYDOWN:
+//            {
+//                k.state = KeyEvent::State::Pressed;
+//                break;
+//            }
+//            case SDL_KEYUP:
+//            {
+//                k.state = KeyEvent::State::Released;
+//                break;
+//            }
+//        }
         
-        KeyEvent k;
-        k.name= event.key.keysym.sym;
-        switch (event.type)
-        {
-           // case SDL_QUIT:
-            case SDL_KEYDOWN:
-            {
-                k.state = KeyEvent::State::Pressed;
-                break;
-            }
-            case SDL_KEYUP:
-            {
-                k.state = KeyEvent::State::Released;
-                break;
-            }
-        }
-        
-        _eventsPool.push_back(k);
-    }
+       // _eventsPool.push_back(k);
+    //}
 //#endif
     
     

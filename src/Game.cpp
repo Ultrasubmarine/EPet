@@ -19,7 +19,7 @@
 #include "SceneManager.hpp"
 #include "Scene.hpp"
 #include "Subscription.hpp"
-#include "SDLWindow.hpp"
+#include "SDLWindow.h"
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
 //bool Input();
@@ -70,14 +70,14 @@ void Game::Loop()
         _input->Update();
         
      //   system("clear");
-        for(auto& key : _input->Get())
-        {
-            std::cout<< key.name;
-            if(key.state== KeyEvent::State::Pressed)
-                std::cout<<" [Pressed]\n";
-            if(key.state== KeyEvent::State::Released)
-                std::cout<<" [Released]\n";
-        }
+//        for(auto& key : _input->Get())
+//        {
+//            std::cout<< key.name;
+//            if(key.state== KeyEvent::State::Pressed)
+//                std::cout<<" [Pressed]\n";
+//            if(key.state== KeyEvent::State::Released)
+//                std::cout<<" [Released]\n";
+//        }
        // system("clear");
 
         //CheckInput();
