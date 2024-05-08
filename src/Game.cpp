@@ -30,8 +30,12 @@ Game::Game() //: _currentState(State::Active)
     //...
     //Create new one
     //"[HAMSTERGOTCHI]"
+    
+#if _SDL666
     _window = new SDLWindow();
     _window->CreateWindow();
+#endif
+
    // if(!_window)
     //    return;
     

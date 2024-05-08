@@ -14,7 +14,7 @@
 
 #include "Singleton.hpp"
 #include "InputEvents.h"
-#include "InputKeys.h"
+#include "SDLInputKeys.h"
 
 //struct VirtualInputTable
 //{
@@ -31,7 +31,7 @@ public:
     Input();
     ~Input() = default;
     
-    //void AddEvent(Event);
+   // void AddEvent(InputEvent);
     void Update();
     
     // table wich contains listening keycode and name of virtual keys map<

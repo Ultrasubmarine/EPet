@@ -69,11 +69,11 @@ void PrintKeyInfo( SDL_KeyboardEvent *key );
 
 Input::Input()
 {
-    _listeningKeys = {
-        {'a', "BUTTON_A"},
-        {'b', "BUTTON_B"},
-        {'d', "BUTTON_D"}
-    };
+//    _listeningKeys = {
+//        {'a', "BUTTON_A"},
+//        {'b', "BUTTON_B"},
+//        {'d', "BUTTON_D"}
+//    };
 }
 
 void Input::Update()

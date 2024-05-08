@@ -64,9 +64,10 @@
 		02D24A842BD841D9008E7DCF /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		02D24A8C2BE556E6008E7DCF /* IWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWindow.h; sourceTree = "<group>"; };
 		02D24A942BE5613B008E7DCF /* InputEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputEvents.h; sourceTree = "<group>"; };
-		02D24A952BE9513C008E7DCF /* InputKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputKeys.h; sourceTree = "<group>"; };
+		02D24A952BE9513C008E7DCF /* SDLInputKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLInputKeys.h; sourceTree = "<group>"; };
 		02D24A972BEAC7AB008E7DCF /* SDLWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLWindow.cpp; sourceTree = "<group>"; };
 		02D24A992BEACA21008E7DCF /* SDLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLWindow.h; sourceTree = "<group>"; };
+		02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EngineSettings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,15 +86,13 @@
 		02BFA8E32BD840970074A6D4 = {
 			isa = PBXGroup;
 			children = (
-				02D24A962BEAC7A2008E7DCF /* SDL */,
-				02D24A932BE56100008E7DCF /* input */,
-				02D24A8D2BE56001008E7DCF /* window */,
+				02D24A6D2BD84125008E7DCF /* patterns */,
+				02D24A9B2BEBFB24008E7DCF /* engine */,
+				02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */,
 				02D24A592BD84124008E7DCF /* core */,
 				02D24A512BD84124008E7DCF /* Game.cpp */,
 				02D24A532BD84124008E7DCF /* Game.hpp */,
 				02D24A522BD84124008E7DCF /* main.cpp */,
-				02D24A6D2BD84125008E7DCF /* patterns */,
-				02D24A542BD84124008E7DCF /* system */,
 				02D24A6B2BD84124008E7DCF /* Timer.cpp */,
 				02D24A702BD84125008E7DCF /* Timer.hpp */,
 				02D24A502BD84124008E7DCF /* View.cpp */,
@@ -119,16 +118,6 @@
 				02BFA8F92BD840980074A6D4 /* EPet.entitlements */,
 			);
 			path = EPet;
-			sourceTree = "<group>";
-		};
-		02D24A542BD84124008E7DCF /* system */ = {
-			isa = PBXGroup;
-			children = (
-				02D24A562BD84124008E7DCF /* FrameRate.hpp */,
-				02D24A572BD84124008E7DCF /* FrameRate.cpp */,
-			);
-			name = system;
-			path = src/system;
 			sourceTree = "<group>";
 		};
 		02D24A592BD84124008E7DCF /* core */ = {
@@ -205,9 +194,21 @@
 			children = (
 				02D24A992BEACA21008E7DCF /* SDLWindow.h */,
 				02D24A972BEAC7AB008E7DCF /* SDLWindow.cpp */,
-				02D24A952BE9513C008E7DCF /* InputKeys.h */,
+				02D24A952BE9513C008E7DCF /* SDLInputKeys.h */,
 			);
 			path = SDL;
+			sourceTree = "<group>";
+		};
+		02D24A9B2BEBFB24008E7DCF /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				02D24A562BD84124008E7DCF /* FrameRate.hpp */,
+				02D24A572BD84124008E7DCF /* FrameRate.cpp */,
+				02D24A8D2BE56001008E7DCF /* window */,
+				02D24A932BE56100008E7DCF /* input */,
+				02D24A962BEAC7A2008E7DCF /* SDL */,
+			);
+			path = engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +342,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					_SDL666,
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -349,11 +351,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"INFOPLIST_PREPROCESSOR_DEFINITIONS[sdk=*]" = "";
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				_SDL = 1;
+				"_SDL[arch=*]" = 1;
 			};
 			name = Debug;
 		};
@@ -405,6 +410,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				_SDL = 1;
 			};
 			name = Release;
 		};
@@ -433,6 +439,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "marina-porkhunova.EPet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				_SDL = 1;
 			};
 			name = Debug;
 		};
@@ -461,6 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "marina-porkhunova.EPet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				_SDL = 1;
 			};
 			name = Release;
 		};
