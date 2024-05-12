@@ -8,6 +8,7 @@
 #ifndef InputEvents_h
 #define InputEvents_h
 
+#include "EngineSettings.h"
 
 enum KeyState
 {
@@ -17,7 +18,7 @@ enum KeyState
 
 struct KeyEvent
 {
-    std::string Name;
+    InputKey Key;
     KeyState State;
 };
 

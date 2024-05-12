@@ -29,4 +29,6 @@ public:
     int GetHeight() const override;
     int GetWidth() const override;
 };
+
+using Window = SDLWindow;
 #endif /* Window_hpp */

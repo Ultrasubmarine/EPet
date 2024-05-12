@@ -19,7 +19,7 @@
 #include "SceneManager.hpp"
 #include "Scene.hpp"
 #include "Subscription.hpp"
-#include "SDLWindow.h"
+#include "EngineSettings.h"
 
 std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
 //bool Input();
@@ -31,16 +31,14 @@ Game::Game() //: _currentState(State::Active)
     //Create new one
     //"[HAMSTERGOTCHI]"
     
-#if _SDL666
-    _window = new SDLWindow();
+    _window = new Window();
     _window->CreateWindow();
-#endif
 
    // if(!_window)
     //    return;
     
     _timer = new Timer();
-    _input = new class Input();
+   // _input = new class Input();
     
     //TODO: wrap this two to smth. it's game logic entities. but Game() manages other layer.
     _requestList = new RequestList();
@@ -71,8 +69,17 @@ void Game::Loop()
     bool isPlay = true;
     while(isPlay)
     {
-        _input->Update();
+        _window->HandleEvent();
+        Input::Instance().Update();
         
+        for(auto& key : Input::Instance().Get())
+        {
+            std::cout<< key.Key;
+            if(key.State == KeyState::Pressed)
+                std::cout<<" [Pressed]\n";
+            if(key.State== KeyState::Released)
+                std::cout<<" [Released]\n";
+        }
      //   system("clear");
 //        for(auto& key : _input->Get())
 //        {

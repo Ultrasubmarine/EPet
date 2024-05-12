@@ -8,6 +8,9 @@
 #ifndef EngineSettings_h
 #define EngineSettings_h
 
-#ifdef _SDL
-#endif //_SDL
+#ifdef SDL
+#include "SDLWindow.h"
+#include "SDLInputKeys.h"
+#endif //SDL
+
 #endif /* EngineSettings_h */

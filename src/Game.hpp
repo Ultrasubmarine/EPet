@@ -16,7 +16,6 @@ class RequestList;
 class View;
 class FrameRate;
 class SDLWindow;
-class Input;
 
 class Game
 {
@@ -34,6 +33,5 @@ public:
     RequestList *_requestList;
     Schedule *_schedule;
     FrameRate *_frameRate;
-    Input *_input;
 };
 #endif /* Game_hpp */

@@ -8,6 +8,8 @@
 #include "SDLWindow.h"
 #include <SDL2/SDL.h>
 
+#include "Input.hpp"
+
 SDLWindow::SDLWindow()
 {
 }
@@ -50,14 +52,14 @@ void SDLWindow::HandleEvent()
                 break;
             case SDL_KEYDOWN:
             {
-               // InputKey(
-                
-                //      k.state = KeyEvent::State::Pressed;
+                auto key = static_cast<InputKey>(event.key.keysym.sym);
+                Input::Instance().AddEvent({key, KeyState::Pressed});
                 break;
             }
             case SDL_KEYUP:
             {
-                //   k.state = KeyEvent::State::Released;
+                auto key = static_cast<InputKey>(event.key.keysym.sym);
+                Input::Instance().AddEvent({key, KeyState::Released});
                 break;
             }
         }
