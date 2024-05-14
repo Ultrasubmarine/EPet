@@ -53,13 +53,13 @@ void SDLWindow::HandleEvent()
             case SDL_KEYDOWN:
             {
                 auto key = static_cast<InputKey>(event.key.keysym.sym);
-                Input::Instance().AddEvent({key, KeyState::Pressed});
+                Input::Instance().AddEvent(key, KeyState::Pressed);
                 break;
             }
             case SDL_KEYUP:
             {
                 auto key = static_cast<InputKey>(event.key.keysym.sym);
-                Input::Instance().AddEvent({key, KeyState::Released});
+                Input::Instance().AddEvent(key, KeyState::Released);
                 break;
             }
         }

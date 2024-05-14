@@ -19,18 +19,15 @@
 #include "EngineSettings.h"
 
 using time_point = std::chrono::steady_clock::time_point;
-//struct VirtualInputTable
-//{
-//    std::string name;
-//    InputKey;
-//};
 
 class Input: public Singleton<Input>
 {   
-    std::vector<KeyEvent> _eventsPool;
-    std::vector<std::pair<const InputKey,const time_point>> _unprocessedInput;
+    std::vector<VirtualKeyEvent> _eventsPool;
     
+    std::vector<KeyEventInfo> _unprocessedInput;    
     std::map<InputKey, std::string> _listeningKeys;
+  //  std::map<InputAccords, std::string> _listeningAccords;
+    
     
     //key accords
     bool _isAccordsEnable = false;
@@ -40,12 +37,12 @@ public:
     Input();
     ~Input() = default;
     
-    void AddEvent(KeyEvent e);
+    void AddEvent(InputKey, KeyState state);
     void Update();
     
- // table wich contains listening keycode and name of virtual keys map<
- //   void SetVirtualKeys();
+    void AddListeningKey(InputKey key, std::string name);
+    void RemoveListeningKey(std::string name);
     
-    const std::vector<KeyEvent>& Get() const { return _eventsPool;};
+    const std::vector<VirtualKeyEvent>& GetEvents() const { return _eventsPool;};
 };
 #endif /* Input_hpp */

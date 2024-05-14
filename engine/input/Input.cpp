@@ -73,10 +73,14 @@ Input::Input()
 //    };
 }
 
-void Input::AddEvent(KeyEvent e)
+void Input::AddEvent(InputKey key, KeyState state)
 {
-    const auto currentTime = std::chrono::steady_clock::now();
-    _unprocessedInput.push_back({e, currentTime});
+    KeyEventInfo info;
+    info.Key = key;
+    info.State = state;
+    info.Time = std::chrono::steady_clock::now();
+ 
+    _unprocessedInput.push_back(info);
 }
 
 void Input::Update()
@@ -86,7 +90,9 @@ void Input::Update()
         _eventsPool.clear();
         for(auto& i: _unprocessedInput)
         {
-            _eventsPool.push_back(i.first);
+            
+            auto& name = _listeningKeys[i.Key];
+            _eventsPool.push_back(name);
         }
         _unprocessedInput.clear();
         return;
@@ -129,6 +135,19 @@ void Input::Update()
    // if(event.key.keysym.sym == 'a')
     //    PrintKeyInfo( &event.key);
 }
+
+void Input::AddListeningKey(InputKey key, std::string name)
+{
+    _listeningKeys[key] = name;
+}
+
+void Input::RemoveListeningKey(std::string name)
+{
+   // _listeningKeys.erase(<#const_iterator __p#>)= name;
+    //TODO: finish 
+}
+
+
 
 /* Print all information about a key event */
 void PrintKeyInfo( SDL_KeyboardEvent *key ){
