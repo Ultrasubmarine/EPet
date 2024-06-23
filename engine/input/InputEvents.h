@@ -18,18 +18,12 @@ enum KeyState
     Released
 };
 
-struct KeyEventInfo
-{
-    InputKey Key;
-    KeyState State;
-    time_point Time;
-};
-
-struct VirtualKeyEvent
+struct KeyEvent
 {
     std::string Name;
     KeyState State;
 };
+
 //TODO: mouse events. window events
 
 #endif /* InputEvents_h */

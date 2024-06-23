@@ -74,11 +74,11 @@ void Game::Loop()
         
         for(auto& key : Input::Instance().GetEvents())
         {
-         //   std::cout<< key.Key;
-          //  if(key.State == KeyState::Pressed)
-                std::cout<<" [Pressed]\n";
-          //  if(key.State== KeyState::Released)
-                std::cout<<" [Released]\n";
+          //  std::cout<< key;
+            if(key.State == KeyState::Pressed)
+                std::cout<<key.Name<<" [Pressed]\n";
+            if(key.State== KeyState::Released)
+                std::cout<<key.Name<<" [Released]\n";
         }
      //   system("clear");
 //        for(auto& key : _input->Get())

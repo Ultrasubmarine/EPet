@@ -10,8 +10,8 @@
 
 #include "SDL2/SDL_keycode.h"
 
-//converted SDL_KeyCode to IventKey
-enum InputKey
+//converted SDL_KeyCode to common KeyCode
+enum KeyCode
 {
     UNKNOWN = SDLK_UNKNOWN,
 

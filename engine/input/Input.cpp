@@ -6,7 +6,7 @@
 //
 
 #include "Input.hpp"
-
+using time_point = std::chrono::steady_clock::time_point;
 //#if defined(__GNUG__) || defined(__GNUC__)
 //#define OS_LINUX
 //#elif defined(_MAC)
@@ -58,126 +58,56 @@
 #include <map>
 void PrintKeyInfo( SDL_KeyboardEvent *key );
 
-
-
-
-//scancode - key name
-//std::map<std::string, Key> inputTable;
-
 Input::Input()
 {
-//    _listeningKeys = {
-//        {'a', "BUTTON_A"},
-//        {'b', "BUTTON_B"},
-//        {'d', "BUTTON_D"}
-//    };
+    _listeningKeys = {
+        {KeyCode::A, "BUTTON_A"},
+        {KeyCode::B, "BUTTON_B"},
+        {KeyCode::D, "BUTTON_D"}
+    };
 }
 
-void Input::AddEvent(InputKey key, KeyState state)
+void Input::AddInput(KeyCode code, KeyState state)
 {
-    KeyEventInfo info;
-    info.Key = key;
+    InputInfo info;
+    info.Code = code;
     info.State = state;
     info.Time = std::chrono::steady_clock::now();
  
-    _unprocessedInput.push_back(info);
+    _unprocessedKeys.push_back(info);
 }
 
 void Input::Update()
 {
-    if(!_isAccordsEnable)
+    //clear all previous events
+    _eventsPool.clear();
+    
+    for(auto& i: _unprocessedKeys)
     {
-        _eventsPool.clear();
-        for(auto& i: _unprocessedInput)
-        {
-            
-            auto& name = _listeningKeys[i.Key];
-            _eventsPool.push_back(name);
+        auto name = GetKeyName(i.Code);
+        if(!name.empty()){
+            _eventsPool.push_back(KeyEvent{name, i.State});
         }
-        _unprocessedInput.clear();
-        return;
     }
-    else
+    _unprocessedKeys.clear();
+}
+
+std::string Input::GetKeyName(KeyCode keyCode)
+{
+    if(auto it = _listeningKeys.find(keyCode); it != _listeningKeys.end())
     {
-        //TODO: calculate accords 
+        return (*it).second;
     }
-    
-//#if USE_SDL
-//    static SDL_Event event;
-//    if(SDL_PollEvent(&event) )
-//    {}
-//        auto key_iter = _listeningKeys.find(event.key.keysym.sym);
-//        if(key_iter == _listeningKeys.end())
-//            return;
-//
-//        KeyEvent k;
-//        k.name= event.key.keysym.sym;
-//        switch (event.type)
-//        {
-//           // case SDL_QUIT:
-//            case SDL_KEYDOWN:
-//            {
-//                k.state = KeyEvent::State::Pressed;
-//                break;
-//            }
-//            case SDL_KEYUP:
-//            {
-//                k.state = KeyEvent::State::Released;
-//                break;
-//            }
-//        }
-        
-       // _eventsPool.push_back(k);
-    //}
-//#endif
-    
-    
-   // if(event.key.keysym.sym == 'a')
-    //    PrintKeyInfo( &event.key);
+    return {};
 }
 
-void Input::AddListeningKey(InputKey key, std::string name)
+void Input::BindKey(KeyCode keyCode, std::string keyName)
 {
-    _listeningKeys[key] = name;
+    _listeningKeys[keyCode] = keyName;
 }
 
-void Input::RemoveListeningKey(std::string name)
+void Input::UnbindKey(std::string keyName)
 {
-   // _listeningKeys.erase(<#const_iterator __p#>)= name;
+    //_listeningKeys.erase(<#const_iterator __p#>)= name;
     //TODO: finish 
-}
-
-
-
-/* Print all information about a key event */
-void PrintKeyInfo( SDL_KeyboardEvent *key ){
-    /* Is it a release or a press? */
-    if( key->type == SDL_KEYUP )
-        printf( "Release:- " );
-    else
-        printf( "Press:- " );
-
-    /* Print the hardware scancode first */
-    printf( "Scancode: 0x%02X", key->keysym.scancode );
-    /* Print the name of the key */
-    printf( ", Name: %s", SDL_GetKeyName( key->keysym.sym ) );
-    /* We want to print the unicode info, but we need to make */
-    /* sure its a press event first (remember, release events */
-    /* don't have unicode info                                */
-    if( key->type == SDL_KEYDOWN ){
-        /* If the Unicode value is less than 0x80 then the    */
-        /* unicode value can be used to get a printable       */
-        /* representation of the key, using (char)unicode.    */
-        printf(", Unicode: " );
-        if( key->keysym.scancode < 0x80 && key->keysym.scancode > 0 ){
-            printf( "%c (0x%04X)", (char)key->keysym.scancode,
-                    key->keysym.scancode );
-        }
-        else{
-            printf( "? (0x%04X)", key->keysym.scancode);
-        }
-    }
-    printf( "\n" );
-    /* Print modifier info */
-  //  PrintModifiers( key->keysym.mod );
 }

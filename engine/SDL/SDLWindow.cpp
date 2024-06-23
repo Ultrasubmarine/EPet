@@ -5,8 +5,9 @@
 //  Created by marina porkhunova on 18.02.2023.
 //
 
+#include <stdio.h>
 #include "SDLWindow.h"
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
 
 #include "Input.hpp"
 
@@ -52,14 +53,14 @@ void SDLWindow::HandleEvent()
                 break;
             case SDL_KEYDOWN:
             {
-                auto key = static_cast<InputKey>(event.key.keysym.sym);
-                Input::Instance().AddEvent(key, KeyState::Pressed);
+                auto keyCode = static_cast<KeyCode>(event.key.keysym.sym);
+                Input::Instance().AddInput(keyCode, KeyState::Pressed);
                 break;
             }
             case SDL_KEYUP:
             {
-                auto key = static_cast<InputKey>(event.key.keysym.sym);
-                Input::Instance().AddEvent(key, KeyState::Released);
+                auto key = static_cast<KeyCode>(event.key.keysym.sym);
+                Input::Instance().AddInput(key, KeyState::Released);
                 break;
             }
         }
