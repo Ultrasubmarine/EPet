@@ -60,7 +60,7 @@ void PrintKeyInfo( SDL_KeyboardEvent *key );
 
 Input::Input()
 {
-    _listeningKeys = {
+    _bindingKeys = {
         {KeyCode::A, "BUTTON_A"},
         {KeyCode::B, "BUTTON_B"},
         {KeyCode::D, "BUTTON_D"}
@@ -94,7 +94,7 @@ void Input::Update()
 
 std::string Input::GetKeyName(KeyCode keyCode)
 {
-    if(auto it = _listeningKeys.find(keyCode); it != _listeningKeys.end())
+    if(auto it = _bindingKeys.find(keyCode); it != _bindingKeys.end())
     {
         return (*it).second;
     }
@@ -103,11 +103,33 @@ std::string Input::GetKeyName(KeyCode keyCode)
 
 void Input::BindKey(KeyCode keyCode, std::string keyName)
 {
-    _listeningKeys[keyCode] = keyName;
+    _bindingKeys[keyCode] = keyName;
+}
+
+void Input::UnbindKey(KeyCode keyCode)
+{
+    _bindingKeys.erase(keyCode);
 }
 
 void Input::UnbindKey(std::string keyName)
 {
-    //_listeningKeys.erase(<#const_iterator __p#>)= name;
-    //TODO: finish 
+    auto it = _bindingKeys.begin();
+    while(it != _bindingKeys.end())
+    {
+        if(it->second == keyName)
+        {
+            break;
+        }
+        it++;
+    }
+    
+    if(it != _bindingKeys.end())
+    {
+        _bindingKeys.erase(it);
+    }
+}
+
+void Input::UnbindAllKeys()
+{
+    _bindingKeys.clear();
 }

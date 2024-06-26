@@ -24,6 +24,4 @@ struct KeyEvent
     KeyState State;
 };
 
-//TODO: mouse events. window events
-
 #endif /* InputEvents_h */

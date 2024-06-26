@@ -76,9 +76,16 @@ void Game::Loop()
         {
           //  std::cout<< key;
             if(key.State == KeyState::Pressed)
+            {
                 std::cout<<key.Name<<" [Pressed]\n";
+                if(key.Name == "BUTTON_D"){
+                    Input::Instance().UnbindKey("BUTTON_A");
+                }
+            }
+                
             if(key.State== KeyState::Released)
                 std::cout<<key.Name<<" [Released]\n";
+            
         }
      //   system("clear");
 //        for(auto& key : _input->Get())
