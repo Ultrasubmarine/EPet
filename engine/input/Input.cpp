@@ -56,6 +56,8 @@ using time_point = std::chrono::steady_clock::time_point;
 
 
 #include <map>
+#include <vector>
+
 void PrintKeyInfo( SDL_KeyboardEvent *key );
 
 Input::Input()
@@ -74,7 +76,7 @@ void Input::AddInput(KeyCode code, KeyState state)
     info.State = state;
     info.Time = std::chrono::steady_clock::now();
  
-    _unprocessedKeys.push_back(info);
+    _keyBuffer.push_back(info);
 }
 
 void Input::Update()
@@ -82,14 +84,15 @@ void Input::Update()
     //clear all previous events
     _eventsPool.clear();
     
-    for(auto& i: _unprocessedKeys)
+    //check simple keys
+    for(auto& i: _keyBuffer)
     {
         auto name = GetKeyName(i.Code);
         if(!name.empty()){
             _eventsPool.push_back(KeyEvent{name, i.State});
         }
     }
-    _unprocessedKeys.clear();
+    _keyBuffer.clear();
 }
 
 std::string Input::GetKeyName(KeyCode keyCode)

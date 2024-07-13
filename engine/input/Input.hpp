@@ -31,7 +31,8 @@ private:
     
     std::vector<KeyEvent> _eventsPool;
     
-    std::vector<InputInfo> _unprocessedKeys;
+    std::vector<InputInfo> _keyBuffer;
+    
     std::map<KeyCode, std::string /*KeyName*/> _bindingKeys;
     
 public:
@@ -42,6 +43,7 @@ public:
     void AddInput(KeyCode, KeyState);
     
     void BindKey(KeyCode keyCode, std::string keyName);
+    
     void UnbindKey(KeyCode keyCode);
     void UnbindKey(std::string keyName); /// try to avoid this function and use UnbindKey(KeyCode) if it's possible. This one is slowly.
     void UnbindAllKeys();
