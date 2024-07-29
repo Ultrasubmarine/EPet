@@ -16,8 +16,8 @@
         <mxCell id="S0Dyq1XGVSe3hS3X8ZzL-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;SDLWindow&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ _window: SDL_Window*&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ override all methods()&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="30" y="40" width="160" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="S0Dyq1XGVSe3hS3X8ZzL-6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;GameCore&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ _window: AWindow*&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Init(); // create window, systems&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ PostInit(); // load smth for own game&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Update(dt);&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Destroy();&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;font color=&quot;#ff8000&quot;&gt;+ Sleep() ???&lt;/font&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="216" y="350" width="236" height="140" as="geometry" />
+        <mxCell id="S0Dyq1XGVSe3hS3X8ZzL-6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;GameCore&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ WindowManager;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Init(); // create window, systems&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ PostInit(); // load smth for own game&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Update(dt);&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Destroy();&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;font color=&quot;#ff8000&quot;&gt;+ Sleep() ???&lt;/font&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="260" y="380" width="236" height="140" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;horizontal=1;endArrow=diamond;endFill=1;" edge="1" parent="1" source="S0Dyq1XGVSe3hS3X8ZzL-7" target="9YUIQhJSh96qjaXv536v-17">
           <mxGeometry relative="1" as="geometry" />
@@ -34,9 +34,6 @@
         <mxCell id="9YUIQhJSh96qjaXv536v-2" value="&lt;b&gt;EngineSettings.h&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;AWindow = SDLWindow;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;align=center;size=27;" vertex="1" parent="1">
           <mxGeometry x="254" y="180" width="160" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="9YUIQhJSh96qjaXv536v-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="S0Dyq1XGVSe3hS3X8ZzL-6" target="9YUIQhJSh96qjaXv536v-2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-8" value="SDLInputKeys.h" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="525.5" y="50" width="200" height="70" as="geometry">
             <mxRectangle x="660" y="330" width="130" height="30" as="alternateBounds" />
@@ -51,43 +48,72 @@
         <mxCell id="9YUIQhJSh96qjaXv536v-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=160;entryDy=53.5;entryPerimeter=0;" edge="1" parent="1" source="S0Dyq1XGVSe3hS3X8ZzL-7" target="9YUIQhJSh96qjaXv536v-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="9YUIQhJSh96qjaXv536v-20" value="Include" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="9YUIQhJSh96qjaXv536v-19">
+        <mxCell id="9YUIQhJSh96qjaXv536v-20" value="#Include" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="9YUIQhJSh96qjaXv536v-19">
           <mxGeometry x="0.1347" y="-2" relative="1" as="geometry">
             <mxPoint x="12" y="1" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-21" value="main Loop" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="269" y="510" width="120" height="20" as="geometry" />
+          <mxGeometry x="330" y="540" width="120" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="9YUIQhJSh96qjaXv536v-24" value="standard core function only;&lt;div&gt;know about big systems; not about game;&amp;nbsp;&lt;/div&gt;&lt;div&gt;it has to start,&amp;nbsp;&lt;/div&gt;&lt;div&gt;update and correct finish programm and own systems;&amp;nbsp;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="400" y="320" width="151" height="100" as="geometry" />
+        <mxCell id="9YUIQhJSh96qjaXv536v-24" value="&lt;font color=&quot;#00cc00&quot;&gt;standard core function only;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#00cc00&quot;&gt;know about big systems; not about game;&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#00cc00&quot;&gt;it has to start,&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#00cc00&quot;&gt;update and correct finish programm and own systems;&amp;nbsp;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="350" width="151" height="100" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-25" value="WindowManager" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="36" y="510" width="154" height="30" as="geometry" />
+          <mxGeometry x="23" y="610" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-27" value="Scene" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="690" width="154" height="30" as="geometry" />
+          <mxGeometry x="200" y="780" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-28" value="Resources" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="640" width="154" height="30" as="geometry" />
+          <mxGeometry x="200" y="730" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-29" value="Saves" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="590" width="154" height="30" as="geometry" />
+          <mxGeometry x="200" y="680" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-30" value="ComponentSystem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="30" y="700" width="154" height="30" as="geometry" />
+          <mxGeometry x="20" y="800" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-31" value="SceneSystem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="30" y="740" width="154" height="30" as="geometry" />
+          <mxGeometry x="20" y="840" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-32" value="ResourceSystem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="30" y="660" width="154" height="30" as="geometry" />
+          <mxGeometry x="20" y="760" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-33" value="RenderSystem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="30" y="620" width="154" height="30" as="geometry" />
+          <mxGeometry x="20" y="720" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9YUIQhJSh96qjaXv536v-35" value="SaveSystem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="30" y="570" width="154" height="30" as="geometry" />
+          <mxGeometry x="20" y="670" width="154" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9YUIQhJSh96qjaXv536v-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=diamond;endFill=1;" edge="1" parent="1" source="9YUIQhJSh96qjaXv536v-40" target="S0Dyq1XGVSe3hS3X8ZzL-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9YUIQhJSh96qjaXv536v-40" value="WindowManager" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=29;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="30" y="400" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="9YUIQhJSh96qjaXv536v-41" value="_window: Window*&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="9YUIQhJSh96qjaXv536v-40">
+          <mxGeometry y="29" width="160" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="9YUIQhJSh96qjaXv536v-42" value="+ CreateWindow()&lt;div&gt;+ DestroyWindow()&lt;/div&gt;&lt;div&gt;+ GetWindow()&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#ff8000&quot;&gt;+ ChangeWindowSize()???&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#ff8000&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;+Update()&lt;/div&gt;" style="text;html=1;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="9YUIQhJSh96qjaXv536v-40">
+          <mxGeometry y="54" width="160" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="9YUIQhJSh96qjaXv536v-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1.007;entryY=0.115;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=diamond;endFill=1;" edge="1" parent="1" source="S0Dyq1XGVSe3hS3X8ZzL-6" target="9YUIQhJSh96qjaXv536v-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9YUIQhJSh96qjaXv536v-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="9YUIQhJSh96qjaXv536v-40" target="9YUIQhJSh96qjaXv536v-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="400" />
+              <mxPoint x="150" y="360" />
+              <mxPoint x="334" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9YUIQhJSh96qjaXv536v-48" value="#Include" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="9YUIQhJSh96qjaXv536v-47">
+          <mxGeometry x="-0.044" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
