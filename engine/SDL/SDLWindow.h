@@ -28,6 +28,8 @@ public:
 
     int GetHeight() const override;
     int GetWidth() const override;
+    
+    SDL_Window* GetSDLWindow() {return _window;};
 };
 
 using Window = SDLWindow;

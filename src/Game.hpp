@@ -15,7 +15,9 @@ class Schedule;
 class RequestList;
 class View;
 class FrameRate;
-class SDLWindow;
+
+class IWindow;
+class IRender;
 
 class Game
 {
@@ -28,7 +30,10 @@ public:
     
     void Loop();
     
-    SDLWindow *_window;
+    IWindow *_window;
+    IRender *_render;
+    
+    //tmp old hamster core stuff. need to move in other place
     Timer *_timer;
     RequestList *_requestList;
     Schedule *_schedule;

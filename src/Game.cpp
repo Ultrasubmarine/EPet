@@ -34,6 +34,9 @@ Game::Game() //: _currentState(State::Active)
     _window = new Window();
     _window->CreateWindow();
 
+    
+    _render = new Render();
+    _render->Init(_window);
    // if(!_window)
     //    return;
     
@@ -87,6 +90,9 @@ void Game::Loop()
                 std::cout<<key.Name<<" [Released]\n";
             
         }
+        
+        _render->Clear();
+        _render->Present();
      //   system("clear");
 //        for(auto& key : _input->Get())
 //        {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020935582C5E61C700D2AA47 /* SDLRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020935562C5E61C700D2AA47 /* SDLRender.cpp */; };
+		0231CA9B2C42F134002E3BAC /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0231CA992C42F134002E3BAC /* RenderSystem.cpp */; };
 		02BFA8F32BD840980074A6D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02BFA8F22BD840980074A6D4 /* Assets.xcassets */; };
 		02D24A712BD84125008E7DCF /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A502BD84124008E7DCF /* View.cpp */; };
 		02D24A722BD84125008E7DCF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A512BD84124008E7DCF /* Game.cpp */; };
@@ -45,6 +47,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		020935562C5E61C700D2AA47 /* SDLRender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLRender.cpp; sourceTree = "<group>"; };
+		020935572C5E61C700D2AA47 /* SDLRender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLRender.hpp; sourceTree = "<group>"; };
+		0231CA992C42F134002E3BAC /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
+		0231CA9A2C42F134002E3BAC /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
+		02B584EE2C5E653D00B86454 /* IRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRender.h; sourceTree = "<group>"; };
+		02B584F12C5EC3AB00B86454 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		02BFA8EC2BD840970074A6D4 /* EPet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EPet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02BFA8F22BD840980074A6D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02BFA8F92BD840980074A6D4 /* EPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EPet.entitlements; sourceTree = "<group>"; };
@@ -100,13 +108,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020935512C5E54DA00D2AA47 /* systems */ = {
+			isa = PBXGroup;
+			children = (
+				02B584EE2C5E653D00B86454 /* IRender.h */,
+			);
+			path = systems;
+			sourceTree = "<group>";
+		};
+		0231CA982C42F111002E3BAC /* render */ = {
+			isa = PBXGroup;
+			children = (
+				0231CA992C42F134002E3BAC /* RenderSystem.cpp */,
+				0231CA9A2C42F134002E3BAC /* RenderSystem.hpp */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		02B584F02C5EC38F00B86454 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				02B584F12C5EC3AB00B86454 /* Texture.h */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		02BFA8E32BD840970074A6D4 = {
 			isa = PBXGroup;
 			children = (
 				02D24A6D2BD84125008E7DCF /* patterns */,
 				02D24A9B2BEBFB24008E7DCF /* engine */,
 				02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */,
-				02D24A592BD84124008E7DCF /* core */,
+				02D24A592BD84124008E7DCF /* hamstergotchi_core */,
 				02D24A512BD84124008E7DCF /* Game.cpp */,
 				02D24A532BD84124008E7DCF /* Game.hpp */,
 				02D24A522BD84124008E7DCF /* main.cpp */,
@@ -137,7 +170,7 @@
 			path = EPet;
 			sourceTree = "<group>";
 		};
-		02D24A592BD84124008E7DCF /* core */ = {
+		02D24A592BD84124008E7DCF /* hamstergotchi_core */ = {
 			isa = PBXGroup;
 			children = (
 				02D24A5A2BD84124008E7DCF /* Pet.cpp */,
@@ -150,8 +183,8 @@
 				02D24A692BD84124008E7DCF /* Schedule.hpp */,
 				02D24A6A2BD84124008E7DCF /* Pet.hpp */,
 			);
-			name = core;
-			path = src/core;
+			name = hamstergotchi_core;
+			path = src/hamstergotchi_core;
 			sourceTree = "<group>";
 		};
 		02D24A5B2BD84124008E7DCF /* scenes */ = {
@@ -212,6 +245,8 @@
 				02D24A992BEACA21008E7DCF /* SDLWindow.h */,
 				02D24A972BEAC7AB008E7DCF /* SDLWindow.cpp */,
 				02D24A952BE9513C008E7DCF /* SDLInputKeys.h */,
+				020935562C5E61C700D2AA47 /* SDLRender.cpp */,
+				020935572C5E61C700D2AA47 /* SDLRender.hpp */,
 			);
 			path = SDL;
 			sourceTree = "<group>";
@@ -219,6 +254,9 @@
 		02D24A9B2BEBFB24008E7DCF /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				02B584F02C5EC38F00B86454 /* resources */,
+				020935512C5E54DA00D2AA47 /* systems */,
+				0231CA982C42F111002E3BAC /* render */,
 				02D24A562BD84124008E7DCF /* FrameRate.hpp */,
 				02D24A572BD84124008E7DCF /* FrameRate.cpp */,
 				02D24A8D2BE56001008E7DCF /* window */,
@@ -297,20 +335,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02D24A982BEAC801008E7DCF /* SDLWindow.cpp in Sources */,
 				02D24A782BD84125008E7DCF /* FeedScene.cpp in Sources */,
 				02D24A712BD84125008E7DCF /* View.cpp in Sources */,
-				02D24A772BD84125008E7DCF /* Scene.cpp in Sources */,
 				02D24A722BD84125008E7DCF /* Game.cpp in Sources */,
+				02D24A772BD84125008E7DCF /* Scene.cpp in Sources */,
 				02D24A752BD84125008E7DCF /* FrameRate.cpp in Sources */,
+				0231CA9B2C42F134002E3BAC /* RenderSystem.cpp in Sources */,
 				02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */,
+				02D24A7D2BD84125008E7DCF /* SceneManager.cpp in Sources */,
 				02D24A7A2BD84125008E7DCF /* LambdaScene.cpp in Sources */,
 				02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */,
 				02D24A792BD84125008E7DCF /* MainScene.cpp in Sources */,
 				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,
 				02D24A742BD84125008E7DCF /* Input.cpp in Sources */,
 				02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */,
-				02D24A7D2BD84125008E7DCF /* SceneManager.cpp in Sources */,
+				02D24A982BEAC801008E7DCF /* SDLWindow.cpp in Sources */,
+				020935582C5E61C700D2AA47 /* SDLRender.cpp in Sources */,
 				02D24A732BD84125008E7DCF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -30,7 +30,6 @@ private:
     };
     
     std::vector<KeyEvent> _eventsPool;
-    
     std::vector<InputInfo> _keyBuffer;
     
     std::map<KeyCode, std::string /*KeyName*/> _bindingKeys;

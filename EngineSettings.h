@@ -10,6 +10,7 @@
 
 #ifdef SDL
 #include "SDLWindow.h"
+#include "SDLRender.hpp"
 #include "SDLInputKeys.h"
 #endif //SDL
 
