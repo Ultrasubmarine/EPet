@@ -14,7 +14,7 @@
 class SDL_Renderer;
 class SDL_Rect;
 
-using Rect = SDL_Rect;
+//using Rect = SDL_Rect;
 
 class SDLRender: public IRender
 {

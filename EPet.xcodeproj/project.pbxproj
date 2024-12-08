@@ -56,6 +56,7 @@
 		02BFA8EC2BD840970074A6D4 /* EPet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EPet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02BFA8F22BD840980074A6D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02BFA8F92BD840980074A6D4 /* EPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EPet.entitlements; sourceTree = "<group>"; };
+		02C0154A2D06251D005113A9 /* registry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = registry.hpp; path = src/entt/src/entt/entity/registry.hpp; sourceTree = "<group>"; };
 		02D24A502BD84124008E7DCF /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = View.cpp; path = src/View.cpp; sourceTree = "<group>"; };
 		02D24A512BD84124008E7DCF /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = src/Game.cpp; sourceTree = "<group>"; };
 		02D24A522BD84124008E7DCF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		02BFA8E32BD840970074A6D4 = {
 			isa = PBXGroup;
 			children = (
+				02C0154A2D06251D005113A9 /* registry.hpp */,
 				02D24A6D2BD84125008E7DCF /* patterns */,
 				02D24A9B2BEBFB24008E7DCF /* engine */,
 				02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */,
