@@ -22,14 +22,17 @@ class SDLRender: public IRender
     
    
 public:
-    
+    SDLRender() = default;
     ~SDLRender() override;
-    void Init(IWindow* w) override; // simple SDLRender() ? 
     
+    void* Init(IWindow* w) override;
+    void Deinit() override;
     
     void Clear() override;
     void Draw(/* */Rect& source, Rect& windRect) override;
     void Present() override;
+    
+    bool IsRenderExist() override;
 };
 
 using Render = SDLRender;

@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <chrono>
 
-#define DEFAULT_FPS 10
+#define DEFAULT_FPS 60
 
 class FrameRate
 {

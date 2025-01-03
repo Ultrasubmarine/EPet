@@ -9,13 +9,9 @@
 
 #include <SDL2/SDL.h>
 #include "SDLWindow.h"
+#include "Logging.hpp"
 
-void SDLRender::Clear() {
-    SDL_SetRenderDrawColor(_render, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(_render);
-}
-
-void SDLRender::Init(IWindow *w) { 
+void* SDLRender::Init(IWindow *w) {
     
     SDLWindow* window = dynamic_cast<SDLWindow*>(w);
     
@@ -25,12 +21,29 @@ void SDLRender::Init(IWindow *w) {
     }
     else
     {
-        //error
+        LOG_ERROR("SDLRender::Init Window is empty");
+        return nullptr;
     }
     
+    LOG_MESSAGE("SDLRender::Init Render was created");
+    return _render;
 }
 
-void SDLRender::Draw(Rect& source, Rect& windRect) { 
+void SDLRender::Deinit() {
+    if(_render)
+    {
+        SDL_DestroyRenderer(_render);
+        _render = nullptr;
+        LOG_MESSAGE("SDLRender::Deinit Render was destroyed");
+    }
+}
+
+void SDLRender::Clear() {
+    SDL_SetRenderDrawColor(_render, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(_render);
+}
+
+void SDLRender::Draw(Rect& source, Rect& windRect) {
   //  SDL_RenderCopy(_render, nullptr/*_texture->texture */, static_cast<SDL_Rect>(source), static_cast<SDL_Rect>(windRect);
 }
 
@@ -39,7 +52,11 @@ void SDLRender::Present() {
 }
 
 SDLRender::~SDLRender(){ 
-    SDL_DestroyRenderer(_render);
+    Deinit();
+}
+
+bool SDLRender::IsRenderExist() {
+    return _render != nullptr;
 }
 
 

@@ -18,16 +18,18 @@ class SDLWindow : public IWindow
     
 public:
     SDLWindow();
-    virtual ~SDLWindow();
+    ~SDLWindow() override;
 
-    bool CreateWindow(int width = WINDOW_DEFAULT_WIDTH,
+    void* CreateWindow(int width = WINDOW_DEFAULT_WIDTH,
                       int height = WINDOW_DEFAULT_WIDTH,
                       const char *title = WINDOW_DEFAULT_TITLE) override;
+    void DestroyWindow() override;
     
     void HandleEvent() override;
 
     int GetHeight() const override;
     int GetWidth() const override;
+    bool IsWindowExist() const override;
     
     SDL_Window* GetSDLWindow() {return _window;};
 };

@@ -51,6 +51,7 @@
 		020935572C5E61C700D2AA47 /* SDLRender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLRender.hpp; sourceTree = "<group>"; };
 		0231CA992C42F134002E3BAC /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		0231CA9A2C42F134002E3BAC /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
+		02A2C9952D285358007D9DB2 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
 		02B584EE2C5E653D00B86454 /* IRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRender.h; sourceTree = "<group>"; };
 		02B584F12C5EC3AB00B86454 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		02BFA8EC2BD840970074A6D4 /* EPet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EPet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +127,21 @@
 			path = render;
 			sourceTree = "<group>";
 		};
+		02A2C9922D28512A007D9DB2 /* Old */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Old;
+			sourceTree = "<group>";
+		};
+		02A2C9932D285346007D9DB2 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				02A2C9952D285358007D9DB2 /* Logging.hpp */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		02B584F02C5EC38F00B86454 /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +153,8 @@
 		02BFA8E32BD840970074A6D4 = {
 			isa = PBXGroup;
 			children = (
+				02A2C9932D285346007D9DB2 /* utils */,
+				02A2C9922D28512A007D9DB2 /* Old */,
 				02C0154A2D06251D005113A9 /* registry.hpp */,
 				02D24A6D2BD84125008E7DCF /* patterns */,
 				02D24A9B2BEBFB24008E7DCF /* engine */,

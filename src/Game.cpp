@@ -6,8 +6,7 @@
 //
 
 #include "Game.hpp"
-#include <iostream>
-
+#include "Logging.hpp"
 #include "Timer.hpp"
 #include "Schedule.hpp"
 #include "RequestList.hpp"
@@ -21,48 +20,39 @@
 #include "Subscription.hpp"
 #include "EngineSettings.h"
 
-std::string tmpAvatar = "-----------------\n\n\n%s ^  ^\n%s(. .)          \n\n   I'm awake :)\n\n-----------------";
-//bool Input();
-
-Game::Game() //: _currentState(State::Active)
+bool Game::Init()
 {
-    //TODO: if Pet has save - load
-    //...
-    //Create new one
-    //"[HAMSTERGOTCHI]"
-    
     _window = new Window();
-    _window->CreateWindow();
-
+    if(!_window->CreateWindow())
+    {
+        LOG_ERROR("Game::Init() Window didn't create. Game initialization was canceled");
+        return false;
+    }
     
     _render = new Render();
-    _render->Init(_window);
-   // if(!_window)
-    //    return;
-    
-    _timer = new Timer();
-   // _input = new class Input();
-    
-    //TODO: wrap this two to smth. it's game logic entities. but Game() manages other layer.
-    _requestList = new RequestList();
-    _schedule = new Schedule(_requestList);
-    //TODO end
-    
-    //_view = new View();
+    if(!_render->Init(_window))
+    {
+        LOG_ERROR("Game::Init() Render didn't create. Game initialization was canceled");
+        return false;
+    }
+
     _frameRate = new FrameRate();
     _frameRate->SetFixedFrame(5);
     
-    SceneManager::Instance().Init();
+    SceneManager::Instance().Init(); //  why is it singletone? TODO: turn it to class field
+    return true;
+}
+
+void Game::Deinit()
+{
+    delete _render;
+    delete _window;
+    delete _frameRate;
 }
 
 Game::~Game()
 {
-   // delete _view;
-    delete _schedule;
-    delete _requestList;
-    delete _timer;
-    
-    Pet::Instance().Destroy();
+    Deinit();
 }
 
 void Game::Loop()
@@ -138,20 +128,20 @@ void Game::CheckInput()
         return;
     }
     
-    switch (keyCode) {
-        case 'f': // food
-            SceneManager::Instance().LoadScene(FEED_SCENE);
-            break;
-        case 'h': // happy
-            Pet::Instance().IncreaseParametr(Pet::Parameter::Happy);
-            break;
-        case 'p': // poop
-            _requestList->RemoveRequest(RequestType::Poop);
-            break;
-        case 's': //sick
-            _requestList->RemoveRequest(RequestType::Sick);
-            break;            
-        default:
-            break;
-    }
+//    switch (keyCode) {
+//        case 'f': // food
+//            SceneManager::Instance().LoadScene(FEED_SCENE);
+//            break;
+//        case 'h': // happy
+//            Pet::Instance().IncreaseParametr(Pet::Parameter::Happy);
+//            break;
+//        case 'p': // poop
+//            _requestList->RemoveRequest(RequestType::Poop);
+//            break;
+//        case 's': //sick
+//            _requestList->RemoveRequest(RequestType::Sick);
+//            break;            
+//        default:
+//            break;
+//    }
 }

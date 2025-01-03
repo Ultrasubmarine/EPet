@@ -10,6 +10,7 @@
 #include "SDL2/SDL.h"
 
 #include "Input.hpp"
+#include "Logging.hpp"
 
 SDLWindow::SDLWindow()
 {
@@ -17,16 +18,14 @@ SDLWindow::SDLWindow()
 
 SDLWindow::~SDLWindow()
 {
-    SDL_DestroyWindow(_window);
-    SDL_Quit();
 }
 
-bool SDLWindow::CreateWindow(int width, int height, const char *title)
+void* SDLWindow::CreateWindow(int width, int height, const char *title)
 {
     if( SDL_Init(SDL_INIT_EVERYTHING ^ SDL_INIT_AUDIO))
     {
-       // LOG_ERROR("Window::CreateWindow(): SDL_Init() error");
-        return false;
+        LOG_ERROR("Window::CreateWindow(): SDL_Init() error");
+        return nullptr;
     }
     
     _window = SDL_CreateWindow(title,
@@ -36,10 +35,22 @@ bool SDLWindow::CreateWindow(int width, int height, const char *title)
                      SDL_WINDOW_RESIZABLE);
     if(!_window)
     {
-        return false;
-      //  LOG_ERROR("Window::CreateWindow(): Fail creating window");
+        LOG_ERROR("Window::CreateWindow(): Fail creating window");
+        return nullptr;
+    
     }
-    return true;
+    LOG_MESSAGE("Window::CreateWindow(): Window sucsesefull created");
+    return _window;
+}
+
+void SDLWindow::DestroyWindow()
+{
+    if(_window)
+    {
+        SDL_DestroyWindow(_window);
+        _window = nullptr;
+        SDL_Quit();
+    }
 }
 
 void SDLWindow::HandleEvent()
@@ -75,4 +86,9 @@ int SDLWindow::GetHeight() const
 int SDLWindow::GetWidth() const
 {
     return SDL_GetWindowSurface(_window)->h;
+}
+
+bool SDLWindow::IsWindowExist() const
+{
+    return _window != nullptr;
 }

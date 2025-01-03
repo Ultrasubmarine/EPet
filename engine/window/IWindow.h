@@ -19,14 +19,16 @@ public:
     virtual ~IWindow() = default;
     
     /// return true if creating was success
-    virtual bool CreateWindow(int width = WINDOW_DEFAULT_WIDTH,
+    virtual void* CreateWindow(int width = WINDOW_DEFAULT_WIDTH,
                               int height = WINDOW_DEFAULT_WIDTH,
                               const char *title = WINDOW_DEFAULT_TITLE) = 0;
+    virtual void DestroyWindow() = 0;
     
     virtual void HandleEvent() = 0;
     
     virtual int GetHeight() const = 0;
     virtual int GetWidth() const = 0;
+    virtual bool IsWindowExist() const = 0;
     
     // TODO: has focus;
     // TODO: smth with render;
