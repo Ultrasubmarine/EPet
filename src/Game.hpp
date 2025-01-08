@@ -10,11 +10,12 @@
 
 #include <stdio.h>
 
-
-class FrameRate;
-
 class IWindow;
 class IRender;
+
+class FrameRate;
+class SceneManager;
+class ResourceManager;
 
 class Game
 {
@@ -28,9 +29,13 @@ public:
     void Deinit();
     void Loop();
     
+    ResourceManager* GetResourceManager() { return _resourceManager;};
 private:
-    IWindow *_window;
-    IRender *_render;
-    FrameRate *_frameRate;
+    IWindow *_window = nullptr;
+    IRender *_render = nullptr;
+    
+    FrameRate *_frameRate = nullptr;
+    SceneManager *_sceneManager = nullptr;
+    ResourceManager *_resourceManager = nullptr;
 };
 #endif /* Game_hpp */

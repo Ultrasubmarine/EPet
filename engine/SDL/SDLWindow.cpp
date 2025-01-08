@@ -22,7 +22,7 @@ SDLWindow::~SDLWindow()
 
 void* SDLWindow::CreateWindow(int width, int height, const char *title)
 {
-    if( SDL_Init(SDL_INIT_EVERYTHING ^ SDL_INIT_AUDIO))
+    if(SDL_Init(SDL_INIT_EVERYTHING ^ SDL_INIT_AUDIO))
     {
         LOG_ERROR("Window::CreateWindow(): SDL_Init() error");
         return nullptr;

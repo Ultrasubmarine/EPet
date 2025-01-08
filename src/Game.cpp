@@ -6,17 +6,20 @@
 //
 
 #include "Game.hpp"
+
 #include "Logging.hpp"
+
+#include "FrameRate.hpp"
+#include "Input.hpp"
+#include "SceneManager.hpp"
+#include "Scene.hpp"
+#include "ResourceManager.hpp"
+
 #include "Timer.hpp"
 #include "Schedule.hpp"
 #include "RequestList.hpp"
 #include "View.hpp"
-#include "FrameRate.hpp"
-#include "Input.hpp"
-
 #include "Pet.hpp"
-#include "SceneManager.hpp"
-#include "Scene.hpp"
 #include "Subscription.hpp"
 #include "EngineSettings.h"
 
@@ -39,7 +42,11 @@ bool Game::Init()
     _frameRate = new FrameRate();
     _frameRate->SetFixedFrame(5);
     
-    SceneManager::Instance().Init(); //  why is it singletone? TODO: turn it to class field
+    _resourceManager = new ResourceManager();
+    
+    _sceneManager = new SceneManager(_resourceManager);
+    _sceneManager->LoadScene("scene2");
+    
     return true;
 }
 
@@ -48,6 +55,8 @@ void Game::Deinit()
     delete _render;
     delete _window;
     delete _frameRate;
+    delete _sceneManager;
+    delete _resourceManager;
 }
 
 Game::~Game()
@@ -123,7 +132,7 @@ void Game::CheckInput()
         //std::cout << "You pressed '" << keyCode << "'\n";
     }
     
-    if(SceneManager::Instance().GetCurrentScene()->GetSceneId() != DEFAULT_SCENE)
+    //if(SceneManager::Instance().GetCurrentScene()->GetSceneId() != DEFAULT_SCENE)
     {
         return;
     }

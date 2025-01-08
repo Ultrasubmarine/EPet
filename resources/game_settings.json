@@ -1,0 +1,8 @@
+
+{
+    "window" : {
+        "name": "Labirint",
+        "screen" : { "width" : 700, "height" : 400}
+    },  
+    "main_scene": "test_scene"
+}

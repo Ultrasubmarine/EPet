@@ -9,7 +9,15 @@
 /* Begin PBXBuildFile section */
 		020935582C5E61C700D2AA47 /* SDLRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020935562C5E61C700D2AA47 /* SDLRender.cpp */; };
 		0231CA9B2C42F134002E3BAC /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0231CA992C42F134002E3BAC /* RenderSystem.cpp */; };
-		02BFA8F32BD840980074A6D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02BFA8F22BD840980074A6D4 /* Assets.xcassets */; };
+		026A84E52D2AC1E2009311A5 /* JsonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 026A84E12D2AC1E2009311A5 /* JsonLoader.cpp */; };
+		026A84E62D2AC1E2009311A5 /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 026A84E22D2AC1E2009311A5 /* ResourceManager.cpp */; };
+		026A84EA2D2AC369009311A5 /* GetPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 026A84E82D2AC369009311A5 /* GetPath.cpp */; };
+		02AC90BF2D2AE12A00B75A8C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */; };
+		02BE0A292D2AE46A00FA0AC4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BC2D2AE0D800B75A8C /* libz.tbd */; };
+		02BE0A3A2D2AE71200FA0AC4 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 02BE0A392D2AE71200FA0AC4 /* resources */; };
+		02BE0A3B2D2AE73300FA0AC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02BFA8F22BD840980074A6D4 /* Assets.xcassets */; };
+		02BE0A402D2EA5A500FA0AC4 /* ISystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02BE0A3E2D2EA5A500FA0AC4 /* ISystem.cpp */; };
+		02BE0A442D2EFB9E00FA0AC4 /* SystemFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02BE0A422D2EFB9E00FA0AC4 /* SystemFactory.cpp */; };
 		02D24A712BD84125008E7DCF /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A502BD84124008E7DCF /* View.cpp */; };
 		02D24A722BD84125008E7DCF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A512BD84124008E7DCF /* Game.cpp */; };
 		02D24A732BD84125008E7DCF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A522BD84124008E7DCF /* main.cpp */; };
@@ -17,9 +25,6 @@
 		02D24A752BD84125008E7DCF /* FrameRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A572BD84124008E7DCF /* FrameRate.cpp */; };
 		02D24A762BD84125008E7DCF /* Pet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A5A2BD84124008E7DCF /* Pet.cpp */; };
 		02D24A772BD84125008E7DCF /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A5C2BD84124008E7DCF /* Scene.cpp */; };
-		02D24A782BD84125008E7DCF /* FeedScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A5E2BD84124008E7DCF /* FeedScene.cpp */; };
-		02D24A792BD84125008E7DCF /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A5F2BD84124008E7DCF /* MainScene.cpp */; };
-		02D24A7A2BD84125008E7DCF /* LambdaScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A602BD84124008E7DCF /* LambdaScene.cpp */; };
 		02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A642BD84124008E7DCF /* RequestList.cpp */; };
 		02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A662BD84124008E7DCF /* Schedule.cpp */; };
 		02D24A7D2BD84125008E7DCF /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A682BD84124008E7DCF /* SceneManager.cpp */; };
@@ -51,9 +56,24 @@
 		020935572C5E61C700D2AA47 /* SDLRender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLRender.hpp; sourceTree = "<group>"; };
 		0231CA992C42F134002E3BAC /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		0231CA9A2C42F134002E3BAC /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
+		026A84E12D2AC1E2009311A5 /* JsonLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonLoader.cpp; sourceTree = "<group>"; };
+		026A84E22D2AC1E2009311A5 /* ResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
+		026A84E32D2AC1E2009311A5 /* ResourceManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourceManager.hpp; sourceTree = "<group>"; };
+		026A84E42D2AC1E2009311A5 /* JsonLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JsonLoader.hpp; sourceTree = "<group>"; };
+		026A84E72D2AC369009311A5 /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
+		026A84E82D2AC369009311A5 /* GetPath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GetPath.cpp; sourceTree = "<group>"; };
+		026A84E92D2AC369009311A5 /* GetPath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GetPath.hpp; sourceTree = "<group>"; };
 		02A2C9952D285358007D9DB2 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
+		02AC90BC2D2AE0D800B75A8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		02B584EE2C5E653D00B86454 /* IRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRender.h; sourceTree = "<group>"; };
 		02B584F12C5EC3AB00B86454 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		02BE0A392D2AE71200FA0AC4 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
+		02BE0A3E2D2EA5A500FA0AC4 /* ISystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ISystem.cpp; sourceTree = "<group>"; };
+		02BE0A3F2D2EA5A500FA0AC4 /* ISystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ISystem.hpp; sourceTree = "<group>"; };
+		02BE0A412D2EB48C00FA0AC4 /* FactoryMethod.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FactoryMethod.hpp; sourceTree = "<group>"; };
+		02BE0A422D2EFB9E00FA0AC4 /* SystemFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SystemFactory.cpp; sourceTree = "<group>"; };
+		02BE0A432D2EFB9E00FA0AC4 /* SystemFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SystemFactory.hpp; sourceTree = "<group>"; };
 		02BFA8EC2BD840970074A6D4 /* EPet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EPet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02BFA8F22BD840980074A6D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02BFA8F92BD840980074A6D4 /* EPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EPet.entitlements; sourceTree = "<group>"; };
@@ -68,12 +88,6 @@
 		02D24A582BD84124008E7DCF /* Input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
 		02D24A5A2BD84124008E7DCF /* Pet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pet.cpp; sourceTree = "<group>"; };
 		02D24A5C2BD84124008E7DCF /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
-		02D24A5D2BD84124008E7DCF /* LambdaScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LambdaScene.hpp; sourceTree = "<group>"; };
-		02D24A5E2BD84124008E7DCF /* FeedScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeedScene.cpp; sourceTree = "<group>"; };
-		02D24A5F2BD84124008E7DCF /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
-		02D24A602BD84124008E7DCF /* LambdaScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LambdaScene.cpp; sourceTree = "<group>"; };
-		02D24A612BD84124008E7DCF /* FeedScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FeedScene.hpp; sourceTree = "<group>"; };
-		02D24A622BD84124008E7DCF /* MainScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainScene.hpp; sourceTree = "<group>"; };
 		02D24A632BD84124008E7DCF /* Scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		02D24A642BD84124008E7DCF /* RequestList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RequestList.cpp; sourceTree = "<group>"; };
 		02D24A652BD84124008E7DCF /* SceneManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneManager.hpp; sourceTree = "<group>"; };
@@ -102,6 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02AC90BF2D2AE12A00B75A8C /* CoreFoundation.framework in Frameworks */,
+				02BE0A292D2AE46A00FA0AC4 /* libz.tbd in Frameworks */,
 				02FBB8FD2C28AA6B00DA2ED3 /* SDL2_ttf.framework in Frameworks */,
 				02FBB8FA2C28A98B00DA2ED3 /* SDL2.framework in Frameworks */,
 			);
@@ -127,6 +143,17 @@
 			path = render;
 			sourceTree = "<group>";
 		};
+		026A84E02D2ABE67009311A5 /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				02D24A682BD84124008E7DCF /* SceneManager.cpp */,
+				02D24A652BD84124008E7DCF /* SceneManager.hpp */,
+				02D24A632BD84124008E7DCF /* Scene.hpp */,
+				02D24A5C2BD84124008E7DCF /* Scene.cpp */,
+			);
+			name = scene;
+			sourceTree = "<group>";
+		};
 		02A2C9922D28512A007D9DB2 /* Old */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +164,9 @@
 		02A2C9932D285346007D9DB2 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				026A84E82D2AC369009311A5 /* GetPath.cpp */,
+				026A84E92D2AC369009311A5 /* GetPath.hpp */,
+				026A84E72D2AC369009311A5 /* json.hpp */,
 				02A2C9952D285358007D9DB2 /* Logging.hpp */,
 			);
 			path = utils;
@@ -148,6 +178,25 @@
 				02B584F12C5EC3AB00B86454 /* Texture.h */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		02BE0A3C2D2EA55900FA0AC4 /* ecs */ = {
+			isa = PBXGroup;
+			children = (
+				02BE0A3D2D2EA57800FA0AC4 /* systems */,
+			);
+			path = ecs;
+			sourceTree = "<group>";
+		};
+		02BE0A3D2D2EA57800FA0AC4 /* systems */ = {
+			isa = PBXGroup;
+			children = (
+				02BE0A422D2EFB9E00FA0AC4 /* SystemFactory.cpp */,
+				02BE0A432D2EFB9E00FA0AC4 /* SystemFactory.hpp */,
+				02BE0A3E2D2EA5A500FA0AC4 /* ISystem.cpp */,
+				02BE0A3F2D2EA5A500FA0AC4 /* ISystem.hpp */,
+			);
+			path = systems;
 			sourceTree = "<group>";
 		};
 		02BFA8E32BD840970074A6D4 = {
@@ -170,6 +219,7 @@
 				02BFA8EE2BD840970074A6D4 /* EPet */,
 				02BFA8ED2BD840970074A6D4 /* Products */,
 				02D24A822BD841D9008E7DCF /* Frameworks */,
+				02BE0A392D2AE71200FA0AC4 /* resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,12 +244,9 @@
 			isa = PBXGroup;
 			children = (
 				02D24A5A2BD84124008E7DCF /* Pet.cpp */,
-				02D24A5B2BD84124008E7DCF /* scenes */,
 				02D24A642BD84124008E7DCF /* RequestList.cpp */,
-				02D24A652BD84124008E7DCF /* SceneManager.hpp */,
 				02D24A662BD84124008E7DCF /* Schedule.cpp */,
 				02D24A672BD84124008E7DCF /* RequestList.hpp */,
-				02D24A682BD84124008E7DCF /* SceneManager.cpp */,
 				02D24A692BD84124008E7DCF /* Schedule.hpp */,
 				02D24A6A2BD84124008E7DCF /* Pet.hpp */,
 			);
@@ -207,24 +254,10 @@
 			path = src/hamstergotchi_core;
 			sourceTree = "<group>";
 		};
-		02D24A5B2BD84124008E7DCF /* scenes */ = {
-			isa = PBXGroup;
-			children = (
-				02D24A5C2BD84124008E7DCF /* Scene.cpp */,
-				02D24A5D2BD84124008E7DCF /* LambdaScene.hpp */,
-				02D24A5E2BD84124008E7DCF /* FeedScene.cpp */,
-				02D24A5F2BD84124008E7DCF /* MainScene.cpp */,
-				02D24A602BD84124008E7DCF /* LambdaScene.cpp */,
-				02D24A612BD84124008E7DCF /* FeedScene.hpp */,
-				02D24A622BD84124008E7DCF /* MainScene.hpp */,
-				02D24A632BD84124008E7DCF /* Scene.hpp */,
-			);
-			path = scenes;
-			sourceTree = "<group>";
-		};
 		02D24A6D2BD84125008E7DCF /* patterns */ = {
 			isa = PBXGroup;
 			children = (
+				02BE0A412D2EB48C00FA0AC4 /* FactoryMethod.hpp */,
 				02D24A6E2BD84125008E7DCF /* Subscription.hpp */,
 				02D24A6F2BD84125008E7DCF /* Singleton.hpp */,
 			);
@@ -235,6 +268,8 @@
 		02D24A822BD841D9008E7DCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */,
+				02AC90BC2D2AE0D800B75A8C /* libz.tbd */,
 				02D24A842BD841D9008E7DCF /* SDL2_ttf.framework */,
 				02D24A832BD841D9008E7DCF /* SDL2.framework */,
 			);
@@ -274,6 +309,12 @@
 		02D24A9B2BEBFB24008E7DCF /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				02BE0A3C2D2EA55900FA0AC4 /* ecs */,
+				026A84E12D2AC1E2009311A5 /* JsonLoader.cpp */,
+				026A84E42D2AC1E2009311A5 /* JsonLoader.hpp */,
+				026A84E22D2AC1E2009311A5 /* ResourceManager.cpp */,
+				026A84E32D2AC1E2009311A5 /* ResourceManager.hpp */,
+				026A84E02D2ABE67009311A5 /* scene */,
 				02B584F02C5EC38F00B86454 /* resources */,
 				020935512C5E54DA00D2AA47 /* systems */,
 				0231CA982C42F111002E3BAC /* render */,
@@ -344,7 +385,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02BFA8F32BD840980074A6D4 /* Assets.xcassets in Resources */,
+				02BE0A3B2D2AE73300FA0AC4 /* Assets.xcassets in Resources */,
+				02BE0A3A2D2AE71200FA0AC4 /* resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,19 +397,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02D24A782BD84125008E7DCF /* FeedScene.cpp in Sources */,
+				02BE0A402D2EA5A500FA0AC4 /* ISystem.cpp in Sources */,
 				02D24A712BD84125008E7DCF /* View.cpp in Sources */,
 				02D24A722BD84125008E7DCF /* Game.cpp in Sources */,
 				02D24A772BD84125008E7DCF /* Scene.cpp in Sources */,
 				02D24A752BD84125008E7DCF /* FrameRate.cpp in Sources */,
+				02BE0A442D2EFB9E00FA0AC4 /* SystemFactory.cpp in Sources */,
 				0231CA9B2C42F134002E3BAC /* RenderSystem.cpp in Sources */,
 				02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */,
 				02D24A7D2BD84125008E7DCF /* SceneManager.cpp in Sources */,
-				02D24A7A2BD84125008E7DCF /* LambdaScene.cpp in Sources */,
+				026A84EA2D2AC369009311A5 /* GetPath.cpp in Sources */,
+				026A84E62D2AC1E2009311A5 /* ResourceManager.cpp in Sources */,
 				02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */,
-				02D24A792BD84125008E7DCF /* MainScene.cpp in Sources */,
 				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,
 				02D24A742BD84125008E7DCF /* Input.cpp in Sources */,
+				026A84E52D2AC1E2009311A5 /* JsonLoader.cpp in Sources */,
 				02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */,
 				02D24A982BEAC801008E7DCF /* SDLWindow.cpp in Sources */,
 				020935582C5E61C700D2AA47 /* SDLRender.cpp in Sources */,

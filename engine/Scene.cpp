@@ -8,6 +8,17 @@
 #include "Scene.hpp"
 #include <iostream>
 
+
+void Scene::AddSystem(std::string& systemId)
+{
+    
+}
+
+void Scene::AddEntity(std::string& systemId)
+{
+    
+}
+
 Scene::Scene(std::string& id) : _id(id)
 {
  //   std::cout<<"Scene: "<<_id<<" was created";

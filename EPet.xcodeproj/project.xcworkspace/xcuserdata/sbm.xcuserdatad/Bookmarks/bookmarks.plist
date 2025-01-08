@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>57</string>
+					<key>EndingLineNumber</key>
+					<string>129</string>
+					<key>StartingColumnNumber</key>
+					<string>57</string>
+					<key>StartingLineNumber</key>
+					<string>129</string>
+					<key>Timestamp</key>
+					<string>758053598.989212</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>platform</string>
+					<key>payload</key>
+					<dict>
+						<key>base-id</key>
+						<string>macosx</string>
+						<key>relative-path</key>
+						<string>Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator.h</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string></string>
+				<key>leading</key>
+				<string>            ::operator delete(__p);
+        } else {
+            _VSTD::__libcpp_deallocate((void*)__p, __n * </string>
+				<key>trailing</key>
+				<string>sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp));
+        }
+    }
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
+</dict>
+</plist>
