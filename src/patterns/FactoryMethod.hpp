@@ -21,25 +21,25 @@ public:
     bool Register(TKey k, TCreateMethod createFunc);
     TBase* Create(TKey k,TCreateMethodArgs... args);
     
-    ~FactoryMethod() { _theMap.clear(); };
-protected:
-    std::unordered_map<TKey,TBase*(*)(TCreateMethodArgs...)> _theMap;
+private:
+    std::unordered_map<TKey,TBase*(*)(TCreateMethodArgs...)>& TheMap();
+    
 };
 
 template<typename Key, typename TBase, typename...TCreateMethodArgs>
 bool FactoryMethod<Key, TBase, TCreateMethodArgs...>::Register(Key k, TCreateMethod createFunc)
 {
-    if(_theMap.find(k) != _theMap.end())
+    if(TheMap().find(k) != TheMap().end())
         return false;
     
-    _theMap[k] = createFunc;
+    TheMap()[k] = createFunc;
     return true;
 }
 
 template<typename Key, typename TBase, typename...TCreateMethodArgs>
 TBase* FactoryMethod<Key, TBase, TCreateMethodArgs...>::Create(Key k, TCreateMethodArgs... args)
 {
-    if(auto it = _theMap.find(k); it != _theMap.end())
+    if(auto it = TheMap().find(k); it != TheMap().end())
     {
         return it->second(args...);
     }
@@ -47,11 +47,11 @@ TBase* FactoryMethod<Key, TBase, TCreateMethodArgs...>::Create(Key k, TCreateMet
     return nullptr;
 }
 
-//template<typename Key, typename TBase, typename...TCreateMethodArgs>
-//std::unordered_map<Key, TBase*(*)(TCreateMethodArgs...)>& FactoryMethod<Key, TBase, TCreateMethodArgs...>::TheMap()
-//{
-//    std::unordered_map<Key, TBase*(*)(TCreateMethodArgs...)> _creators{};
-//    return _creators;
-//}
+template<typename Key, typename TBase, typename...TCreateMethodArgs>
+std::unordered_map<Key, TBase*(*)(TCreateMethodArgs...)>& FactoryMethod<Key, TBase, TCreateMethodArgs...>::TheMap()
+{
+    static std::unordered_map<Key, TBase*(*)(TCreateMethodArgs...)> _creators{};
+    return _creators;
+}
 
 #endif /* FactoryMethod_hpp */

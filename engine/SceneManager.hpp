@@ -21,9 +21,7 @@ class ResourceManager;
 class ISystem;
 
 class SceneManager
-{
-    FactoryMethod<std::string, ISystem> _systemFactories;
-    
+{    
     ResourceManager* _resourceManager;
     Scene* _currentScene;
     
@@ -33,9 +31,6 @@ class SceneManager
     void DeleteScene();
 
 public:
-    
-    void RegistrySystem();
-    void UnregistrySystem();
     
     SceneManager(ResourceManager* r);
     void LoadScene(std::string id);

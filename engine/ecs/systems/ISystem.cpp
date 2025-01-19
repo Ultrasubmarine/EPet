@@ -6,7 +6,12 @@
 //
 
 #include "ISystem.hpp"
+#include "SystemFactory.hpp"
 
 
+bool RegisterSystem(const char* systemName, TCreateSystem createFunc)
+{
+    return SystemFactory::Instance().Register(systemName, createFunc);
+}
 
 //SYSTEM_REGISTRATION(TestSystem);

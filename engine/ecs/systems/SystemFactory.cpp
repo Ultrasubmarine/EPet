@@ -13,3 +13,4 @@
 //{
 //    Register("TestSystem", &TestSystem::CreateSystem);
 //}
+//_systemFactories.Register("TestSystem", &TestSystem::CreateSystem);

@@ -11,23 +11,14 @@
 #include "Scene.hpp"
 #include "Game.hpp"
 #include "ResourceManager.hpp"
+#include "SystemFactory.hpp"
 #include "Logging.hpp"
 
 #include "ISystem.hpp"
 
 SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
 {
-    RegistrySystem();
-}
-
-void SceneManager::RegistrySystem()
-{
-    _systemFactories.Register("TestSystem", &TestSystem::CreateSystem);
-}
-
-void SceneManager::UnregistrySystem()
-{
-    //todo
+  //  SystemFactory::Instance().Register("TestSystem", &TestSystem::CreateSystem);
 }
 
 void SceneManager::LoadScene(std::string id)
@@ -49,16 +40,18 @@ void SceneManager::LoadScene(std::string id)
     }
     
     _currentScene = new Scene(id);
+    
     //loadding from data
     auto systems =(*data)["systems"];
     for (json::iterator it = systems.begin(); it != systems.end(); ++it) {
         
         auto systemId = it.value().get<std::string>();
-        ISystem* sys = _systemFactories.Create(systemId);
+
+        ISystem* sys = SystemFactory::Instance().Create(systemId);
         
         if(!sys)
         {
-            //error
+            LOG_ERROR("SceneManager::LoadScene() System with id \""<<systemId<<"\" didn't find. system didn't added.");
         }
         _currentScene->AddSystem(systemId); // create system
     }
