@@ -16,6 +16,9 @@
 
 #include "ISystem.hpp"
 
+#include "registry.hpp"
+#include "CommonComponents.hpp"
+
 SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
 {
   //  SystemFactory::Instance().Register("TestSystem", &TestSystem::CreateSystem);
@@ -56,6 +59,54 @@ void SceneManager::LoadScene(std::string id)
         _currentScene->AddSystem(systemId); // create system
     }
     
+    
+    // TEST CODE TO DESERIALIZE COMPONENT
+    entt::registry registry;
+    ComponentRegister compReg;
+    
+    ComponentRegister::creationFunction f = [](entt::registry& registry, entt::entity e){
+        TestComponent t;
+        t.value = 505;
+        registry.emplace<TestComponent>(e, std::move(t));
+        //registry.emplace<TestComponent>(e);
+    };
+    
+    compReg.Register("TestComponent", f);
+    
+    auto entityes = (*data)["objects"];
+    for (json::iterator it = entityes.begin(); it != entityes.end(); ++it) {
+        
+        auto entity = registry.create();
+        
+        for (auto it_comp : it.value()["components"].items())
+        {
+            auto componentId = it_comp.value()["id"].get<std::string>();
+            
+            // 1. создать компонентик
+            if(f = compReg.GetCreateFunction(componentId); f)
+            {
+                f(registry, entity);
+            };
+            
+            bool isExist = !registry.view<TestComponent>().empty();
+            
+            // 2. заполнить компонентик даннымию
+           if(auto comp = registry.try_get<TestComponent>(entity))
+           {
+               // auto g = TestComponent::Load((*data).);
+              //  registry.emplace<TestComponent>(entity, g);
+               comp->value = it_comp.value()["value"].get<int>();
+            bool check = true;
+           }
+         
+        }
+        
+      
+        
+       
+        
+    }
+    
     // end of loadding
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);
@@ -64,6 +115,11 @@ void SceneManager::LoadScene(std::string id)
 };
 
 
+void CreateComponentById(entt::registry& registry, entt::entity entity, std::string& componentId)
+{
+    //registry.emplace<T>(entity);
+};
+                         
 void SceneManager::DeleteScene()
 {
     _currentScene->Destroy();

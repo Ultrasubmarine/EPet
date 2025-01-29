@@ -13,6 +13,7 @@
 		026A84E62D2AC1E2009311A5 /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 026A84E22D2AC1E2009311A5 /* ResourceManager.cpp */; };
 		026A84EA2D2AC369009311A5 /* GetPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 026A84E82D2AC369009311A5 /* GetPath.cpp */; };
 		02792FE32D3D82FA00A76187 /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02792FE12D3D82FA00A76187 /* TestSystem.cpp */; };
+		02792FE62D48055000A76187 /* CommonComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02792FE42D48055000A76187 /* CommonComponents.cpp */; };
 		02AC90BF2D2AE12A00B75A8C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */; };
 		02BE0A292D2AE46A00FA0AC4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BC2D2AE0D800B75A8C /* libz.tbd */; };
 		02BE0A3A2D2AE71200FA0AC4 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 02BE0A392D2AE71200FA0AC4 /* resources */; };
@@ -66,6 +67,8 @@
 		026A84E92D2AC369009311A5 /* GetPath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GetPath.hpp; sourceTree = "<group>"; };
 		02792FE12D3D82FA00A76187 /* TestSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestSystem.cpp; sourceTree = "<group>"; };
 		02792FE22D3D82FA00A76187 /* TestSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TestSystem.hpp; sourceTree = "<group>"; };
+		02792FE42D48055000A76187 /* CommonComponents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CommonComponents.cpp; sourceTree = "<group>"; };
+		02792FE52D48055000A76187 /* CommonComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CommonComponents.hpp; sourceTree = "<group>"; };
 		02A2C9952D285358007D9DB2 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
 		02AC90BC2D2AE0D800B75A8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -187,6 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				02BE0A3D2D2EA57800FA0AC4 /* systems */,
+				02792FE42D48055000A76187 /* CommonComponents.cpp */,
+				02792FE52D48055000A76187 /* CommonComponents.hpp */,
 			);
 			path = ecs;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				02D24A712BD84125008E7DCF /* View.cpp in Sources */,
 				02D24A722BD84125008E7DCF /* Game.cpp in Sources */,
 				02D24A772BD84125008E7DCF /* Scene.cpp in Sources */,
+				02792FE62D48055000A76187 /* CommonComponents.cpp in Sources */,
 				02D24A752BD84125008E7DCF /* FrameRate.cpp in Sources */,
 				02BE0A442D2EFB9E00FA0AC4 /* SystemFactory.cpp in Sources */,
 				0231CA9B2C42F134002E3BAC /* RenderSystem.cpp in Sources */,

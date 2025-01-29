@@ -38,6 +38,10 @@ public:
     void Update(double dt){};
     void Render(){}; // TODO: temp place
     
+    //TODO:
+    //void Serialize(json*);
+    
+    
     const std::string& GetSceneId() { return _id;} const;
 };
 
