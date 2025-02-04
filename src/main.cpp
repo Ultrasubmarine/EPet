@@ -7,13 +7,6 @@
 
 #include "Game.hpp"
 #include <stdio.h>
-#include <iostream>
-
-template<class T>
-T testFunction(T n)
-{
-    //std::cout<<n;
-};
 
 int main(int argc, const char *argv[]) {
     

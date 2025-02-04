@@ -5147,7 +5147,7 @@ template<typename IteratorType> class iteration_proxy_value
     }
 
     /// return value of the iterator
-    typename IteratorType::reference value() const
+typename IteratorType::reference value() const
     {
         return anchor.value();
     }

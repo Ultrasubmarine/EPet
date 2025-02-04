@@ -119,7 +119,6 @@ void Game::Loop()
 //        std::cout<<"Scene: "<<SceneManager::Instance().GetCurrentScene()->GetSceneId()<<std::endl;
 //        std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
         _frameRate->WaitFrame();
-        
     }
 }
 

@@ -20,10 +20,12 @@ struct TestComponent
 {
     int value;
     
-    static TestComponent Load(json* data)
+    static TestComponent Load(const json& data)
     {
         TestComponent obj;
-        obj.value = (*data)["value"].get<int>();
+        
+        obj.value = data["value"].get<int>();
+        
         return obj;
     }
     

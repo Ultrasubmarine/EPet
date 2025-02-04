@@ -16,6 +16,7 @@
 #include "ISystem.hpp"
 #include "FactoryMethod.hpp"
 
+
 class Scene;
 class ResourceManager;
 class ISystem;
@@ -36,4 +37,6 @@ public:
     void LoadScene(std::string id);
     Scene* GetCurrentScene() {return _currentScene;};
 };
+
+
 #endif /* SceneManager_hpp */
