@@ -18,45 +18,11 @@
 
 #include "registry.hpp"
 #include "CommonComponents.hpp"
+#include "SaveLoadComponents.hpp"
 #include <map>
 
-std::map<std::string, std::function<void(entt::registry&, entt::entity, const json&)>>& GetLoaders()
-{
-    static std::map<std::string, std::function<void(entt::registry&, entt::entity, const json&)>> _Loaders;
-    return _Loaders;
-};
-
-void RegisterLoader(std::string typeId, std::function<void(entt::registry&, entt::entity, const json&)> loadingFunction)
-{
-    GetLoaders()[typeId]=loadingFunction;
-}
-
-// общая функция для внешнего вызова
-void Load(std::string typeId, entt::registry& registry, entt::entity entity, const json& data)
-{
-    if(auto it = GetLoaders().find(typeId); it != GetLoaders().end())
-    {
-        it->second(registry, entity, data);
-    }
-    
-       // loader(registry, entity, data);
-   // assert
-}
-
-template<class T>
-void GenerateLoadingFunction(std::string typeId, std::function<T(const json&)> loader)
-{
-    static std::function<void(entt::registry&, entt::entity, const json&)> f =
-    [loader](entt::registry& registry, entt::entity e, const json& data)
-    {
-        registry.emplace<T>(e, std::move(loader(data)));
-    };
-    
-    RegisterLoader(typeId, f);
-}
-
 //temp place
-using json = nlohmann::json;
+//using json = nlohmann::json;
 
 SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
 {
@@ -64,10 +30,10 @@ SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
 }
 
 
-void Load(const json& data)
-{
-    auto i = (data)["value"].get<int>();
-}
+//void Load(const json& data)
+//{
+//    auto i = (data)["value"].get<int>();
+//}
 
 void SceneManager::LoadScene(std::string id)
 {
@@ -121,10 +87,10 @@ void SceneManager::LoadScene(std::string id)
 
             Load(componentId, registry, entity, it_comp.value());
             
-//           if(auto comp = registry.try_get<TestComponent>(entity))
-//           {
-//               bool check = true;
-//           }
+           if(auto comp = registry.try_get<TestComponent>(entity))
+           {
+               bool check = true;
+           }
         }
     }
     

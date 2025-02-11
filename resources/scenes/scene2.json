@@ -5,7 +5,7 @@
     ],
     "objects":[
         { "components": [
-            { "id": "TestComponent", "value" : 666 }
+            { "id": "TestComponent", "value" : 555 }
         ]}
     ]
 }

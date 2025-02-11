@@ -32,6 +32,7 @@
 		02D24A7D2BD84125008E7DCF /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A682BD84124008E7DCF /* SceneManager.cpp */; };
 		02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A6B2BD84124008E7DCF /* Timer.cpp */; };
 		02D24A982BEAC801008E7DCF /* SDLWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A972BEAC7AB008E7DCF /* SDLWindow.cpp */; };
+		02F5EA002D5914B80084EDA9 /* SaveLoadComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F5E9FE2D5914B80084EDA9 /* SaveLoadComponents.cpp */; };
 		02FBB8FA2C28A98B00DA2ED3 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D24A832BD841D9008E7DCF /* SDL2.framework */; };
 		02FBB8FB2C28A98B00DA2ED3 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02D24A832BD841D9008E7DCF /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02FBB8FD2C28AA6B00DA2ED3 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D24A842BD841D9008E7DCF /* SDL2_ttf.framework */; };
@@ -115,6 +116,8 @@
 		02D24A972BEAC7AB008E7DCF /* SDLWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLWindow.cpp; sourceTree = "<group>"; };
 		02D24A992BEACA21008E7DCF /* SDLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLWindow.h; sourceTree = "<group>"; };
 		02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EngineSettings.h; sourceTree = "<group>"; };
+		02F5E9FE2D5914B80084EDA9 /* SaveLoadComponents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SaveLoadComponents.cpp; sourceTree = "<group>"; };
+		02F5E9FF2D5914B80084EDA9 /* SaveLoadComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SaveLoadComponents.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +195,8 @@
 				02BE0A3D2D2EA57800FA0AC4 /* systems */,
 				02792FE42D48055000A76187 /* CommonComponents.cpp */,
 				02792FE52D48055000A76187 /* CommonComponents.hpp */,
+				02F5E9FE2D5914B80084EDA9 /* SaveLoadComponents.cpp */,
+				02F5E9FF2D5914B80084EDA9 /* SaveLoadComponents.hpp */,
 			);
 			path = ecs;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				026A84EA2D2AC369009311A5 /* GetPath.cpp in Sources */,
 				026A84E62D2AC1E2009311A5 /* ResourceManager.cpp in Sources */,
 				02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */,
+				02F5EA002D5914B80084EDA9 /* SaveLoadComponents.cpp in Sources */,
 				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,
 				02D24A742BD84125008E7DCF /* Input.cpp in Sources */,
 				026A84E52D2AC1E2009311A5 /* JsonLoader.cpp in Sources */,
