@@ -92,42 +92,103 @@ void SceneManager::LoadScene(std::string id)
 };
 
 
-
-//template<class T>
-//void Load(const json& data, entt::registry& registry, entt::entity entity)
-//{
-//    // то как это должно выглядеть
-//    
-//    std::function<T(const json&)> f ; // где и как тебя хранить?
-//    registry.emplace<T>(entity, std::move(f(data)));
-//    
-//    
-//    // 1. создать компонентик
-//    if(f = compReg.GetCreateFunction(componentId); f)
-//    {
-//        f(registry, entity);
-//    };
-//    
-//    bool isExist = !registry.view<TestComponent>().empty();
-//    
-//    // 2. заполнить компонентик даннымию
-//   if(auto comp = registry.try_get<TestComponent>(entity))
-//   {
-//       // auto g = TestComponent::Load((*data).);
-//      //  registry.emplace<TestComponent>(entity, g);
-//       comp->value = it_comp.value()["value"].get<int>();
-//    bool check = true;
-//   }
-//     
-//    
-//};
+#define SAVE_FUNCTION_PARAMS entt::registry& registry, entt::entity entity, data& data
+using saveFunction = void(entt::registry& registry, entt::entity entity, json& data);
 
 
-void CreateComponentById(entt::registry& registry, entt::entity entity, std::string& componentId)
+class ComponentSaver
 {
-    //registry.emplace<T>(entity);
+private:
+    static std::map<std::string, std::function<saveFunction>>& GetSavers()
+    {
+        static std::map<std::string, std::function<saveFunction>> _Savers;
+        return _Savers;
+    };
+    
+    static void RegisterSaver(std::string typeId, std::function<saveFunction> saveFunction)
+    {
+        if(const auto it = GetSavers().find(typeId); it != GetSavers().end())
+        {
+            LOG_ERROR("ComponentSaver::RegisterSaver: Component saver ["<<typeId<<"] already exist. Saver registration was ignored");
+            return;
+        }
+        GetSavers()[typeId] = saveFunction;
+        LOG_MESSAGE("ComponentSaver::RegisterSaver: Component saver ["<<typeId<<"] registred");
+    };
+    
+    template <typename T>
+    friend void GenerateSaveFunction(const char* typeId, std::function<void(entt::registry&, entt::entity, data&)> saver);
+    
+    friend void Save(const char* typeId, SAVE_FUNCTION_PARAMS);
+    friend void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity);
 };
-                         
+
+
+/// function for component registration
+template<class T>
+void GenerateSaveFunction(const char* typeId, std::function<void(entt::registry& registry, entt::entity, data&)> saver)
+{
+    static std::function<void(entt::registry&, entt::entity, data&)> f =
+    [saver](entt::registry& registry, entt::entity entity, data& data)
+    {
+        if(const auto comp = registry.try_get<T>(entity))
+        {
+            saver(comp, data);
+        }
+    };
+    
+    ComponentSaver::RegisterSaver(typeId, f);
+}
+
+/// function for saving a component
+void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
+{
+    if(auto it = ComponentSaver::GetSavers().find(typeId); it != ComponentSaver::GetSavers().end())
+    {
+        it->second(registry, entity, data);
+    }
+    else
+    {
+        LOG_ERROR("Load: Component saver ["<<typeId<<"] didn't find. Saving component canceled");
+    }
+}
+
+void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity)
+{
+    
+}
+
+
+void SceneManager::SaveScene()
+{
+    
+//    std::vector<entt::entity> savePool;
+//    json data;
+//    
+//    for(const auto e: savePool)
+//    {
+//    // пройтись по всем компонентам с ID и сохранить
+//     for(id: saveId)
+//       if(const comp = _registry.try_get<T>(e))
+//       {
+//           Save(T, comp, data);
+//       }
+//    }
+    
+}
+
+//template <class T>
+//std::string GetTypeId()
+//{
+//    return str;
+//}
+//  
+//
+//template <class T>
+//void RegisterSave(std::string& typeId, )
+
+
+
 void SceneManager::DeleteScene()
 {
     _currentScene->Destroy();

@@ -37,6 +37,8 @@ public:
     
     SceneManager(ResourceManager* r);
     void LoadScene(std::string id);
+    void SaveScene(); // current
+    
     Scene* GetCurrentScene() {return _currentScene;};
 };
 
