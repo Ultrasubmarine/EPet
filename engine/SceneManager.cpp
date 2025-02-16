@@ -29,12 +29,6 @@ SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
   //  SystemFactory::Instance().Register("TestSystem", &TestSystem::CreateSystem);
 }
 
-
-//void Load(const json& data)
-//{
-//    auto i = (data)["value"].get<int>();
-//}
-
 void SceneManager::LoadScene(std::string id)
 {
     if(!_resourceManager){
@@ -93,7 +87,6 @@ void SceneManager::LoadScene(std::string id)
            }
         }
     }
-    
     // end of loadding
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);
