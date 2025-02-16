@@ -16,6 +16,7 @@
 #include "ISystem.hpp"
 #include "FactoryMethod.hpp"
 
+#include "registry.hpp" // TODO: think about place
 
 class Scene;
 class ResourceManager;
@@ -29,6 +30,7 @@ class SceneManager
     Signal<Scene*> OnCreate;
     Signal<Scene*> OnDestroy;
     
+    entt::registry _registry;
     void DeleteScene();
 
 public:

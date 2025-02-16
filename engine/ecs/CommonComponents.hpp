@@ -29,8 +29,9 @@ struct TestComponent
         return obj;
     }
     
-    void Save(json* data)
+    static void Save(TestComponent& obj, json& data)
     {
+        data["value"] = obj.value;
     }
 };
 

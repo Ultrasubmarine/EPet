@@ -16,7 +16,6 @@
 
 #include "ISystem.hpp"
 
-#include "registry.hpp"
 #include "CommonComponents.hpp"
 #include "SaveLoadComponents.hpp"
 #include <map>
@@ -66,22 +65,20 @@ void SceneManager::LoadScene(std::string id)
     
     
     // TEST CODE TO DESERIALIZE COMPONENT
-    entt::registry registry;
-    
     GenerateLoadingFunction<TestComponent>("TestComponent", &TestComponent::Load);
     
     auto entityes = (*data)["objects"];
     for (json::iterator it = entityes.begin(); it != entityes.end(); ++it) {
         
-        auto entity = registry.create();
+        auto entity = _registry.create();
         
         for (auto it_comp : it.value()["components"].items())
         {
             auto componentId = it_comp.value()["id"].get<std::string>();
 
-            Load(componentId, registry, entity, it_comp.value());
+            Load(componentId.c_str(), _registry, entity, it_comp.value());
             
-           if(auto comp = registry.try_get<TestComponent>(entity))
+           if(auto comp = _registry.try_get<TestComponent>(entity))
            {
                bool check = true;
            }

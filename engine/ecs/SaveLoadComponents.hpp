@@ -30,7 +30,7 @@ private:
         return _Loaders;
     };
     
-    static void RegisterLoader(std::string typeId, std::function<loadFunction> loadingFunction)
+    static void RegisterLoader(const char* typeId, std::function<loadFunction> loadingFunction)
     {
         if(const auto it = GetLoaders().find(typeId); it != GetLoaders().end())
         {
@@ -42,14 +42,14 @@ private:
     };
     
     template <typename T>
-    friend void GenerateLoadingFunction(std::string typeId, std::function<T(const data&)> loader);
+    friend void GenerateLoadingFunction(const char* typeId, std::function<T(const data&)> loader);
     
-    friend void Load(std::string typeId, LOAD_FUNCTION_PARAMS);
+    friend void Load(const char* typeId, LOAD_FUNCTION_PARAMS);
 };
 
 /// function for component registration
 template<class T>
-void GenerateLoadingFunction(std::string typeId, std::function<T(const data&)> loader)
+void GenerateLoadingFunction(const char* typeId, std::function<T(const data&)> loader)
 {
     static std::function<loadFunction> f =
     [loader](LOAD_FUNCTION_PARAMS)
@@ -61,7 +61,7 @@ void GenerateLoadingFunction(std::string typeId, std::function<T(const data&)> l
 }
 
 /// function for loading a component
-void Load(std::string typeId, LOAD_FUNCTION_PARAMS)
+void Load(const char* typeId, LOAD_FUNCTION_PARAMS)
 {
     if(auto it = ComponentLoader::GetLoaders().find(typeId); it != ComponentLoader::GetLoaders().end())
     {
@@ -72,5 +72,7 @@ void Load(std::string typeId, LOAD_FUNCTION_PARAMS)
         LOG_ERROR("Load: Component loader ["<<typeId<<"] didn't find. Loading component canceled");
     }
 }
+
+
 
 #endif /* SaveLoadComponents_hpp */
