@@ -19,7 +19,7 @@ using json = nlohmann::json;
 struct TestComponent
 {
     int value;
-    
+    std::string str = "hello, my friends";
     static TestComponent Load(const json& data)
     {
         TestComponent obj;
@@ -32,6 +32,7 @@ struct TestComponent
     static void Save(TestComponent& obj, json& data)
     {
         data["value"] = obj.value;
+        data["str"] = obj.str;
     }
 };
 
