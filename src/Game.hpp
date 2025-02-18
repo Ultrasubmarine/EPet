@@ -10,33 +10,32 @@
 
 #include <stdio.h>
 
-class Timer;
-class Schedule;
-class RequestList;
-class View;
-class FrameRate;
-
 class IWindow;
 class IRender;
+
+class FrameRate;
+class SceneManager;
+class ResourceManager;
 
 class Game
 {
 private:
     void CheckInput();
-    
-public:    
-    Game();
+public:
+    Game() = default;
     ~Game();
     
+    bool Init(); /// true - if init waa successful
+    void Deinit();
     void Loop();
     
-    IWindow *_window;
-    IRender *_render;
+    ResourceManager* GetResourceManager() { return _resourceManager;};
+private:
+    IWindow *_window = nullptr;
+    IRender *_render = nullptr;
     
-    //tmp old hamster core stuff. need to move in other place
-    Timer *_timer;
-    RequestList *_requestList;
-    Schedule *_schedule;
-    FrameRate *_frameRate;
+    FrameRate *_frameRate = nullptr;
+    SceneManager *_sceneManager = nullptr;
+    ResourceManager *_resourceManager = nullptr;
 };
 #endif /* Game_hpp */

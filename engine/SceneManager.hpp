@@ -11,26 +11,36 @@
 #include <stdio.h>
 #include <string>
 
-#include "Singleton.hpp"
 #include "Subscription.hpp"
 
-#define DEFAULT_SCENE "default"
-#define FEED_SCENE "food"
+#include "ISystem.hpp"
+#include "FactoryMethod.hpp"
+
+#include "registry.hpp" // TODO: think about place
 
 class Scene;
+class ResourceManager;
+class ISystem;
 
-class SceneManager: public Singleton<SceneManager>
-{
+class SceneManager
+{    
+    ResourceManager* _resourceManager;
     Scene* _currentScene;
     
     Signal<Scene*> OnCreate;
     Signal<Scene*> OnDestroy;
     
-    void DeleteScene();    
+    entt::registry _registry;
+    void DeleteScene();
+
 public:
-    void Init();
     
+    SceneManager(ResourceManager* r);
     void LoadScene(std::string id);
+    void SaveScene(); // current
+    
     Scene* GetCurrentScene() {return _currentScene;};
 };
+
+
 #endif /* SceneManager_hpp */

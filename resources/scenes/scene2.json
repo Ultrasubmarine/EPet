@@ -1,0 +1,11 @@
+
+{
+   "systems":[
+        "TestSystem"
+    ],
+    "objects":[
+        { "components": [
+            { "id": "TestComponent", "value" : 555 }
+        ]}
+    ]
+}

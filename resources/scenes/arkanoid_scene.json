@@ -1,0 +1,18 @@
+
+{
+    "hubs":[
+        {"name":"player", "components": [
+            {"name": "Transform", "position":  { "x": 5, "y": 70} },
+            {"name": "Image", "texture" : "coinIcon"},
+            {"name": "MovingScript"}
+        ]},
+        {"name":"frog_static", "components": [
+            {"name": "Transform", "position":  { "x": 50, "y": 170} },
+            {"name": "Image", "texture" : "coinIcon"}] },
+        {"name":"frog_static2", "components": [
+            {"name": "Transform", "position":  { "x": 150, "y": 200} },
+            {"name": "Image", "texture" : "coinIcon"}] }
+    ]    
+}
+
+
