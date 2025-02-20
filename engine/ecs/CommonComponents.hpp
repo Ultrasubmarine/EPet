@@ -36,6 +36,24 @@ struct TestComponent
     }
 };
 
+struct Sorting
+{
+    int layer;
+    static Sorting Load(const json& data)
+    {
+        Sorting obj;
+        
+        obj.layer= data["layer"].get<int>();
+        
+        return obj;
+    }
+    
+    static void Save(Sorting& obj, json& data)
+    {
+        data["layer"] = obj.layer;
+    }
+};
+
 class ComponentRegister
 {
 public:

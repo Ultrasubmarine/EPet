@@ -87,8 +87,11 @@ void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, dat
 {
     for(auto it : ComponentSaver::GetSavers())
     {
-        Save(it.first.c_str(), registry, entity, data);
-       // it.second( it.first, );
+        //data.push_back(data[it.first]);
+        
+        nlohmann::json obj;
+        Save(it.first.c_str(), registry, entity, obj[it.first]);
+        data.push_back(obj);
     }
 }
 
@@ -138,6 +141,10 @@ void SceneManager::LoadScene(std::string id)
     GenerateLoadingFunction<TestComponent>("TestComponent", &TestComponent::Load);
     GenerateSaveFunction<TestComponent>("TestComponent", &TestComponent::Save);
     
+    GenerateLoadingFunction<Sorting>("Sorting", &Sorting::Load);
+    GenerateSaveFunction<Sorting>("Sorting", &Sorting::Save);
+    
+    
     auto entityes = (*data)["objects"];
     for (json::iterator it = entityes.begin(); it != entityes.end(); ++it) {
         
@@ -177,12 +184,17 @@ void SceneManager::SaveScene()
     json data;
     std::ofstream o("trySave.json");
     
+    
+    
     for(const auto e: _registry.view<entt::entity>())
     {
-        SaveAllComponentInEntity(_registry,e, data);
+       // auto f = data["objects"];
+        SaveAllComponentInEntity(_registry,e, data["objects"]);
     }
     
-    std::cout<<"my test save"<<data<<std::endl;
+    data["scene"] = _currentScene->GetSceneId();
+    
+    std::cout<<"\n\n\n"<<data<<"\n\n\n";
     o << data << std::endl;
     
     
