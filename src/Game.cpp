@@ -46,7 +46,7 @@ bool Game::Init()
     
     _sceneManager = new SceneManager(_resourceManager);
     _sceneManager->LoadScene("scene2");
-    
+    _sceneManager->SaveScene();
     return true;
 }
 

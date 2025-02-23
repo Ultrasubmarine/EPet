@@ -29,9 +29,9 @@ using saveFunction = void(SAVE_FUNCTION_PARAMS);
 class ComponentSaver
 {
 private:
-    static std::map<std::string, std::function<saveFunction>>& GetSavers()
+    static std::unordered_map<std::string, std::function<saveFunction>>& GetSavers()
     {
-        static std::map<std::string, std::function<saveFunction>> _Savers;
+        static std::unordered_map<std::string, std::function<saveFunction>> _Savers;
         return _Savers;
     };
     
@@ -87,11 +87,11 @@ void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, dat
 {
     for(auto it : ComponentSaver::GetSavers())
     {
-        //data.push_back(data[it.first]);
-        
         nlohmann::json obj;
-        Save(it.first.c_str(), registry, entity, obj[it.first]);
-        data.push_back(obj);
+        obj["id"] = it.first;
+        Save(it.first.c_str(), registry, entity, obj);
+        
+        data["components"].push_back(obj);
     }
 }
 
@@ -122,18 +122,21 @@ void SceneManager::LoadScene(std::string id)
     _currentScene = new Scene(id);
     
     //loadding from data
-    auto systems =(*data)["systems"];
-    for (json::iterator it = systems.begin(); it != systems.end(); ++it) {
-        
-        auto systemId = it.value().get<std::string>();
 
-        ISystem* sys = SystemFactory::Instance().Create(systemId);
-        
-        if(!sys)
-        {
-            LOG_ERROR("SceneManager::LoadScene() System with id \""<<systemId<<"\" didn't find. system didn't added.");
+    // systems
+    if ((*data).contains("systems")) {
+        auto systems =(*data)["systems"];
+        for (json::iterator it = systems.begin(); it != systems.end(); ++it) {
+
+            auto systemId = it.value().get<std::string>();
+            ISystem* sys = SystemFactory::Instance().Create(systemId);
+            
+            if(!sys)
+            {
+                LOG_ERROR("SceneManager::LoadScene() System with id \""<<systemId<<"\" didn't find. system didn't added.");
+            }
+            _currentScene->AddSystem(systemId); // create system
         }
-        _currentScene->AddSystem(systemId); // create system
     }
     
     
@@ -145,25 +148,36 @@ void SceneManager::LoadScene(std::string id)
     GenerateSaveFunction<Sorting>("Sorting", &Sorting::Save);
     
     
-    auto entityes = (*data)["objects"];
-    for (json::iterator it = entityes.begin(); it != entityes.end(); ++it) {
-        
-        auto entity = _registry.create();
-        
-        for (auto it_comp : it.value()["components"].items())
-        {
-            auto componentId = it_comp.value()["id"].get<std::string>();
-
-            Load(componentId.c_str(), _registry, entity, it_comp.value());
+    // objects
+    if ((*data).contains("objects"))
+    {
+        auto entityes = (*data)["objects"];
+        for (json::iterator it = entityes.begin(); it != entityes.end(); ++it) {
             
-           if(auto comp = _registry.try_get<TestComponent>(entity))
-           {
-               bool check = true;
-           }
+            auto entity = _registry.create();
+            
+            if(!it.value().contains("components"))
+            {
+                break;
+            }
+            
+            for (auto it_comp : it.value()["components"].items())
+            {
+                if(it.value().contains("id"))
+                {
+                    auto componentId = it_comp.value()["id"].get<std::string>();
+                    Load(componentId.c_str(), _registry, entity, it_comp.value());
+                }
+                
+                // test for debug. TODO: delete
+//               if(auto comp = _registry.try_get<TestComponent>(entity))
+//               {
+//                   bool check = true;
+//               }
+            }
         }
     }
     
-    SaveScene();
     // end of loadding
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);
@@ -177,53 +191,25 @@ void SceneManager::LoadScene(std::string id)
 
 void SceneManager::SaveScene()
 {
-    
-    // write prettified JSON to another file
-    
-    
     json data;
-    std::ofstream o("trySave.json");
+ 
+    data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. saved as name of file
     
-    
-    
-    for(const auto e: _registry.view<entt::entity>())
+    // save entities with components
+    for(const auto entity: _registry.view<entt::entity>())
     {
-       // auto f = data["objects"];
-        SaveAllComponentInEntity(_registry,e, data["objects"]);
+        json objectData;
+        SaveAllComponentInEntity(_registry, entity, objectData);
+        data["objects"].push_back(objectData);
     }
     
-    data["scene"] = _currentScene->GetSceneId();
+    //TODO: save systems
     
     std::cout<<"\n\n\n"<<data<<"\n\n\n";
-    o << data << std::endl;
     
-    
-//    std::vector<entt::entity> savePool;
-//    json data;
-//    
-//    for(const auto e: savePool)
-//    {
-//    // пройтись по всем компонентам с ID и сохранить
-//     for(id: saveId)
-//       if(const comp = _registry.try_get<T>(e))
-//       {
-//           Save(T, comp, data);
-//       }
-//    }
-    
+// std::ofstream o("trySave.json");
+//  o << data << std::endl;
 }
-
-//template <class T>
-//std::string GetTypeId()
-//{
-//    return str;
-//}
-//  
-//
-//template <class T>
-//void RegisterSave(std::string& typeId, )
-
-
 
 void SceneManager::DeleteScene()
 {
