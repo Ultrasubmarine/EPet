@@ -17,83 +17,9 @@
 #include "ISystem.hpp"
 
 #include "CommonComponents.hpp"
-#include "SaveLoadComponents.hpp"
-#include <map>
 
-//temp place
-//using json = nlohmann::json;
-#define SAVE_FUNCTION_PARAMS entt::registry& registry, entt::entity entity, data& data
-using saveFunction = void(SAVE_FUNCTION_PARAMS);
-
-
-class ComponentSaver
-{
-private:
-    static std::unordered_map<std::string, std::function<saveFunction>>& GetSavers()
-    {
-        static std::unordered_map<std::string, std::function<saveFunction>> _Savers;
-        return _Savers;
-    };
-    
-    static void RegisterSaver(std::string typeId, std::function<saveFunction> saveFunction)
-    {
-        if(const auto it = GetSavers().find(typeId); it != GetSavers().end())
-        {
-            LOG_ERROR("ComponentSaver::RegisterSaver: Component saver ["<<typeId<<"] already exist. Saver registration was ignored");
-            return;
-        }
-        GetSavers()[typeId] = saveFunction;
-        LOG_MESSAGE("ComponentSaver::RegisterSaver: Component saver ["<<typeId<<"] registred");
-    };
-    
-    template <typename T>
-    friend void GenerateSaveFunction(const char* typeId, std::function<void(T&, data&)> saver);
-   
-    friend void Save(const char* typeId, SAVE_FUNCTION_PARAMS);
-    friend void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, data& data);
-};
-
-
-/// function for component registration
-template<class T>
-void GenerateSaveFunction(const char* typeId, std::function<void(T&, data&)> saver)
-{
-    static std::function<saveFunction> f =
-    [saver](SAVE_FUNCTION_PARAMS)
-    {
-       if(auto comp = registry.try_get<T>(entity))
-        {
-            saver(*comp, data);
-        }
-    };
-    
-    ComponentSaver::RegisterSaver(typeId, f);
-}
-
-/// function for saving a component
-void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
-{
-    if(auto it = ComponentSaver::GetSavers().find(typeId); it != ComponentSaver::GetSavers().end())
-    {
-        it->second(registry, entity, data);
-    }
-    else
-    {
-        LOG_ERROR("Load: Component saver ["<<typeId<<"] didn't find. Saving component canceled");
-    }
-}
-
-void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, data& data)
-{
-    for(auto it : ComponentSaver::GetSavers())
-    {
-        nlohmann::json obj;
-        obj["id"] = it.first;
-        Save(it.first.c_str(), registry, entity, obj);
-        
-        data["components"].push_back(obj);
-    }
-}
+#include "LoadComponents.hpp"
+#include "SaveComponents.hpp"
 
 
 SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
@@ -130,7 +56,6 @@ void SceneManager::LoadScene(std::string id)
     _currentScene = new Scene(id);
     
     //loadding from data
-
     // systems
     if ((*data).contains("systems")) {
         auto systems =(*data)["systems"];
@@ -187,14 +112,9 @@ void SceneManager::LoadScene(std::string id)
     LOG_MESSAGE("SceneManager::LoadScene() scene \""<<id<<"\" was created.");
 };
 
-
-
-
-
 void SceneManager::SaveScene()
 {
     json data;
- 
     data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. save as name of file
     
     // save entities with components
@@ -207,8 +127,7 @@ void SceneManager::SaveScene()
     
     //TODO: save systems
     
-    std::cout<<"\n\n\n"<<data<<"\n\n\n";
-    
+    LOG_MESSAGE(data);
     _resourceManager->SaveScene(_currentScene->GetSceneId(), &data);
 }
 

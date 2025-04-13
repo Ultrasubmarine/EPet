@@ -8,7 +8,6 @@
 #ifndef RenderObjectCreateSystem_hpp
 #define RenderObjectCreateSystem_hpp
 
-#include <stdio.h>
 #include "ISystem.hpp"
 
 class RenderObjectCreateSystem : public ISystem {

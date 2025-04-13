@@ -8,6 +8,8 @@
 #include "RenderObjectCreateSystem.hpp"
 #include "CommonComponents.hpp"
 
+SYSTEM_CPP(RenderObjectCreateSystem);
+
 void RenderObjectCreateSystem::Update(double dt)
 {
  //   _registry.view<<#typename Type#>, <#typename Other#>>()
