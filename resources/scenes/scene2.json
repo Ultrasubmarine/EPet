@@ -2,6 +2,13 @@
     "systems":[
         "TestSystem"
     ],
-    "objects":[{"components":[{"id":"TestComponent","str":"hello, my friends","value":555},{"id":"Sorting","layer":404}]}],
+    
+    "objects":
+        [
+            {"components":[
+                {"id":"Sorting","layer":666},
+                {"id":"TestComponent","str":"hello, my friends","value":2}
+            ]}
+        ],
     "scene":"scene2"
 }

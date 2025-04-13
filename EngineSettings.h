@@ -12,6 +12,7 @@
 #include "SDLWindow.h"
 #include "SDLRender.hpp"
 #include "SDLInputKeys.h"
+#include "SDLTextureLoader.hpp"
 #endif //SDL
 
 #endif /* EngineSettings_h */
