@@ -13,13 +13,24 @@
 #include "Game.hpp"
 
 struct SDLTexture {
-   SDL_Texture *texture;
-   SDL_Rect src;
+    
+    SDL_Texture *texture;
+    SDL_Rect src;
+    
+    SDLTexture(SDL_Texture* texture, SDL_Rect& src) : texture(texture), src(src) {};
     
     ~SDLTexture()
     {
         SDL_DestroyTexture(texture);
     }
+    
+    //no copy
+    SDLTexture(const SDLTexture&) = delete;
+    SDLTexture& operator=(const SDLTexture&) = delete;
+    
+    //no move
+    SDLTexture(const SDLTexture&&) = delete;
+    SDLTexture& operator=(const SDLTexture&&) = delete;
 };
 
 SDLTextureLoader::SDLTextureLoader()
@@ -27,7 +38,7 @@ SDLTextureLoader::SDLTextureLoader()
     _render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
 }
 
-Texture* SDLTextureLoader::_LoadTexture(std::string& name, char *fullPath)
+Texture* SDLTextureLoader::_LoadTexture(const std::string& name, char *fullPath)
 {
     if(!_render)
     {

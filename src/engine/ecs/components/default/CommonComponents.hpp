@@ -10,11 +10,9 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "registry.hpp"
-#include "json.hpp"
-#include "FactoryMethod.hpp"
-using json = nlohmann::json;
 
+#include "json.hpp"
+using json = nlohmann::json;
 
 struct TestComponent
 {

@@ -18,7 +18,7 @@
 
 using data = nlohmann::json;
 
-#define SAVE_FUNCTION_PARAMS entt::registry& registry, entt::entity entity, data& data
+#define SAVE_FUNCTION_PARAMS entt::registry& registry, entt::entity entity, data& saveData
 using saveFunction = void(SAVE_FUNCTION_PARAMS);
 
 class ComponentSaver
@@ -45,9 +45,8 @@ private:
     friend void GenerateSaveFunction(const char* typeId, std::function<void(T&, data&)> saver);
    
     friend void Save(const char* typeId, SAVE_FUNCTION_PARAMS);
-    friend void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, data& data);
+    friend void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, data& saveData);
 };
-
 
 /// function for component registration
 template<class T>
@@ -58,7 +57,7 @@ void GenerateSaveFunction(const char* typeId, std::function<void(T&, data&)> sav
     {
        if(auto comp = registry.try_get<T>(entity))
         {
-            saver(*comp, data);
+            saver(*comp, saveData);
         }
     };
     
@@ -70,7 +69,7 @@ void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
 {
     if(auto it = ComponentSaver::GetSavers().find(typeId); it != ComponentSaver::GetSavers().end())
     {
-        it->second(registry, entity, data);
+        it->second(registry, entity, saveData);
     }
     else
     {
@@ -78,7 +77,7 @@ void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
     }
 }
 
-void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, data& saveData)
+void SaveAllComponentInEntity(SAVE_FUNCTION_PARAMS)
 {
     for(auto it : ComponentSaver::GetSavers())
     {

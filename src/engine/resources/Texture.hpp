@@ -10,6 +10,7 @@
 
 #include <functional>
 
+//TODO: 5th rule, please
 struct Texture
 {
     std::string name;

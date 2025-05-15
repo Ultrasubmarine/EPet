@@ -8,8 +8,8 @@
 #include "ITextureLoader.hpp"
 
 #include <string>
-#include <iostream>
 
+#include "Logging.hpp"
 
 void ITextureLoader::DeleteTexture(Texture* texture)
 {
@@ -17,7 +17,7 @@ void ITextureLoader::DeleteTexture(Texture* texture)
     delete texture;
 }
 
-std::shared_ptr<Texture> ITextureLoader::GetTexture(std::string& name)
+std::shared_ptr<Texture> ITextureLoader::GetTexture(const std::string& name)
 {
     if(auto it = _textures.find(name); it != _textures.end())
         return it->second.lock() ;
@@ -30,7 +30,7 @@ ITextureLoader::~ITextureLoader()
     _textures.clear();
 }
 
-std::shared_ptr<Texture> ITextureLoader::LoadTexture(std::string& name, char *fullPath)
+std::shared_ptr<Texture> ITextureLoader::LoadTexture(const std::string& name, char *fullPath)
 {
     if(auto resource = _LoadTexture(name, fullPath))
     {
@@ -40,6 +40,6 @@ std::shared_ptr<Texture> ITextureLoader::LoadTexture(std::string& name, char *fu
         return texture;
     }
     
-    std::cout<<"error: TextureLoader::LoadTexture() texture:"<<name;
+    LOG_ERROR("TextureLoader::LoadTexture() texture:"<<name);
     return NULL;
 }
