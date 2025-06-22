@@ -42,6 +42,14 @@ public:
     void SaveScene(); // current
     
     Scene* GetCurrentScene() {return _currentScene;};
+    
+    void Update(double dt);
+    
+private:
+
+    void RegisterComponents();
+    
+    void SaveSystem();
 };
 
 #endif /* SceneManager_hpp */

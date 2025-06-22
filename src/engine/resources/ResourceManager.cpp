@@ -89,11 +89,6 @@ const json* ResourceManager::LoadScene(std::string title)
     
     char *json_path = GetPath(r_path, type);
     
-    
-    std::string nothing;
-    std::string root = "resources/scenes/";
-    char *test = GetPath(root, nothing);
-    
     if(*json_path == '\0')
     {
         LOG_ERROR("ResourceManager::GetScene() scene (" << title <<") didn't found");

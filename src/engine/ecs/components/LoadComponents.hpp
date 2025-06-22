@@ -44,7 +44,7 @@ private:
     template <typename T>
     friend void GenerateLoadingFunction(const char* typeId, std::function<T(const data&)> loader);
     
-    friend void Load(const char* typeId, LOAD_FUNCTION_PARAMS);
+    friend void LoadComponent(const char* typeId, LOAD_FUNCTION_PARAMS);
 };
 
 /// function for component registration
@@ -61,7 +61,7 @@ void GenerateLoadingFunction(const char* typeId, std::function<T(const data&)> l
 }
 
 /// function for loading a component
-void Load(const char* typeId, LOAD_FUNCTION_PARAMS)
+void LoadComponent(const char* typeId, LOAD_FUNCTION_PARAMS)
 {
     if(auto it = ComponentLoader::GetLoaders().find(typeId); it != ComponentLoader::GetLoaders().end())
     {

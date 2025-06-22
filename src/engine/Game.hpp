@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include "Singleton.hpp"
+
 class IWindow;
 class IRender;
 
@@ -17,21 +18,25 @@ class FrameRate;
 class SceneManager;
 class ResourceManager;
 
-class Game : public Singleton<Game>
+class Game final: public Singleton<Game>
 {
-private:
-    void CheckInput();
-    
 public:
     Game() = default;
     ~Game();
     
-    bool Init(); /// true - if init waa successful
+    Game(const Game& ) = delete;
+    Game(Game&&) = delete;
+    
+    bool Init(); /// true - if init was successful
     void Deinit();
     void Loop();
     
     ResourceManager* GetResourceManager() { return _resourceManager;};
     IRender* GetRender() { return _render;};
+    
+private:
+    void Input();
+    void RenderAll();
     
 private:
     IWindow *_window = nullptr;

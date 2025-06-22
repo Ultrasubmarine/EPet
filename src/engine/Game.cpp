@@ -8,20 +8,13 @@
 #include "Game.hpp"
 
 #include "Logging.hpp"
+#include "EngineSettings.h"
 
 #include "FrameRate.hpp"
-#include "Input.hpp"
 #include "SceneManager.hpp"
-#include "Scene.hpp"
 #include "ResourceManager.hpp"
-
-#include "Timer.hpp"
-#include "Schedule.hpp"
-#include "RequestList.hpp"
-#include "Pet.hpp"
-#include "Subscription.hpp"
-#include "EngineSettings.h"
-#include "SDLRender.hpp"
+#include "Input.hpp"
+#include "Scene.hpp"
 
 bool Game::Init()
 {
@@ -44,11 +37,12 @@ bool Game::Init()
     
     _resourceManager = new ResourceManager();
     
+    /// TODO: clear tmp code
     std::string f_str("coinIcon");
     auto f = _resourceManager->GetTexture(f_str);
     
     _sceneManager = new SceneManager(_resourceManager);
-    _sceneManager->LoadScene("scene2");
+    _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
     _sceneManager->SaveScene();
     return true;
 }
@@ -56,15 +50,53 @@ bool Game::Init()
 void Game::Deinit()
 {
     delete _render;
+    _render = nullptr;
+    
     delete _window;
+    _window = nullptr;
+    
     delete _frameRate;
+    _frameRate = nullptr;
+    
     delete _sceneManager;
+    _sceneManager = nullptr;
+    
     delete _resourceManager;
+    _resourceManager = nullptr;
 }
 
 Game::~Game()
 {
     Deinit();
+}
+
+
+void Game::Input()
+{
+    _window->HandleEvent();
+    Input::Instance().Update();
+    
+    for(auto& key : Input::Instance().GetEvents())
+    {
+      //  std::cout<< key;
+        if(key.State == KeyState::Pressed)
+        {
+            std::cout<<key.Name<<" [Pressed]\n";
+            if(key.Name == "BUTTON_D"){
+                Input::Instance().UnbindKey("BUTTON_A");
+            }
+        }
+            
+        if(key.State== KeyState::Released)
+            std::cout<<key.Name<<" [Released]\n";
+        
+    }
+}
+
+void Game::RenderAll()
+{
+    _render->Clear();
+    _render->Present();
 }
 
 void Game::Loop()
@@ -74,89 +106,9 @@ void Game::Loop()
     bool isPlay = true;
     while(isPlay)
     {
-        _window->HandleEvent();
-        Input::Instance().Update();
-        
-        for(auto& key : Input::Instance().GetEvents())
-        {
-          //  std::cout<< key;
-            if(key.State == KeyState::Pressed)
-            {
-                std::cout<<key.Name<<" [Pressed]\n";
-                if(key.Name == "BUTTON_D"){
-                    Input::Instance().UnbindKey("BUTTON_A");
-                }
-            }
-                
-            if(key.State== KeyState::Released)
-                std::cout<<key.Name<<" [Released]\n";
-            
-        }
-        
-        _sceneManager->GetCurrentScene()->Update(_frameRate->GetDeltaTime());
-        
-        _render->Clear();
-        _render->Present();
-        
-     //   system("clear");
-//        for(auto& key : _input->Get())
-//        {
-//            std::cout<< key.name;
-//            if(key.state== KeyEvent::State::Pressed)
-//                std::cout<<" [Pressed]\n";
-//            if(key.state== KeyEvent::State::Released)
-//                std::cout<<" [Released]\n";
-//        }
-       // system("clear");
-
-        //CheckInput();
-        //isPlay = Input();
-        
-//        _timer->Update();
-//        _timer->PrintTime();
-//
-//        _schedule->Update(_frameRate->GetDeltaTime());
-//
-//        SceneManager::Instance().GetCurrentScene()->Update(_frameRate->GetDeltaTime());
-//        SceneManager::Instance().GetCurrentScene()->Render(); // use scene from sceneManager Instanc because we couldn't be sure that it's the same scenes as previous
-//
-//        _requestList->Print();
-//
-//        std::cout<<"Scene: "<<SceneManager::Instance().GetCurrentScene()->GetSceneId()<<std::endl;
-//        std::cout<<"\nfps: "<<1/_frameRate->GetDeltaTime()<<std::endl;
+        Input();
+        _sceneManager->Update(_frameRate->GetDeltaTime());
+        RenderAll();
         _frameRate->WaitFrame();
     }
-}
-
-
-void Game::CheckInput()
-{
-    int keyCode = {0};
-    //fif (StdinHasData())
-    {
-        keyCode = std::cin.get();
-        //std::cout << "You pressed '" << keyCode << "'\n";
-    }
-    
-    //if(SceneManager::Instance().GetCurrentScene()->GetSceneId() != DEFAULT_SCENE)
-    {
-        return;
-    }
-    
-//    switch (keyCode) {
-//        case 'f': // food
-//            SceneManager::Instance().LoadScene(FEED_SCENE);
-//            break;
-//        case 'h': // happy
-//            Pet::Instance().IncreaseParametr(Pet::Parameter::Happy);
-//            break;
-//        case 'p': // poop
-//            _requestList->RemoveRequest(RequestType::Poop);
-//            break;
-//        case 's': //sick
-//            _requestList->RemoveRequest(RequestType::Sick);
-//            break;            
-//        default:
-//            break;
-//    }
 }
