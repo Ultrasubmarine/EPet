@@ -38,13 +38,13 @@
 				<key>focused</key>
 				<string></string>
 				<key>leading</key>
-				<string>            ::operator delete(__p);
-        } else {
-            _VSTD::__libcpp_deallocate((void*)__p, __n * </string>
+				<string>
+#if _LIBCPP_STD_VER &gt;= 23
+  [[nodiscard]] _LIBCPP_HIDE_FROM_ABI constexpr allocatio</string>
 				<key>trailing</key>
-				<string>sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp));
-        }
-    }
+				<string>n_result&lt;_Tp*&gt; allocate_at_least(size_t __n) {
+    return {allocate(__n), __n};
+  }
 </string>
 			</dict>
 			<key>type</key>

@@ -1,11 +1,14 @@
-
 {
-   "systems":[
+    "systems":[
         "TestSystem"
     ],
-    "objects":[
-        { "components": [
-            { "id": "TestComponent", "value" : 555 }
-        ]}
-    ]
+    
+    "objects":
+        [
+            {"components":[
+                {"id":"Sorting","layer":666},
+                {"id":"TestComponent","str":"hello, my friends","value":2}
+            ]}
+        ],
+    "scene":"scene2"
 }

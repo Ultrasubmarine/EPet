@@ -61,3 +61,6 @@ Dependencies/
 
 iOSInjectionProject/
 *.xcbkptlist
+
+#Cmake
+cmake-build-debug
