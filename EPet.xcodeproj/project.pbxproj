@@ -54,6 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02117BFC2E10750E001D1E06 /* SceneUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneUtils.hpp; sourceTree = "<group>"; };
 		025F2E892D88AD5A0090AE59 /* GetPath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GetPath.hpp; sourceTree = "<group>"; };
 		025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GetPath.cpp; sourceTree = "<group>"; };
 		025F2E8B2D88AD5A0090AE59 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
@@ -136,6 +137,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02117BFB2E107452001D1E06 /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				02DB3BFF2DA80F7C00BE90D1 /* Scene.hpp */,
+				02DB3C002DA80F7C00BE90D1 /* Scene.cpp */,
+				02DB3C012DA80F7C00BE90D1 /* SceneManager.hpp */,
+				02DB3C022DA80F7C00BE90D1 /* SceneManager.cpp */,
+				02117BFC2E10750E001D1E06 /* SceneUtils.hpp */,
+			);
+			path = scene;
+			sourceTree = "<group>";
+		};
 		025F2E8D2D88AD5A0090AE59 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +305,7 @@
 		02DB3C052DA80F7C00BE90D1 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				02117BFB2E107452001D1E06 /* scene */,
 				02DB3C252DA921F800BE90D1 /* loaders */,
 				02DB3C212DA9218400BE90D1 /* resources */,
 				02DB3BE22DA80F7C00BE90D1 /* ecs */,
@@ -304,10 +318,6 @@
 				02DB3BF82DA80F7C00BE90D1 /* FrameRate.cpp */,
 				02DB3BF92DA80F7C00BE90D1 /* Game.hpp */,
 				02DB3BFA2DA80F7C00BE90D1 /* Game.cpp */,
-				02DB3BFF2DA80F7C00BE90D1 /* Scene.hpp */,
-				02DB3C002DA80F7C00BE90D1 /* Scene.cpp */,
-				02DB3C012DA80F7C00BE90D1 /* SceneManager.hpp */,
-				02DB3C022DA80F7C00BE90D1 /* SceneManager.cpp */,
 			);
 			name = engine;
 			path = src/engine;
