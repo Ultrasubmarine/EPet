@@ -82,7 +82,7 @@ entt::entity LoadObject(const json* data, entt::registry& registry)
     return entity;
 }
 
-#include "CommonComponents.hpp"
+//#include "CommonComponents.hpp"
 
 void LoadObjects(const json* data, entt::registry& registry)
 {
@@ -91,18 +91,19 @@ void LoadObjects(const json* data, entt::registry& registry)
         auto entityes = (*data)["objects"];
         for (json::iterator it = entityes.begin(); it != entityes.end(); ++it) {
             
-            auto entity = LoadObject(&it.value(), registry);
-            
+            LoadObject(&it.value(), registry);
+
 // Test block code
-            LOG_MESSAGE(" load entity with: ");
-            if( auto comp = registry.try_get<TestComponent>(entity))
-            {
-                LOG_MESSAGE("   TestComponent: value: " << comp->value << " str:"<< comp->str);
-            }
-            if( auto comp = registry.try_get<Sorting>(entity))
-            {
-                LOG_MESSAGE("   Sorting: value: " << comp->layer);
-            }
+//            auto entity = LoadObject(&it.value(), registry);
+//            LOG_MESSAGE(" load entity with: ");
+//            if( auto comp = registry.try_get<TestComponent>(entity))
+//            {
+//                LOG_MESSAGE("   TestComponent: value: " << comp->value << " str:"<< comp->str);
+//            }
+//            if( auto comp = registry.try_get<Sorting>(entity))
+//            {
+//                LOG_MESSAGE("   Sorting: value: " << comp->layer);
+//            }
         }
     }
 }
@@ -111,6 +112,25 @@ void LoadObjects(const json* data, entt::registry& registry)
 //____________________________________
 
 // SAVING SCENE HELPING FUNCTIONS:
+void SaveSystems(json& data, const Scene* scene)
+{
+    for(const auto& sys: scene->GetSystems())
+    {
+        auto id = sys->GetSystemId();
+        data["systems"].push_back(id);
+    }
+}
+
+void SaveObjects(json& data, entt::registry& registry)
+{
+    // TODO: change registry on different structure that takes sorted entityes !!!
+    for(const auto entity: registry.view<entt::entity>())
+    {
+        json objectData;
+        SaveAllComponentInEntity(registry, entity, objectData);
+        data["objects"].push_back(objectData);
+    }
+}
 // SAVING SCENE HELPING FUNCTIONS END
 
 #endif /* SceneUtils_hpp */

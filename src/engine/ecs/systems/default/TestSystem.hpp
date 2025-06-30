@@ -19,4 +19,13 @@ public:
     void Update(double dt) override;
 };
 
+class AAATestSystem: public ISystem {
+    SYSTEM_BODY(AAATestSystem)
+    
+public:
+    void Init() override {};
+    void DeInit() override {};
+    void Update(double dt) override;
+};
+
 #endif /* TestSystem_hpp */

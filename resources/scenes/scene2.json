@@ -1,6 +1,7 @@
 {
     "systems":[
-        "TestSystem"
+        "TestSystem",
+        "AAATestSystem"
     ],
     
     "objects":

@@ -45,6 +45,7 @@ public:
     
     
     const std::string& GetSceneId() { return _id;} const;
+    const std::vector<ISystem*>& GetSystems() const { return _allSystems;};
 };
 
 #endif /* Scene_hpp */

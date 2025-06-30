@@ -25,6 +25,7 @@ bool CLASS_NAME::c_register = REGISTER_SYSTEM_IN_FACTORY(CLASS_NAME);
 public: \
     static ISystem* CreateComponent(entt::registry& registry) { return  new CLASS_NAME(registry);}; \
     CLASS_NAME(entt::registry& registry) : ISystem(registry) {}; \
+    const char* GetSystemId() const override { return #CLASS_NAME; }; \
 private: \
     static bool c_register;
 
@@ -39,7 +40,7 @@ public:
     virtual void Init() {};
     virtual void DeInit() {};
     virtual void Update(double dt) {};
-    
+    virtual const char*  GetSystemId() const { return "ISystem";};
 protected:
     entt::registry& _registry;
 };

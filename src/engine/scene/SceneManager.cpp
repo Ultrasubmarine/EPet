@@ -83,23 +83,13 @@ void SceneManager::LoadScene(std::string id)
     LOG_MESSAGE("SceneManager::LoadScene() scene \""<<id<<"\" was created.");
 };
 
-void SaveEntity();
-
-
 void SceneManager::SaveScene()
 {
     json data;
     data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. save as name of file
     
-    // save entities with components
-    for(const auto entity: _registry.view<entt::entity>())
-    {
-        json objectData;
-        SaveAllComponentInEntity(_registry, entity, objectData);
-        data["objects"].push_back(objectData);
-    }
-    
-    //TODO: save systems
+    SaveSystems(data, _currentScene);
+    SaveObjects(data, _registry);
     
     LOG_MESSAGE(data);
     _resourceManager->SaveScene(_currentScene->GetSceneId(), &data);
@@ -111,7 +101,6 @@ void SceneManager::DeleteScene()
     OnDestroy.Broadcast(_currentScene);
     delete _currentScene;
 }
-
 
 void SceneManager::Update(double dt)
 {

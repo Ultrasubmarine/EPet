@@ -46,10 +46,7 @@ public:
     void Update(double dt);
     
 private:
-
     void RegisterComponents();
-    
-    void SaveSystem();
 };
 
 #endif /* SceneManager_hpp */
