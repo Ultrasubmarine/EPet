@@ -47,7 +47,6 @@ std::vector<std::string> GetSystemsIds(const json* data)
     return systemIds;
 }
 
-/// TODO: move to utilit.cpp
 void LoadSystems(Scene* scene, const std::vector<std::string>& systemIds, entt::registry& registry)
 {
     for(const auto& systemId: systemIds)
@@ -82,7 +81,7 @@ entt::entity LoadObject(const json* data, entt::registry& registry)
     return entity;
 }
 
-//#include "CommonComponents.hpp"
+#include "CommonComponents.hpp"
 
 void LoadObjects(const json* data, entt::registry& registry)
 {
@@ -94,7 +93,11 @@ void LoadObjects(const json* data, entt::registry& registry)
             LoadObject(&it.value(), registry);
 
 // Test block code
-//            auto entity = LoadObject(&it.value(), registry);
+//           auto entity = LoadObject(&it.value(), registry);
+//            IPoint t;
+//            t.x = 5;
+//            t.y = 10;
+//            registry.emplace<Transform>(entity, t);
 //            LOG_MESSAGE(" load entity with: ");
 //            if( auto comp = registry.try_get<TestComponent>(entity))
 //            {
@@ -121,9 +124,9 @@ void SaveSystems(json& data, const Scene* scene)
     }
 }
 
+// TODO: change registry on different structure that takes sorted entityes !!!
 void SaveObjects(json& data, entt::registry& registry)
 {
-    // TODO: change registry on different structure that takes sorted entityes !!!
     for(const auto entity: registry.view<entt::entity>())
     {
         json objectData;

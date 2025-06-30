@@ -59,6 +59,7 @@
 		025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GetPath.cpp; sourceTree = "<group>"; };
 		025F2E8B2D88AD5A0090AE59 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		025F2E8C2D88AD5A0090AE59 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
+		0271F9E62E12E407000958E1 /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
 		02AC90BC2D2AE0D800B75A8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		02BE0A392D2AE71200FA0AC4 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
@@ -159,6 +160,14 @@
 			);
 			name = utils;
 			path = src/utils;
+			sourceTree = "<group>";
+		};
+		0271F9E52E12E3D3000958E1 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				0271F9E62E12E407000958E1 /* Point.h */,
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 		02BFA8E32BD840970074A6D4 = {
@@ -305,6 +314,7 @@
 		02DB3C052DA80F7C00BE90D1 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				0271F9E52E12E3D3000958E1 /* common */,
 				02117BFB2E107452001D1E06 /* scene */,
 				02DB3C252DA921F800BE90D1 /* loaders */,
 				02DB3C212DA9218400BE90D1 /* resources */,

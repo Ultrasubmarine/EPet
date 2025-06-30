@@ -38,6 +38,9 @@ void SceneManager::RegisterComponents()
     
     GenerateLoadingFunction<Sorting>("Sorting", &Sorting::Load);
     GenerateSaveFunction<Sorting>("Sorting", &Sorting::Save);
+    
+    GenerateLoadingFunction<Transform>("Transform", &Transform::Load);
+    GenerateSaveFunction<Transform>("Transform", &Transform::Save);
 }
 
 SceneManager::~SceneManager()
@@ -91,7 +94,8 @@ void SceneManager::SaveScene()
     SaveSystems(data, _currentScene);
     SaveObjects(data, _registry);
     
-    LOG_MESSAGE(data);
+    std::string dataScene = data.dump(1, '\t');
+    LOG_MESSAGE(dataScene);
     _resourceManager->SaveScene(_currentScene->GetSceneId(), &data);
 }
 

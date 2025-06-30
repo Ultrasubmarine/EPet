@@ -1,20 +1,51 @@
 {
-    "systems":[
-        "TestSystem",
-        "AAATestSystem"
-    ],
-    
-    "objects":
-        [
-            {   "components":[
-                    {"id":"Sorting","layer":666},
-                    {"id":"TestComponent","str":"hello, my friends","value":2}
-                ]
-            },
-            {   "components":[
-                    {"id":"Sorting","layer":29}
-                ]
-            }
-        ],
-    "scene":"scene2"
+   "objects": [
+       {
+           "components": [
+               {
+                   "id": "Transform",
+                   "position": {
+                       "x": 5,
+                       "y": 100
+                   }
+               }
+           ]
+       },
+       {
+           "components": [
+               {
+                   "id": "Transform"
+               },
+               {
+                   "id": "Sorting",
+                   "layer": 29
+               }
+           ]
+       },
+       {
+           "components": [
+               {
+                   "id": "Transform",
+                   "position": {
+                       "x": 5,
+                       "y": 10
+                   }
+               },
+               {
+                   "id": "Sorting",
+                   "layer": 666
+               },
+               {
+                   "id": "TestComponent",
+                   "str": "hello, my friends",
+                   "value": 2
+               }
+           ]
+       }
+   ],
+   "scene": "scene2",
+   "systems": [
+       "TestSystem",
+       "AAATestSystem"
+   ]
 }

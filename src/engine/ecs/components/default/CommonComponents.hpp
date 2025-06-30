@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <iostream>
 
+#include "Point.h"
 #include "json.hpp"
 using json = nlohmann::json;
 
@@ -51,6 +52,28 @@ struct Sorting
     static void Save(Sorting& obj, json& data)
     {
         data["layer"] = obj.layer;
+    }
+};
+
+struct Transform
+{
+    IPoint position;
+    static Transform Load(const json& data)
+    {
+        Transform obj;
+        if(data.contains("position"))
+        {
+            obj.position = LoadPoint<int>(data["position"]);
+        }
+        
+        return obj;
+    }
+    
+    static void Save(Transform& obj, json& data)
+    {
+        json posData;
+        SavePoint<int>(obj.position, posData);
+        data["position"] = posData;
     }
 };
 
