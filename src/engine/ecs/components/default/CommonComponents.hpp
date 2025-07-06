@@ -12,7 +12,13 @@
 #include <iostream>
 
 #include "Point.h"
+
+//TODO: move to .cpp file. 
+#include "PointSerialization.hpp"
+
 #include "json.hpp"
+#include "Logging.hpp"
+
 using json = nlohmann::json;
 
 struct TestComponent

@@ -21,12 +21,24 @@ struct Point {
         y = _y;
     }
     
-    Point operator+(const Point& other) const {
+    Point operator+(const Point& other) {
         return {x + other.x, y + other.y};
     }
 
-    Point operator-(const Point& other) const {
+    Point operator-(const Point& other) {
         return {x - other.x, y - other.y};
+    }
+    
+    Point& operator+=(const Point& other) {
+        x += other.x;
+        y += other.y;
+        return *this;
+    }
+    
+    Point& operator-=(const Point& other) {
+        x -= other.x;
+        y -= other.y;
+        return *this;
     }
     
     friend std::ostream& operator<<(std::ostream& os, const Point& p) {
@@ -36,34 +48,5 @@ struct Point {
 };
 
 using IPoint = Point<int>;
-
-#include "json.hpp"
-
-using json = nlohmann::json;
-
-template<typename T>
-Point<T> LoadPoint(const json& data)
-{
-    IPoint obj;
-    
-    obj.x= data["x"].get<T>();
-    obj.y= data["y"].get<T>();
-    
-    return obj;
-}
-
-template<typename T>
-void SavePoint(Point<T>& obj, json& data)
-{
-    data["x"] = obj.x;
-    data["y"] = obj.y;
-}
-
-
-//IPoint LoadIPoint(const json& data)
-//{
-//    return LoadPoint<int>(data);
-//};
-//void SaveIPoint(IPoint obj, json& data) { return SavePoint<int>(obj, data);};
 
 #endif /* Point_h */
