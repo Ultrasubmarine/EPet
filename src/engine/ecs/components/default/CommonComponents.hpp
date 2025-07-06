@@ -57,7 +57,7 @@ struct Sorting
 
 struct Transform
 {
-    IPoint position;
+    IPoint position = IPoint(0, 0);
     static Transform Load(const json& data)
     {
         Transform obj;

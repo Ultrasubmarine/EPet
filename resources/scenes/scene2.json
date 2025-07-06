@@ -3,11 +3,7 @@
        {
            "components": [
                {
-                   "id": "Transform",
-                   "position": {
-                       "x": 5,
-                       "y": 100
-                   }
+                   "id": "Transform"
                }
            ]
        },

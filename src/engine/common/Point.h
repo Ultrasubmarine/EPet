@@ -14,6 +14,13 @@ struct Point {
     T x;
     T y;
 
+    Point() = default;
+    Point(T _x, T _y)
+    {
+        x = _x;
+        y = _y;
+    }
+    
     Point operator+(const Point& other) const {
         return {x + other.x, y + other.y};
     }
