@@ -70,6 +70,11 @@ void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
     if(auto it = ComponentSaver::GetSavers().find(typeId); it != ComponentSaver::GetSavers().end())
     {
         it->second(registry, entity, saveData);
+        
+        if(!saveData.empty())
+        {
+            saveData["id"] = typeId;
+        }
     }
     else
     {
@@ -82,10 +87,12 @@ void SaveAllComponentInEntity(SAVE_FUNCTION_PARAMS)
     for(auto it : ComponentSaver::GetSavers())
     {
         data obj;
-        obj["id"] = it.first;
         Save(it.first.c_str(), registry, entity, obj);
-        
-        saveData["components"].push_back(obj);
+
+        if(!obj.empty())
+        {
+            saveData["components"].push_back(obj);
+        }
     }
 }
 

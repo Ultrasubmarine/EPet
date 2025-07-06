@@ -14,9 +14,6 @@
        {
            "components": [
                {
-                   "id": "Transform"
-               },
-               {
                    "id": "Sorting",
                    "layer": 29
                }
