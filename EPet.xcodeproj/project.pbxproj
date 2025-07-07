@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */; };
+		02A143FF2E1C5F34000B7535 /* CommonComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02A143FE2E1C5F34000B7535 /* CommonComponents.cpp */; };
 		02AC90BF2D2AE12A00B75A8C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */; };
 		02BE0A292D2AE46A00FA0AC4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BC2D2AE0D800B75A8C /* libz.tbd */; };
 		02BE0A3A2D2AE71200FA0AC4 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 02BE0A392D2AE71200FA0AC4 /* resources */; };
@@ -61,6 +62,7 @@
 		025F2E8C2D88AD5A0090AE59 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
 		0271F9E62E12E407000958E1 /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
 		02A143FB2E1ACCB0000B7535 /* PointSerialization.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointSerialization.hpp; sourceTree = "<group>"; };
+		02A143FE2E1C5F34000B7535 /* CommonComponents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CommonComponents.cpp; sourceTree = "<group>"; };
 		02AC90BC2D2AE0D800B75A8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		02BE0A392D2AE71200FA0AC4 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				02DB3C392DAC250600BE90D1 /* CommonComponents.hpp */,
+				02A143FE2E1C5F34000B7535 /* CommonComponents.cpp */,
 			);
 			path = default;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				02DB3C092DA80F7C00BE90D1 /* SDLRender.cpp in Sources */,
 				02DB3C0A2DA80F7C00BE90D1 /* SceneManager.cpp in Sources */,
 				02DB3C0B2DA80F7C00BE90D1 /* Game.cpp in Sources */,
+				02A143FF2E1C5F34000B7535 /* CommonComponents.cpp in Sources */,
 				02DB3C262DA921F800BE90D1 /* ITextureLoader.cpp in Sources */,
 				02DB3C0C2DA80F7C00BE90D1 /* Input.cpp in Sources */,
 				02DB3C0D2DA80F7C00BE90D1 /* JsonLoader.cpp in Sources */,

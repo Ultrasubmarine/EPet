@@ -40,7 +40,7 @@ void SDLRender::Deinit() {
 }
 
 void SDLRender::Clear() {
-    SDL_SetRenderDrawColor(_render, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(_render, 0xA, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(_render);
 }
 

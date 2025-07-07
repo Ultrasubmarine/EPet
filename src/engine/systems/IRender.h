@@ -24,18 +24,16 @@ class IWindow;
 
 struct RenderObject
 {
-    int sorting;
-    
    // std::shared_ptr<Texture> texture;
     void* info; // dest rect, rotation, and etc.
 };
 
 struct RenderObjectCmp
 {
-    bool operator()(const RenderObject& lobj, const RenderObject& robj) const
-    {
-        return lobj.sorting < robj.sorting;
-    }
+//    bool operator()(const RenderObject& lobj, const RenderObject& robj) const
+//    {
+//      //  return lobj.sorting < robj.sorting;
+//    }
 };
 
 class IRender

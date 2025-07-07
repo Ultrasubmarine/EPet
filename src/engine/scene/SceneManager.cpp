@@ -41,6 +41,9 @@ void SceneManager::RegisterComponents()
     
     GenerateLoadingFunction<Transform>("Transform", &Transform::Load);
     GenerateSaveFunction<Transform>("Transform", &Transform::Save);
+    
+    GenerateLoadingFunction<Image>("Image", &Image::Load);
+    GenerateSaveFunction<Image>("Image", &Image::Save);
 }
 
 SceneManager::~SceneManager()

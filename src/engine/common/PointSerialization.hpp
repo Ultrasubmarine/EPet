@@ -32,5 +32,4 @@ void SavePoint(Point<T>& obj, json& data)
     data["y"] = obj.y;
 }
 
-
 #endif /* PointSerialization_hpp */

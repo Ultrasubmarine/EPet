@@ -29,6 +29,10 @@
                    "layer": 666
                },
                {
+                   "id": "Image",
+                   "imageId": "frog"
+               },
+               {
                    "id": "TestComponent",
                    "str": "hello, my friends",
                    "value": 2
