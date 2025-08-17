@@ -13,6 +13,7 @@
 		02BE0A292D2AE46A00FA0AC4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BC2D2AE0D800B75A8C /* libz.tbd */; };
 		02BE0A3A2D2AE71200FA0AC4 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 02BE0A392D2AE71200FA0AC4 /* resources */; };
 		02BE0A3B2D2AE73300FA0AC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02BFA8F22BD840980074A6D4 /* Assets.xcassets */; };
+		02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C886892E50AF5F00B47F76 /* RenderSystem.cpp */; };
 		02D24A732BD84125008E7DCF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A522BD84124008E7DCF /* main.cpp */; };
 		02D24A762BD84125008E7DCF /* Pet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A5A2BD84124008E7DCF /* Pet.cpp */; };
 		02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A642BD84124008E7DCF /* RequestList.cpp */; };
@@ -26,7 +27,6 @@
 		02DB3C0C2DA80F7C00BE90D1 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BE42DA80F7C00BE90D1 /* Input.cpp */; };
 		02DB3C0D2DA80F7C00BE90D1 /* JsonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BFC2DA80F7C00BE90D1 /* JsonLoader.cpp */; };
 		02DB3C112DA80F7C00BE90D1 /* FrameRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BF82DA80F7C00BE90D1 /* FrameRate.cpp */; };
-		02DB3C132DA80F7C00BE90D1 /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BE82DA80F7C00BE90D1 /* RenderSystem.cpp */; };
 		02DB3C142DA80F7C00BE90D1 /* SDLWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BF12DA80F7C00BE90D1 /* SDLWindow.cpp */; };
 		02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BD82DA80F7C00BE90D1 /* ISystem.cpp */; };
 		02DB3C1D2DA91FB600BE90D1 /* SDLTextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C1C2DA91FB600BE90D1 /* SDLTextureLoader.cpp */; };
@@ -71,6 +71,8 @@
 		02BFA8F22BD840980074A6D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02BFA8F92BD840980074A6D4 /* EPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EPet.entitlements; sourceTree = "<group>"; };
 		02C0154A2D06251D005113A9 /* registry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = registry.hpp; path = src/entt/src/entt/entity/registry.hpp; sourceTree = "<group>"; };
+		02C886882E50AF5F00B47F76 /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
+		02C886892E50AF5F00B47F76 /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		02D24A522BD84124008E7DCF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
 		02D24A5A2BD84124008E7DCF /* Pet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pet.cpp; sourceTree = "<group>"; };
 		02D24A642BD84124008E7DCF /* RequestList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RequestList.cpp; sourceTree = "<group>"; };
@@ -85,14 +87,13 @@
 		02D24A832BD841D9008E7DCF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		02D24A842BD841D9008E7DCF /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EngineSettings.h; sourceTree = "<group>"; };
+		02D82D242E524F4A00EE26F2 /* SDLTexture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLTexture.hpp; sourceTree = "<group>"; };
 		02DB3BD72DA80F7C00BE90D1 /* ISystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ISystem.hpp; sourceTree = "<group>"; };
 		02DB3BD82DA80F7C00BE90D1 /* ISystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ISystem.cpp; sourceTree = "<group>"; };
 		02DB3BD92DA80F7C00BE90D1 /* SystemFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SystemFactory.hpp; sourceTree = "<group>"; };
 		02DB3BE32DA80F7C00BE90D1 /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
 		02DB3BE42DA80F7C00BE90D1 /* Input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
 		02DB3BE52DA80F7C00BE90D1 /* InputEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputEvents.h; sourceTree = "<group>"; };
-		02DB3BE72DA80F7C00BE90D1 /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
-		02DB3BE82DA80F7C00BE90D1 /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		02DB3BED2DA80F7C00BE90D1 /* SDLInputKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLInputKeys.h; sourceTree = "<group>"; };
 		02DB3BEE2DA80F7C00BE90D1 /* SDLRender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SDLRender.hpp; sourceTree = "<group>"; };
 		02DB3BEF2DA80F7C00BE90D1 /* SDLRender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLRender.cpp; sourceTree = "<group>"; };
@@ -276,25 +277,12 @@
 			path = input;
 			sourceTree = "<group>";
 		};
-		02DB3BE92DA80F7C00BE90D1 /* render */ = {
-			isa = PBXGroup;
-			children = (
-				02DB3BE72DA80F7C00BE90D1 /* RenderSystem.hpp */,
-				02DB3BE82DA80F7C00BE90D1 /* RenderSystem.cpp */,
-			);
-			path = render;
-			sourceTree = "<group>";
-		};
 		02DB3BF22DA80F7C00BE90D1 /* SDL */ = {
 			isa = PBXGroup;
 			children = (
 				02DB3BED2DA80F7C00BE90D1 /* SDLInputKeys.h */,
-				02DB3BEE2DA80F7C00BE90D1 /* SDLRender.hpp */,
-				02DB3BEF2DA80F7C00BE90D1 /* SDLRender.cpp */,
 				02DB3BF02DA80F7C00BE90D1 /* SDLWindow.h */,
 				02DB3BF12DA80F7C00BE90D1 /* SDLWindow.cpp */,
-				02DB3C1B2DA91FB600BE90D1 /* SDLTextureLoader.hpp */,
-				02DB3C1C2DA91FB600BE90D1 /* SDLTextureLoader.cpp */,
 			);
 			path = SDL;
 			sourceTree = "<group>";
@@ -302,6 +290,8 @@
 		02DB3BF42DA80F7C00BE90D1 /* systems */ = {
 			isa = PBXGroup;
 			children = (
+				02DB3BEE2DA80F7C00BE90D1 /* SDLRender.hpp */,
+				02DB3BEF2DA80F7C00BE90D1 /* SDLRender.cpp */,
 				02DB3BF32DA80F7C00BE90D1 /* IRender.h */,
 			);
 			path = systems;
@@ -324,7 +314,6 @@
 				02DB3C212DA9218400BE90D1 /* resources */,
 				02DB3BE22DA80F7C00BE90D1 /* ecs */,
 				02DB3BE62DA80F7C00BE90D1 /* input */,
-				02DB3BE92DA80F7C00BE90D1 /* render */,
 				02DB3BF22DA80F7C00BE90D1 /* SDL */,
 				02DB3BF42DA80F7C00BE90D1 /* systems */,
 				02DB3BF62DA80F7C00BE90D1 /* window */,
@@ -341,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				02DB3C272DA923A700BE90D1 /* Texture.hpp */,
+				02D82D242E524F4A00EE26F2 /* SDLTexture.hpp */,
 				02DB3BFD2DA80F7C00BE90D1 /* ResourceManager.hpp */,
 				02DB3BFE2DA80F7C00BE90D1 /* ResourceManager.cpp */,
 			);
@@ -352,6 +342,8 @@
 			children = (
 				02DB3BFB2DA80F7C00BE90D1 /* JsonLoader.hpp */,
 				02DB3BFC2DA80F7C00BE90D1 /* JsonLoader.cpp */,
+				02DB3C1B2DA91FB600BE90D1 /* SDLTextureLoader.hpp */,
+				02DB3C1C2DA91FB600BE90D1 /* SDLTextureLoader.cpp */,
 				02DB3C232DA921F800BE90D1 /* ITextureLoader.hpp */,
 				02DB3C242DA921F800BE90D1 /* ITextureLoader.cpp */,
 			);
@@ -365,6 +357,8 @@
 				02DB3C2D2DAC1DDC00BE90D1 /* RenderObjectCreateSystem.cpp */,
 				02DB3C2E2DAC1DDC00BE90D1 /* TestSystem.hpp */,
 				02DB3C2F2DAC1DDC00BE90D1 /* TestSystem.cpp */,
+				02C886882E50AF5F00B47F76 /* RenderSystem.hpp */,
+				02C886892E50AF5F00B47F76 /* RenderSystem.cpp */,
 			);
 			path = default;
 			sourceTree = "<group>";
@@ -474,8 +468,8 @@
 				02DB3C0D2DA80F7C00BE90D1 /* JsonLoader.cpp in Sources */,
 				02DB3C1D2DA91FB600BE90D1 /* SDLTextureLoader.cpp in Sources */,
 				02DB3C112DA80F7C00BE90D1 /* FrameRate.cpp in Sources */,
-				02DB3C132DA80F7C00BE90D1 /* RenderSystem.cpp in Sources */,
 				02DB3C142DA80F7C00BE90D1 /* SDLWindow.cpp in Sources */,
+				02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */,
 				02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */,
 				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,
 				02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */,

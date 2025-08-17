@@ -13,8 +13,9 @@
 
 #include "ITextureLoader.hpp"
 
+
 class SDLRender;
-class Texture;
+struct Texture;
 
 class SDLTextureLoader : public ITextureLoader
 {

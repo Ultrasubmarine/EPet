@@ -8,9 +8,10 @@
 #ifndef ResourceManager_hpp
 #define ResourceManager_hpp
 
-#include <fstream>
 #include <stdio.h>
-#include <map>
+//#include <fstream>
+
+//#include <map>
 
 #include "json.hpp"
 
@@ -28,7 +29,7 @@ enum class ResourceType
 class JsonLoader;
 class ITextureLoader;
 
-class Texture;
+struct Texture;
 
 class ResourceManager
 {

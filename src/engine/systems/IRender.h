@@ -13,7 +13,13 @@
 
 #include "IWindow.h"
 
-struct Rect;
+//struct Rect
+//{
+//    int x, y;
+//    int w, h;
+//};
+struct Texture;
+
 class IWindow;
 
 //struct Rect
@@ -38,15 +44,13 @@ struct RenderObjectCmp
 
 class IRender
 {
-  //  std::multimap<int, std::weak_ptr<RenderObject>> _renderObjects;
-    
 public:
     virtual ~IRender() {};
     virtual void* Init(IWindow* w) = 0;
     virtual void Deinit() = 0;
     
     virtual void Clear() = 0;
-    void Draw() {}; 
+    virtual void Draw(Texture* texture, void* dst) = 0; // TODO: const void*?
 //    virtual void Draw( std::iterator_traits<Rect> begin, std::iterator_traits<InputIt> end) = 0;
     virtual void Present() = 0;
     

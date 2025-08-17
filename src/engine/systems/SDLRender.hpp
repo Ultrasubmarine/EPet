@@ -25,8 +25,8 @@ public:
     void Deinit() override;
     
     void Clear() override;
-  //  void Draw( RenderObject* obj);
-   // void Draw(/* */Rect& source, Rect& windRect) override;
+    void Draw(Texture* texture, void* dst) override;
+  //  void Draw(Rect& source, Rect& windRect) override;
     void Present() override;
     
     bool IsRenderExist() override;

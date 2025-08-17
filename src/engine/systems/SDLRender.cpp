@@ -7,10 +7,14 @@
 
 #include "SDLRender.hpp"
 
+#include "SDLTextureLoader.hpp"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 
 #include "SDLWindow.h"
 #include "Logging.hpp"
+#include "Texture.hpp"
+#include "SDLTexture.hpp"
 
 void* SDLRender::Init(IWindow *w) {
     
@@ -44,10 +48,16 @@ void SDLRender::Clear() {
     SDL_RenderClear(_render);
 }
 
-//void SDLRender::Draw(Rect& source, Rect& windRect) {
+#include "Game.hpp"
+#include "ResourceManager.hpp"
+void SDLRender::Draw(Texture* texture, void* dst) { //Draw(Rect& source, Rect& windRect) {
+    
+//    static SDL_Rect f (50,50, 50, 50);
+//    SDLTexture* txt = static_cast<SDLTexture*>(texture->resource);
 //    
-//  //  SDL_RenderCopy(_render, nullptr/*_texture->texture */, static_cast<SDL_Rect>(source), static_cast<SDL_Rect>(windRect);
-//}
+//   // Game::Instance().GetResourceManager()->GetTexture("frog")
+//    SDL_RenderCopy(_render, txt->texture, &f, &f);
+}
 
 void SDLRender::Present() { 
     SDL_RenderPresent(_render);

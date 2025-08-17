@@ -5,6 +5,7 @@
 //  Created by marina porkhunova on 12.02.2023.
 //
 
+#include <fstream>
 #include "ResourceManager.hpp"
 #include "GetPath.hpp"
 #include "Logging.hpp"

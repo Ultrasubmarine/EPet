@@ -37,10 +37,6 @@ bool Game::Init()
     
     _resourceManager = new ResourceManager();
     
-    /// TODO: clear tmp code
-    std::string f_str("coinIcon");
-    auto f = _resourceManager->GetTexture(f_str);
-    
     _sceneManager = new SceneManager(_resourceManager);
     _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
     _sceneManager->SaveScene();
@@ -95,8 +91,8 @@ void Game::Input()
 
 void Game::RenderAll()
 {
-    _render->Clear();
-    _render->Present();
+   // _render->Clear();
+   // _render->Present();
 }
 
 void Game::Loop()
