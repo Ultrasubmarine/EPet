@@ -49,22 +49,6 @@ Texture* SDLTextureLoader::_LoadTexture(const std::string& name, char *fullPath)
         };
         
         SDLTexture* res = new SDLTexture{ bmpTex, src};
-        
-        auto t = Texture{name, res, deleter};
-        // TMP TEST
-        SDL_Rect f(10,10, 150,150);
-        auto ren = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
-        
-        SDL_SetRenderDrawColor(ren->GetRender(), 0xFF, 0xA, 0xA, 0xFF);
-       // SDL_RenderClear(ren->GetRender());
-        
-        SDLTexture* txt = static_cast<SDLTexture*>(t.resource);
-        SDL_RenderCopy(ren->GetRender(), txt->texture, &f, &f);
-        
-       // SDL_RenderCopy(ren->GetRender(), bmpTex, &src, &f);
-        ren->Present();
-        /// END TMP TEST
-    
         return new Texture{name, res, deleter};
     }
     
