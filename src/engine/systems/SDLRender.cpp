@@ -50,13 +50,11 @@ void SDLRender::Clear() {
 
 #include "Game.hpp"
 #include "ResourceManager.hpp"
-void SDLRender::Draw(Texture* texture, void* dst) { //Draw(Rect& source, Rect& windRect) {
+void SDLRender::Draw(Texture* texture, void* dst) {
     
-//    static SDL_Rect f (50,50, 50, 50);
-//    SDLTexture* txt = static_cast<SDLTexture*>(texture->resource);
-//    
-//   // Game::Instance().GetResourceManager()->GetTexture("frog")
-//    SDL_RenderCopy(_render, txt->texture, &f, &f);
+    SDLTexture* txt = static_cast<SDLTexture*>(texture->resource);
+    SDL_Rect* r_dst = static_cast<SDL_Rect*>(dst);
+    SDL_RenderCopy(_render, txt->texture, &txt->src, r_dst);
 }
 
 void SDLRender::Present() { 

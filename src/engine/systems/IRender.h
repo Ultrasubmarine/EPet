@@ -55,7 +55,6 @@ public:
     virtual void Present() = 0;
     
     virtual bool IsRenderExist() = 0;
-    
   //  void AddRenderObject(int sorting, RenderObject* obj);
   //  void RemoveRenderObject(RenderObject* obj);
 };
