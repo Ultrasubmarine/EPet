@@ -31,7 +31,6 @@
 		02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BD82DA80F7C00BE90D1 /* ISystem.cpp */; };
 		02DB3C1D2DA91FB600BE90D1 /* SDLTextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C1C2DA91FB600BE90D1 /* SDLTextureLoader.cpp */; };
 		02DB3C262DA921F800BE90D1 /* ITextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C242DA921F800BE90D1 /* ITextureLoader.cpp */; };
-		02DB3C312DAC1DDC00BE90D1 /* RenderObjectCreateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C2D2DAC1DDC00BE90D1 /* RenderObjectCreateSystem.cpp */; };
 		02DB3C322DAC1DDC00BE90D1 /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C2F2DAC1DDC00BE90D1 /* TestSystem.cpp */; };
 		02FBB8FA2C28A98B00DA2ED3 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D24A832BD841D9008E7DCF /* SDL2.framework */; };
 		02FBB8FB2C28A98B00DA2ED3 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02D24A832BD841D9008E7DCF /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -118,8 +117,6 @@
 		02DB3C232DA921F800BE90D1 /* ITextureLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ITextureLoader.hpp; sourceTree = "<group>"; };
 		02DB3C242DA921F800BE90D1 /* ITextureLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ITextureLoader.cpp; sourceTree = "<group>"; };
 		02DB3C272DA923A700BE90D1 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
-		02DB3C2C2DAC1DDC00BE90D1 /* RenderObjectCreateSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderObjectCreateSystem.hpp; sourceTree = "<group>"; };
-		02DB3C2D2DAC1DDC00BE90D1 /* RenderObjectCreateSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderObjectCreateSystem.cpp; sourceTree = "<group>"; };
 		02DB3C2E2DAC1DDC00BE90D1 /* TestSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TestSystem.hpp; sourceTree = "<group>"; };
 		02DB3C2F2DAC1DDC00BE90D1 /* TestSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestSystem.cpp; sourceTree = "<group>"; };
 		02DB3C392DAC250600BE90D1 /* CommonComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CommonComponents.hpp; sourceTree = "<group>"; };
@@ -353,8 +350,6 @@
 		02DB3C302DAC1DDC00BE90D1 /* default */ = {
 			isa = PBXGroup;
 			children = (
-				02DB3C2C2DAC1DDC00BE90D1 /* RenderObjectCreateSystem.hpp */,
-				02DB3C2D2DAC1DDC00BE90D1 /* RenderObjectCreateSystem.cpp */,
 				02DB3C2E2DAC1DDC00BE90D1 /* TestSystem.hpp */,
 				02DB3C2F2DAC1DDC00BE90D1 /* TestSystem.cpp */,
 				02C886882E50AF5F00B47F76 /* RenderSystem.hpp */,
@@ -453,7 +448,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */,
-				02DB3C312DAC1DDC00BE90D1 /* RenderObjectCreateSystem.cpp in Sources */,
 				02DB3C322DAC1DDC00BE90D1 /* TestSystem.cpp in Sources */,
 				02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */,
 				025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */,

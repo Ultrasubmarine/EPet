@@ -50,11 +50,12 @@ void SDLRender::Clear() {
 
 #include "Game.hpp"
 #include "ResourceManager.hpp"
-void SDLRender::Draw(Texture* texture, void* dst) {
+void SDLRender::Draw(Texture* texture, const int& x, const int& y) {
     
     SDLTexture* txt = static_cast<SDLTexture*>(texture->resource);
-    SDL_Rect* r_dst = static_cast<SDL_Rect*>(dst);
-    SDL_RenderCopy(_render, txt->texture, &txt->src, r_dst);
+    SDL_Rect r_dst(x, y, txt->src.w,txt->src.h);
+    
+    SDL_RenderCopy(_render, txt->texture, &txt->src, &r_dst);
 }
 
 void SDLRender::Present() { 
