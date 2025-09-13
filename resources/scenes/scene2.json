@@ -20,22 +20,36 @@
                {
                    "id": "Transform",
                    "position": {
-                       "x": 5,
-                       "y": 100
+                       "x": 180,
+                       "y": 135
                    }
                },
                {
                    "id": "Sorting",
-                   "layer": 666
+                   "layer": 10
                },
                {
                    "id": "Image",
-                   "imageId": "frog"
+                   "imageId": "Hamster"
+               }
+           ]
+       },
+       {
+           "components": [
+               {
+                   "id": "Transform",
+                   "position": {
+                       "x": 0,
+                       "y": 0
+                   }
                },
                {
-                   "id": "TestComponent",
-                   "str": "hello, my friends",
-                   "value": 2
+                   "id": "Sorting",
+                   "layer": 0
+               },
+               {
+                   "id": "Image",
+                   "imageId": "Background"
                }
            ]
        }

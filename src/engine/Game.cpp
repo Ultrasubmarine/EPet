@@ -19,7 +19,7 @@
 bool Game::Init()
 {
     _window = new Window();
-    if(!_window->CreateWindow())
+    if(!_window->CreateWindow(320, 240, "my Gotchi"))
     {
         LOG_ERROR("Game::Init() Window didn't create. Game initialization was canceled");
         return false;

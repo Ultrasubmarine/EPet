@@ -16,14 +16,20 @@ SYSTEM_CPP(RenderSystem);
 void RenderSystem::Init()
 {
     _render = Game::Instance().GetRender();
+    
+    // TODO: move it in different system
+    _registry.sort<Sorting>([](const auto &lhs, const auto &rhs) {
+        return lhs.layer < rhs.layer;
+    });
+    //-----------------------------------
 }
 
 void RenderSystem::Update(double dt)
 {
     _render->Clear();
     
-    auto view = _registry.view<Transform, Image>();
-    for(auto [entt, trasform, image] :_registry.view<Transform, Image>().each())
+   // auto view = _registry.view<Sorting, Transform, Image>();
+    for(auto [entt, _, trasform, image] :_registry.view<Sorting, Transform, Image>().each())
     {
         _render->Draw(image.resource.get(), trasform.position.x, trasform.position.y);
     }
