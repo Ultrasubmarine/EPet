@@ -40,16 +40,8 @@ Texture* SDLTextureLoader::_LoadTexture(const std::string& name, char *fullPath)
     
     if(bmpTex)
     {
-        //TODO: make sure that this f*king function doesn't start to leak memory
-        //TODO: is it okey that my resource is combined by two different resources in memmory? 
-        std::function<void(void*)> deleter = [](void* resource)
-        {
-            auto res = static_cast<SDLTexture*>(resource);
-            delete res;
-        };
-        
         SDLTexture* res = new SDLTexture{ bmpTex, src};
-        return new Texture{name, res, deleter};
+        return new Texture{name, res};
     }
     
     std::cout<<"error: SDLTextureLoader::LoadTexture() texture:"<<name;

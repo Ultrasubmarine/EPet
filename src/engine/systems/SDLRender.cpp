@@ -7,7 +7,6 @@
 
 #include "SDLRender.hpp"
 
-#include "SDLTextureLoader.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 
@@ -15,6 +14,9 @@
 #include "Logging.hpp"
 #include "Texture.hpp"
 #include "SDLTexture.hpp"
+
+#include <variant>
+
 
 void* SDLRender::Init(IWindow *w) {
     
@@ -48,14 +50,13 @@ void SDLRender::Clear() {
     SDL_RenderClear(_render);
 }
 
-#include "Game.hpp"
-#include "ResourceManager.hpp"
 void SDLRender::Draw(Texture* texture, const int& x, const int& y) {
     
-    SDLTexture* txt = static_cast<SDLTexture*>(texture->resource);
-    SDL_Rect r_dst(x, y, txt->src.w,txt->src.h);
-    
-    SDL_RenderCopy(_render, txt->texture, &txt->src, &r_dst);
+    if (SDLTexture** txt = std::get_if<SDLTexture*>(&texture->resource))
+    {
+        SDL_Rect r_dst(x, y, (*txt)->src.w, (*txt)->src.h);
+        SDL_RenderCopy(_render, (*txt)->texture, &(*txt)->src, &r_dst);
+    }
 }
 
 void SDLRender::Present() { 

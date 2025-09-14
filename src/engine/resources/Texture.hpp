@@ -8,20 +8,20 @@
 #ifndef Texture_h
 #define Texture_h
 
+#include <variant>
 #include <functional>
+
+struct SDLTexture;
 
 //TODO: 5th rule, please
 struct Texture
 {
     std::string name;
-    
-    // cast it for speciphic graphic libs structures. SDLTexture or etc.
-    void* resource;
-    std::function<void(void*)> deleter; // function that destroy resource
+    std::variant<SDLTexture*> resource;
     
     ~Texture()
     {
-        deleter(resource);
+        std::visit([](auto* r) { delete r;}, resource);
     }
 };
 #endif /* Texture_h */

@@ -28,10 +28,10 @@ void RenderSystem::Update(double dt)
 {
     _render->Clear();
     
-   // auto view = _registry.view<Sorting, Transform, Image>();
     for(auto [entt, _, trasform, image] :_registry.view<Sorting, Transform, Image>().each())
     {
         _render->Draw(image.resource.get(), trasform.position.x, trasform.position.y);
     }
+    
     _render->Present();
 }
