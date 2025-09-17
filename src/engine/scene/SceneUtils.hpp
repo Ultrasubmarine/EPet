@@ -15,11 +15,11 @@
 #include "Logging.hpp"
 #include "Scene.hpp"
 
-#include "FactoryMethod.hpp"
 #include "SystemFactory.hpp"
 
 #include "LoadComponents.hpp"
 #include "SaveComponents.hpp"
+
 #include "registry.hpp"
 #include "json.hpp"
 
@@ -28,7 +28,7 @@ class Scene;
 
 //____________________________________
 // LOADING SCENE HELPING FUNCTIONS:
-std::vector<std::string> GetSystemsIds(const json* data)
+inline std::vector<std::string> GetSystemsIds(const json* data)
 {
     std::vector<std::string> systemIds{};
     if ((*data).contains("systems")) {
@@ -47,7 +47,7 @@ std::vector<std::string> GetSystemsIds(const json* data)
     return systemIds;
 }
 
-void LoadSystems(Scene* scene, const std::vector<std::string>& systemIds, entt::registry& registry)
+inline void LoadSystems(Scene* scene, const std::vector<std::string>& systemIds, entt::registry& registry)
 {
     for(const auto& systemId: systemIds)
     {
@@ -60,7 +60,7 @@ void LoadSystems(Scene* scene, const std::vector<std::string>& systemIds, entt::
     }
 }
 
-entt::entity LoadObject(const json* data, entt::registry& registry)
+inline entt::entity LoadObject(const json* data, entt::registry& registry)
 {
     auto entity = registry.create();
     
@@ -81,9 +81,7 @@ entt::entity LoadObject(const json* data, entt::registry& registry)
     return entity;
 }
 
-#include "CommonComponents.hpp"
-
-void LoadObjects(const json* data, entt::registry& registry)
+inline void LoadObjects(const json* data, entt::registry& registry)
 {
     if ((*data).contains("objects"))
     {
@@ -91,22 +89,6 @@ void LoadObjects(const json* data, entt::registry& registry)
         for (json::iterator it = entityes.begin(); it != entityes.end(); ++it) {
             
             LoadObject(&it.value(), registry);
-
-// Test block code
-//           auto entity = LoadObject(&it.value(), registry);
-//            IPoint t;
-//            t.x = 5;
-//            t.y = 10;
-//            registry.emplace<Transform>(entity, t);
-//            LOG_MESSAGE(" load entity with: ");
-//            if( auto comp = registry.try_get<TestComponent>(entity))
-//            {
-//                LOG_MESSAGE("   TestComponent: value: " << comp->value << " str:"<< comp->str);
-//            }
-//            if( auto comp = registry.try_get<Sorting>(entity))
-//            {
-//                LOG_MESSAGE("   Sorting: value: " << comp->layer);
-//            }
         }
     }
 }
@@ -115,7 +97,7 @@ void LoadObjects(const json* data, entt::registry& registry)
 //____________________________________
 
 // SAVING SCENE HELPING FUNCTIONS:
-void SaveSystems(json& data, const Scene* scene)
+inline void SaveSystems(json& data, const Scene* scene)
 {
     for(const auto& sys: scene->GetSystems())
     {
@@ -125,7 +107,7 @@ void SaveSystems(json& data, const Scene* scene)
 }
 
 // TODO: change registry on different structure that takes sorted entityes !!!
-void SaveObjects(json& data, entt::registry& registry)
+inline void SaveObjects(json& data, entt::registry& registry)
 {
     for(const auto entity: registry.view<entt::entity>())
     {

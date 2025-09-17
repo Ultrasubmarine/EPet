@@ -9,10 +9,6 @@
 #define ResourceManager_hpp
 
 #include <stdio.h>
-//#include <fstream>
-
-//#include <map>
-
 #include "json.hpp"
 
 #include "RenderSystem.hpp"
@@ -42,7 +38,7 @@ public:
     
   //  static const json* GetGameSettings();
     const json* LoadScene(std::string title);
-    void SaveScene(const std::string& title,json* scene) const;
+    void SaveScene(const std::string& title, json* scene) const;
     
     const char* GetResourcePath(ResourceType type, std::string& name, std::string format);
     

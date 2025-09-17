@@ -15,14 +15,14 @@ using json = nlohmann::json;
 
 class JsonLoader
 {
-    static json gameSettings;
+    static json gameSettings; // ???
 public:
     ~JsonLoader();
     
     static const json* GetGameSettings();
     static const json* LoadGameSettings(char *fullPath);
    
-    const json* GetJson(char *fullPath); /// free memory in json*
+    const json* GetJson(char *fullPath); /// free memory in json* // change to smart pointer*?
     void ConvertToData();
     
 };

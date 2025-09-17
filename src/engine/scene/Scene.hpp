@@ -22,9 +22,9 @@ protected:
     std::vector<ISystem*> _allSystems;
     
     //TODO: use this vectors to call anly needed
-    std::vector<ISystem*> _initSystems;
-    std::vector<ISystem*> _updateSystems;
-    std::vector<ISystem*> _deInitSystems;
+    //std::vector<ISystem*> _initSystems;
+    //std::vector<ISystem*> _updateSystems;
+    //std::vector<ISystem*> _deInitSystems;
     
 public:
     Scene(std::string& id);
@@ -32,17 +32,13 @@ public:
         
     void AddSystem(ISystem* system);
     //TODO: RemoveSystem(std::string& systemId)?
+    
     void AddEntity(std::string& systemId);
     
     void Start();
-    void Destroy();
-    
     void Update(double dt);
-    void Render(){}; // TODO: temp place
-    
-    //TODO:
-    //void Serialize(json*);
-    
+    void Destroy();
+
     const std::string& GetSceneId() { return _id;} const;
     const std::vector<ISystem*>& GetSystems() const { return _allSystems;};
 };

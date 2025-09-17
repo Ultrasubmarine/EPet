@@ -8,6 +8,21 @@
 #include "Scene.hpp"
 #include <iostream>
 #include "ISystem.hpp"
+#include "Logging.hpp"
+
+Scene::Scene(std::string& id) : _id(id)
+{
+    LOG_MESSAGE("Scene::Scene Scene was created. id = "  << id);
+}
+
+Scene::~Scene()
+{
+    for(auto s: _allSystems)
+    {
+        delete s;
+    }
+    _allSystems.clear();
+}
 
 void Scene::AddSystem(ISystem* system)
 {
@@ -19,21 +34,21 @@ void Scene::AddEntity(std::string& systemId)
     
 }
 
-void Scene:: Update(double dt)
-{
-    //TODO: call only overrided functions
-    for(auto sys: _allSystems)
-    {
-        sys->Update(dt);
-    }
-}
-
 void Scene::Start()
 {
     //TODO: call only overrided functions
     for(auto s: _allSystems)
     {
         s->Init();
+    }
+}
+
+void Scene:: Update(double dt)
+{
+    //TODO: call only overrided functions
+    for(auto sys: _allSystems)
+    {
+        sys->Update(dt);
     }
 }
 
@@ -44,18 +59,9 @@ void Scene::Destroy()
     {
         s->DeInit();
     }
-}
-
-Scene::Scene(std::string& id) : _id(id)
-{
- //   std::cout<<"Scene: "<<_id<<" was created";
-}
-
-Scene::~Scene()
-{
+    
     for(auto s: _allSystems)
     {
         delete s;
     }
-    _allSystems.clear();
 }

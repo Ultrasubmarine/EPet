@@ -65,7 +65,7 @@ void GenerateSaveFunction(const char* typeId, std::function<void(T&, data&)> sav
 }
 
 /// function for saving a component
-void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
+inline void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
 {
     if(auto it = ComponentSaver::GetSavers().find(typeId); it != ComponentSaver::GetSavers().end())
     {
@@ -82,7 +82,7 @@ void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
     }
 }
 
-void SaveAllComponentInEntity(SAVE_FUNCTION_PARAMS)
+inline void SaveAllComponentInEntity(SAVE_FUNCTION_PARAMS)
 {
     for(auto it : ComponentSaver::GetSavers())
     {

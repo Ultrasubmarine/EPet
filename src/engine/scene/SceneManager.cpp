@@ -8,42 +8,16 @@
 #include <iostream>
 #include "SceneManager.hpp"
 
-#include "Scene.hpp"
-#include "Game.hpp"
+#include "RegisterComponents.hpp"
 #include "ResourceManager.hpp"
-#include "SystemFactory.hpp"
-#include "Logging.hpp"
-
-#include "ISystem.hpp"
-
-#include "CommonComponents.hpp"
-
-#include "LoadComponents.hpp"
-#include "SaveComponents.hpp"
-
 #include "SceneUtils.hpp"
+#include "Scene.hpp"
 
 using json = nlohmann::json;
 
 SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
 {
     RegisterComponents();
-}
-
-/// TODO: think about another place
-void SceneManager::RegisterComponents()
-{
-    GenerateLoadingFunction<TestComponent>("TestComponent", &TestComponent::Load);
-    GenerateSaveFunction<TestComponent>("TestComponent", &TestComponent::Save);
-    
-    GenerateLoadingFunction<Sorting>("Sorting", &Sorting::Load);
-    GenerateSaveFunction<Sorting>("Sorting", &Sorting::Save);
-    
-    GenerateLoadingFunction<Transform>("Transform", &Transform::Load);
-    GenerateSaveFunction<Transform>("Transform", &Transform::Save);
-    
-    GenerateLoadingFunction<Image>("Image", &Image::Load);
-    GenerateSaveFunction<Image>("Image", &Image::Save);
 }
 
 SceneManager::~SceneManager()

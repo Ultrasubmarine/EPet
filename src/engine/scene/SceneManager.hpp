@@ -12,15 +12,10 @@
 #include <string>
 
 #include "Subscription.hpp"
-
-#include "ISystem.hpp"
-#include "FactoryMethod.hpp"
-
 #include "registry.hpp" // TODO: think about place
 
 class Scene;
 class ResourceManager;
-class ISystem;
 
 class SceneManager
 {    
@@ -31,7 +26,6 @@ class SceneManager
     Signal<Scene*> OnDestroy;
     
     entt::registry _registry;
-    void DeleteScene();
 
 public:
     
@@ -46,7 +40,7 @@ public:
     void Update(double dt);
     
 private:
-    void RegisterComponents();
+    void DeleteScene();
 };
 
 #endif /* SceneManager_hpp */
