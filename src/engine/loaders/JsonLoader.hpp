@@ -9,6 +9,7 @@
 #define JsonLoader_hpp
 
 #include <stdio.h>
+#include <memory>
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -22,7 +23,7 @@ public:
     static const json* GetGameSettings();
     static const json* LoadGameSettings(char *fullPath);
    
-    const json* GetJson(char *fullPath); /// free memory in json* // change to smart pointer*?
+    std::shared_ptr<const json> GetJson(char *fullPath);
     void ConvertToData();
     
 };

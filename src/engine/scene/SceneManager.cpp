@@ -6,6 +6,8 @@
 //
 
 #include <iostream>
+#include <memory>
+
 #include "SceneManager.hpp"
 
 #include "RegisterComponents.hpp"
@@ -35,11 +37,12 @@ void SceneManager::LoadScene(std::string id)
         return;
     }
     
-    auto data = _resourceManager->LoadScene(id);
-    if(!data) {
+    auto data_ptr = _resourceManager->LoadScene(id);
+    if(!data_ptr) {
         LOG_ERROR("SceneManager::LoadScene() scene \""<<id<<"\" didn't find. Scene Loading canceled.");
         return;
     }
+    const auto data = data_ptr.get();
     
     if(_currentScene)
     {
@@ -59,13 +62,13 @@ void SceneManager::LoadScene(std::string id)
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);
     
-    delete data;
+   // delete data;
     LOG_MESSAGE("SceneManager::LoadScene() scene \""<<id<<"\" was created.");
 };
 
 void SceneManager::SaveScene()
 {
-    json data;
+    json data; // TODO: maybe if it's too big it's better to convert it to pointer* with new. 
     data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. save as name of file
     
     SaveSystems(data, _currentScene);

@@ -13,8 +13,7 @@
 
 #include "Point.h"
 
-//TODO: move to .cpp file. 
-#include "PointSerialization.hpp"
+
 
 #include "json.hpp"
 #include "Logging.hpp"

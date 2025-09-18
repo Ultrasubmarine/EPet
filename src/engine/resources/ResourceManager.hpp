@@ -37,7 +37,7 @@ public:
     ~ResourceManager();
     
   //  static const json* GetGameSettings();
-    const json* LoadScene(std::string title);
+    std::shared_ptr<const json> LoadScene(std::string title);
     void SaveScene(const std::string& title, json* scene) const;
     
     const char* GetResourcePath(ResourceType type, std::string& name, std::string format);

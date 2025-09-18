@@ -7,6 +7,7 @@
 
 #include "JsonLoader.hpp"
 #include <fstream>
+#include "Logging.hpp"
 
 json JsonLoader::gameSettings{};
 
@@ -16,7 +17,6 @@ JsonLoader::~JsonLoader()
 
 void JsonLoader::ConvertToData()
 {
-    
 }
 
 const json* JsonLoader::LoadGameSettings(char *fullPath)
@@ -35,10 +35,16 @@ const json* JsonLoader::GetGameSettings()
     return &gameSettings;
 }
 
-const json* JsonLoader::GetJson(char *fullPath)
+std::shared_ptr<const json> JsonLoader::GetJson(char *fullPath)
 {
     std::ifstream buff(fullPath);
     auto* j = new json(json::parse(buff));
     buff.close();
-    return j;
+    
+//    auto deleter = [](const json* j)
+//    {
+//        LOG_MESSAGE("Json file deleted "<<j->type_name());
+//        delete j;
+//    };
+    return std::shared_ptr<const json>{j};
 }

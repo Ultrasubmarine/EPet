@@ -83,7 +83,7 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
 //    return j;
 //}
 
-const json* ResourceManager::LoadScene(std::string title)
+std::shared_ptr<const json> ResourceManager::LoadScene(std::string title)
 {
     std::string r_path ="resources/scenes/" + title;
     std::string type = "json";

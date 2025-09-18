@@ -9,6 +9,7 @@
 #include "CommonComponents.hpp"
 #include "Game.hpp"
 #include "ResourceManager.hpp"
+#include "PointSerialization.hpp"
 
 Transform Transform::Load(const json& data)
 {
