@@ -12,6 +12,8 @@
 
 using time_point = std::chrono::steady_clock::time_point;
 
+enum KeyCode; // get it from current action library. it's here only for view.
+
 enum KeyState
 {
     Pressed,

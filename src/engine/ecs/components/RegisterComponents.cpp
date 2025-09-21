@@ -13,9 +13,6 @@
 
 void RegisterComponents()
 {
-    GenerateLoadingFunction<TestComponent>("TestComponent", &TestComponent::Load);
-    GenerateSaveFunction<TestComponent>("TestComponent", &TestComponent::Save);
-
     GenerateLoadingFunction<Sorting>("Sorting", &Sorting::Load);
     GenerateSaveFunction<Sorting>("Sorting", &Sorting::Save);
 

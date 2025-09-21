@@ -6,10 +6,12 @@
 //
 
 #include <stdio.h>
+
 #include "CommonComponents.hpp"
 #include "Game.hpp"
 #include "ResourceManager.hpp"
 #include "PointSerialization.hpp"
+#include "Logging.hpp"
 
 Transform Transform::Load(const json& data)
 {
@@ -21,12 +23,26 @@ Transform Transform::Load(const json& data)
     
     return obj;
 }
-    
+
 void Transform::Save(Transform& obj, json& data)
 {
     json posData;
     SavePoint<int>(obj.position, posData);
     data["position"] = posData;
+}
+
+Sorting Sorting::Load(const json& data)
+{
+    Sorting obj;
+    
+    obj.layer= data["layer"].get<int>();
+    
+    return obj;
+}
+
+void Sorting::Save(Sorting& obj, json& data)
+{
+    data["layer"] = obj.layer;
 }
 
 Image Image::Load(const json& data)
