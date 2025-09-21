@@ -55,6 +55,7 @@ inline void LoadSystems(Scene* scene, const std::vector<std::string>& systemIds,
         if(!sys)
         {
             LOG_ERROR("LoadSystems() System with id \""<<systemId<<"\" didn't find in SystemFactory. system didn't added.");
+            continue;
         }
         scene->AddSystem(sys); // create system
     }
