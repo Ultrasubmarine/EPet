@@ -17,6 +17,7 @@ using json = nlohmann::json;
 class JsonLoader
 {
     static json gameSettings; // ???
+    
 public:
     ~JsonLoader();
     
@@ -24,6 +25,8 @@ public:
     static const json* LoadGameSettings(char *fullPath);
    
     std::shared_ptr<const json> GetJson(char *fullPath);
+    void SaveJson(char *fullPath, const json* src);
+    
     void ConvertToData();
     
 };

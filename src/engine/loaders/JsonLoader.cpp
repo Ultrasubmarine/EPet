@@ -38,8 +38,13 @@ const json* JsonLoader::GetGameSettings()
 std::shared_ptr<const json> JsonLoader::GetJson(char *fullPath)
 {
     std::ifstream buff(fullPath);
-    auto* j = new json(json::parse(buff));
-    buff.close();
+    
+    json* j;
+    if(buff.is_open())
+    {
+        j = new json(json::parse(buff));
+        buff.close();
+    }
     
 //    auto deleter = [](const json* j)
 //    {
@@ -47,4 +52,9 @@ std::shared_ptr<const json> JsonLoader::GetJson(char *fullPath)
 //        delete j;
 //    };
     return std::shared_ptr<const json>{j};
+}
+
+void JsonLoader::SaveJson(char *fullPath, const json* src)
+{
+    
 }
