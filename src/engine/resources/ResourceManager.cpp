@@ -35,7 +35,7 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
     std::string r_path ="resources/images/" + title;
     std::string type = "bmp";
     
-    char *image_path = GetPath(r_path, type);
+    char *image_path = GetPath(r_path, &type);
     t = _textureLoader->LoadTexture(title, image_path);
     delete image_path;
     
@@ -88,7 +88,7 @@ std::shared_ptr<const json> ResourceManager::LoadScene(std::string title)
     std::string r_path ="resources/scenes/" + title;
     std::string type = "json";
     
-    char *json_path = GetPath(r_path, type);
+    char *json_path = GetPath(r_path, &type);
     
     if(*json_path == '\0')
     {
@@ -99,7 +99,7 @@ std::shared_ptr<const json> ResourceManager::LoadScene(std::string title)
     auto j =   _jsonLoader->GetJson(json_path);
     delete json_path;
     
-    return j;
+    return std::shared_ptr<const json>{j};
 }
 
 void ResourceManager::SaveScene(const std::string& title, json* scene) const
@@ -119,7 +119,62 @@ void ResourceManager::SaveScene(const std::string& title, json* scene) const
     sceneFile.close();
 }
 
-const char* ResourceManager::GetResourcePath(ResourceType type, std::string& name, std::string format)
+json* ResourceManager::GetJson(const std::string& title /*, ResourceType??? */) const
+{
+    std::string r_path ="resources/scenes/" + title; // TODO: tmp place
+    std::string type = ".json";
+    
+    char *json_path = GetPath(r_path, &type);
+    if(*json_path == '\0')
+    {
+        LOG_ERROR("ResourceManager::GetJson() json file (" << title <<") didn't found");
+        return nullptr;
+    }
+    
+    auto j = _jsonLoader->GetJson(json_path);
+    delete json_path;
+    
+    return j;
+}
+
+bool ResourceManager::SaveJson(const std::string& title,const json* src) const
+{
+    std::string _path = GetPath("resources/scenes");
+    
+    
+    std::ofstream file(_path, std::ios::out | std::ios::trunc);
+    if (!file.is_open()) {
+        LOG_ERROR("ResourceManager::SaveScene() Coudn't open sceneFile (" << title <<"). Saving scene was canceled.");
+        return false;
+    }
+    
+    file<<src->dump(4);
+    file.close();
+    return true;
+}
+
+//std::weak_ptr<json> ResourceManager::GetSave()
+//{
+//    std::string r_path ="resources/save/playerSave";
+//    std::string type = ".json";
+//    
+//    char *path = GetPath(r_path, type);
+//    
+//    auto j = _jsonLoader->GetJson(path);
+//    if(j->empty())
+//    {
+//        
+//    }
+//    std::ofstream savingFile;
+//    savingFile.open(r_path);
+//    if(savingFile.is_open())
+//    {
+//      //  playerSave{savingFile}
+//    }
+//    return nullptr;
+//}
+
+const char* ResourceManager::GetResourcePath(ResourceType type, const std::string& name, const std::string& format) const
 {
     std::string _path ="resources/";
     
@@ -139,11 +194,16 @@ const char* ResourceManager::GetResourcePath(ResourceType type, std::string& nam
             _path += "scenes/";
             break;
         }
+        case ResourceType::save:
+        {
+            _path += "save/";
+            break;
+        }
         default:
             return nullptr;
     }
     _path += name;
     
-    char *full_path = GetPath(_path, format);
-    return full_path;
+    auto full_path = GetPath(_path, &format);
+    return nullptr;//full_path;
 }

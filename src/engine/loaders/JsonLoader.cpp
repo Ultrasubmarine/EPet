@@ -35,7 +35,7 @@ const json* JsonLoader::GetGameSettings()
     return &gameSettings;
 }
 
-std::shared_ptr<const json> JsonLoader::GetJson(char *fullPath)
+json* JsonLoader::GetJson(char *fullPath)
 {
     std::ifstream buff(fullPath);
     
@@ -51,7 +51,7 @@ std::shared_ptr<const json> JsonLoader::GetJson(char *fullPath)
 //        LOG_MESSAGE("Json file deleted "<<j->type_name());
 //        delete j;
 //    };
-    return std::shared_ptr<const json>{j};
+    return j;
 }
 
 void JsonLoader::SaveJson(char *fullPath, const json* src)

@@ -18,6 +18,8 @@ class FrameRate;
 class SceneManager;
 class ResourceManager;
 
+class PlayerSave;
+
 class Game final: public Singleton<Game>
 {
 public:
@@ -45,5 +47,7 @@ private:
     FrameRate *_frameRate = nullptr;
     SceneManager *_sceneManager = nullptr;
     ResourceManager *_resourceManager = nullptr;
+    
+    PlayerSave* _playerSave = nullptr; // TODO: temp place
 };
 #endif /* Game_hpp */

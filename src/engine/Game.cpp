@@ -15,6 +15,7 @@
 #include "ResourceManager.hpp"
 #include "Input.hpp"
 #include "Scene.hpp"
+#include "PlayerSave.hpp"
 
 bool Game::Init()
 {
@@ -37,9 +38,14 @@ bool Game::Init()
     
     _resourceManager = new ResourceManager();
     
+    _playerSave = new PlayerSave();
+    _playerSave->Load();
+    _playerSave->Save();
+    
     _sceneManager = new SceneManager(_resourceManager);
     _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
     _sceneManager->SaveScene();
+    
     return true;
 }
 
@@ -65,7 +71,6 @@ Game::~Game()
 {
     Deinit();
 }
-
 
 void Game::Input()
 {

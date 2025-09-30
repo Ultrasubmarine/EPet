@@ -24,7 +24,7 @@ public:
     static const json* GetGameSettings();
     static const json* LoadGameSettings(char *fullPath);
    
-    std::shared_ptr<const json> GetJson(char *fullPath);
+    json* GetJson(char *fullPath);
     void SaveJson(char *fullPath, const json* src);
     
     void ConvertToData();

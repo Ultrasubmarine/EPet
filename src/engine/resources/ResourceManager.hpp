@@ -19,7 +19,8 @@ enum class ResourceType
 {
     texture,
     font,
-    scene
+    scene,
+    save
 };
 
 class JsonLoader;
@@ -40,7 +41,11 @@ public:
     std::shared_ptr<const json> LoadScene(std::string title);
     void SaveScene(const std::string& title, json* scene) const;
     
-    const char* GetResourcePath(ResourceType type, std::string& name, std::string format);
+    json* GetJson(const std::string& title /*, ResourceType??? */) const;
+    bool SaveJson(const std::string& title, const json* src) const;
+  //  std::weak_ptr<json> GetSave(); // file with player progress saving information
+    
+    const char* GetResourcePath(ResourceType type, const std::string& name, const std::string& format) const;
     
     std::shared_ptr<Texture> GetTexture(std::string& title);
 };
