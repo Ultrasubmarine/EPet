@@ -13,37 +13,52 @@
 
 bool PlayerSave::Save()
 {
-    if(auto manager = Game::Instance().GetResourceManager())
+    auto manager = Game::Instance().GetResourceManager();
+    if(!manager)
     {
-        return manager->SaveJson(_fileName, _save.get());
+        LOG_ERROR("PlayerSave::Save(): ResourceManager didn't find.");
+        return false;
     }
-    return false;
+    
+    if(!_save)
+    {
+        _save = std::unique_ptr<json>(new json()); // accept saving empty json
+    }
+    
+    return manager->SaveJson(_fileName, _save.get(), ResourceType::save);
 };
 
 bool PlayerSave::Load()
 {
-    if(auto manager = Game::Instance().GetResourceManager())
+    auto manager = Game::Instance().GetResourceManager();
+    if(!manager)
     {
-        if(auto file = manager->GetJson(_fileName))
-        {
-            _save = std::unique_ptr<json>(std::move(file)); // TODO: check/add json* deleter
-            
-            std::string type = "json";
-            manager->GetResourcePath(ResourceType::save, _fileName, type);
-            
-            if(_save->empty())
-                return false;
-            return true;
-        }
-        else
-        {
-            
-            // TODO: create default/new
-            LOG_MESSAGE("PlayerSave::Load(): player save file didn't find.");
-            return false;
-        }
+        LOG_ERROR("PlayerSave::Load(): ResourceManager didn't find.");
+        return false;
     }
-    return false;
-   
+    
+    auto file = manager->GetJson(_fileName, ResourceType::save);
+    if(!file)
+    {
+        LOG_MESSAGE("PlayerSave::Load() player save didn't find.");
+        return false;
+    }
+    
+    // TODO: maybe bad solution
+    if(file.use_count() == 1)
+    {
+       json* raw_tmp = file.get();
+       file.reset();
+       _save = std::unique_ptr<json>(raw_tmp);
+    }
+    else
+    {
+       LOG_ERROR("PlayerSave::Load() : player save downloaded but loader keep smart pointer.");
+       
+       json* another = new json( *file.get());
+       _save = std::unique_ptr<json>(another);
+    }
+    
+    return true;
 };
 

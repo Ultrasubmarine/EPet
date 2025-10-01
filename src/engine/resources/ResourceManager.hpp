@@ -17,10 +17,12 @@ using json = nlohmann::json;
 
 enum class ResourceType
 {
+    none,
     texture,
     font,
     scene,
-    save
+    save,
+    settings
 };
 
 class JsonLoader;
@@ -37,16 +39,15 @@ public:
     ResourceManager();
     ~ResourceManager();
     
-  //  static const json* GetGameSettings();
-    std::shared_ptr<const json> LoadScene(std::string title);
-    void SaveScene(const std::string& title, json* scene) const;
+    //Json
+    std::shared_ptr<json> GetJson(const std::string& title, ResourceType type) const;
+    bool SaveJson(const std::string& title, const json* src, ResourceType type) const;
     
-    json* GetJson(const std::string& title /*, ResourceType??? */) const;
-    bool SaveJson(const std::string& title, const json* src) const;
-  //  std::weak_ptr<json> GetSave(); // file with player progress saving information
-    
-    const char* GetResourcePath(ResourceType type, const std::string& name, const std::string& format) const;
-    
+    //Texture
     std::shared_ptr<Texture> GetTexture(std::string& title);
+    
+    //Helper functions
+    const char* GetResourcePath(const std::string& name, const std::string* format /* could be nullptr */, ResourceType type) const;
+    
 };
 #endif /* ResourceManager_hpp */

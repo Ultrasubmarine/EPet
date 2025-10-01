@@ -20,7 +20,7 @@ class PlayerSave
 {
     const std::string _fileName = "playerSave";
     
-    std::unique_ptr<json> _save;
+    std::unique_ptr<json> _save = nullptr;
     std::string _fullPath;
     
 public:

@@ -83,49 +83,12 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
 //    return j;
 //}
 
-std::shared_ptr<const json> ResourceManager::LoadScene(std::string title)
+std::shared_ptr<json> ResourceManager::GetJson(const std::string& title, ResourceType type) const
 {
-    std::string r_path ="resources/scenes/" + title;
-    std::string type = "json";
-    
-    char *json_path = GetPath(r_path, &type);
-    
-    if(*json_path == '\0')
-    {
-        LOG_ERROR("ResourceManager::GetScene() scene (" << title <<") didn't found");
-        return nullptr;
-    }
-    
-    auto j =   _jsonLoader->GetJson(json_path);
-    delete json_path;
-    
-    return std::shared_ptr<const json>{j};
-}
+    std::string format = ".json";
+    const char *json_path = GetResourcePath(title, &format, type);
 
-void ResourceManager::SaveScene(const std::string& title, json* scene) const
-{
-    // TODO: temporary crutch for macOS. xcode build application and doesn't see working directory. only app directory. it's hard set path to save
-    static char *rootPath = "/Users/sbm/Projects/EPet/resources/";
-    
-    std::ofstream sceneFile;
-    sceneFile.open(title + ".json");
-    if(sceneFile.is_open())
-    {
-        sceneFile<<scene;
-    }
-    else{
-        LOG_ERROR("ResourceManager::SaveScene() Coudn't open sceneFile (" << title <<"). Saving scene was canceled.");
-    }
-    sceneFile.close();
-}
-
-json* ResourceManager::GetJson(const std::string& title /*, ResourceType??? */) const
-{
-    std::string r_path ="resources/scenes/" + title; // TODO: tmp place
-    std::string type = ".json";
-    
-    char *json_path = GetPath(r_path, &type);
-    if(*json_path == '\0')
+    if( !json_path || *json_path == '\0')
     {
         LOG_ERROR("ResourceManager::GetJson() json file (" << title <<") didn't found");
         return nullptr;
@@ -134,15 +97,25 @@ json* ResourceManager::GetJson(const std::string& title /*, ResourceType??? */) 
     auto j = _jsonLoader->GetJson(json_path);
     delete json_path;
     
-    return j;
+    return std::shared_ptr<json>{j};
 }
 
-bool ResourceManager::SaveJson(const std::string& title,const json* src) const
+bool ResourceManager::SaveJson(const std::string& title,const json* src, ResourceType type) const
 {
-    std::string _path = GetPath("resources/scenes");
+    std::string empt = "";
+    std::string format = ".json";
+    const char* _path = GetResourcePath(empt, nullptr, ResourceType::scene); // check only directory path
     
+    if(!_path || *_path == '\0')
+    {
+        LOG_ERROR("ResourceManager::SaveScene() Empty path file(" << title <<"). Saving was canceled.");
+        return false;
+    }
     
-    std::ofstream file(_path, std::ios::out | std::ios::trunc);
+    std::string _full_path = _path + std::string("/") + title + format;
+    delete _path;
+    
+    std::ofstream file(_full_path, std::ios::out | std::ios::trunc | std::ios::app);
     if (!file.is_open()) {
         LOG_ERROR("ResourceManager::SaveScene() Coudn't open sceneFile (" << title <<"). Saving scene was canceled.");
         return false;
@@ -150,60 +123,40 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src) const
     
     file<<src->dump(4);
     file.close();
+    
+    LOG_MESSAGE("ResourceManager::SaveScene() file (" << title <<") was saved.");
     return true;
 }
 
-//std::weak_ptr<json> ResourceManager::GetSave()
-//{
-//    std::string r_path ="resources/save/playerSave";
-//    std::string type = ".json";
-//    
-//    char *path = GetPath(r_path, type);
-//    
-//    auto j = _jsonLoader->GetJson(path);
-//    if(j->empty())
-//    {
-//        
-//    }
-//    std::ofstream savingFile;
-//    savingFile.open(r_path);
-//    if(savingFile.is_open())
-//    {
-//      //  playerSave{savingFile}
-//    }
-//    return nullptr;
-//}
-
-const char* ResourceManager::GetResourcePath(ResourceType type, const std::string& name, const std::string& format) const
+const char* ResourceManager::GetResourcePath(const std::string& name, const std::string* format, ResourceType type) const
 {
-    std::string _path ="resources/";
+    std::string _path ="resources";
     
     switch (type) {
         case ResourceType::texture:
         {
-            _path += "images/";
+            _path += "/images";
             break;
         }
         case ResourceType::font:
         {
-            _path += "fonts/";
+            _path += "/fonts";
             break;
         }
         case ResourceType::scene:
         {
-            _path += "scenes/";
+            _path += "/scenes";
             break;
         }
         case ResourceType::save:
         {
-            _path += "save/";
+            _path += "/saves";
             break;
         }
         default:
-            return nullptr;
+            break;
     }
-    _path += name;
+    _path += name.empty()? "" : "/" + name;
     
-    auto full_path = GetPath(_path, &format);
-    return nullptr;//full_path;
+    return GetPath(_path, format);
 }

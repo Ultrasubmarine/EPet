@@ -22,10 +22,10 @@ public:
     ~JsonLoader();
     
     static const json* GetGameSettings();
-    static const json* LoadGameSettings(char *fullPath);
+    static const json* LoadGameSettings(const char *fullPath);
    
-    json* GetJson(char *fullPath);
-    void SaveJson(char *fullPath, const json* src);
+    json* GetJson(const char *fullPath);
+    void SaveJson(const char *fullPath, const json* src);
     
     void ConvertToData();
     

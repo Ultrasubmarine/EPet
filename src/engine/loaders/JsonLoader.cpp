@@ -19,7 +19,7 @@ void JsonLoader::ConvertToData()
 {
 }
 
-const json* JsonLoader::LoadGameSettings(char *fullPath)
+const json* JsonLoader::LoadGameSettings(const char *fullPath)
 {
     std::ifstream buff(fullPath);
     gameSettings = json::parse(buff);
@@ -35,11 +35,11 @@ const json* JsonLoader::GetGameSettings()
     return &gameSettings;
 }
 
-json* JsonLoader::GetJson(char *fullPath)
+json* JsonLoader::GetJson(const char *fullPath)
 {
     std::ifstream buff(fullPath);
     
-    json* j;
+    json* j = nullptr;
     if(buff.is_open())
     {
         j = new json(json::parse(buff));
@@ -54,7 +54,7 @@ json* JsonLoader::GetJson(char *fullPath)
     return j;
 }
 
-void JsonLoader::SaveJson(char *fullPath, const json* src)
+void JsonLoader::SaveJson(const char *fullPath, const json* src)
 {
     
 }

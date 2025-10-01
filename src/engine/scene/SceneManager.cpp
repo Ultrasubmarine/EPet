@@ -37,7 +37,7 @@ void SceneManager::LoadScene(std::string id)
         return;
     }
     
-    auto data_ptr = _resourceManager->LoadScene(id);
+    auto data_ptr = _resourceManager->GetJson(id, ResourceType::scene);
     if(!data_ptr) {
         LOG_ERROR("SceneManager::LoadScene() scene \""<<id<<"\" didn't find. Scene Loading canceled.");
         return;
@@ -68,15 +68,15 @@ void SceneManager::LoadScene(std::string id)
 
 void SceneManager::SaveScene()
 {
-    json data; // TODO: maybe if it's too big it's better to convert it to pointer* with new. 
-    data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. save as name of file
-    
-    SaveSystems(data, _currentScene);
-    SaveObjects(data, _registry);
-    
-    std::string dataScene = data.dump(1, '\t');
-    LOG_MESSAGE(dataScene);
-    _resourceManager->SaveScene(_currentScene->GetSceneId(), &data);
+//    json data; // TODO: maybe if it's too big it's better to convert it to pointer* with new. 
+//    data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. save as name of file
+//    
+//    SaveSystems(data, _currentScene);
+//    SaveObjects(data, _registry);
+//    
+//    std::string dataScene = data.dump(1, '\t');
+//    LOG_MESSAGE(dataScene);
+   // _resourceManager->SaveScene(_currentScene->GetSceneId(), &data);
 }
 
 void SceneManager::DeleteScene()
