@@ -9,11 +9,11 @@
 	<key>CustomBuildLocationType</key>
 	<string>RelativeToWorkspace</string>
 	<key>CustomBuildProductsPath</key>
-	<string>Build/Products</string>
+	<string>Build/</string>
 	<key>DerivedDataCustomLocation</key>
-	<string>/Users/sbm/Projects/EPet</string>
+	<string>BuildCash</string>
 	<key>DerivedDataLocationStyle</key>
-	<string>AbsolutePath</string>
+	<string>WorkspaceRelativePath</string>
 	<key>ShowSharedSchemesAutomaticallyEnabled</key>
 	<true/>
 </dict>
