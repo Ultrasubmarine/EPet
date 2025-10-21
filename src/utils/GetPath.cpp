@@ -31,13 +31,16 @@ fs::path GetResourcePathFromApple()
 
     // up to project root (Debug: Build/Products/Debug/ -> project)
     fs::path candidate = exePath;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 8; ++i) {
         candidate = candidate.parent_path();
-        if (fs::exists(candidate / "resources")) {
-            return candidate / "resources";
+        if (fs::exists(candidate / "Build")) {
+            break;// up to Build folder
         }
     }
 
+    if (fs::exists(candidate / "resources")) {
+        return candidate / "resources";
+    }
     // fallback
     return exePath.parent_path();
 #else // RELEASE
