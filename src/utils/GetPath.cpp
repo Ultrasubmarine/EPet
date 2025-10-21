@@ -7,30 +7,62 @@
 
 #include "GetPath.hpp"
 
-// from app bundle ONLY!
-char* GetPath_Apple(CFStringRef name, CFStringRef type)
+
+
+
+// ________APPLE REALISATION________
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+
+fs::path GetExecutablePath()
 {
-    CFURLRef manifest_url = CFBundleCopyResourceURL(CFBundleGetMainBundle(),
-                                                    name, type,
-                                                    NULL);
-    
-    char * manifest_path = (char *)malloc(PATH_MAX);
-    CFURLGetFileSystemRepresentation(manifest_url, true, (uint8_t *)manifest_path, PATH_MAX);
-    
-    if (manifest_url != NULL)
-        {
-          CFRelease(manifest_url);
-        }
-    return manifest_path;
+    char buffer[PATH_MAX];
+    uint32_t size = sizeof(buffer);
+    if (_NSGetExecutablePath(buffer, &size) == 0) {
+        return fs::path(buffer);
+    }
+    return {};
 }
 
-char* GetPath(const std::string& title, const std::string* type)
+fs::path GetResourcePathFromApple()
+{
+#ifdef DEBUG
+    fs::path exePath = GetExecutablePath();
+
+    // up to project root (Debug: Build/Products/Debug/ -> project)
+    fs::path candidate = exePath;
+    for (int i = 0; i < 4; ++i) {
+        candidate = candidate.parent_path();
+        if (fs::exists(candidate / "resources")) {
+            return candidate / "resources";
+        }
+    }
+
+    // fallback
+    return exePath.parent_path();
+#else // RELEASE
+    // take Resources from .app bundle
+    CFURLRef resURL = CFBundleCopyResourcesDirectoryURL(CFBundleGetMainBundle());
+    char buffer[PATH_MAX];
+    if (resURL) {
+        if (CFURLGetFileSystemRepresentation(resURL, true, (UInt8*)buffer, PATH_MAX)) {
+            CFRelease(resURL);
+            return fs::path(buffer);
+        }
+        CFRelease(resURL);
+    }
+    return fs::current_path();
+#endif // DEBUG or RELEASE
+}
+
+#endif //__APPLE__
+// ________END OF APPLE REALISATION________
+
+
+fs::path GetResourcePath()
 {
 #ifdef __APPLE__
-    CFStringRef p_name = CFStringCreateWithCString(NULL, title.c_str(), NULL);
-    CFStringRef p_type = type? CFStringCreateWithCString(NULL, type->c_str(), NULL) : NULL;
-    
-    return GetPath_Apple(p_name, p_type);
-#endif
-    return NULL;
+    return GetResourcePathFromApple();
+#endif //__APPLE__
+    return {}; // mayby someday
 }

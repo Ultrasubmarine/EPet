@@ -10,6 +10,7 @@
 #include "Game.hpp"
 #include "ResourceManager.hpp"
 #include "Logging.hpp"
+#include "GetPath.hpp"
 
 bool PlayerSave::Save()
 {
@@ -36,6 +37,7 @@ bool PlayerSave::Load()
         LOG_ERROR("PlayerSave::Load(): ResourceManager didn't find.");
         return false;
     }
+    std::filesystem::path cwd = GetResourcePath();
     
     auto file = manager->GetJson(_fileName, ResourceType::save);
     if(!file)

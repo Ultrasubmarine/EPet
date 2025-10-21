@@ -9,15 +9,19 @@
 #define GetPath_hpp
 
 #include <stdio.h>
-
+#include <filesystem>
 #include <string>
+
 #include <CoreFoundation/CoreFoundation.h>
 
-/// use free() to returned string
-char* GetPath(const std::string& title, const std::string* type = nullptr /* for directory searching */);
+namespace fs = std::filesystem;
+//
+///// use free() to returned string
+inline char* GetPath(const std::string& title, const std::string* type = nullptr /* for directory searching */) {return nullptr;};
 
-//use free() to returned string
-char* GetPath_Apple(CFStringRef name, CFStringRef type);
+////use free() to returned string
+//char* GetPath_Apple(CFStringRef name, CFStringRef type);
+//
 
-
+fs::path GetResourcePath();
 #endif /* GetPath_hpp */
