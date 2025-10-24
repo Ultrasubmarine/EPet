@@ -38,9 +38,9 @@ bool Game::Init()
     
     _resourceManager = new ResourceManager();
     
-    _playerSave = new PlayerSave();
-    _playerSave->Load();
-    _playerSave->Save();
+   // _playerSave = new PlayerSave();
+   // _playerSave->Load();
+   // _playerSave->Save();
     
     _sceneManager = new SceneManager(_resourceManager);
     _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file

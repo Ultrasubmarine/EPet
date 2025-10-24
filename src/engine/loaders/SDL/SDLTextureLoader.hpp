@@ -25,7 +25,7 @@ public:
     SDLTextureLoader();
   
 protected:
-    Texture* _LoadTexture(const std::string& name, char *fullPath) override;
+    Texture* _LoadTexture(const std::string& name, const char *fullPath) override;
 };
 
 using TextureLoader = SDLTextureLoader;

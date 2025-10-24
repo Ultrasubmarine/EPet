@@ -19,7 +19,7 @@ SDLTextureLoader::SDLTextureLoader()
     _render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
 }
 
-Texture* SDLTextureLoader::_LoadTexture(const std::string& name, char *fullPath)
+Texture* SDLTextureLoader::_LoadTexture(const std::string& name, const char *fullPath)
 {
     if(!_render)
     {

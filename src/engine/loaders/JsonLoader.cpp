@@ -45,6 +45,11 @@ json* JsonLoader::GetJson(const char *fullPath)
         j = new json(json::parse(buff));
         buff.close();
     }
+    else
+    {
+        std::perror("Причина (errno)");
+        LOG_ERROR(" JsonLoader::GetJson() couldn't open file. error:" <<std::perror);
+    }
     
 //    auto deleter = [](const json* j)
 //    {

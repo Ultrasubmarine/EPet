@@ -30,7 +30,7 @@ ITextureLoader::~ITextureLoader()
     _textures.clear();
 }
 
-std::shared_ptr<Texture> ITextureLoader::LoadTexture(const std::string& name, char *fullPath)
+std::shared_ptr<Texture> ITextureLoader::LoadTexture(const std::string& name, const char *fullPath)
 {
     if(auto resource = _LoadTexture(name, fullPath))
     {

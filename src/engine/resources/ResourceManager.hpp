@@ -35,6 +35,7 @@ class ResourceManager
     JsonLoader* _jsonLoader;
     ITextureLoader* _textureLoader;
     
+    std::filesystem::path _path; // to resources
 public:
     ResourceManager();
     ~ResourceManager();
@@ -47,7 +48,7 @@ public:
     std::shared_ptr<Texture> GetTexture(std::string& title);
     
     //Helper functions
-    const char* GetResourcePath(const std::string& name, const std::string* format /* could be nullptr */, ResourceType type) const;
+    std::filesystem::path GetResourcePath(const std::string& name, const std::string* format /* could be nullptr */, ResourceType type) const;
     
 };
 #endif /* ResourceManager_hpp */
