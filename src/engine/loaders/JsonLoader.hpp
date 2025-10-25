@@ -25,7 +25,7 @@ public:
     static const json* LoadGameSettings(const char *fullPath);
    
     json* GetJson(const char *fullPath);
-    void SaveJson(const char *fullPath, const json* src);
+    bool SaveJson(const char *fullPath, const json* src);
     
     void ConvertToData();
     

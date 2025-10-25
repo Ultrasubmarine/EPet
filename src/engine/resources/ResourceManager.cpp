@@ -29,20 +29,18 @@ ResourceManager::~ResourceManager()
 
 std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
 {
-    auto t = _textureLoader->GetTexture(title);
-    if(t) {
+    if (auto t = _textureLoader->GetTexture(title)) {
         return t;
     }
     
     std::string format = ".bmp";
     if (auto path = GetResourcePath(title, &format, ResourceType::texture); !path.empty()) {
-        t = _textureLoader->LoadTexture(title, path.c_str());
+        auto t = _textureLoader->LoadTexture(title, path.c_str());
+        return t;
     }
-    else
-    {
-        LOG_ERROR("image " << title <<"didn't find");
-    }
-    return t;
+  
+    LOG_ERROR("image " << title <<"didn't find");
+    return nullptr;
 }
 
 //std::shared_ptr<Font> ResourceManager::GetFont(std::string& name)
@@ -90,44 +88,35 @@ std::shared_ptr<json> ResourceManager::GetJson(const std::string& title, Resourc
 {
     std::string format = ".json";
     
-    auto json_path = GetResourcePath(title, &format, type);
-
-    if(json_path.empty())
+    if(auto json_path = GetResourcePath(title, &format, type); !json_path.empty())
     {
-        LOG_ERROR("ResourceManager::GetJson() json file (" << title <<") didn't found");
-        return nullptr;
+        auto j = _jsonLoader->GetJson(json_path.string().c_str());
+        return std::shared_ptr<json>{j};
     }
     
-    auto j = _jsonLoader->GetJson(json_path.string().c_str());
-    return std::shared_ptr<json>{j};
+    LOG_ERROR("ResourceManager::GetJson() json file (" << title <<") didn't found");
+    return nullptr;
 }
 
 bool ResourceManager::SaveJson(const std::string& title,const json* src, ResourceType type) const
 {
     std::string empt = "";
     std::string format = ".json";
-    auto path = GetResourcePath(empt, nullptr, ResourceType::scene); // check only directory path
     
+    auto path = GetResourcePath(empt, nullptr, ResourceType::scene); // check only directory path
     if(path.empty())
     {
         LOG_ERROR("ResourceManager::SaveScene() Empty path file(" << title <<"). Saving was canceled.");
         return false;
     }
     
-   // std::string _full_path = path / title + format;
-  //  delete path;
-    
-//    std::ofstream file(_full_path, std::ios::out | std::ios::trunc | std::ios::app);
-//    if (!file.is_open()) {
-//        LOG_ERROR("ResourceManager::SaveScene() Coudn't open sceneFile (" << title <<"). Saving scene was canceled.");
-//        return false;
-//    }
-//    
-//    file<<src->dump(4);
-//    file.close();
-//    
-//    LOG_MESSAGE("ResourceManager::SaveScene() file (" << title <<") was saved.");
-    return true;
+    std::string fullPath = path / (title + format);
+    if(_jsonLoader->SaveJson(fullPath.c_str(), src))
+    {
+        LOG_MESSAGE("ResourceManager::SaveScene() file (" << title <<") was saved.");
+        return true;
+    }
+    return false;
 }
 
 std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, const std::string* format, ResourceType type) const
@@ -152,7 +141,7 @@ std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, 
         }
         case ResourceType::save:
         {
-            candidate += "/saves"; // TODO: FULL CHANGE 
+            candidate += "/saves"; // TODO: FULL CHANGE
             break;
         }
         default:

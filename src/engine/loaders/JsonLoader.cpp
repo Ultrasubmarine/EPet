@@ -47,19 +47,20 @@ json* JsonLoader::GetJson(const char *fullPath)
     }
     else
     {
-        std::perror("Причина (errno)");
-        LOG_ERROR(" JsonLoader::GetJson() couldn't open file. error:" <<std::perror);
+        LOG_ERROR(" JsonLoader::GetJson() couldn't open file. error: " <<std::system_category().message(errno));
     }
-    
-//    auto deleter = [](const json* j)
-//    {
-//        LOG_MESSAGE("Json file deleted "<<j->type_name());
-//        delete j;
-//    };
     return j;
 }
 
-void JsonLoader::SaveJson(const char *fullPath, const json* src)
+bool JsonLoader::SaveJson(const char *fullPath, const json* src)
 {
+    std::ofstream file(fullPath, std::ios::out | std::ios::trunc);
+    if (!file.is_open()) {
+        LOG_ERROR("ResourceManager::SaveJson couldn't open file. error: " <<std::system_category().message(errno)<<"\n path:"<<fullPath);
+        return false;
+    }
     
+    file<<src->dump(4);
+    file.close();
+    return true;
 }

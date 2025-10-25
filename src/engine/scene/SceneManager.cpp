@@ -68,15 +68,15 @@ void SceneManager::LoadScene(std::string id)
 
 void SceneManager::SaveScene()
 {
-//    json data; // TODO: maybe if it's too big it's better to convert it to pointer* with new. 
-//    data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. save as name of file
-//    
-//    SaveSystems(data, _currentScene);
-//    SaveObjects(data, _registry);
-//    
-//    std::string dataScene = data.dump(1, '\t');
-//    LOG_MESSAGE(dataScene);
-   // _resourceManager->SaveScene(_currentScene->GetSceneId(), &data);
+    json data; // TODO: maybe if it's too big it's better to convert it to pointer* with new.
+    data["scene"] = _currentScene->GetSceneId(); // TODO: don't really need this. save as name of file
+    
+    SaveSystems(data, _currentScene);
+    SaveObjects(data, _registry);
+    
+    std::string dataScene = data.dump(1, '\t');
+    LOG_MESSAGE(dataScene);
+    _resourceManager->SaveJson(_currentScene->GetSceneId() + "1", &data, ResourceType::scene);
 }
 
 void SceneManager::DeleteScene()
