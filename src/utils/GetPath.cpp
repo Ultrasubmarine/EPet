@@ -69,3 +69,18 @@ fs::path GetResourcePath()
 #endif //__APPLE__
     return {}; // mayby someday
 }
+
+#include <filesystem>
+#include <cstdlib>
+#include <iostream>
+
+fs::path GetSavePath() {
+#ifdef __APPLE__
+    const char* home = std::getenv("HOME");
+    std::filesystem::path savePath = std::string(home) + "/Library/Application Support/EPet";
+    std::filesystem::create_directories(savePath);
+    return savePath;
+    
+#endif //__APPLE__
+    return {}; // mayby someday
+}

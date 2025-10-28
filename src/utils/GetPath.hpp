@@ -24,4 +24,6 @@ inline char* GetPath(const std::string& title, const std::string* type = nullptr
 //
 
 fs::path GetResourcePath();
+
+fs::path GetSavePath();
 #endif /* GetPath_hpp */

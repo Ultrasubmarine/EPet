@@ -38,8 +38,8 @@ bool Game::Init()
     
     _resourceManager = new ResourceManager();
     
-   // _playerSave = new PlayerSave();
-   // _playerSave->Load();
+    _playerSave = new PlayerSave();
+    _playerSave->Load();
    // _playerSave->Save();
     
     _sceneManager = new SceneManager(_resourceManager);

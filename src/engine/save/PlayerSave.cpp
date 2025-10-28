@@ -12,6 +12,8 @@
 #include "Logging.hpp"
 #include "GetPath.hpp"
 
+#include <filesystem>
+#include <fstream>
 bool PlayerSave::Save()
 {
     auto manager = Game::Instance().GetResourceManager();
@@ -37,29 +39,39 @@ bool PlayerSave::Load()
         LOG_ERROR("PlayerSave::Load(): ResourceManager didn't find.");
         return false;
     }
-    std::filesystem::path cwd = GetResourcePath();
-    
-    auto file = manager->GetJson(_fileName, ResourceType::save);
-    if(!file)
-    {
-        LOG_MESSAGE("PlayerSave::Load() player save didn't find.");
+    std::filesystem::path cwd = GetSavePath() / "save.json";
+
+    std::ofstream file(cwd.c_str(), std::ios::out | std::ios::trunc);
+    if (!file.is_open()) {
+        LOG_ERROR("ResourceManager::SaveJson couldn't open file. error: " <<std::system_category().message(errno)<<"\n path:"<<cwd);
         return false;
     }
     
+    file<<" you won";
+    file.close();
+    
+    
+//    auto file = manager->GetJson(_fileName, ResourceType::save);
+//    if(!file)
+//    {
+//        LOG_MESSAGE("PlayerSave::Load() player save didn't find.");
+//        return false;
+//    }
+    
     // TODO: maybe bad solution
-    if(file.use_count() == 1)
-    {
-       json* raw_tmp = file.get();
-       file.reset();
-       _save = std::unique_ptr<json>(raw_tmp);
-    }
-    else
-    {
-       LOG_ERROR("PlayerSave::Load() : player save downloaded but loader keep smart pointer.");
-       
-       json* another = new json( *file.get());
-       _save = std::unique_ptr<json>(another);
-    }
+//    if(file.use_count() == 1)
+//    {
+//       json* raw_tmp = file.get();
+//       file.reset();
+//       _save = std::unique_ptr<json>(raw_tmp);
+//    }
+//    else
+//    {
+//       LOG_ERROR("PlayerSave::Load() : player save downloaded but loader keep smart pointer.");
+//       
+//       json* another = new json( *file.get());
+//       _save = std::unique_ptr<json>(another);
+//    }
     
     return true;
 };
