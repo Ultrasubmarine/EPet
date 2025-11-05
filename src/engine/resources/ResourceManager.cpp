@@ -103,17 +103,18 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src, Resourc
     std::string empt = "";
     std::string format = ".json";
     
-    auto path = GetResourcePath(empt, nullptr, ResourceType::scene); // check only directory path
+    //TODO: really bad solution to use 2 ifs where first - negative/error behaviour, second - positive. it's mess.
+    auto path = GetResourcePath(empt, nullptr, type); // check only directory path
     if(path.empty())
     {
-        LOG_ERROR("ResourceManager::SaveScene() Empty path file(" << title <<"). Saving was canceled.");
+        LOG_ERROR("ResourceManager::SaveJson() Empty path file(" << title <<"). Saving was canceled.");
         return false;
     }
     
     std::string fullPath = path / (title + format);
     if(_jsonLoader->SaveJson(fullPath.c_str(), src))
     {
-        LOG_MESSAGE("ResourceManager::SaveScene() file (" << title <<") was saved.");
+        LOG_MESSAGE("ResourceManager::SaveJson() file (" << title <<") was saved.");
         return true;
     }
     return false;
@@ -141,7 +142,7 @@ std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, 
         }
         case ResourceType::save:
         {
-            candidate += "/saves"; // TODO: FULL CHANGE
+            candidate = GetSavePath();
             break;
         }
         default:

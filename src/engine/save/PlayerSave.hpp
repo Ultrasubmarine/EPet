@@ -18,7 +18,7 @@ using json = nlohmann::json;
 
 class PlayerSave
 {
-    const std::string _fileName = "playerSave";
+    const std::string _fileName = "save";
     
     std::unique_ptr<json> _save = nullptr;
     std::string _fullPath;
