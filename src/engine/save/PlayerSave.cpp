@@ -14,6 +14,7 @@
 
 #include <filesystem>
 #include <fstream>
+
 bool PlayerSave::Save()
 {
     auto manager = Game::Instance().GetResourceManager();
@@ -22,12 +23,12 @@ bool PlayerSave::Save()
         LOG_ERROR("PlayerSave::Save(): ResourceManager didn't find.");
         return false;
     }
-    
+
     if(!_save)
     {
         _save = std::unique_ptr<json>(new json()); // accept saving empty json
     }
-    
+
     return manager->SaveJson(_fileName, _save.get(), ResourceType::save);
 };
 
@@ -39,7 +40,7 @@ bool PlayerSave::Load()
         LOG_ERROR("PlayerSave::Load(): ResourceManager didn't find.");
         return false;
     }
-    
+
     auto save_json = manager->GetJson(_fileName, ResourceType::save);
     if(!save_json || save_json.get()->empty())
     {
@@ -49,11 +50,10 @@ bool PlayerSave::Load()
     {
         // create new save from start default settings
     }
-    
+
     json another;
     another["smth"] = 605;
-    
+
     manager->SaveJson(_fileName, &another, ResourceType::save);
     return true;
 };
-

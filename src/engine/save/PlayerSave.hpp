@@ -16,18 +16,27 @@
 
 using json = nlohmann::json;
 
+struct IPlayerInfo
+{
+    virtual void Save(json& data) = 0;
+    virtual void Load(const json& data) = 0;
+    
+    virtual void SetDefault() = 0;
+};
+
 class PlayerSave
 {
     const std::string _fileName = "save";
+    std::string _fullPath;
     
     std::unique_ptr<json> _save = nullptr;
-    std::string _fullPath;
+    IPlayerInfo* _saveInfo;
     
 public:
     bool Save();
     bool Load();
     
-//std::weak_ptr<json> GetSave() { return std::weak_ptr<json>{_save};};
+    IPlayerInfo* GetSave() { return _saveInfo;};
 };
 
 #endif /* PlayerSave_hpp */
