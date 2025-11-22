@@ -14,16 +14,14 @@
 struct HamsterPlayerInfo: public IPlayerInfo
 {
     // hamster states
-    int lifeTime;
-    int level;
+    int lifeTime = 0;
+    int level = 0;
     
-    int happyState;
-    int foodState;
+    int happyState = 0;
+    int foodState = 0;
   
 public:
-    void Save(json& data) override {};
-    void Load(const json& data) override{};
-    
-    void SetDefault() override {};
+    void Save(json& data) override;
+    void Load(const json& data) override;
 };
 #endif /* HamsterSave_hpp */

@@ -41,7 +41,7 @@ public:
     ~ResourceManager();
     
     //Json
-    std::shared_ptr<json> GetJson(const std::string& title, ResourceType type) const;
+    json* GetJson(const std::string& title, ResourceType type) const;
     bool SaveJson(const std::string& title, const json* src, ResourceType type) const;
     
     //Texture

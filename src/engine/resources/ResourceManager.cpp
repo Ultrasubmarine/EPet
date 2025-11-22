@@ -84,14 +84,14 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
 //    return j;
 //}
 
-std::shared_ptr<json> ResourceManager::GetJson(const std::string& title, ResourceType type) const
+json* ResourceManager::GetJson(const std::string& title, ResourceType type) const
 {
     std::string format = ".json";
     
     if(auto json_path = GetResourcePath(title, &format, type); !json_path.empty())
     {
         auto j = _jsonLoader->GetJson(json_path.string().c_str());
-        return std::shared_ptr<json>{j};
+        return j;
     }
     
     LOG_ERROR("ResourceManager::GetJson() json file (" << title <<") didn't found");

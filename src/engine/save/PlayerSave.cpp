@@ -15,6 +15,23 @@
 #include <filesystem>
 #include <fstream>
 
+
+PlayerSave::PlayerSave(IPlayerInfo* playerInfo): _saveInfo(playerInfo)
+{
+    if(!_saveInfo)
+    {
+        LOG_ERROR("PlayerSave::PlayerSave(): save info container doesn't set");
+    }
+}
+
+PlayerSave::~PlayerSave()
+{
+    if(_saveInfo)
+    {
+        delete _saveInfo;
+    }
+}
+
 bool PlayerSave::Save()
 {
     auto manager = Game::Instance().GetResourceManager();
@@ -23,13 +40,21 @@ bool PlayerSave::Save()
         LOG_ERROR("PlayerSave::Save(): ResourceManager didn't find.");
         return false;
     }
-
-    if(!_save)
+    if(!_saveInfo)
     {
-        _save = std::unique_ptr<json>(new json()); // accept saving empty json
+        LOG_ERROR("PlayerSave::Save(): saveInfo didn't find.");
+        return false;
+    }
+    
+    if(!_saveData)
+    {
+        _saveData = std::unique_ptr<json>(new json()); // accept saving empty json
     }
 
-    return manager->SaveJson(_fileName, _save.get(), ResourceType::save);
+    // serialize information
+    _saveInfo->Save(*_saveData.get());
+    
+    return manager->SaveJson(_fileName, _saveData.get(), ResourceType::save);
 };
 
 bool PlayerSave::Load()
@@ -40,20 +65,23 @@ bool PlayerSave::Load()
         LOG_ERROR("PlayerSave::Load(): ResourceManager didn't find.");
         return false;
     }
-
-    auto save_json = manager->GetJson(_fileName, ResourceType::save);
-    if(!save_json || save_json.get()->empty())
+    if(!_saveInfo)
     {
-        LOG_MESSAGE("PlayerSave::Load(): Save file didn't find.");
+        LOG_ERROR("PlayerSave::Load(): save info container doesn't set");
+        return false;
     }
-    else
+    
+    if(auto data = manager->GetJson(_fileName, ResourceType::save))
     {
-        // create new save from start default settings
+        _saveData = std::unique_ptr<json>(data);
+    }
+    else  // create new save from start default settings
+    {
+        LOG_MESSAGE("PlayerSave::Load(): Save file didn't find. Start new game");
+        _saveData = std::unique_ptr<json>(new json()); // accept saving empty json
     }
 
-    json another;
-    another["smth"] = 605;
-
-    manager->SaveJson(_fileName, &another, ResourceType::save);
+    // deserialize information
+    _saveInfo->Load(*_saveData.get());
     return true;
 };

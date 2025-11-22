@@ -18,10 +18,9 @@ using json = nlohmann::json;
 
 struct IPlayerInfo
 {
+    virtual ~IPlayerInfo() {};
     virtual void Save(json& data) = 0;
     virtual void Load(const json& data) = 0;
-    
-    virtual void SetDefault() = 0;
 };
 
 class PlayerSave
@@ -29,10 +28,14 @@ class PlayerSave
     const std::string _fileName = "save";
     std::string _fullPath;
     
-    std::unique_ptr<json> _save = nullptr;
+    std::unique_ptr<json> _saveData = nullptr;
     IPlayerInfo* _saveInfo;
     
 public:
+    
+    PlayerSave(IPlayerInfo* playerInfo);
+    ~PlayerSave();
+    
     bool Save();
     bool Load();
     

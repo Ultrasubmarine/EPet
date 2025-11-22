@@ -37,12 +37,11 @@ void SceneManager::LoadScene(std::string id)
         return;
     }
     
-    auto data_ptr = _resourceManager->GetJson(id, ResourceType::scene);
-    if(!data_ptr) {
+    auto data = _resourceManager->GetJson(id, ResourceType::scene);
+    if(!data) {
         LOG_ERROR("SceneManager::LoadScene() scene \""<<id<<"\" didn't find. Scene Loading canceled.");
         return;
     }
-    const auto data = data_ptr.get();
     
     if(_currentScene)
     {
@@ -62,7 +61,7 @@ void SceneManager::LoadScene(std::string id)
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);
     
-   // delete data;
+    delete data;
     LOG_MESSAGE("SceneManager::LoadScene() scene \""<<id<<"\" was created.");
 };
 
