@@ -1,0 +1,66 @@
+{
+    "objects": [
+        {
+            "components": [
+                {
+                    "id": "Image",
+                    "imageId": "Background"
+                },
+                {
+                    "id": "Transform",
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                {
+                    "id": "Sorting",
+                    "layer": 0
+                }
+            ]
+        },
+        {
+            "components": [
+                {
+                    "id": "Image",
+                    "imageId": "Hamster"
+                },
+                {
+                    "id": "Transform",
+                    "position": {
+                        "x": 180,
+                        "y": 135
+                    }
+                },
+                {
+                    "id": "Sorting",
+                    "layer": 10
+                }
+            ]
+        },
+        {
+            "components": [
+                {
+                    "id": "Sorting",
+                    "layer": 29
+                }
+            ]
+        },
+        {
+            "components": [
+                {
+                    "id": "Transform",
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    }
+                }
+            ]
+        }
+    ],
+    "scene": "scene2",
+    "systems": [
+        "TestSystem",
+        "RenderSystem"
+    ]
+}

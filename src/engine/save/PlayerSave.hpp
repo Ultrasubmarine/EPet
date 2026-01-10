@@ -21,6 +21,7 @@ struct IPlayerInfo
     virtual ~IPlayerInfo() {};
     virtual void Save(json& data) = 0;
     virtual void Load(const json& data) = 0;
+    virtual void SetDefaultValues() = 0;
 };
 
 class PlayerSave

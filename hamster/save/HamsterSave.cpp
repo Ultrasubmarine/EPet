@@ -6,14 +6,29 @@
 //
 
 #include "HamsterSave.hpp"
+#include "Logging.hpp"
+
+HamsterPlayerInfo::HamsterPlayerInfo()
+{
+    SetDefaultValues();
+}
 
 void HamsterPlayerInfo::Load(const json &data) {
 
-    lifeTime = data.value("lifeTime", 0);
-    level = data.value("level", 0);
-    
-    happyState = data.value("happyState", 0);
-    foodState = data.value("foodState", 0);
+    if(data.is_object())
+    {
+        lifeTime = data.value("lifeTime", 0);
+        level = data.value("level", 0);
+        
+        happyState = data.value("happyState", 0);
+        foodState = data.value("foodState", 0);
+        
+        LOG_MESSAGE("HamsterPlayerInfo::Load(): Load Player Info from save file");
+    }
+    else {
+        SetDefaultValues();
+        LOG_MESSAGE("HamsterPlayerInfo::Load(): Load Player Info from default values");
+    }
 }
 
 void HamsterPlayerInfo::Save(json &data) {
@@ -25,3 +40,10 @@ void HamsterPlayerInfo::Save(json &data) {
     data["foodState"]  = foodState;
 }
 
+void HamsterPlayerInfo::SetDefaultValues() {
+    lifeTime = 0;
+    level = 0;
+    
+    happyState = 0;
+    foodState = 0;
+}

@@ -59,6 +59,7 @@ bool PlayerSave::Save()
 
 bool PlayerSave::Load()
 {
+    bool saveFinded = false;
     auto manager = Game::Instance().GetResourceManager();
     if(!manager)
     {
@@ -74,14 +75,15 @@ bool PlayerSave::Load()
     if(auto data = manager->GetJson(_fileName, ResourceType::save))
     {
         _saveData = std::unique_ptr<json>(data);
+        saveFinded = true;
     }
     else  // create new save from start default settings
     {
         LOG_MESSAGE("PlayerSave::Load(): Save file didn't find. Start new game");
-        _saveData = std::unique_ptr<json>(new json()); // accept saving empty json
+        _saveData = std::unique_ptr<json>(new json({})); // accept saving empty json
     }
 
     // deserialize information
     _saveInfo->Load(*_saveData.get());
-    return true;
+    return saveFinded;
 };
