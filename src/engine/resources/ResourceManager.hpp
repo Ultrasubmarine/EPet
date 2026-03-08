@@ -22,18 +22,22 @@ enum class ResourceType
     font,
     scene,
     save,
-    settings
+    settings,
+    animation
 };
 
 class JsonLoader;
+class AnimationLoader;
 class ITextureLoader;
 
 struct Texture;
+struct Animation;
 
 class ResourceManager
 {
     JsonLoader* _jsonLoader;
     ITextureLoader* _textureLoader;
+    AnimationLoader* _animationLoader;
     
     std::filesystem::path _path; // to resources
 public:
@@ -46,6 +50,9 @@ public:
     
     //Texture
     std::shared_ptr<Texture> GetTexture(std::string& title);
+    
+    //Animation
+    std::shared_ptr<Animation> GetAnimation(const std::string& title);
     
     //Helper functions
     std::filesystem::path GetResourcePath(const std::string& name, const std::string* format /* could be nullptr */, ResourceType type) const;

@@ -47,6 +47,8 @@ bool Game::Init()
     _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
     _sceneManager->SaveScene();
     
+    std::string animName = "idle";
+    auto anim = _resourceManager->GetAnimation(animName);
     return true;
 }
 

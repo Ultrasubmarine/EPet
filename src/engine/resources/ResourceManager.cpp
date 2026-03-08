@@ -11,6 +11,8 @@
 #include "Logging.hpp"
 
 #include "JsonLoader.hpp"
+#include "AnimationLoader.hpp"
+
 #include "EngineSettings.h"
 
 ResourceManager::ResourceManager()
@@ -19,10 +21,12 @@ ResourceManager::ResourceManager()
     
     _jsonLoader = new JsonLoader();
     _textureLoader = new TextureLoader();
+    _animationLoader = new AnimationLoader(_jsonLoader);
 }
 
 ResourceManager::~ResourceManager()
 {
+    delete _animationLoader;
     delete _jsonLoader;
     delete _textureLoader;
 }
@@ -120,6 +124,23 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src, Resourc
     return false;
 }
 
+//Animation
+std::shared_ptr<Animation> ResourceManager::GetAnimation(const std::string& title)
+{
+    if (auto a = _animationLoader->GetAnimation(title)) {
+        return a;
+    }
+    
+    std::string format = ".json";
+    if (auto path = GetResourcePath(title, &format, ResourceType::animation); !path.empty()) {
+        auto a = _animationLoader->LoadAnimation(title, path.c_str());
+        return a;
+    }
+  
+    LOG_ERROR("animation " << title <<"didn't find");
+    return nullptr;
+}
+
 std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, const std::string* format, ResourceType type) const
 {
     auto candidate = _path;
@@ -143,6 +164,11 @@ std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, 
         case ResourceType::save:
         {
             candidate = GetSavePath();
+            break;
+        }
+        case ResourceType::animation:
+        {
+            candidate += "/animations";
             break;
         }
         default:

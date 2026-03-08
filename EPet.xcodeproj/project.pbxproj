@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022ED2F22F5DEFC70095E697 /* AnimationLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */; };
 		025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */; };
+		0268FF052F129B00004AD2D8 /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0268FF042F129B00004AD2D8 /* Time.cpp */; };
 		0284CCE42E7720D700BFBE96 /* RegisterComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0284CCE32E7720D700BFBE96 /* RegisterComponents.cpp */; };
 		02A143FF2E1C5F34000B7535 /* CommonComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02A143FE2E1C5F34000B7535 /* CommonComponents.cpp */; };
 		02AC90BF2D2AE12A00B75A8C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */; };
@@ -54,9 +56,13 @@
 
 /* Begin PBXFileReference section */
 		02117BFC2E10750E001D1E06 /* SceneUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneUtils.hpp; sourceTree = "<group>"; };
+		022ED2EE2F5DEEBF0095E697 /* AnimationLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationLoader.hpp; sourceTree = "<group>"; };
+		022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationLoader.cpp; sourceTree = "<group>"; };
 		025F2E892D88AD5A0090AE59 /* GetPath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GetPath.hpp; sourceTree = "<group>"; };
 		025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GetPath.cpp; sourceTree = "<group>"; };
 		025F2E8C2D88AD5A0090AE59 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
+		0268FF032F129B00004AD2D8 /* Time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Time.hpp; sourceTree = "<group>"; };
+		0268FF042F129B00004AD2D8 /* Time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Time.cpp; sourceTree = "<group>"; };
 		0271F9E62E12E407000958E1 /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
 		0284CCE22E7720D700BFBE96 /* RegisterComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RegisterComponents.hpp; sourceTree = "<group>"; };
 		0284CCE32E7720D700BFBE96 /* RegisterComponents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RegisterComponents.cpp; sourceTree = "<group>"; };
@@ -319,6 +325,8 @@
 				02DB3BF82DA80F7C00BE90D1 /* FrameRate.cpp */,
 				02DB3BF92DA80F7C00BE90D1 /* Game.hpp */,
 				02DB3BFA2DA80F7C00BE90D1 /* Game.cpp */,
+				0268FF032F129B00004AD2D8 /* Time.hpp */,
+				0268FF042F129B00004AD2D8 /* Time.cpp */,
 			);
 			name = engine;
 			path = src/engine;
@@ -332,6 +340,8 @@
 				02DB3BFC2DA80F7C00BE90D1 /* JsonLoader.cpp */,
 				02DB3C232DA921F800BE90D1 /* ITextureLoader.hpp */,
 				02DB3C242DA921F800BE90D1 /* ITextureLoader.cpp */,
+				022ED2EE2F5DEEBF0095E697 /* AnimationLoader.hpp */,
+				022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */,
 			);
 			path = loaders;
 			sourceTree = "<group>";
@@ -462,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				022ED2F22F5DEFC70095E697 /* AnimationLoader.cpp in Sources */,
 				02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */,
 				02DB3C322DAC1DDC00BE90D1 /* TestSystem.cpp in Sources */,
 				02E4874A2ECE578E00A627BB /* HamsterSave.cpp in Sources */,
@@ -477,6 +488,7 @@
 				02DB3C0D2DA80F7C00BE90D1 /* JsonLoader.cpp in Sources */,
 				02DB3C112DA80F7C00BE90D1 /* FrameRate.cpp in Sources */,
 				02DB3C142DA80F7C00BE90D1 /* SDLWindow.cpp in Sources */,
+				0268FF052F129B00004AD2D8 /* Time.cpp in Sources */,
 				02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */,
 				02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */,
 				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,
@@ -611,7 +623,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G48J393866;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -644,7 +656,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G48J393866;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
