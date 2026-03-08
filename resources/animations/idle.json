@@ -1,8 +1,8 @@
 {
    "frames": [
-       "idle_1",
-       "idle_2",
-       "idle_3"
+       "coinIcon",
+       "hamster",
+       "frog"
    ],
    "loop": false,
    "duration": 2.0

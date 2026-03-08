@@ -161,14 +161,14 @@ std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, 
             candidate += "/scenes";
             break;
         }
-        case ResourceType::save:
-        {
-            candidate = GetSavePath();
-            break;
-        }
         case ResourceType::animation:
         {
             candidate += "/animations";
+            break;
+        }
+        case ResourceType::save:
+        {
+            candidate = GetSavePath();
             break;
         }
         default:

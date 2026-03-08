@@ -8,6 +8,8 @@
 #include "AnimationLoader.hpp"
 #include "JsonLoader.hpp"
 #include "Logging.hpp"
+#include "Game.hpp"
+#include "ResourceManager.hpp"
 
 AnimationLoader::AnimationLoader(JsonLoader* loader): _jsonLoader(loader)
 {
@@ -40,6 +42,7 @@ std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& nam
     
     if(auto animationData = _jsonLoader->GetJson(fullPath))
     {
+// #example of json data:
 //        "frames": [
 //            "idle_1",
 //            "idle_2",
@@ -47,10 +50,11 @@ std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& nam
 //        ],
 //        "loop": false,
 //        "duration": 2.0
-     //   animationData["frames"];
         
-        bool loop = animationData["loop"].get<bool>();
-        std::vector<std::string> frames;
+        bool loop = (*animationData)["loop"].get<bool>();
+        float duration = (*animationData)["duration"].get<float>();
+        
+        std::vector<std::string> frameNames;
         
         if ((*animationData).contains("frames")) {
             auto framesData =(*animationData)["frames"];
@@ -59,28 +63,40 @@ std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& nam
 
                 if(auto currentFrame = it.value().get<std::string>(); !currentFrame.empty())
                 {
-                    frames.push_back(currentFrame);
+                    frameNames.push_back(currentFrame);
                 }
                 else{
                     LOG_MESSAGE("AnimationLoader::LoadAnimation() Empty animation in animation json data");
                 }
             }
         }
-        
-        
-        std::string = animationData["imageId"].get<std::string>();
-        std::shared_ptr<Animation> anim{ resource, [this](Texture* t){ this->DeleteTexture(t);}};
-        
-        _animations[name] = std::weak_ptr<Animation>{};
-        
         delete animationData;
-        return _animations[name].lock();
+        // finish loading from data
+        
+        
+        std::vector<std::shared_ptr<Texture>> frames;
+        if (auto resources = Game::Instance().GetResourceManager())
+        {
+            for(auto& f : frameNames)
+            {
+                frames.push_back(resources->GetTexture(f));
+            }
+        }
+      
+        auto resource = new Animation(frames, duration, loop, name);
+        std::shared_ptr<Animation> resource_ptr{ resource, [this](Animation* obj){ this->DeleteAnimation(obj);}};
+        
+        _animations[name] = std::weak_ptr<Animation>{resource_ptr};
+        return resource_ptr;
     }
    
     return nullptr;
 }
     
-void AnimationLoader::DeleteAnimation(Animation* texture)
+void AnimationLoader::DeleteAnimation(Animation* res)
 {
+    LOG_MESSAGE("AnimationLoader::DeleteAnimation() Animation ["<< res->_name <<"]");
+    _animations.erase(res->_name);
     
+    delete res;
 }

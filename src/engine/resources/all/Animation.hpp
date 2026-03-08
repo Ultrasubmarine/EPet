@@ -9,15 +9,17 @@
 #define Animation_hpp
 
 #include <stdio.h>
-#include <list>
-#include <variant>
+#include <vector>
 
 struct Texture;
 
 struct Animation
 {
-    std::list<std::shared_ptr<Texture>> _frames;
-    float duration = 1.0f;
-    bool loop = false;
+    std::vector<std::shared_ptr<Texture>> _frames;
+    float _duration = 1.0f;
+    bool _loop = false;
+    std::string _name;
+    
+    Animation(const std::vector<std::shared_ptr<Texture>>& frames, float duration, bool loop, const std::string& name /* maybe name id usless property */);
 };
 #endif /* Animation_hpp */
