@@ -24,7 +24,7 @@ protected:
     
 public:
     AnimationLoader(ResourceManager* resourceManager);
-    virtual ~AnimationLoader();
+    ~AnimationLoader();
     
     std::shared_ptr<Animation> GetAnimation(const std::string& name);
     std::shared_ptr<Animation> LoadAnimation(const std::string& name, const char *fullPath);

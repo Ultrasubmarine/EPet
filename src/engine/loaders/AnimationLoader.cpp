@@ -19,7 +19,7 @@ AnimationLoader::AnimationLoader(ResourceManager* manager): _resourceManager(man
 
 AnimationLoader::~AnimationLoader()
 {
-    //TODO Delete smth?
+    _animations.clear();
 }
     
 std::shared_ptr<Animation> AnimationLoader::GetAnimation(const std::string& name)
@@ -99,5 +99,15 @@ std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& nam
 
 void AnimationLoader::ClearExpiredAnimations()
 {
-    //TODO: delete expired elements
+    for(auto it = _animations.begin(); it != _animations.end();)
+    {
+        if(it->second.expired())
+        {
+            it = _animations.erase(it);
+        }
+        else
+        {
+            it++;
+        }
+    }
 }
