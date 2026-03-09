@@ -14,26 +14,23 @@
 
 #include "Animation.hpp"
 
-class JsonLoader;
-class ITextureLoader;
+class ResourceManager;
 
 class AnimationLoader
 {
 protected:
     std::unordered_map<std::string, std::weak_ptr<Animation>> _animations;
-    
-    JsonLoader* _jsonLoader; // for loading json animation file
-    ITextureLoader* _textureLoader; // for loading frames;
+    ResourceManager* _resourceManager;
     
 public:
-    AnimationLoader(JsonLoader* loader);
+    AnimationLoader(ResourceManager* resourceManager);
     virtual ~AnimationLoader();
     
     std::shared_ptr<Animation> GetAnimation(const std::string& name);
     std::shared_ptr<Animation> LoadAnimation(const std::string& name, const char *fullPath);
     
 protected:
-    void DeleteAnimation(Animation* texture);
+    void ClearExpiredAnimations();
 };
 
 #endif /* AnimationLoader_hpp */

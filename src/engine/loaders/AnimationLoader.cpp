@@ -6,16 +6,14 @@
 //
 
 #include "AnimationLoader.hpp"
-#include "JsonLoader.hpp"
-#include "Logging.hpp"
-#include "Game.hpp"
 #include "ResourceManager.hpp"
+#include "Logging.hpp"
 
-AnimationLoader::AnimationLoader(JsonLoader* loader): _jsonLoader(loader)
+AnimationLoader::AnimationLoader(ResourceManager* manager): _resourceManager(manager)
 {
-    if(!_jsonLoader)
+    if(!_resourceManager)
     {
-        LOG_ERROR("AnimationLoader::AnimationLoader() empty json loader. Impossible to load animations");
+        LOG_ERROR("AnimationLoader::AnimationLoader() empty ResourceManager. Impossible to load animations");
     }
 }
 
@@ -27,20 +25,20 @@ AnimationLoader::~AnimationLoader()
 std::shared_ptr<Animation> AnimationLoader::GetAnimation(const std::string& name)
 {
     if(auto it = _animations.find(name); it != _animations.end())
-        return it->second.lock() ;
+        return it->second.lock();
     
     return nullptr;
 }
 
 std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& name, const char *fullPath)
 {
-    if(!_jsonLoader)
+    if(!_resourceManager)
     {
-        LOG_ERROR("AnimationLoader::GetAnimation() empty json loader. Impossible to load animations");
+        LOG_ERROR("AnimationLoader::GetAnimation() empty ResourceManager. Impossible to load animations");
         return std::shared_ptr<Animation>{};
     }
     
-    if(auto animationData = _jsonLoader->GetJson(fullPath))
+    if(auto animationData = _resourceManager->GetJson(name, ResourceType::animation))
     {
 // #example of json data:
 //        "frames": [
@@ -51,40 +49,46 @@ std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& nam
 //        "loop": false,
 //        "duration": 2.0
         
-        bool loop = (*animationData)["loop"].get<bool>();
-        float duration = (*animationData)["duration"].get<float>();
+        bool loop = false;
+        if ((*animationData).contains("loop") && (*animationData)["loop"].is_boolean()) {
+            loop = (*animationData)["loop"].get<bool>();
+        }
+
+        float duration = 0.f;
+        if ((*animationData).contains("duration") && (*animationData)["duration"].is_number()) {
+            duration = (*animationData)["duration"].get<float>();
+        }
         
         std::vector<std::string> frameNames;
-        
-        if ((*animationData).contains("frames")) {
+        if ((*animationData).contains("frames") && (*animationData)["frames"].is_array()) {
             auto framesData =(*animationData)["frames"];
             
             for (json::iterator it = framesData.begin(); it != framesData.end(); ++it) {
 
+                if(!it.value().is_string())
+                {
+                    LOG_MESSAGE("AnimationLoader::LoadAnimation() not correct frame in animation json data [" << name << ".json]");
+                    continue;
+                }
                 if(auto currentFrame = it.value().get<std::string>(); !currentFrame.empty())
                 {
-                    frameNames.push_back(currentFrame);
+                    frameNames.push_back(std::move(currentFrame));
                 }
                 else{
-                    LOG_MESSAGE("AnimationLoader::LoadAnimation() Empty animation in animation json data");
+                    LOG_MESSAGE("AnimationLoader::LoadAnimation() Empty animation in animation json data [" << name << ".json]");
                 }
             }
         }
-        delete animationData;
         // finish loading from data
         
-        
         std::vector<std::shared_ptr<Texture>> frames;
-        if (auto resources = Game::Instance().GetResourceManager())
+        for(auto& f : frameNames)
         {
-            for(auto& f : frameNames)
-            {
-                frames.push_back(resources->GetTexture(f));
-            }
+            frames.push_back(_resourceManager->GetTexture(f));
         }
-      
+        
         auto resource = new Animation(frames, duration, loop, name);
-        std::shared_ptr<Animation> resource_ptr{ resource, [this](Animation* obj){ this->DeleteAnimation(obj);}};
+        std::shared_ptr<Animation> resource_ptr{resource};
         
         _animations[name] = std::weak_ptr<Animation>{resource_ptr};
         return resource_ptr;
@@ -92,11 +96,8 @@ std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& nam
    
     return nullptr;
 }
-    
-void AnimationLoader::DeleteAnimation(Animation* res)
+
+void AnimationLoader::ClearExpiredAnimations()
 {
-    LOG_MESSAGE("AnimationLoader::DeleteAnimation() Animation ["<< res->_name <<"]");
-    _animations.erase(res->_name);
-    
-    delete res;
+    //TODO: delete expired elements
 }

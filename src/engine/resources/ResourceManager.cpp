@@ -21,7 +21,7 @@ ResourceManager::ResourceManager()
     
     _jsonLoader = new JsonLoader();
     _textureLoader = new TextureLoader();
-    _animationLoader = new AnimationLoader(_jsonLoader);
+    _animationLoader = new AnimationLoader(this);
 }
 
 ResourceManager::~ResourceManager()
