@@ -62,3 +62,22 @@ void Image::Save(Image& obj, json& data)
 {
     data["imageId"] = obj.resoursesId;
 }
+
+
+Animator Animator::Load(const json& data)
+{
+    Animator obj;
+    if(data.contains("animationId") && data["animationId"].is_string())
+    {
+        obj.resoursesId = data["animationId"].get<std::string>();
+    }
+    
+    //TODO: Load resource callback;
+    obj.animation = Game::Instance().GetResourceManager()->GetAnimation(obj.resoursesId);
+    return obj;
+}
+
+void Animator::Save(Animator& obj, json& data)
+{
+    data["animationId"] = obj.resoursesId;
+}

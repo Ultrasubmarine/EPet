@@ -42,4 +42,19 @@ struct Image
     static Image Load(const json& data);
     static void Save(Image& obj, json& data);
 };
+
+
+struct Animation;
+
+struct Animator
+{
+    std::string resoursesId;
+    std::shared_ptr<Animation> animation;
+    
+    double timer = 0;
+    int frame = 0;
+    
+    static Animator Load(const json& data);
+    static void Save(Animator& obj, json& data);
+};
 #endif /* CommonComponents_hpp */

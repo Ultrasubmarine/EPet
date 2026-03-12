@@ -10,4 +10,13 @@
 
 #include <stdio.h>
 
+
+class Time
+{
+    
+   // std::chrono::nanoseconds _sessionDuration;
+    
+    
+};
+
 #endif /* Time_hpp */

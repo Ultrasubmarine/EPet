@@ -10,6 +10,7 @@
 		022ED2F22F5DEFC70095E697 /* AnimationLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */; };
 		025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */; };
 		0268FF052F129B00004AD2D8 /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0268FF042F129B00004AD2D8 /* Time.cpp */; };
+		027725612F63596800E8F256 /* AnimationSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027725602F63596800E8F256 /* AnimationSystem.cpp */; };
 		0284CCE42E7720D700BFBE96 /* RegisterComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0284CCE32E7720D700BFBE96 /* RegisterComponents.cpp */; };
 		02A143FF2E1C5F34000B7535 /* CommonComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02A143FE2E1C5F34000B7535 /* CommonComponents.cpp */; };
 		02AC90BF2D2AE12A00B75A8C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */; };
@@ -64,6 +65,8 @@
 		0268FF032F129B00004AD2D8 /* Time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Time.hpp; sourceTree = "<group>"; };
 		0268FF042F129B00004AD2D8 /* Time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Time.cpp; sourceTree = "<group>"; };
 		0271F9E62E12E407000958E1 /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		0277255F2F63596800E8F256 /* AnimationSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationSystem.hpp; sourceTree = "<group>"; };
+		027725602F63596800E8F256 /* AnimationSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationSystem.cpp; sourceTree = "<group>"; };
 		0284CCE22E7720D700BFBE96 /* RegisterComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RegisterComponents.hpp; sourceTree = "<group>"; };
 		0284CCE32E7720D700BFBE96 /* RegisterComponents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RegisterComponents.cpp; sourceTree = "<group>"; };
 		02A143FB2E1ACCB0000B7535 /* PointSerialization.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointSerialization.hpp; sourceTree = "<group>"; };
@@ -353,6 +356,8 @@
 				02DB3C2F2DAC1DDC00BE90D1 /* TestSystem.cpp */,
 				02C886882E50AF5F00B47F76 /* RenderSystem.hpp */,
 				02C886892E50AF5F00B47F76 /* RenderSystem.cpp */,
+				0277255F2F63596800E8F256 /* AnimationSystem.hpp */,
+				027725602F63596800E8F256 /* AnimationSystem.cpp */,
 			);
 			path = default;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				02DB3C112DA80F7C00BE90D1 /* FrameRate.cpp in Sources */,
 				02DB3C142DA80F7C00BE90D1 /* SDLWindow.cpp in Sources */,
 				0268FF052F129B00004AD2D8 /* Time.cpp in Sources */,
+				027725612F63596800E8F256 /* AnimationSystem.cpp in Sources */,
 				02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */,
 				02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */,
 				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,

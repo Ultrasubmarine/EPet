@@ -6,6 +6,7 @@
 //
 
 #include "Animation.hpp"
+#include "Logging.hpp"
 
 Animation::Animation(const std::vector<std::shared_ptr<Texture>>& frames, float duration, bool loop, const std::string& name):
     _frames(frames),
@@ -13,7 +14,11 @@ Animation::Animation(const std::vector<std::shared_ptr<Texture>>& frames, float 
     _loop(loop),
     _name(name)
 {
-    
 };
+
+Animation::~Animation()
+{
+    LOG_MESSAGE("Animation::~Animation() Delete animation ["<< _name <<"]");
+}
 
 

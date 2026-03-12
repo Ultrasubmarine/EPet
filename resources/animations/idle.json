@@ -4,6 +4,6 @@
        "hamster",
        "frog"
    ],
-   "loop": false,
+   "loop": true,
    "duration": 2.0
 }

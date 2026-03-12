@@ -45,10 +45,10 @@ bool Game::Init()
     
     _sceneManager = new SceneManager(_resourceManager);
     _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
-    _sceneManager->SaveScene();
+  //  _sceneManager->SaveScene();
     
-    std::string animName = "idle";
-    auto anim = _resourceManager->GetAnimation(animName);
+ //   std::string animName = "idle";
+ //  auto anim = _resourceManager->GetAnimation(animName);
     return true;
 }
 

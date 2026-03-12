@@ -20,6 +20,8 @@ struct Animation
     bool _loop = false;
     std::string _name;
     
-    Animation(const std::vector<std::shared_ptr<Texture>>& frames, float duration, bool loop, const std::string& name /* maybe name id usless property */);
+    Animation(const std::vector<std::shared_ptr<Texture>>& frames, float duration, bool loop, const std::string& name);
+    ~Animation();
+    
 };
 #endif /* Animation_hpp */
