@@ -10,6 +10,7 @@
 
 #include "Animation.hpp"
 #include "Texture.hpp"
+#include "Logging.hpp"
 
 SYSTEM_CPP(AnimationSystem);
 
@@ -18,7 +19,7 @@ void AnimationSystem::Init()
 
 void AnimationSystem::Update(double dt)
 {
-    
+   // dt = 0.6666;
     for(auto [entt, animator, image] :_registry.view<Animator, Image>().each())
     {
    
@@ -37,21 +38,27 @@ void AnimationSystem::Update(double dt)
                 animator.timer = 0; // or animator.timer -= animator.animation->_duration ?
             }
         }
+        
+        double oneFrameTime = animator.animation->_duration / (animator.animation->_frames.size());
+        
+        int currentFrameIndex = animator.timer / oneFrameTime;
+        currentFrameIndex = std::min(currentFrameIndex, static_cast<int>(animator.animation->_frames.size() - 1));
+        
+        SwitchFrame(entt, animator, image,currentFrameIndex);
+        
         animator.timer += dt;
-        
-        double oneFrameTime = animator.animation->_duration / animator.animation->_frames.size();
-        
-        int currentFrameTime = animator.timer / oneFrameTime;
-        currentFrameTime = std::min(currentFrameTime, static_cast<int>(animator.animation->_frames.size() - 1));
-        
-        SwitchFrame(entt, animator, image,currentFrameTime);
-        
     }
     
 }
 
 void AnimationSystem::SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex)
 {
+    if(image.resource == animator.animation->_frames[frameIndex])
+    {
+        return;
+    }
+    
+    LOG_MESSAGE("Set animation frame"<< frameIndex<< " ["<< image.resoursesId<< "]");
     image.resource = animator.animation->_frames[frameIndex];
     image.resoursesId = animator.animation->_frames[frameIndex]->name;
     

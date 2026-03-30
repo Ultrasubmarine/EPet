@@ -1,9 +1,17 @@
 {
    "frames": [
-       "coinIcon",
-       "hamster",
-       "frog"
+       "Nymph_idle/Nymph_idle - 1",
+       "Nymph_idle/Nymph_idle - 2",
+       "Nymph_idle/Nymph_idle - 3",
+       "Nymph_idle/Nymph_idle - 4",
+       "Nymph_idle/Nymph_idle - 5",
+       "Nymph_idle/Nymph_idle - 6",
+       "Nymph_idle/Nymph_idle - 7",
+       "Nymph_idle/Nymph_idle - 8",
+       "Nymph_idle/Nymph_idle - 9",
+       "Nymph_idle/Nymph_idle - 10",
+       "Nymph_idle/Nymph_idle - 11"
    ],
    "loop": true,
-   "duration": 2.0
+   "duration": 3.0
 }
