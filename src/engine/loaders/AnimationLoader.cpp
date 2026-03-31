@@ -40,7 +40,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
     
     if(auto animationData = _resourceManager->GetJson(name, ResourceType::animation))
     {
-// #example of json data:
+// example of json data:
 //        "frames": [
 //            "idle_1",
 //            "idle_2",
@@ -49,6 +49,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
 //        "loop": false,
 //        "duration": 2.0
         
+        // start loading from json data
         bool loop = false;
         if ((*animationData).contains("loop") && (*animationData)["loop"].is_boolean()) {
             loop = (*animationData)["loop"].get<bool>();
@@ -67,7 +68,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
 
                 if(!it.value().is_string())
                 {
-                    LOG_MESSAGE("AnimationLoader::LoadAnimation() not correct frame in animation json data [" << name << ".json]");
+                    LOG_MESSAGE("AnimationLoader::LoadAnimation() incorrect frame in animation json data [" << name << ".json]");
                     continue;
                 }
                 if(auto currentFrame = it.value().get<std::string>(); !currentFrame.empty())
@@ -79,7 +80,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
                 }
             }
         }
-        // finish loading from data
+        // finish loading from json data
         
         std::vector<std::shared_ptr<Texture>> frames;
         for(auto& f : frameNames)
@@ -93,7 +94,8 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
         _animations[name] = std::weak_ptr<const Animation>{resource_ptr};
         return resource_ptr;
     }
-   
+    
+    LOG_ERROR("AnimationLoader::GetAnimation() json file for animation [" << name << ".json] didn't find");
     return nullptr;
 }
 

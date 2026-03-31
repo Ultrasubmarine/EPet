@@ -54,8 +54,6 @@ struct Animator
     double timer = 0;
     int frame = 0;
     
-    double _oneFrameTime = 0; // calculated property!
-    
     static Animator Load(const json& data);
     static void Save(Animator& obj, json& data);
 };
