@@ -49,10 +49,12 @@ struct Animation;
 struct Animator
 {
     std::string resoursesId;
-    std::shared_ptr<Animation> animation;
+    std::shared_ptr<const Animation> animation;
     
     double timer = 0;
     int frame = 0;
+    
+    double _oneFrameTime = 0; // calculated property!
     
     static Animator Load(const json& data);
     static void Save(Animator& obj, json& data);

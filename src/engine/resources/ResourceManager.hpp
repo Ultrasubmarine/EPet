@@ -52,7 +52,7 @@ public:
     std::shared_ptr<Texture> GetTexture(std::string& title);
     
     //Animation
-    std::shared_ptr<Animation> GetAnimation(const std::string& title);
+    std::shared_ptr<const Animation> GetAnimation(const std::string& title);
     
     //Helper functions
     std::filesystem::path GetResourcePath(const std::string& name, const std::string* format /* could be nullptr */, ResourceType type) const;

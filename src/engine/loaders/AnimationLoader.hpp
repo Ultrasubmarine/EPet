@@ -19,15 +19,15 @@ class ResourceManager;
 class AnimationLoader
 {
 protected:
-    std::unordered_map<std::string, std::weak_ptr<Animation>> _animations;
+    std::unordered_map<std::string, std::weak_ptr<const Animation>> _animations;
     ResourceManager* _resourceManager;
     
 public:
     AnimationLoader(ResourceManager* resourceManager);
     ~AnimationLoader();
     
-    std::shared_ptr<Animation> GetAnimation(const std::string& name);
-    std::shared_ptr<Animation> LoadAnimation(const std::string& name, const char *fullPath);
+    std::shared_ptr<const Animation> GetAnimation(const std::string& name);
+    std::shared_ptr<const Animation> LoadAnimation(const std::string& name, const char *fullPath);
     
 protected:
     void ClearExpiredAnimations();

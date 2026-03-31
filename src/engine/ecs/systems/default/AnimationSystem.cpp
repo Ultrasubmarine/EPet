@@ -19,14 +19,8 @@ void AnimationSystem::Init()
 
 void AnimationSystem::Update(double dt)
 {
-   // dt = 0.6666;
     for(auto [entt, animator, image] :_registry.view<Animator, Image>().each())
     {
-   
-        const auto entityCopy = entt;
-        auto& anim = animator;
-        auto& img = image;
-        
         if(animator.timer >= animator.animation->_duration)
         {
             if(!animator.animation->_loop)
@@ -35,17 +29,14 @@ void AnimationSystem::Update(double dt)
             }
             else
             {
-                animator.timer = 0; // or animator.timer -= animator.animation->_duration ?
+                animator.timer = std::fmod(animator.timer, animator.animation->_duration);
             }
         }
         
-        double oneFrameTime = animator.animation->_duration / (animator.animation->_frames.size());
-        
-        int currentFrameIndex = animator.timer / oneFrameTime;
-        currentFrameIndex = std::min(currentFrameIndex, static_cast<int>(animator.animation->_frames.size() - 1));
+        int currentFrameIndex = animator.timer / animator.animation->_oneFrameTime;
+        currentFrameIndex = std::max(0, std::min(currentFrameIndex, static_cast<int>(animator.animation->_frames.size() - 1)));
         
         SwitchFrame(entt, animator, image,currentFrameIndex);
-        
         animator.timer += dt;
     }
     

@@ -8,12 +8,13 @@
 #include "Animation.hpp"
 #include "Logging.hpp"
 
-Animation::Animation(const std::vector<std::shared_ptr<Texture>>& frames, float duration, bool loop, const std::string& name):
+Animation::Animation(const std::vector<std::shared_ptr<Texture>>& frames, double duration, bool loop, const std::string& name):
     _frames(frames),
     _duration(duration),
     _loop(loop),
     _name(name)
 {
+    _oneFrameTime = _duration / _frames.size();
 };
 
 Animation::~Animation()

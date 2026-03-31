@@ -22,7 +22,7 @@ AnimationLoader::~AnimationLoader()
     _animations.clear();
 }
     
-std::shared_ptr<Animation> AnimationLoader::GetAnimation(const std::string& name)
+std::shared_ptr<const Animation> AnimationLoader::GetAnimation(const std::string& name)
 {
     if(auto it = _animations.find(name); it != _animations.end())
         return it->second.lock();
@@ -30,12 +30,12 @@ std::shared_ptr<Animation> AnimationLoader::GetAnimation(const std::string& name
     return nullptr;
 }
 
-std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& name, const char *fullPath)
+std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::string& name, const char *fullPath)
 {
     if(!_resourceManager)
     {
         LOG_ERROR("AnimationLoader::GetAnimation() empty ResourceManager. Impossible to load animations");
-        return std::shared_ptr<Animation>{};
+        return std::shared_ptr<const Animation>{};
     }
     
     if(auto animationData = _resourceManager->GetJson(name, ResourceType::animation))
@@ -88,9 +88,9 @@ std::shared_ptr<Animation> AnimationLoader::LoadAnimation(const std::string& nam
         }
         
         auto resource = new Animation(frames, duration, loop, name);
-        std::shared_ptr<Animation> resource_ptr{resource};
+        std::shared_ptr<const Animation> resource_ptr{resource};
         
-        _animations[name] = std::weak_ptr<Animation>{resource_ptr};
+        _animations[name] = std::weak_ptr<const Animation>{resource_ptr};
         return resource_ptr;
     }
    

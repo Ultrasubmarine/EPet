@@ -125,7 +125,7 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src, Resourc
 }
 
 //Animation
-std::shared_ptr<Animation> ResourceManager::GetAnimation(const std::string& title)
+std::shared_ptr<const Animation> ResourceManager::GetAnimation(const std::string& title)
 {
     if (auto a = _animationLoader->GetAnimation(title)) {
         return a;

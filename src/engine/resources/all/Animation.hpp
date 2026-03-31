@@ -16,11 +16,13 @@ struct Texture;
 struct Animation
 {
     std::vector<std::shared_ptr<Texture>> _frames;
-    float _duration = 1.0f;
+    double _duration = 1.0;
     bool _loop = false;
     std::string _name;
     
-    Animation(const std::vector<std::shared_ptr<Texture>>& frames, float duration, bool loop, const std::string& name);
+    double _oneFrameTime = 0.0; // calculated property!
+    
+    Animation(const std::vector<std::shared_ptr<Texture>>& frames, double duration, bool loop, const std::string& name);
     ~Animation();
     
 };
