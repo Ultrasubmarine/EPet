@@ -13,5 +13,6 @@
        "Nymph_idle/Nymph_idle - 11"
    ],
    "loop": true,
-   "duration": 3.0
+   "duration": 3.0,
+   "playMode": "Forward"
 }

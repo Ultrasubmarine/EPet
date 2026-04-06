@@ -24,7 +24,7 @@ public:
     
 private:
     
-    bool CanMoveToNextFrame(entt::entity, Animator& animator, Image& image);
-    void SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex);
+    void SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex) const;
+    int CalculateCurrentFrame(entt::entity, Animator& animator) const;
 };
 #endif /* AnimationSystem_hpp */

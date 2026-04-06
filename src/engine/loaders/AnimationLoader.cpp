@@ -7,6 +7,8 @@
 
 #include "AnimationLoader.hpp"
 #include "ResourceManager.hpp"
+#include "PlayModeJSON.hpp"
+
 #include "Logging.hpp"
 
 AnimationLoader::AnimationLoader(ResourceManager* manager): _resourceManager(manager)
@@ -80,6 +82,16 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
                 }
             }
         }
+        
+        PlayMode playMode = PlayMode::Forward;
+
+        if (animationData->contains("playMode") && (*animationData)["playMode"].is_string()) {
+            try {
+                playMode = (*animationData)["playMode"].get<PlayMode>();
+            } catch (const std::exception& e) {
+                LOG_MESSAGE("AnimationLoader::LoadAnimation() unknown playMode in [" << name << ".json]: " << e.what());
+            }
+        }
         // finish loading from json data
         
         std::vector<std::shared_ptr<Texture>> frames;
@@ -88,7 +100,8 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
             frames.push_back(_resourceManager->GetTexture(f));
         }
         
-        auto resource = new Animation(frames, duration, loop, name);
+        
+        auto resource = new Animation(frames, duration, loop, playMode, name);
         std::shared_ptr<const Animation> resource_ptr{resource};
         
         _animations[name] = std::weak_ptr<const Animation>{resource_ptr};

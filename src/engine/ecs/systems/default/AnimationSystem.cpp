@@ -33,6 +33,13 @@ void AnimationSystem::Update(double dt)
             }
         }
         
+        if(animator.animation->_frames.empty())
+        {
+            LOG_ERROR("AnimationSystem::Update() animation ["<<animator.animation->_name<<"] doesn't have any frames");
+            //TODO: add finish component
+            return;
+        }
+        
         int currentFrameIndex = animator.timer / animator.animation->_oneFrameTime;
         currentFrameIndex = std::max(0, std::min(currentFrameIndex, static_cast<int>(animator.animation->_frames.size() - 1)));
         
@@ -42,14 +49,40 @@ void AnimationSystem::Update(double dt)
     
 }
 
-void AnimationSystem::SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex)
+int AnimationSystem::CalculateCurrentFrame(entt::entity, Animator& animator) const
 {
-    if(animator.animation->_frames.empty())
-    {
-        LOG_ERROR("AnimationSystem::SwitchFrame() animation ["<<animator.animation->_name<<"] doesn't have any frames");
-        return;
+    int currentFrameIndex = 0;
+    switch (animator.animation->_mode) {
+        case PlayMode::Forward:
+        {
+            currentFrameIndex = animator.timer / animator.animation->_oneFrameTime;
+            return currentFrameIndex;
+        }
+        case PlayMode::Reverse:
+        {
+            currentFrameIndex = (animator.animation->_duration - animator.timer)/ animator.animation->_oneFrameTime;
+            return currentFrameIndex;
+        }
+        case PlayMode::YoYo:
+        {
+            if(animator.timer < animator.animation->_duration/2) // as forward
+            {
+                
+            }
+            else // as reverse
+            currentFrameIndex = (animator.animation->_duration/2 - animator.timer)/ animator.animation->_oneFrameTime;
+            return currentFrameIndex;
+        }
+        default:
+            break;
     }
-    
+
+    currentFrameIndex = std::max(0, std::min(currentFrameIndex, static_cast<int>(animator.animation->_frames.size() - 1)));
+    return currentFrameIndex;
+}
+
+void AnimationSystem::SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex) const
+{
     if(image.resource == animator.animation->_frames[frameIndex])
     {
         return;
