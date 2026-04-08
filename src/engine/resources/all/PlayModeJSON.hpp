@@ -7,7 +7,8 @@
 // Values: "forward", "reverse", "yoyo"
 
 NLOHMANN_JSON_SERIALIZE_ENUM(PlayMode, {
-    {PlayMode::Forward, "forward"},
-    {PlayMode::Reverse, "reverse"},
-    {PlayMode::YoYo,    "yoyo"},
+    {PlayMode::None, ""},
+    {PlayMode::Forward, "Forward"},
+    {PlayMode::Reverse, "Reverse"},
+    {PlayMode::YoYo,    "YoYo"},
 })

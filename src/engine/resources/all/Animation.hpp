@@ -17,6 +17,7 @@ struct Texture;
 
 enum class PlayMode
 {
+    None, // for unresolving files
     Forward,
     Reverse,
     YoYo

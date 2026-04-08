@@ -5,14 +5,9 @@
        "Nymph_idle/Nymph_idle - 3",
        "Nymph_idle/Nymph_idle - 4",
        "Nymph_idle/Nymph_idle - 5",
-       "Nymph_idle/Nymph_idle - 6",
-       "Nymph_idle/Nymph_idle - 7",
-       "Nymph_idle/Nymph_idle - 8",
-       "Nymph_idle/Nymph_idle - 9",
-       "Nymph_idle/Nymph_idle - 10",
-       "Nymph_idle/Nymph_idle - 11"
+       "Nymph_idle/Nymph_idle - 6"
    ],
    "loop": true,
    "duration": 3.0,
-   "playMode": "Forward"
+   "playMode": "YoYo"
 }

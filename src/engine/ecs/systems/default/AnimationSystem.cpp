@@ -40,10 +40,10 @@ void AnimationSystem::Update(double dt)
             return;
         }
         
-        int currentFrameIndex = animator.timer / animator.animation->_oneFrameTime;
-        currentFrameIndex = std::max(0, std::min(currentFrameIndex, static_cast<int>(animator.animation->_frames.size() - 1)));
         
+        int currentFrameIndex = CalculateCurrentFrame(entt, animator);
         SwitchFrame(entt, animator, image,currentFrameIndex);
+        
         animator.timer += dt;
     }
     
@@ -56,22 +56,25 @@ int AnimationSystem::CalculateCurrentFrame(entt::entity, Animator& animator) con
         case PlayMode::Forward:
         {
             currentFrameIndex = animator.timer / animator.animation->_oneFrameTime;
-            return currentFrameIndex;
+            break;
         }
         case PlayMode::Reverse:
         {
             currentFrameIndex = (animator.animation->_duration - animator.timer)/ animator.animation->_oneFrameTime;
-            return currentFrameIndex;
+            break;
         }
         case PlayMode::YoYo:
         {
             if(animator.timer < animator.animation->_duration/2) // as forward
             {
-                
+                currentFrameIndex = animator.timer / animator.animation->_oneFrameTime;
+                break;
             }
             else // as reverse
-            currentFrameIndex = (animator.animation->_duration/2 - animator.timer)/ animator.animation->_oneFrameTime;
-            return currentFrameIndex;
+            {
+                currentFrameIndex = (animator.animation->_duration - animator.timer)/ animator.animation->_oneFrameTime;
+                break;
+            }
         }
         default:
             break;

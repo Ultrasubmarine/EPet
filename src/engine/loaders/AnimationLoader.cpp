@@ -84,12 +84,13 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
         }
         
         PlayMode playMode = PlayMode::Forward;
-
         if (animationData->contains("playMode") && (*animationData)["playMode"].is_string()) {
-            try {
-                playMode = (*animationData)["playMode"].get<PlayMode>();
-            } catch (const std::exception& e) {
-                LOG_MESSAGE("AnimationLoader::LoadAnimation() unknown playMode in [" << name << ".json]: " << e.what());
+            
+            playMode = (*animationData)["playMode"].get<PlayMode>();
+            if( playMode == PlayMode::None)
+            {
+                auto str = (*animationData)["playMode"].get<std::string>();
+                LOG_ERROR("AnimationLoader::LoadAnimation() unknown playMode ["<<str<<"] in [" << name << ".json]");
             }
         }
         // finish loading from json data
