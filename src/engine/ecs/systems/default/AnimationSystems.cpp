@@ -5,29 +5,31 @@
 //  Created by marina porkhunova on 12.03.2026.
 //
 
-#include "AnimationSystem.hpp"
+#include "AnimationSystems.hpp"
 #include "CommonComponents.hpp"
 
 #include "Animation.hpp"
 #include "Texture.hpp"
 #include "Logging.hpp"
 
-SYSTEM_CPP(AnimationSystem);
+SYSTEM_CPP(AnimationUpdateSystem);
+SYSTEM_CPP(AnimationFinishSystem);
 
-void AnimationSystem::Init()
-{};
-
-void AnimationSystem::Update(double dt)
+void AnimationUpdateSystem::Update(double dt)
 {
-    for(auto [entt, animator, image] :_registry.view<Animator, Image>().each())
+    ClearOneFrameComponents();
+    
+    for(auto [entt, animator, image] :_registry.view<Animator, Image>(entt::exclude<AnimationFinished>).each())
     {
+        
         if(animator.timer >= animator.animation->_duration)
         {
             if(!animator.animation->_loop)
             {
+                FinishAnimation(entt, animator);
                 continue;
             }
-            else
+            else // refresh timer
             {
                 animator.timer = std::fmod(animator.timer, animator.animation->_duration);
             }
@@ -36,10 +38,9 @@ void AnimationSystem::Update(double dt)
         if(animator.animation->_frames.empty())
         {
             LOG_ERROR("AnimationSystem::Update() animation ["<<animator.animation->_name<<"] doesn't have any frames");
-            //TODO: add finish component
+            FinishAnimation(entt, animator);
             return;
         }
-        
         
         int currentFrameIndex = CalculateCurrentFrame(entt, animator);
         SwitchFrame(entt, animator, image,currentFrameIndex);
@@ -49,7 +50,12 @@ void AnimationSystem::Update(double dt)
     
 }
 
-int AnimationSystem::CalculateCurrentFrame(entt::entity, Animator& animator) const
+void AnimationUpdateSystem::ClearOneFrameComponents() const
+{
+    _registry.clear<AnimationFinished_OF>();
+}
+
+int AnimationUpdateSystem::CalculateCurrentFrame(entt::entity, Animator& animator) const
 {
     int currentFrameIndex = 0;
     switch (animator.animation->_mode) {
@@ -84,7 +90,7 @@ int AnimationSystem::CalculateCurrentFrame(entt::entity, Animator& animator) con
     return currentFrameIndex;
 }
 
-void AnimationSystem::SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex) const
+void AnimationUpdateSystem::SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex) const
 {
     if(image.resource == animator.animation->_frames[frameIndex])
     {
@@ -96,4 +102,23 @@ void AnimationSystem::SwitchFrame(entt::entity, Animator& animator, Image& image
     image.resoursesId = animator.animation->_frames[frameIndex]->name;
     
     animator.frame = frameIndex;
+}
+
+void AnimationUpdateSystem::FinishAnimation(entt::entity ent, Animator& animator) const
+{
+    _registry.emplace_or_replace<AnimationFinished_OF>(ent, animator.resoursesId);
+}
+
+
+
+
+
+// FINISH ANIMATION
+void AnimationFinishSystem::Update(double)
+{
+    for(auto [entt, animator, _ ] :_registry.view<Animator, AnimationFinished_OF>().each())
+    {
+        //mark us finished
+        _registry.emplace_or_replace<AnimationFinished>(entt, animator.resoursesId);
+    }
 }

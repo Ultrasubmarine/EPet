@@ -62,7 +62,8 @@
    "systems": [
        "TestSystem",
        "AAATestSystem",
-       "AnimationSystem",
+       "AnimationUpdateSystem",
+       "AnimationFinishSystem",
        "RenderSystem"
    ]
 }

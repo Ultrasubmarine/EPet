@@ -57,4 +57,16 @@ struct Animator
     static Animator Load(const json& data);
     static void Save(Animator& obj, json& data);
 };
+
+struct AnimationFinished
+{
+    std::string resoursesId;
+};
+
+struct AnimationFinished_OF /// one shot
+{
+    std::string resoursesId;
+};
+
+
 #endif /* CommonComponents_hpp */
