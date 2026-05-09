@@ -16,6 +16,7 @@
 #include "Input.hpp"
 #include "Scene.hpp"
 #include "PlayerSave.hpp"
+#include "Time.hpp"
 
 bool Game::Init()
 {
@@ -45,6 +46,9 @@ bool Game::Init()
     
     _sceneManager = new SceneManager(_resourceManager);
     _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
+
+    Time::Instance().Init();
+    
   //  _sceneManager->SaveScene();
     
  //   std::string animName = "idle";
@@ -111,8 +115,13 @@ void Game::Loop()
     while(isPlay)
     {
         Input();
-        _sceneManager->Update(_frameRate->GetDeltaTime());
+        float dtMs = _frameRate->GetDeltaTime();
+        
+        Time::Instance().Update(dtMs);
+        _sceneManager->Update(dtMs);
+        
         RenderAll();
         _frameRate->WaitFrame();
     }
 }
+
