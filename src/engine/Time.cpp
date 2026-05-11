@@ -11,6 +11,7 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include "Logging.hpp"
 
 void Time::Init()
 {
