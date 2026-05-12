@@ -13,8 +13,10 @@
 
 struct SDLFont
 {
-    TTF_Font *font;
-
+private:
+      TTF_Font *font; // it's okey with raw pointer
+    
+public:
     SDLFont(TTF_Font *res) : font(res) {};
     ~SDLFont()
     {
@@ -28,6 +30,8 @@ struct SDLFont
     //no move
     SDLFont(const SDLFont&&) = delete;
     SDLFont& operator=(const SDLFont&&) = delete;
+    
+    const TTF_Font* GetFont() const { return font;};
 };
 
 #endif /* Font_h */

@@ -19,12 +19,16 @@ struct Font
     std::string name;
     std::variant<std::unique_ptr<SDLFont>> resource;
     
-    Font(const std::string& name, SDLFont* res): name(name), resource(std::unique_ptr<SDLFont>(res)) {};
-    Font(const char* name, SDLFont* res): name(name), resource(std::unique_ptr<SDLFont>(res)) {};
+    Font(const std::string& name, std::unique_ptr<SDLFont> SDLres);
+    Font(const char* name, std::unique_ptr<SDLFont> SDLres);
     
+    ~Font();
+    
+    // no copy
     Font(Font& other) = delete;
     Font& operator=(const Font& other) = delete;
     
+    //no move
     Font(Font&& other) = delete;
     Font& operator=(const Font&& other) = delete;
 };

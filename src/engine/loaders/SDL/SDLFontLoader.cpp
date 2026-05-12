@@ -8,10 +8,14 @@
 #include <iostream>
 #include "SDLFontLoader.hpp"
 
-#include "SDLRender.hpp"
-#include "Game.hpp"
-#include "Font.hpp"
+#include <SDL2/SDL.h>
+#include <SDL2_ttf/SDL_ttf.h>
 
+#include "SDLRender.hpp"
+#include "SDLFont.h"
+#include "SDLTextTexture.hpp" // TODO: Delete this
+
+#include "Game.hpp"
 #include "Logging.hpp"
 
 
@@ -44,17 +48,15 @@ SDLFontLoader::SDLFontLoader()
 Font* SDLFontLoader::_LoadFont(const std::string& name, const char *fullPath)
 {
     auto f = TTF_OpenFont(fullPath, 24);
-    if(f) {
+    if(!f) {
         LOG_ERROR("SDLFontLoader::_LoadFont() error with open ttf font ");
         return nullptr;
     }
     
-    std::shared_ptr<Font> font{new Font{name,f}, [this](Font *f){ this->DeleteFont(f);} };
-    if(font) {
-        _fonts[name] = std::weak_ptr<Font>{font};
-        return font;
-    }
-    return nullptr;
+    auto sdl = std::make_unique<SDLFont>(f);
+    auto font = new Font(name, std::move(sdl));
+
+    return font;
 }
 
 
