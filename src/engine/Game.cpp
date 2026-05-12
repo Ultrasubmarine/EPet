@@ -18,6 +18,8 @@
 #include "PlayerSave.hpp"
 #include "Time.hpp"
 
+#include "IFontLoader.hpp"
+
 bool Game::Init()
 {
     _window = new Window();
@@ -49,6 +51,8 @@ bool Game::Init()
 
     Time::Instance().Init();
     
+    std::string font_name = std::string(DEFAULT_FONT);
+    auto font_object = _resourceManager->GetFont(font_name);
   //  _sceneManager->SaveScene();
     
  //   std::string animName = "idle";

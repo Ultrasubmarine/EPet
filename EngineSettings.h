@@ -13,6 +13,7 @@
 #include "SDLRender.hpp"
 #include "SDLInputKeys.h"
 #include "SDLTextureLoader.hpp"
+#include "SDLFontLoader.hpp"
 #endif //SDL
 
 // TMP PLACE hamster

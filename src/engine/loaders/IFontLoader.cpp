@@ -20,18 +20,18 @@ void IFontLoader::DeleteFont(Font* font)
 std::shared_ptr<Font> IFontLoader::GetFont(const std::string& name)
 {
     if(auto it = _fonts.find(name); it != _fonts.end())
-        return it->second.lock();
+        return it->second;
     
     return nullptr;
 }
 
-std::shared_ptr<Font> IFontLoader::LoadFont(const std::string& name, char *fullPath)
+std::shared_ptr<Font> IFontLoader::LoadFont(const std::string& name, const char *fullPath)
 {
     if(auto resource = _LoadFont(name, fullPath))
     {
         std::shared_ptr<Font> font{ resource, [this](Font* t){ this->DeleteFont(t);}};
         
-        _fonts[name] = std::weak_ptr<Font>{font};
+        _fonts[name] = font;
         return font;
     }
     

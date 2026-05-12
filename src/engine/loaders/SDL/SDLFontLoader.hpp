@@ -27,5 +27,5 @@ protected:
     virtual Font* _LoadFont(const std::string& name, const char *fullPath) override;
 };
 
-
+using FontLoader = SDLFontLoader;
 #endif /* SDLFontLoader_hpp */

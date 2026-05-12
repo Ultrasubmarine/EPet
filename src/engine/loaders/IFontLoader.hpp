@@ -17,7 +17,7 @@
 
 class IFontLoader
 {
-    std::unordered_map<std::string, std::weak_ptr<Font>> _fonts;
+    std::unordered_map<std::string, std::shared_ptr<Font>> _fonts;
     
 public:
     virtual ~IFontLoader() {};
@@ -26,7 +26,7 @@ public:
  //   std::shared_ptr<TextTexture> GetText(std::string& text, std::shared_ptr<Font> font, int fsize, SDL_Color color);
     
     std::shared_ptr<Font> GetFont(const std::string& name);
-    std::shared_ptr<Font> LoadFont(const std::string& name, char *fullPath);
+    std::shared_ptr<Font> LoadFont(const std::string& name, const char *fullPath);
     
     void DeleteFont(Font* font);
     void DeleteFont(std::string fontName);

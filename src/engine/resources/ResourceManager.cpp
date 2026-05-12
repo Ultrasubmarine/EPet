@@ -12,6 +12,7 @@
 
 #include "JsonLoader.hpp"
 #include "AnimationLoader.hpp"
+#include "IFontLoader.hpp"
 
 #include "EngineSettings.h"
 
@@ -22,6 +23,7 @@ ResourceManager::ResourceManager()
     _jsonLoader = new JsonLoader();
     _textureLoader = new TextureLoader();
     _animationLoader = new AnimationLoader(this);
+    _fontLoader = new FontLoader();
 }
 
 ResourceManager::~ResourceManager()
@@ -47,21 +49,23 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
     return nullptr;
 }
 
-//std::shared_ptr<Font> ResourceManager::GetFont(std::string& name)
-//{
-//    auto ft = _fontLoader->GetFont(name);
-//    if(ft)
-//        return ft;
-//
-//    std::string r_path ="resources/fonts/" + name;
-//    std::string type = "ttf";
-//
-//    char *font_path = GetPath(r_path, type);
-//    ft = _fontLoader->LoadFont(name, font_path);
-//    delete font_path;
-//
-//    return ft;
-//}
+
+std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
+{
+    if( auto f = _fontLoader->GetFont(title))
+    {
+        return f;
+    }
+        
+    std::string format = ".ttf";
+    if (auto path = GetResourcePath(title, &format, ResourceType::font); !path.empty()) {
+        auto f = _fontLoader->LoadFont(title, path.c_str());
+        return f;
+    }
+    
+    LOG_ERROR("ResourceManager::GetFont() font " << title <<"didn't find");
+    return nullptr;
+}
 
 //std::shared_ptr<TextTexture> ResourceManager::GetTextTexture(std::string& text, std::string& fontName, int fsize, SDL_Color color)
 //{
