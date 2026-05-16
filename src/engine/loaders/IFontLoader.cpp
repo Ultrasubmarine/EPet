@@ -13,8 +13,19 @@
 
 void IFontLoader::DeleteFont(Font* font)
 {
-    _fonts.erase(font->name);
-    delete font;
+    DeleteFont(font->name);
+}
+
+void IFontLoader::DeleteFont(const std::string& fontName)
+{
+    if(auto it = _fonts.find(fontName); it != _fonts.end())
+    {
+        if( it->second.use_count() > 1)
+        {
+            LOG_MESSAGE("IFontLoader::DeleteFont(). font ["<<fontName<<"] still have "<<it->second.use_count()-1<<" users");
+        }
+        _fonts.erase(it);
+    }
 }
 
 std::shared_ptr<Font> IFontLoader::GetFont(const std::string& name)

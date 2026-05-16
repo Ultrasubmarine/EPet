@@ -9,14 +9,14 @@
 #include "SDLFont.h"
 
 
-Font::Font(const std::string& name, std::unique_ptr<SDLFont> SDLres):
+Font::Font(const std::string& name, std::unique_ptr<SDLFont> res_SDL):
     name(name),
-    resource(std::move(SDLres))
+    resource(std::move(res_SDL))
 {};
 
-Font::Font(const char* name, std::unique_ptr<SDLFont> SDLres):
+Font::Font(const char* name, std::unique_ptr<SDLFont> res_SDL):
     name(name),
-    resource(std::move(SDLres))
+    resource(std::move(res_SDL))
 {};
 
 Font::~Font() = default;

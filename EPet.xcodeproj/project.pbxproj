@@ -379,9 +379,9 @@
 		02DB3C3D2DAC250600BE90D1 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				02DB3C3A2DAC250600BE90D1 /* default */,
 				0284CCE22E7720D700BFBE96 /* RegisterComponents.hpp */,
 				0284CCE32E7720D700BFBE96 /* RegisterComponents.cpp */,
-				02DB3C3A2DAC250600BE90D1 /* default */,
 				02DB3C3B2DAC250600BE90D1 /* LoadComponents.hpp */,
 				02DB3C3C2DAC250600BE90D1 /* SaveComponents.hpp */,
 			);

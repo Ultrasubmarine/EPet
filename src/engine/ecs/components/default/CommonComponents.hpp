@@ -43,7 +43,6 @@ struct Image
     static void Save(Image& obj, json& data);
 };
 
-
 struct Animation;
 
 struct Animator
@@ -68,5 +67,13 @@ struct AnimationFinished_OF /// one shot
     std::string resoursesId;
 };
 
+struct TextImage
+{
+    std::string text;
+    std::shared_ptr<Texture> resource;
+    
+    static TextImage Load(const json& data);
+    static void Save(TextImage& obj, json& data);
+};
 
 #endif /* CommonComponents_hpp */

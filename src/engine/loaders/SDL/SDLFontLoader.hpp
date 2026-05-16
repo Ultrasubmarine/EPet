@@ -21,10 +21,12 @@ public:
     SDLFontLoader();
     virtual ~SDLFontLoader() override {};
     
+    virtual std::shared_ptr<Texture> GetTexture(std::string& text, std::shared_ptr<Font> font, const FontSettings& settings) override;
 protected:
 
     /// different libs could have different realisation for loading textures
     virtual Font* _LoadFont(const std::string& name, const char *fullPath) override;
+
 };
 
 using FontLoader = SDLFontLoader;

@@ -19,8 +19,8 @@ struct Font
     std::string name;
     std::variant<std::unique_ptr<SDLFont>> resource;
     
-    Font(const std::string& name, std::unique_ptr<SDLFont> SDLres);
-    Font(const char* name, std::unique_ptr<SDLFont> SDLres);
+    Font(const std::string& name, std::unique_ptr<SDLFont> res_SDL);
+    Font(const char* name, std::unique_ptr<SDLFont> res_SDL);
     
     ~Font();
     

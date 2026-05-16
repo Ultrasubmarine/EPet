@@ -81,3 +81,21 @@ void Animator::Save(Animator& obj, json& data)
 {
     data["animationId"] = obj.resoursesId;
 }
+
+//TextImage TextImage::Load(const json& data)
+//{
+//    TextImage obj;
+//    if(data.contains("text"))
+//    {
+//        obj.resoursesId = data["text"].get<std::string>();
+//    }
+//    
+//    //TODO: Load resource callback;
+//    obj.resource = Game::Instance().GetResourceManager()->Get
+//    return obj;
+//}
+//    
+//void TextImage::Save(Image& obj, json& data)
+//{
+//    data["text"] = obj.resoursesId;
+//}

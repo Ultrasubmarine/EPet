@@ -8,7 +8,6 @@
 #ifndef Font_h
 #define Font_h
 
-#include <string>
 #include <SDL2_ttf/SDL_ttf.h>
 
 struct SDLFont
@@ -31,7 +30,7 @@ public:
     SDLFont(const SDLFont&&) = delete;
     SDLFont& operator=(const SDLFont&&) = delete;
     
-    const TTF_Font* GetFont() const { return font;};
+    TTF_Font* GetFont() const { return font;};
 };
 
 #endif /* Font_h */

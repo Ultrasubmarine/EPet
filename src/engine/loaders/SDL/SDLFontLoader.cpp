@@ -18,6 +18,14 @@
 #include "Game.hpp"
 #include "Logging.hpp"
 
+#include "Texture.hpp"
+#include "SDLTexture.hpp"
+
+#include <variant>
+
+SDL_Color ToSDLColor(const RGBA& c) {
+    return SDL_Color{ c.r, c.g, c.b, c.a };
+}
 
 SDLFontLoader::SDLFontLoader()
 {
@@ -28,22 +36,6 @@ SDLFontLoader::SDLFontLoader()
         return ;
     }
 }
-
-
-//std::shared_ptr<Font> SDLFontLoader::LoadFont(std::string& name, char *fullPath)
-//{
-//    auto f =TTF_OpenFont(fullPath, 24);
-//    std::shared_ptr<Font> font{new Font{name,f}, [this](Font *f){ this->DeleteFont(f);} };
-//    
-//    if(font)
-//    {
-//        _fonts[name] = std::weak_ptr<Font>{font};
-//        return font;
-//    }
-//    
-//    return nullptr;
-//}
-
 
 Font* SDLFontLoader::_LoadFont(const std::string& name, const char *fullPath)
 {
@@ -59,4 +51,48 @@ Font* SDLFontLoader::_LoadFont(const std::string& name, const char *fullPath)
     return font;
 }
 
+std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::shared_ptr<Font> font, const FontSettings& settings)
+{
+    TTF_Font* ttf = nullptr;
+    if (auto sdlUPtr = std::get_if<std::unique_ptr<SDLFont>>(&font->resource)) {
+        SDLFont* sdlFont = sdlUPtr->get(); // sdlUPtr имеет тип std::unique_ptr<SDLFont>*
+        ttf = sdlFont->GetFont();
+    }
+    else {
+        LOG_ERROR("Font resource is not SDLFont");
+        return nullptr;
+    }
+
+    if (!ttf) {
+        LOG_ERROR("GetTextTexture: null TTF_Font");
+        return nullptr;
+    }
+
+    if (TTF_SetFontSize(ttf, settings.size) == -1) {
+        LOG_ERROR("GetTextTexture: TTF_SetFontSize failed: " << TTF_GetError());
+        return nullptr;
+    }
+
+    // render
+    SDL_Color sdlColor = ToSDLColor(settings.color);
+    SDL_Surface* surfaceText = TTF_RenderText_Solid(ttf, text.c_str(), sdlColor);
+    if (!surfaceText) {
+        LOG_ERROR("GetTextTexture: TTF_RenderText_Solid failed: " << TTF_GetError());
+        return nullptr;
+    }
+
+    SDL_Texture* textTex = SDL_CreateTextureFromSurface(_render->GetRender(), surfaceText);
+
+    SDL_Rect rect{0, 0, surfaceText->w, surfaceText->h};
+    SDL_FreeSurface(surfaceText);
+
+    if (!textTex) {
+        LOG_ERROR("GetTextTexture: SDL_CreateTextureFromSurface failed: " << SDL_GetError());
+        return nullptr;
+    }
+
+    SDLTexture* res = new SDLTexture{ textTex, rect};
+    auto texturePtr = std::make_shared<Texture>(text, res);
+    return texturePtr;
+}
 
