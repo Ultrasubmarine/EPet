@@ -33,5 +33,11 @@ void RenderSystem::Update(double dt)
         _render->Draw(image.resource.get(), trasform.position.x, trasform.position.y);
     }
     
+    // Text draws on Images. until it's okey
+    for(auto [entt, _, trasform, image] :_registry.view<Sorting, Transform, TextImage>().each())
+    {
+        _render->Draw(image.resource.get(), trasform.position.x, trasform.position.y);
+    }
+    
     _render->Present();
 }

@@ -33,7 +33,9 @@ class IFontLoader;
 
 struct Texture;
 struct Animation;
+
 struct Font;
+struct FontSettings;
 
 class ResourceManager
 {
@@ -54,7 +56,10 @@ public:
     //Texture
     std::shared_ptr<Texture> GetTexture(std::string& title);
     
-    //Text
+    //TextTexture
+    std::shared_ptr<Texture> GetTextTexture(std::string& title, std::shared_ptr<Font> font, const FontSettings &settings);
+    
+    //Font
     std::shared_ptr<Font> GetFont(std::string& title);
     
     //Animation

@@ -49,10 +49,23 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
     return nullptr;
 }
 
+//TextTexture
+std::shared_ptr<Texture> ResourceManager::GetTextTexture(std::string& title, std::shared_ptr<Font> font, const FontSettings &settings)
+{
+    if(!_fontLoader) {
+        return nullptr;
+    }
+    
+    return _fontLoader->GetTexture(title, font, settings);
+}
 
 std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
 {
-    if( auto f = _fontLoader->GetFont(title))
+    if(!_fontLoader) {
+        return nullptr;
+    }
+    
+    if(auto f = _fontLoader->GetFont(title))
     {
         return f;
     }

@@ -82,20 +82,73 @@ void Animator::Save(Animator& obj, json& data)
     data["animationId"] = obj.resoursesId;
 }
 
-//TextImage TextImage::Load(const json& data)
-//{
-//    TextImage obj;
-//    if(data.contains("text"))
-//    {
-//        obj.resoursesId = data["text"].get<std::string>();
-//    }
-//    
-//    //TODO: Load resource callback;
-//    obj.resource = Game::Instance().GetResourceManager()->Get
-//    return obj;
-//}
-//    
-//void TextImage::Save(Image& obj, json& data)
-//{
-//    data["text"] = obj.resoursesId;
-//}
+TextImage TextImage::Load(const json& data)
+{
+    TextImage obj;
+    if(data.contains("text") && data["text"].is_string())
+    {
+        obj.text = data["text"].get<std::string>();
+    }
+    else
+    {
+        LOG_ERROR("TextImage::Load() field [text] didn't find");
+    }
+    
+    if(data.contains("size") && data["size"].is_number_integer())
+    {
+        obj.settings.size = data["size"].get<int>();
+    }
+    else
+    {
+        LOG_ERROR("TextImage::Load() field [size] didn't find");
+    }
+    
+    // color expects array [r,g,b]; default is black
+    obj.settings.color = {0,0,0};
+    if (data.contains("color") && data["color"].is_array() && data["color"].size() == 3)
+    {
+        const auto& arr = data["color"];
+        bool ok = arr[0].is_number_integer() && arr[1].is_number_integer() && arr[2].is_number_integer();
+        if (ok)
+        {
+            int r = arr[0].get<int>();
+            int g = arr[1].get<int>();
+            int b = arr[2].get<int>();
+            // clamp to [0,255]
+            r = r < 0 ? 0 : (r > 255 ? 255 : r);
+            g = g < 0 ? 0 : (g > 255 ? 255 : g);
+            b = b < 0 ? 0 : (b > 255 ? 255 : b);
+            obj.settings.color = { (uint8_t)r, (uint8_t)g, (uint8_t)b };
+        }
+        else
+        {
+            LOG_ERROR("TextImage::Load() field [color] has invalid values; using default (black)");
+        }
+    }
+    else
+    {
+        LOG_ERROR("TextImage::Load() field [color] didn't find or has invalid format; using default (black)");
+    }
+    
+    std::string fontName = DEFAULT_FONT;
+    if(data.contains("font") && data["font"].is_string())
+    {
+        fontName = data["font"].get<std::string>();
+    }
+    else
+    {
+        LOG_ERROR("TextImage::Load() field [font] didn't find. using default");
+    }
+    
+    //TODO: Load resource callback;
+    obj.font = Game::Instance().GetResourceManager()->GetFont(fontName);
+    obj.resource = Game::Instance().GetResourceManager()->GetTextTexture(obj.text, obj.font, obj.settings);
+    
+    return obj;
+}
+    
+void TextImage::Save(TextImage& obj, json& data)
+{
+   // skip for now
+}
+

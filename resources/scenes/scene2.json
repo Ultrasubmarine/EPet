@@ -56,6 +56,28 @@
                    "imageId": "Background"
                }
            ]
+       },
+       {
+         "components": [
+            {
+                 "id": "Transform",
+                 "position": {
+                     "x": 50,
+                     "y": 100
+                 }
+            },
+            {
+                "id": "Sorting",
+                "layer": 0
+            },
+            {
+                "id": "TextImage",
+                "text": "Mmmm.... text!",
+                "size": 30,
+                "color": [37, 150, 190],
+                "font": "Roboto-Light"
+            }
+         ]
        }
    ],
    "scene": "scene2",

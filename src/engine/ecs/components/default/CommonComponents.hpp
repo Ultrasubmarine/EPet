@@ -67,10 +67,15 @@ struct AnimationFinished_OF /// one shot
     std::string resoursesId;
 };
 
+#include "IFontLoader.hpp"
+
 struct TextImage
 {
     std::string text;
-    std::shared_ptr<Texture> resource;
+    std::shared_ptr<Font> font;
+    FontSettings settings;
+    
+    std::shared_ptr<Texture> resource; // genericTexture
     
     static TextImage Load(const json& data);
     static void Save(TextImage& obj, json& data);

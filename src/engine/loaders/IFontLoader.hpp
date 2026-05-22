@@ -15,7 +15,7 @@
 
 #define DEFAULT_FONT "Roboto-Light"
 
-struct RGBA
+struct RGBA // TODO: move to other place
 {
     std::uint8_t r{};
     std::uint8_t g{};
@@ -23,8 +23,8 @@ struct RGBA
     std::uint8_t a{255};
 };
 
-struct FontSettings
-{  
+struct FontSettings // TODO: move to other place
+{
     int size;
     RGBA color;
 };
