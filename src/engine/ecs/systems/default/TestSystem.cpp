@@ -15,5 +15,10 @@ void TestSystem::Update(double dt){
     {
         int layer = sort.layer;
     }
+    for( auto [ent, text] : _registry.view<TextImage>().each())
+    {
+        int layer = sort.layer;
+    }
+    
 };
 
