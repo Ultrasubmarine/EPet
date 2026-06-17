@@ -36,6 +36,7 @@ public:
     void SaveScene(); // current
     
     Scene* GetCurrentScene() {return _currentScene;};
+    entt::registry& GetRegistry() {return _registry;};
     
     void Update(double dt);
     

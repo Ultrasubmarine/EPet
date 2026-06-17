@@ -18,6 +18,7 @@
 using json = nlohmann::json;
 struct Texture;
 
+
 struct Sorting
 {
     int layer;
@@ -68,17 +69,26 @@ struct AnimationFinished_OF /// one shot
 };
 
 #include "IFontLoader.hpp"
+class TextSystem;
 
 struct TextImage
 {
+private:
     std::string text;
     std::shared_ptr<Font> font;
     FontSettings settings;
-    
+public:
     std::shared_ptr<Texture> resource; // genericTexture
-    
+ 
     static TextImage Load(const json& data);
     static void Save(TextImage& obj, json& data);
+    
+    friend TextSystem;
+};
+
+struct SetTextImage
+{
+    std::string text;
 };
 
 #endif /* CommonComponents_hpp */

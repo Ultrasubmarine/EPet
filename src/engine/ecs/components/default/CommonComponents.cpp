@@ -85,7 +85,7 @@ void Animator::Save(Animator& obj, json& data)
 TextImage TextImage::Load(const json& data)
 {
     TextImage obj;
-    if(data.contains("text") && data["text"].is_string())
+    if (data.contains("text") && data["text"].is_string())
     {
         obj.text = data["text"].get<std::string>();
     }
@@ -143,7 +143,6 @@ TextImage TextImage::Load(const json& data)
     //TODO: Load resource callback;
     obj.font = Game::Instance().GetResourceManager()->GetFont(fontName);
     obj.resource = Game::Instance().GetResourceManager()->GetTextTexture(obj.text, obj.font, obj.settings);
-    
     return obj;
 }
     

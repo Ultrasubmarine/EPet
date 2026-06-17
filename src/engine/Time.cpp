@@ -39,7 +39,8 @@ std::string Time::GetClockTimeString() const {
     localtime_r(&t, &tm);
 #endif
     std::ostringstream oss;
-    oss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
+    oss << std::put_time(&tm, "%H:%M:%S");
+    //oss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
     return oss.str();
 }
 

@@ -33,6 +33,7 @@ public:
     void Deinit();
     void Loop();
     
+    SceneManager* GetSceneManager() { return _sceneManager;};
     ResourceManager* GetResourceManager() { return _resourceManager;};
     IRender* GetRender() { return _render;};
     

@@ -7,6 +7,7 @@
 
 #include "TestSystem.hpp"
 #include "CommonComponents.hpp"
+#include "Time.hpp"
 
 SYSTEM_CPP(TestSystem);
 
@@ -17,7 +18,7 @@ void TestSystem::Update(double dt){
     }
     for( auto [ent, text] : _registry.view<TextImage>().each())
     {
-        int layer = sort.layer;
+        _registry.emplace_or_replace<SetTextImage>(ent, Time::Instance().GetClockTimeString());
     }
     
 };

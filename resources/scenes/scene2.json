@@ -86,6 +86,7 @@
        "AAATestSystem",
        "AnimationUpdateSystem",
        "AnimationFinishSystem",
+       "TextSystem",
        "RenderSystem"
    ]
 }
