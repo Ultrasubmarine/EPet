@@ -27,6 +27,11 @@ struct Sorting
     static void Save(Sorting& obj, json& data);
 };
 
+struct UpdateSorting
+{
+    
+};
+
 struct Transform
 {
     IPoint position = IPoint(0, 0);
@@ -38,7 +43,7 @@ struct Transform
 struct Image
 {
     std::string resoursesId;
-    std::shared_ptr<Texture> resource;
+    //std::shared_ptr<Texture> resource;
     
     static Image Load(const json& data);
     static void Save(Image& obj, json& data);
@@ -68,22 +73,28 @@ struct AnimationFinished_OF /// one shot
     std::string resoursesId;
 };
 
-#include "IFontLoader.hpp"
-class TextSystem;
+struct RendererObject
+{
+    std::shared_ptr<Texture> resource;
+    static RendererObject Load(const json& data);
+    static void Save(RendererObject& obj, json& data);
+};
 
-struct TextImage
+#include "IFontLoader.hpp"
+class TextLoadSystem;
+
+struct Text
 {
 private:
     std::string text;
     std::shared_ptr<Font> font;
     FontSettings settings;
-public:
-    std::shared_ptr<Texture> resource; // genericTexture
- 
-    static TextImage Load(const json& data);
-    static void Save(TextImage& obj, json& data);
     
-    friend TextSystem;
+public:
+    static Text Load(const json& data);
+    static void Save(Text& obj, json& data);
+    
+    friend TextLoadSystem;
 };
 
 struct SetTextImage

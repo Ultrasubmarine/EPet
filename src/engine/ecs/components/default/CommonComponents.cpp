@@ -54,7 +54,7 @@ Image Image::Load(const json& data)
     }
     
     //TODO: Load resource callback;
-    obj.resource = Game::Instance().GetResourceManager()->GetTexture(obj.resoursesId);
+   // obj.resource = Game::Instance().GetResourceManager()->GetTexture(obj.resoursesId);
     return obj;
 }
     
@@ -82,9 +82,21 @@ void Animator::Save(Animator& obj, json& data)
     data["animationId"] = obj.resoursesId;
 }
 
-TextImage TextImage::Load(const json& data)
+
+RendererObject RendererObject::Load(const json& data)
 {
-    TextImage obj;
+    RendererObject obj;
+    return obj;
+}
+
+void RendererObject::Save(RendererObject& obj,  json& data)
+{
+    // skip
+}
+
+Text Text::Load(const json& data)
+{
+    Text obj;
     if (data.contains("text") && data["text"].is_string())
     {
         obj.text = data["text"].get<std::string>();
@@ -142,11 +154,11 @@ TextImage TextImage::Load(const json& data)
     
     //TODO: Load resource callback;
     obj.font = Game::Instance().GetResourceManager()->GetFont(fontName);
-    obj.resource = Game::Instance().GetResourceManager()->GetTextTexture(obj.text, obj.font, obj.settings);
+   // obj.resource = Game::Instance().GetResourceManager()->GetTextTexture(obj.text, obj.font, obj.settings);
     return obj;
 }
     
-void TextImage::Save(TextImage& obj, json& data)
+void Text::Save(Text& obj, json& data)
 {
    // skip for now
 }

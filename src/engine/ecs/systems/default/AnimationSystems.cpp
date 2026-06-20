@@ -19,9 +19,8 @@ void AnimationUpdateSystem::Update(double dt)
 {
     ClearOneFrameComponents();
     
-    for(auto [entt, animator, image] :_registry.view<Animator, Image>(entt::exclude<AnimationFinished>).each())
+    for(auto [entt, animator, image, rObj] :_registry.view<Animator, Image, RendererObject>(entt::exclude<AnimationFinished>).each())
     {
-        
         if(animator.timer >= animator.animation->_duration)
         {
             if(!animator.animation->_loop)
@@ -43,7 +42,7 @@ void AnimationUpdateSystem::Update(double dt)
         }
         
         int currentFrameIndex = CalculateCurrentFrame(entt, animator);
-        SwitchFrame(entt, animator, image,currentFrameIndex);
+        SwitchFrame(entt, animator, rObj, image, currentFrameIndex);
         
         animator.timer += dt;
     }
@@ -90,15 +89,15 @@ int AnimationUpdateSystem::CalculateCurrentFrame(entt::entity, Animator& animato
     return currentFrameIndex;
 }
 
-void AnimationUpdateSystem::SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex) const
+void AnimationUpdateSystem::SwitchFrame(entt::entity, Animator& animator, RendererObject& rObj, Image& image, int frameIndex) const
 {
-    if(image.resource == animator.animation->_frames[frameIndex])
+    if(rObj.resource == animator.animation->_frames[frameIndex])
     {
         return;
     }
     
     LOG_MESSAGE("AnimationSystem::SwitchFrame() Set animation frame"<< frameIndex<< " ["<< image.resoursesId<< "]");
-    image.resource = animator.animation->_frames[frameIndex];
+    rObj.resource = animator.animation->_frames[frameIndex];
     image.resoursesId = animator.animation->_frames[frameIndex]->name;
     
     animator.frame = frameIndex;

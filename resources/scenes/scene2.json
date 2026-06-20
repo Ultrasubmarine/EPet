@@ -3,21 +3,6 @@
        {
            "components": [
                {
-                   "id": "Transform"
-               }
-           ]
-       },
-       {
-           "components": [
-               {
-                   "id": "Sorting",
-                   "layer": 29
-               }
-           ]
-       },
-       {
-           "components": [
-               {
                    "id": "Transform",
                    "position": {
                        "x": 180,
@@ -35,6 +20,9 @@
                {
                    "id": "Animator",
                    "animationId": "Idle"
+               },
+               {
+                   "id": "RendererObject"
                }
            ]
        },
@@ -54,6 +42,9 @@
                {
                    "id": "Image",
                    "imageId": "Background"
+               },
+               {
+                   "id": "RendererObject"
                }
            ]
        },
@@ -68,25 +59,33 @@
             },
             {
                 "id": "Sorting",
-                "layer": 0
+                "layer": 3
             },
             {
                 "id": "TextImage",
                 "text": "Mmmm.... text!",
-                "size": 30,
-                "color": [37, 150, 190],
+                "size": 63,
+                "color": [188, 210, 251],
                 "font": "Minecraft"
+            },
+            {
+                "id": "RendererObject"
             }
          ]
        }
    ],
    "scene": "scene2",
    "systems": [
-       "TestSystem",
+       "TextLoadSystem",
+       "ImageLoadSystem",
+       
        "AAATestSystem",
+   
        "AnimationUpdateSystem",
        "AnimationFinishSystem",
-       "TextSystem",
+
+       "SortingUpdateSystem",
+       "TestSystem",
        "RenderSystem"
    ]
 }

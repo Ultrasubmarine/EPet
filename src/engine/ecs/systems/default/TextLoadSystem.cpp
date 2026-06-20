@@ -15,19 +15,28 @@ void TextLoadSystem::Init()
 {
     _resourceManager = Game::Instance().GetResourceManager();
     
-    for(auto [entt, text] :_registry.view<Text>().each())
+    if(!_resourceManager)
+    {
+        return;
+    }
+    for(auto [entt, text, rObj] :_registry.view<Text, RendererObject>().each())
     {
         if(text.text.empty()) {
             continue;
         }
         
-        auto& rObj = _registry.emplace_or_replace<RendererObject>(entt);
-        rObj.resource = _resourceManager->GetTexture(text.text);
+        rObj.resource = _resourceManager->GetTextTexture(text.text, text.font, text.settings);
     }
 }
 
 void TextLoadSystem::Update(double dt)
 {
+    if(!_resourceManager)
+    {
+        return;
+    }
+    
+    //Set text
     for(auto [entt, textImage, newText, rObj] :_registry.view<Text, SetTextImage, RendererObject>().each())
     {
         if(textImage.text.compare(newText.text) == 0) {

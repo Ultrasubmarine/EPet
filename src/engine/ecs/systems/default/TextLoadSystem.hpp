@@ -13,9 +13,9 @@
 class IRender;
 class ResourceManager;
 
-class TextSystem : public ISystem
+class TextLoadSystem : public ISystem
 {
-    SYSTEM_BODY(TextSystem)
+    SYSTEM_BODY(TextLoadSystem)
 public:
     void Init() override;
     void Update(double dt) override;

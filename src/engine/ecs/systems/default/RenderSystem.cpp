@@ -16,27 +16,22 @@ SYSTEM_CPP(RenderSystem);
 void RenderSystem::Init()
 {
     _render = Game::Instance().GetRender();
-    
-    // TODO: move it in different system
-    _registry.sort<Sorting>([](const auto &lhs, const auto &rhs) {
-        return lhs.layer < rhs.layer;
-    });
-    //-----------------------------------
 }
 
 void RenderSystem::Update(double dt)
 {
     _render->Clear();
     
-    for(auto [entt, _, trasform, image] :_registry.view<Sorting, Transform, Image>().each())
-    {
-        _render->Draw(image.resource.get(), trasform.position.x, trasform.position.y);
-    }
+    //without sorting
+//    for(auto [entt, trasform, rObj] :_registry.view<Transform, RendererObject>(entt::exclude<Sorting>).each())
+//    {
+//        _render->Draw(rObj.resource.get(), trasform.position.x, trasform.position.y);
+//    }
+    //auto fff = _registry.view<Sorting, Transform, RendererObject>();
     
-    // Text draws on Images. until it's okey
-    for(auto [entt, _, trasform, image] :_registry.view<Sorting, Transform, TextImage>().each())
+    for(auto [entt, _, trasform, rObj] :_registry.view<Sorting, Transform, RendererObject>().each())
     {
-        _render->Draw(image.resource.get(), trasform.position.x, trasform.position.y);
+        _render->Draw(rObj.resource.get(), trasform.position.x, trasform.position.y);
     }
     
     _render->Present();

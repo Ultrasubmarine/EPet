@@ -13,6 +13,7 @@
 
 struct Animator;
 struct Image;
+struct RendererObject;
 
 class AnimationUpdateSystem: public ISystem {
     SYSTEM_BODY(AnimationUpdateSystem)
@@ -22,7 +23,7 @@ public:
     
 private:
     
-    void SwitchFrame(entt::entity, Animator& animator, Image& image, int frameIndex) const;
+    void SwitchFrame(entt::entity, Animator& animator, RendererObject& rObj, Image& image, int frameIndex) const;
     int CalculateCurrentFrame(entt::entity, Animator& animator) const;
     void FinishAnimation(entt::entity, Animator& animator) const;
     

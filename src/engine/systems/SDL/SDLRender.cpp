@@ -52,6 +52,10 @@ void SDLRender::Clear() {
 
 void SDLRender::Draw(Texture* texture, const int& x, const int& y) {
     
+    if(!texture)
+    {
+        return;
+    }
     if (SDLTexture** txt = std::get_if<SDLTexture*>(&texture->resource))
     {
         SDL_Rect r_dst(x, y, (*txt)->src.w, (*txt)->src.h);

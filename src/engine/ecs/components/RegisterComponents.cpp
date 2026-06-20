@@ -25,6 +25,9 @@ void RegisterComponents()
     GenerateLoadingFunction<Animator>("Animator", &Animator::Load);
     GenerateSaveFunction<Animator>("Animator", &Animator::Save);
     
-    GenerateLoadingFunction<TextImage>("TextImage", &TextImage::Load);
-    GenerateSaveFunction<TextImage>("TextImage", &TextImage::Save);
+    GenerateLoadingFunction<Text>("TextImage", &Text::Load);
+    GenerateSaveFunction<Text>("TextImage", &Text::Save);
+    
+    GenerateLoadingFunction<RendererObject>("RendererObject", &RendererObject::Load);
+    GenerateSaveFunction<RendererObject>("RendererObject", &RendererObject::Save);
 }

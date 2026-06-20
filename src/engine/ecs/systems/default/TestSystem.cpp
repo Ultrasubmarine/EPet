@@ -16,7 +16,7 @@ void TestSystem::Update(double dt){
     {
         int layer = sort.layer;
     }
-    for( auto [ent, text] : _registry.view<TextImage>().each())
+    for( auto [ent, text] : _registry.view<Text>().each())
     {
         _registry.emplace_or_replace<SetTextImage>(ent, Time::Instance().GetClockTimeString());
     }

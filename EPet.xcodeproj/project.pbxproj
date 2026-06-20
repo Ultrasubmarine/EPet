@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		022ED2F22F5DEFC70095E697 /* AnimationLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */; };
-		022FF1FC2FE3206A00716982 /* TextSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022FF1FB2FE3206A00716982 /* TextSystem.cpp */; };
+		022FF1FC2FE3206A00716982 /* TextLoadSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022FF1FB2FE3206A00716982 /* TextLoadSystem.cpp */; };
+		022FF1FF2FE712B300716982 /* ImageLoadSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022FF1FE2FE712B300716982 /* ImageLoadSystem.cpp */; };
+		022FF2022FE71E6000716982 /* SortingUpdateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022FF2012FE71E6000716982 /* SortingUpdateSystem.cpp */; };
 		025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */; };
 		0268FF052F129B00004AD2D8 /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0268FF042F129B00004AD2D8 /* Time.cpp */; };
 		027009A82FB2595500100C05 /* IFontLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027009A72FB2595500100C05 /* IFontLoader.cpp */; };
@@ -61,8 +63,12 @@
 		02117BFC2E10750E001D1E06 /* SceneUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneUtils.hpp; sourceTree = "<group>"; };
 		022ED2EE2F5DEEBF0095E697 /* AnimationLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationLoader.hpp; sourceTree = "<group>"; };
 		022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationLoader.cpp; sourceTree = "<group>"; };
-		022FF1FA2FE3206600716982 /* TextSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextSystem.hpp; sourceTree = "<group>"; };
-		022FF1FB2FE3206A00716982 /* TextSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextSystem.cpp; sourceTree = "<group>"; };
+		022FF1FA2FE3206600716982 /* TextLoadSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextLoadSystem.hpp; sourceTree = "<group>"; };
+		022FF1FB2FE3206A00716982 /* TextLoadSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextLoadSystem.cpp; sourceTree = "<group>"; };
+		022FF1FD2FE712B300716982 /* ImageLoadSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageLoadSystem.hpp; sourceTree = "<group>"; };
+		022FF1FE2FE712B300716982 /* ImageLoadSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLoadSystem.cpp; sourceTree = "<group>"; };
+		022FF2002FE71E6000716982 /* SortingUpdateSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SortingUpdateSystem.hpp; sourceTree = "<group>"; };
+		022FF2012FE71E6000716982 /* SortingUpdateSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SortingUpdateSystem.cpp; sourceTree = "<group>"; };
 		025F2E892D88AD5A0090AE59 /* GetPath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GetPath.hpp; sourceTree = "<group>"; };
 		025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GetPath.cpp; sourceTree = "<group>"; };
 		025F2E8C2D88AD5A0090AE59 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
@@ -366,8 +372,12 @@
 				02C886892E50AF5F00B47F76 /* RenderSystem.cpp */,
 				0277255F2F63596800E8F256 /* AnimationSystems.hpp */,
 				027725602F63596800E8F256 /* AnimationSystems.cpp */,
-				022FF1FA2FE3206600716982 /* TextSystem.hpp */,
-				022FF1FB2FE3206A00716982 /* TextSystem.cpp */,
+				022FF1FA2FE3206600716982 /* TextLoadSystem.hpp */,
+				022FF1FB2FE3206A00716982 /* TextLoadSystem.cpp */,
+				022FF1FD2FE712B300716982 /* ImageLoadSystem.hpp */,
+				022FF1FE2FE712B300716982 /* ImageLoadSystem.cpp */,
+				022FF2002FE71E6000716982 /* SortingUpdateSystem.hpp */,
+				022FF2012FE71E6000716982 /* SortingUpdateSystem.cpp */,
 			);
 			path = default;
 			sourceTree = "<group>";
@@ -494,7 +504,7 @@
 				02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */,
 				025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */,
 				02DB3C082DA80F7C00BE90D1 /* Scene.cpp in Sources */,
-				022FF1FC2FE3206A00716982 /* TextSystem.cpp in Sources */,
+				022FF1FC2FE3206A00716982 /* TextLoadSystem.cpp in Sources */,
 				02DB3C0A2DA80F7C00BE90D1 /* SceneManager.cpp in Sources */,
 				0284CCE42E7720D700BFBE96 /* RegisterComponents.cpp in Sources */,
 				02DB3C0B2DA80F7C00BE90D1 /* Game.cpp in Sources */,
@@ -502,6 +512,7 @@
 				02A143FF2E1C5F34000B7535 /* CommonComponents.cpp in Sources */,
 				02DB3C262DA921F800BE90D1 /* ITextureLoader.cpp in Sources */,
 				02DB3C0C2DA80F7C00BE90D1 /* Input.cpp in Sources */,
+				022FF2022FE71E6000716982 /* SortingUpdateSystem.cpp in Sources */,
 				02DB3C0D2DA80F7C00BE90D1 /* JsonLoader.cpp in Sources */,
 				02DB3C112DA80F7C00BE90D1 /* FrameRate.cpp in Sources */,
 				02DB3C142DA80F7C00BE90D1 /* SDLWindow.cpp in Sources */,
@@ -509,6 +520,7 @@
 				027725612F63596800E8F256 /* AnimationSystems.cpp in Sources */,
 				02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */,
 				02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */,
+				022FF1FF2FE712B300716982 /* ImageLoadSystem.cpp in Sources */,
 				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,
 				02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */,
 				02D24A732BD84125008E7DCF /* main.cpp in Sources */,
