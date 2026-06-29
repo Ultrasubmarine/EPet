@@ -23,11 +23,23 @@ struct RGBA // TODO: move to other place
     std::uint8_t a{255};
 };
 
+inline bool operator==(const RGBA& lhs, const RGBA& rhs) noexcept {
+    return lhs.r == rhs.r &&
+           lhs.g == rhs.g &&
+           lhs.b == rhs.b &&
+           lhs.a == rhs.a;
+}
+
 struct FontSettings // TODO: move to other place
 {
-    int size;
+    int size = 10;
     RGBA color;
 };
+
+inline bool operator==(const FontSettings& lhs, const FontSettings& rhs) noexcept {
+    return lhs.size  == rhs.size &&
+           lhs.color == rhs.color; // опирается на RGBA::operator==
+}
 
 struct Texture;
 

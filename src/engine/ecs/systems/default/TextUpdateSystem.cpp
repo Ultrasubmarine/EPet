@@ -49,8 +49,8 @@ void TextUpdateSystem::UpdateText()
         if(textImage.text.compare(newText.text) == 0) {
             continue;
         }
-        textImage.text = newText.text;
         
+        textImage.text = newText.text;
         _registry.emplace_or_replace<NeedUpdateText>(entt);
     }
     
@@ -61,17 +61,32 @@ void TextUpdateSystem::UpdateFont()
 {
     for(auto [entt, text, newFont] :_registry.view<Text, SetNewFont>().each())
     {
-        if(text.font->name.compare(newFont.fontName) == 0) {
+        if (text.font && text.font->name.compare(newFont.fontName) == 0) {
             continue;
         }
     
         auto font = _resourceManager->GetFont(newFont.fontName);
         text.font = font;
-        
         _registry.emplace_or_replace<NeedUpdateText>(entt);
     }
     
     _registry.clear<SetNewFont>();
+}
+
+void TextUpdateSystem::UpdateFontSetting()
+{
+    for(auto [entt, text, newSettings] :_registry.view<Text, SetNewFontSettings>().each())
+    {
+        if (text.settings == newSettings.settings) {
+            continue;
+        }
+        
+        text.settings = newSettings.settings;
+        _registry.emplace_or_replace<NeedUpdateText>(entt);
+        
+    }
+    _registry.clear<SetNewFontSettings>();
+    
 }
 
 void TextUpdateSystem::UpdateRenderTexture()
@@ -79,7 +94,6 @@ void TextUpdateSystem::UpdateRenderTexture()
     //Update render object
     for(auto [entt, text, rObj] :_registry.view<Text, RendererObject, NeedUpdateText>().each())
     {
-        
         auto newImage = _resourceManager->GetTextTexture(text.text, text.font, text.settings);
         rObj.resource = newImage;
     }

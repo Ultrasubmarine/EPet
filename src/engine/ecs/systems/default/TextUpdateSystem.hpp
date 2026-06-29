@@ -24,6 +24,7 @@ private:
     
     void UpdateText();
     void UpdateFont();
+    void UpdateFontSetting();
     void UpdateRenderTexture();
     
     ResourceManager* _resourceManager;

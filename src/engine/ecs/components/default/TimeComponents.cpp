@@ -36,7 +36,7 @@ bool CreateTimer(double duration, entt::entity* outCreatedEntity, Timer* outCrea
     }
     if(outCreatedEntity)
     {
-        *outCreatedEntity = static_cast<entt::entity>(ent);
+        *outCreatedEntity = ent;//static_cast<entt::entity>(ent);
     }
     
     return true;

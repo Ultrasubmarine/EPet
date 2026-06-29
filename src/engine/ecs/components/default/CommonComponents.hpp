@@ -107,6 +107,11 @@ struct SetNewFont
     std::string fontName;
 };
 
+struct SetNewFontSettings
+{
+    FontSettings settings;
+};
+
 struct NeedUpdateText // if smth changed in settings/text/font
 {
 };

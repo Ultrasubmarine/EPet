@@ -17,18 +17,21 @@ SYSTEM_CPP(TimerSystem);
 
 void TimerSystem::Init()
 {
-    entt::entity* ent_ptr;
-    if(CreateTimer(10.0, ent_ptr))
+    entt::entity entity;
+    if(CreateTimer(10.0, &entity))
     {
-        _registry.emplace<Text>(*ent_ptr);
-        _registry.emplace<SetNewFont>(*ent_ptr, DEFAULT_FONT);
+        _registry.emplace<Text>(entity);
+        _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
         
-        _registry.emplace<Sorting>(*ent_ptr, 1000);
-        _registry.emplace<Transform>(*ent_ptr, IPoint(50, 50));
+        _registry.emplace<RendererObject>(entity);
+        _registry.emplace<Sorting>(entity, 1000);
+        _registry.emplace<Transform>(entity, IPoint(50, 50));
     }
 }
 
 void TimerSystem::Update(double dt){
+    
+    dt = dt/1000.0; // dt in miliseconds but here we need seconds;
     
     // delete all one frame components
     _registry.clear<TimerFinished_OF>();
@@ -40,7 +43,7 @@ void TimerSystem::Update(double dt){
         timer.timeLeft -= dt;
         
         // if completed
-        if(timer.timeLeft <= -0.001)
+        if(timer.timeLeft <= 0.0)
         {
             _registry.emplace<TimerFinished_OF>(ent);
             _registry.emplace<TimerFinished>(ent);

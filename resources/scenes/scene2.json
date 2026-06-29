@@ -76,10 +76,10 @@
    ],
    "scene": "scene2",
    "systems": [
-       "TextUpdateSystem",
-       "TimerSystem",
        "ImageLoadSystem",
        
+       "TimerSystem",
+       "TextUpdateSystem",
        "AAATestSystem",
    
        "AnimationUpdateSystem",
