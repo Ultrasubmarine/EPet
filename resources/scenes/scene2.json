@@ -76,7 +76,8 @@
    ],
    "scene": "scene2",
    "systems": [
-       "TextLoadSystem",
+       "TextUpdateSystem",
+       "TimerSystem",
        "ImageLoadSystem",
        
        "AAATestSystem",

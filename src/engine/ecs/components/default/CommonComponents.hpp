@@ -81,7 +81,7 @@ struct RendererObject
 };
 
 #include "IFontLoader.hpp"
-class TextLoadSystem;
+class TextUpdateSystem;
 
 struct Text
 {
@@ -94,12 +94,21 @@ public:
     static Text Load(const json& data);
     static void Save(Text& obj, json& data);
     
-    friend TextLoadSystem;
+    friend TextUpdateSystem;
 };
 
-struct SetTextImage
+struct SetNewText
 {
     std::string text;
+};
+
+struct SetNewFont
+{
+    std::string fontName;
+};
+
+struct NeedUpdateText // if smth changed in settings/text/font
+{
 };
 
 #endif /* CommonComponents_hpp */

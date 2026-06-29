@@ -18,7 +18,7 @@ void TestSystem::Update(double dt){
     }
     for( auto [ent, text] : _registry.view<Text>().each())
     {
-        _registry.emplace_or_replace<SetTextImage>(ent, Time::Instance().GetClockTimeString());
+        _registry.emplace_or_replace<SetNewText>(ent, Time::Instance().GetClockTimeString());
     }
     
 };

@@ -13,14 +13,18 @@
 class IRender;
 class ResourceManager;
 
-class TextLoadSystem : public ISystem
+class TextUpdateSystem : public ISystem
 {
-    SYSTEM_BODY(TextLoadSystem)
+    SYSTEM_BODY(TextUpdateSystem)
 public:
     void Init() override;
     void Update(double dt) override;
     
 private:
+    
+    void UpdateText();
+    void UpdateFont();
+    void UpdateRenderTexture();
     
     ResourceManager* _resourceManager;
 };
