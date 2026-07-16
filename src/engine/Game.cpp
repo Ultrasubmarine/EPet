@@ -119,10 +119,10 @@ void Game::Loop()
     while(isPlay)
     {
         Input();
-        float dtMs = _frameRate->GetDeltaTime();
-        
-        Time::Instance().Update(dtMs);
-        _sceneManager->Update(dtMs);
+        float dt = _frameRate->GetDeltaTime(); // in seconds
+
+        Time::Instance().Update(dt);
+        _sceneManager->Update(dt);
         
         RenderAll();
         _frameRate->WaitFrame();

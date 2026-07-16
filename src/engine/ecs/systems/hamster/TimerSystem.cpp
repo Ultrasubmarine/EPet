@@ -30,9 +30,7 @@ void TimerSystem::Init()
 }
 
 void TimerSystem::Update(double dt){
-    
-    dt = dt/1000.0; // dt in miliseconds but here we need seconds;
-    
+
     // delete all one frame components
     _registry.clear<TimerFinished_OF>();
     

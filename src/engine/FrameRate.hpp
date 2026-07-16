@@ -21,14 +21,14 @@ class FrameRate
     std::chrono::nanoseconds _delta;
     std::chrono::nanoseconds _fixedDelta;
     
-    std::chrono::time_point<std::chrono::steady_clock> _lastClock, _nowClock;
+    std::chrono::time_point<std::chrono::steady_clock> _lastClock;
     
 public:
     void FirstInitialization();
     void SetFixedFrame(int fps);
     void WaitFrame();
     
-    float GetDeltaTime(); /// in milliseconds
+    float GetDeltaTime(); /// in seconds
     float GetFixedDeltaTime();
     
     FrameRate() :_fps(DEFAULT_FPS){};

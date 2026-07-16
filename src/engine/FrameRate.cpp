@@ -13,7 +13,7 @@
 void FrameRate::FirstInitialization()
 {
     _delta = std::chrono::nanoseconds::zero();
-    _nowClock = std::chrono::steady_clock::now();
+    _lastClock = std::chrono::steady_clock::now();
     
     _fixedDelta = std::chrono::seconds(1);
     _fixedDelta /= _fps;
@@ -31,24 +31,21 @@ void FrameRate::SetFixedFrame(int fps)
 
 void FrameRate::WaitFrame()
 {
-    _lastClock = _nowClock;
-    _nowClock = std::chrono::steady_clock::now();
-    
-    _delta = _nowClock - _lastClock;
-    
-    
+    auto now = std::chrono::steady_clock::now();
+
     if(_fixedFrameRate)
     {
-        auto wait = _fixedDelta - _delta;
-        _delta += wait;
-        
+        auto wait = _fixedDelta - (now - _lastClock);
+
         if(wait > std::chrono::nanoseconds::zero())
         {
             std::this_thread::sleep_for(wait);
         }
     }
-    
-    _lastClock = std::chrono::steady_clock::now();
+
+    auto end = std::chrono::steady_clock::now();
+    _delta = end - _lastClock; // actual frame time, including the sleep
+    _lastClock = end;
 }
 
 float FrameRate::GetDeltaTime()

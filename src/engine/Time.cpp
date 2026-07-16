@@ -25,7 +25,7 @@ void Time::Update(double dt)
         dt = 0.0;
     }
     
-    _session += dt; // miliseconds
+    _session += dt; // seconds
     _clock->Update(dt);
 }
 

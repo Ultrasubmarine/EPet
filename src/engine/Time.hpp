@@ -41,7 +41,7 @@ public:
     std::string GetClockTimeString() const;
 
 private:
-    double _session = 0.0; // in milliseconds
+    double _session = 0.0; // in seconds
     std::unique_ptr<IClockSource> _clock; // default == SystemClockSource
  // TODO: Timers?
 };
@@ -60,10 +60,10 @@ struct SystemClockSource : IClockSource {
 struct AccumulatedClockSource : IClockSource {
     std::int64_t _unixTime = 0; // текущее «виртуальное» реальное время
     void Init() override { /* опционально: _unixMs = seed */ }
-    void Update(double dtMs) override {
-        if (dtMs < 0) dtMs = 0;
+    void Update(double dt) override {
+        if (dt < 0) dt = 0;
         // можно клампить слишком большие шаги
-        _unixTime += static_cast<std::int64_t>(dtMs);
+        _unixTime += static_cast<std::int64_t>(dt * 1000.0); // dt in seconds, _unixTime in ms
     }
     // TODO: set clock
     std::int64_t GetNow() const override { return _unixTime; }
