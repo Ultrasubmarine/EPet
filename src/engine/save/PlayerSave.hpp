@@ -40,7 +40,10 @@ public:
     bool Save();
     bool Load();
     
-    IPlayerInfo* GetSave() { return _saveInfo;};
+    json* GetData() { return _saveData.get();} // easy than spechial structure;
+    //IPlayerInfo* GetSave() { return _saveInfo;};
 };
+
+// TODO: Add function for easy get common atributes
 
 #endif /* PlayerSave_hpp */

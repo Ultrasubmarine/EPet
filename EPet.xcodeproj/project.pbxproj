@@ -26,6 +26,7 @@
 		02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C886892E50AF5F00B47F76 /* RenderSystem.cpp */; };
 		02D24A732BD84125008E7DCF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A522BD84124008E7DCF /* main.cpp */; };
 		02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A6B2BD84124008E7DCF /* Timer.cpp */; };
+		02DA5936300BD7FC004C7691 /* GrowingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DA5935300BD7FC004C7691 /* GrowingSystem.cpp */; };
 		02DB3C082DA80F7C00BE90D1 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C002DA80F7C00BE90D1 /* Scene.cpp */; };
 		02DB3C0A2DA80F7C00BE90D1 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C022DA80F7C00BE90D1 /* SceneManager.cpp */; };
 		02DB3C0B2DA80F7C00BE90D1 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3BFA2DA80F7C00BE90D1 /* Game.cpp */; };
@@ -104,6 +105,8 @@
 		02D24A832BD841D9008E7DCF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		02D24A842BD841D9008E7DCF /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EngineSettings.h; sourceTree = "<group>"; };
+		02DA5934300BD7FC004C7691 /* GrowingSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GrowingSystem.hpp; sourceTree = "<group>"; };
+		02DA5935300BD7FC004C7691 /* GrowingSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GrowingSystem.cpp; sourceTree = "<group>"; };
 		02DB3BD72DA80F7C00BE90D1 /* ISystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ISystem.hpp; sourceTree = "<group>"; };
 		02DB3BD82DA80F7C00BE90D1 /* ISystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ISystem.cpp; sourceTree = "<group>"; };
 		02DB3BD92DA80F7C00BE90D1 /* SystemFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SystemFactory.hpp; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 		022FF2062FF2B95F00716982 /* hamster */ = {
 			isa = PBXGroup;
 			children = (
+				02DA5934300BD7FC004C7691 /* GrowingSystem.hpp */,
+				02DA5935300BD7FC004C7691 /* GrowingSystem.cpp */,
 				022FF2032FF2B86500716982 /* TimerSystem.hpp */,
 				022FF2042FF2B86500716982 /* TimerSystem.cpp */,
 			);
@@ -502,6 +507,7 @@
 				022ED2F22F5DEFC70095E697 /* AnimationLoader.cpp in Sources */,
 				02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */,
 				02DB3C322DAC1DDC00BE90D1 /* TestSystem.cpp in Sources */,
+				02DA5936300BD7FC004C7691 /* GrowingSystem.cpp in Sources */,
 				02E4874A2ECE578E00A627BB /* HamsterSave.cpp in Sources */,
 				025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */,
 				02DB3C082DA80F7C00BE90D1 /* Scene.cpp in Sources */,

@@ -36,6 +36,7 @@ public:
     SceneManager* GetSceneManager() { return _sceneManager;};
     ResourceManager* GetResourceManager() { return _resourceManager;};
     IRender* GetRender() { return _render;};
+    PlayerSave* GetPlayerSave() { return _playerSave;};
     
 private:
     void Input();
