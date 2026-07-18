@@ -25,9 +25,6 @@
 		02BE0A3B2D2AE73300FA0AC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02BFA8F22BD840980074A6D4 /* Assets.xcassets */; };
 		02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C886892E50AF5F00B47F76 /* RenderSystem.cpp */; };
 		02D24A732BD84125008E7DCF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A522BD84124008E7DCF /* main.cpp */; };
-		02D24A762BD84125008E7DCF /* Pet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A5A2BD84124008E7DCF /* Pet.cpp */; };
-		02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A642BD84124008E7DCF /* RequestList.cpp */; };
-		02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A662BD84124008E7DCF /* Schedule.cpp */; };
 		02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D24A6B2BD84124008E7DCF /* Timer.cpp */; };
 		02DB3C082DA80F7C00BE90D1 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C002DA80F7C00BE90D1 /* Scene.cpp */; };
 		02DB3C0A2DA80F7C00BE90D1 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB3C022DA80F7C00BE90D1 /* SceneManager.cpp */; };
@@ -100,12 +97,6 @@
 		02C886882E50AF5F00B47F76 /* RenderSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderSystem.hpp; sourceTree = "<group>"; };
 		02C886892E50AF5F00B47F76 /* RenderSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSystem.cpp; sourceTree = "<group>"; };
 		02D24A522BD84124008E7DCF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
-		02D24A5A2BD84124008E7DCF /* Pet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pet.cpp; sourceTree = "<group>"; };
-		02D24A642BD84124008E7DCF /* RequestList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RequestList.cpp; sourceTree = "<group>"; };
-		02D24A662BD84124008E7DCF /* Schedule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Schedule.cpp; sourceTree = "<group>"; };
-		02D24A672BD84124008E7DCF /* RequestList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RequestList.hpp; sourceTree = "<group>"; };
-		02D24A692BD84124008E7DCF /* Schedule.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Schedule.hpp; sourceTree = "<group>"; };
-		02D24A6A2BD84124008E7DCF /* Pet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pet.hpp; sourceTree = "<group>"; };
 		02D24A6B2BD84124008E7DCF /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = src/Timer.cpp; sourceTree = "<group>"; };
 		02D24A6E2BD84125008E7DCF /* Subscription.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Subscription.hpp; sourceTree = "<group>"; };
 		02D24A6F2BD84125008E7DCF /* Singleton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Singleton.hpp; sourceTree = "<group>"; };
@@ -224,7 +215,6 @@
 				025F2E8D2D88AD5A0090AE59 /* utils */,
 				02C0154A2D06251D005113A9 /* registry.hpp */,
 				02D24A9A2BEBFB05008E7DCF /* EngineSettings.h */,
-				02D24A592BD84124008E7DCF /* hamstergotchi_core */,
 				02D24A522BD84124008E7DCF /* main.cpp */,
 				02D24A6B2BD84124008E7DCF /* Timer.cpp */,
 				02D24A702BD84125008E7DCF /* Timer.hpp */,
@@ -250,20 +240,6 @@
 				02BFA8F92BD840980074A6D4 /* EPet.entitlements */,
 			);
 			path = EPet;
-			sourceTree = "<group>";
-		};
-		02D24A592BD84124008E7DCF /* hamstergotchi_core */ = {
-			isa = PBXGroup;
-			children = (
-				02D24A5A2BD84124008E7DCF /* Pet.cpp */,
-				02D24A642BD84124008E7DCF /* RequestList.cpp */,
-				02D24A662BD84124008E7DCF /* Schedule.cpp */,
-				02D24A672BD84124008E7DCF /* RequestList.hpp */,
-				02D24A692BD84124008E7DCF /* Schedule.hpp */,
-				02D24A6A2BD84124008E7DCF /* Pet.hpp */,
-			);
-			name = hamstergotchi_core;
-			path = src/hamstergotchi_core;
 			sourceTree = "<group>";
 		};
 		02D24A6D2BD84125008E7DCF /* patterns */ = {
@@ -527,7 +503,6 @@
 				02D24A7E2BD84125008E7DCF /* Timer.cpp in Sources */,
 				02DB3C322DAC1DDC00BE90D1 /* TestSystem.cpp in Sources */,
 				02E4874A2ECE578E00A627BB /* HamsterSave.cpp in Sources */,
-				02D24A7C2BD84125008E7DCF /* Schedule.cpp in Sources */,
 				025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */,
 				02DB3C082DA80F7C00BE90D1 /* Scene.cpp in Sources */,
 				022FF1FC2FE3206A00716982 /* TextUpdateSystem.cpp in Sources */,
@@ -549,8 +524,6 @@
 				02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */,
 				02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */,
 				022FF1FF2FE712B300716982 /* ImageLoadSystem.cpp in Sources */,
-				02D24A762BD84125008E7DCF /* Pet.cpp in Sources */,
-				02D24A7B2BD84125008E7DCF /* RequestList.cpp in Sources */,
 				02D24A732BD84125008E7DCF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

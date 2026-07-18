@@ -21,7 +21,7 @@ protected:
     
     std::vector<ISystem*> _allSystems;
     
-    //TODO: use this vectors to call anly needed
+    //TODO: use this vectors to call only needed
     //std::vector<ISystem*> _initSystems;
     //std::vector<ISystem*> _updateSystems;
     //std::vector<ISystem*> _deInitSystems;
