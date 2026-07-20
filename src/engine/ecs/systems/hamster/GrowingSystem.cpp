@@ -21,19 +21,38 @@ SYSTEM_CPP(GrowingSystem);
 void GrowingSystem::Init()
 {
     _playerSave = Game::Instance().GetPlayerSave();
-    if(_playerSave)
+    if(!_playerSave || !_playerSave->GetData())
     {
         // TODO think about errors. maybe optimize it. some how
         LOG_ERROR("GrowingSystem::LoadAge() saveData doesn't exist. Loading hamster level skipped");
         return;
     }
     
-    int age = 0;
+    
+    // load
+    int lastAge = 0;
     std::time_t lastUpdate = 0;
-    LoadAge(age, lastUpdate);
+    if(!GetAttribute(_playerSave->GetData(), "level", lastAge, lastUpdate))
+    {
+        // new player
+        // do smth?
+    }
+    
 
-    // Recalculate timer
-    // ...
+    //Recalculate current parametrs
+    //...
+    
+    
+    // Recalculate timer for changing parametrs
+    int nextAge = 0;
+    std::time_t nextUpdate = 0;
+    RecalculateParametrs(age, lastUpdate, nextAge, nextUpdate);
+    if(nextUpdate == 0)
+    {
+        // no more changes
+        return;
+    }
+    
     
     // Create timer
     // ...
@@ -60,29 +79,6 @@ void GrowingSystem::Init()
 
 }
 
-void GrowingSystem::LoadAge(int& value, std::time_t& lastUpdate)
-{
-    auto saveData = _playerSave->GetData();
-    if(!saveData)
-    {
-        LOG_ERROR("GrowingSystem::LoadAge() saveData doesn't exist. Loading hamster level skipped");
-        //TODO do smth for player + share logs
-        return;
-    }
-    
-    //TODO: make template for common hamster stats?
-    std::string atribut_name = "age";
-    
-    if((*saveData).contains(atribut_name) && (*saveData)[atribut_name].is_object()) {
-        const auto& levelObj = (*saveData)[atribut_name];
-        if(levelObj.contains("value") && levelObj["value"].is_number_integer()) {
-            value = levelObj["value"].get<int>();
-        }
-        if(levelObj.contains("lastUpdate") && levelObj["lastUpdate"].is_number_integer()) {
-            lastUpdate = levelObj["lastUpdate"];
-        }
-    }
-}
 
 void GrowingSystem::Update(double dt){
 
@@ -109,5 +105,21 @@ void GrowingSystem::Update(double dt){
         _registry.emplace_or_replace<SetNewText>(ent, std::to_string(timer.timeLeft));
     }
 };
+
+void GrowingSystem::RecalculateParametrs(const int& currentValue, const std::time_t& lastUpdate, int& nextValue, std::time_t& nextUpdate)
+{
+    //simplest calculation function for test
+    nextValue = currentValue + 1;
+    
+    
+  //  std::duration t =
+    if(lastUpdate == 0)
+    {
+       // use full timer
+    }
+        
+
+    //
+}
 
 

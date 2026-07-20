@@ -14,6 +14,7 @@
 
 using json = nlohmann::json;
 
+// TODO: doesn't have check. it's unsave.
 template<typename T>
 Point<T> LoadPoint(const json& data)
 {

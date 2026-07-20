@@ -16,9 +16,4 @@
 #include "SDLFontLoader.hpp"
 #endif //SDL
 
-// TMP PLACE hamster
-#include "HamsterSave.hpp"
-using PlayerInfo = HamsterPlayerInfo;
-
-
 #endif /* EngineSettings_h */

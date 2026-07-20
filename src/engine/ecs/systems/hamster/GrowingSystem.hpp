@@ -23,7 +23,7 @@ public:
     PlayerSave* _playerSave;
 
 private:
-    void LoadAge(int& value, std::time_t& lastUpdate);
+    void RecalculateParametrs(const int& currentValue, const std::time_t& lastUpdate, int& nextValue, std::time_t& nextUpdate);
 };
 
 #endif /* GrowingSystem_hpp */
