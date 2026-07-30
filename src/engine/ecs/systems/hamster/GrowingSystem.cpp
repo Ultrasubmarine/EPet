@@ -28,6 +28,7 @@ void GrowingSystem::Init()
         return;
     }
     
+   // ApplyTimerByStartRecalculation(Time::Instance().GetClockTime());
     
     // load
     int lastAge = 0;
@@ -37,16 +38,31 @@ void GrowingSystem::Init()
         // new player
         // do smth?
     }
+    _level = lastAge; // tmp
     
-
     //Recalculate current parametrs
-    //...
+    if(lastUpdate)
+    {
+        auto duration = static_cast<std::time_t>(std::round(GetDuration()));
+        while(IsPossibleToChange() && lastUpdate + duration <= Time::Instance().GetClockTime())
+        {
+            lastUpdate += duration;
+            ApplyTimerByStartRecalculation(lastUpdate);
+
+            duration = GetDuration(); // maybe changed
+        }
+    }
+    
+    if(IsPossibleToChange() && lastUpdate > Time::Instance().GetClockTime())
+    {
+        // create new timer for next update;
+    }
     
     
-    // Recalculate timer for changing parametrs
-    int nextAge = 0;
+    // Recalculate timer for next update
+    
     std::time_t nextUpdate = 0;
-    RecalculateParametrs(age, lastUpdate, nextAge, nextUpdate);
+   // RecalculateParametrs(age, lastUpdate, nextAge, nextUpdate);
     if(nextUpdate == 0)
     {
         // no more changes
@@ -79,6 +95,26 @@ void GrowingSystem::Init()
 
 }
 
+bool GrowingSystem::IsPossibleToChange()
+{
+    return true;
+}
+
+double GrowingSystem::GetDuration() // in seconds
+{
+    return 5 * 60.0;
+}
+
+void GrowingSystem::ApplyTimerByStartRecalculation(const std::time_t& updateTime)
+{
+    ApplyTimerByGameProgress(updateTime); // maybe different but now it's the same
+}
+
+void GrowingSystem::ApplyTimerByGameProgress(const std::time_t& updateTime)
+{
+    SetAttribute(_playerSave->GetData(), "level", ++_level, updateTime);
+    _playerSave->Save();
+}
 
 void GrowingSystem::Update(double dt){
 

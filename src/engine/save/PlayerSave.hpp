@@ -52,7 +52,7 @@ inline bool GetAttribute(json* from, const char* attribute_name, int& value, std
     return true;
 }
 
-inline void SetAttribute(json* from, const char* attribute_name, int& value, std::time_t& lastUpdate)
+inline void SetAttribute(json* from, const char* attribute_name, const int& value, const std::time_t& lastUpdate)
 {
     if(!from)
     {
@@ -61,6 +61,8 @@ inline void SetAttribute(json* from, const char* attribute_name, int& value, std
         return;
     }
     
+    // Устанавливаем объект атрибута с value и lastUpdate
+    (*from)[attribute_name] = json{{"value", value}, {"lastUpdate", lastUpdate}};
 }
 
 // TODO: Add function for easy get common atributes

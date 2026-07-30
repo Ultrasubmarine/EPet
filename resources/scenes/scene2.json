@@ -81,6 +81,8 @@
        "TimerSystem",
        "TextUpdateSystem",
        "AAATestSystem",
+       
+       "GrowingSystem",
    
        "AnimationUpdateSystem",
        "AnimationFinishSystem",

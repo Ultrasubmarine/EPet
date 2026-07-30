@@ -22,6 +22,7 @@
 
 bool Game::Init()
 {
+    Time::Instance().Init();
     _window = new Window();
     if(!_window->CreateWindow(320, 240, "my Gotchi"))
     {
