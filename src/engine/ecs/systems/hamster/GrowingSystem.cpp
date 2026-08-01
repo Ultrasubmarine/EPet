@@ -11,6 +11,7 @@
 
 #include "TimeComponents.hpp"
 #include "CommonComponents.hpp"
+#include "HM_StatesComponents.hpp"
 
 #include "Time.hpp"
 #include "Game.hpp"
@@ -19,97 +20,86 @@
 
 SYSTEM_CPP(GrowingSystem);
 
-
-void GrowingSystem::Init()
+Level* GrowingSystem::Load()
 {
     _playerSave = Game::Instance().GetPlayerSave();
     if(!_playerSave || !_playerSave->GetData())
     {
         // TODO think about errors. maybe optimize it. some how
         LOG_ERROR("GrowingSystem::LoadAge() saveData doesn't exist. Loading hamster level skipped");
-        return;
+        return nullptr;
     }
     
-   // ApplyTimerByStartRecalculation(Time::Instance().GetClockTime());
-    
-    // load
     int lastAge = 0;
     std::time_t lastUpdate = 0;
     if(!GetAttribute(_playerSave->GetData(), "level", lastAge, lastUpdate))
     {
-        // new player
-        // do smth?
+        // NEW PLAYER. DOESN'T HAVE A "Level" IN DATA
+        _registry.emplace<Empty_Level_OF>(_registry.create());
     }
-    _level = lastAge; // tmp
     
-    //Recalculate current parametrs
+    // for test
+    // ApplyTimerByStartRecalculation(Time::Instance().GetClockTime());
     
-  //  auto duration = GetDuration();
-    if(lastUpdate)
+    auto& level = _registry.emplace<Level>(_registry.create(), lastAge, lastUpdate);
+    return &level;
+}
+
+
+void GrowingSystem::Init()
+{
+    auto level = Load();
+    if(!level) {
+        return;
+    }
+
+    //update hamster level for current time
+    RecalculateParametrs(level->lastUpdate);
+    
+    // create new timer
+    if(IsPossibleToChange())
     {
+        auto timeThatAlreadyGone = Time::Instance().GetClockTime() - level->lastUpdate;
+        auto neededDuration = GetDuration() - timeThatAlreadyGone;
+        if(neededDuration < 0)
+        {
+            LOG_ERROR("GrowingSystem::Init() calculated duration for timer <0. RecalculateParametrs() doesn't cover all timeline");
+            neededDuration = GetDuration();
+        }
+        
+        entt::entity entity;
+        if(CreateTimer(1.0, &entity))//CreateTimer(neededDuration, &entity))
+        {
+            //code only for growing system
+            _registry.emplace<LevelTimer>(entity);
+            
+            
+            _registry.emplace<Text>(entity);
+            _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
+            
+            _registry.emplace<RendererObject>(entity);
+            _registry.emplace<Sorting>(entity, 1000);
+            _registry.emplace<Transform>(entity, IPoint(150, 150));
+        }
+    //    CreateTimer(dur)
+        // create new timer for next update;
+    }
+}
+
+void GrowingSystem::RecalculateParametrs(std::time_t lastUpdate)
+{
+    //Recalculate current parametrs that was save long time ago
+    if(lastUpdate) {
         const auto now = Time::Instance().GetClockTime();
         auto duration = GetDuration();
 
-        while(IsPossibleToChange() && duration > 0 && lastUpdate + duration <= now)
-        {
+        while(IsPossibleToChange() && duration > 0 && lastUpdate + duration <= now) {
             lastUpdate += duration;
             ApplyTimerByStartRecalculation(lastUpdate);
 
             duration = GetDuration(); // maybe changed
         }
     }
-    
-    if(IsPossibleToChange() && lastUpdate > Time::Instance().GetClockTime())
-    {
-    //    CreateTimer(dur)
-        // create new timer for next update;
-    }
-    
-    
-    // Recalculate timer for next update
-    
-    std::time_t nextUpdate = 0;
-   // RecalculateParametrs(age, lastUpdate, nextAge, nextUpdate);
-    if(nextUpdate == 0)
-    {
-        // no more changes
-        return;
-    }
-    
-    
-    // Create timer
-    // ...
-    
-    
-    // WHEN Save?
-//    (*saveData)["level"] = {
-//        {"value", age},
-//        {"lastUpdate", static_cast<std::int64_t>(std::time(nullptr))}
-//    };
-    
-    
-    entt::entity entity;
-    if(CreateTimer(10.0, &entity))
-    {
-        _registry.emplace<Text>(entity);
-        _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
-        
-        _registry.emplace<RendererObject>(entity);
-        _registry.emplace<Sorting>(entity, 1000);
-        _registry.emplace<Transform>(entity, IPoint(50, 50));
-    }
-
-
-}
-
-bool GrowingSystem::IsPossibleToChange()
-{
-    return true;
-}
-
-std::time_t GrowingSystem::GetDuration() // in seconds
-{
-    return std::time_t(5.0 * 60);
 }
 
 void GrowingSystem::ApplyTimerByStartRecalculation(const std::time_t& updateTime)
@@ -119,6 +109,15 @@ void GrowingSystem::ApplyTimerByStartRecalculation(const std::time_t& updateTime
 
 void GrowingSystem::ApplyTimerByGameProgress(const std::time_t& updateTime)
 {
+    for(auto [ent, level] : _registry.view<Level>().each())
+    {
+        level.value++;
+        level.lastUpdate = updateTime;
+        
+        _registry.emplace_or_replace<LevelChanged_OF>(ent);
+    }
+    
+    // tmp place for save
     SetAttribute(_playerSave->GetData(), "level", ++_level, updateTime);
     _playerSave->Save();
 }
@@ -126,43 +125,20 @@ void GrowingSystem::ApplyTimerByGameProgress(const std::time_t& updateTime)
 void GrowingSystem::Update(double dt){
 
     // delete all one frame components
-    _registry.clear<TimerFinished_OF>();
-    
-    
-    //update timers
-    for( auto [ent, timer] : _registry.view<Timer>(entt::exclude<TimerFinished>).each())
-    {
-        timer.timeLeft -= dt;
-        
-        // if completed
-        if(timer.timeLeft <= 0.0)
-        {
-            _registry.emplace<TimerFinished_OF>(ent);
-            _registry.emplace<TimerFinished>(ent);
-        }
+    _registry.clear<LevelChanged_OF>();
+    for (auto entity : _registry.view<Empty_Level_OF>()) {
+        _registry.destroy(entity);
     }
+    //--------------------------------
     
-    //show timers
-    for( auto [ent, timer, text] : _registry.view<Timer, Text>().each())
+    
+    for( auto [ent, timer] : _registry.view<Timer, TimerFinished_OF, LevelTimer>().each())
     {
-        _registry.emplace_or_replace<SetNewText>(ent, std::to_string(timer.timeLeft));
+        ApplyTimerByGameProgress(Time::Instance().GetClockTime());
+        //CreateNextTimer...
     }
 };
 
-void GrowingSystem::RecalculateParametrs(const int& currentValue, const std::time_t& lastUpdate, int& nextValue, std::time_t& nextUpdate)
-{
-    //simplest calculation function for test
-    nextValue = currentValue + 1;
-    
-    
-  //  std::duration t =
-    if(lastUpdate == 0)
-    {
-       // use full timer
-    }
-        
 
-    //
-}
 
 

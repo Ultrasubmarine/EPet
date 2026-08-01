@@ -13,6 +13,7 @@
 #include "ISystem.hpp"
 
 class PlayerSave;
+struct Level;
 
 class GrowingSystem: public ISystem {
     SYSTEM_BODY(GrowingSystem)
@@ -25,10 +26,16 @@ public:
     PlayerSave* _playerSave;
 
 private:
-    void RecalculateParametrs(const int& currentValue, const std::time_t& lastUpdate, int& nextValue, std::time_t& nextUpdate);
     
-    std::time_t GetDuration();
-    bool IsPossibleToChange();
+    Level* Load();
+    
+    
+    // for moving to other class
+    virtual void RecalculateParametrs(std::time_t lastUpdate);
+    
+    virtual std::time_t GetDuration() {return std::time_t(5.0 * 60);};
+    virtual bool IsPossibleToChange() {return true;};
+    // ______________________________
     
     void ApplyTimerByStartRecalculation(const std::time_t& updateTime); // maybe different
     void ApplyTimerByGameProgress(const std::time_t& updateTime);

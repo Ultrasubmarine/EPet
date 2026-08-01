@@ -60,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		02117BFC2E10750E001D1E06 /* SceneUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneUtils.hpp; sourceTree = "<group>"; };
+		02245F05301E58E600B33707 /* HM_StatesComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HM_StatesComponents.hpp; sourceTree = "<group>"; };
 		022ED2EE2F5DEEBF0095E697 /* AnimationLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationLoader.hpp; sourceTree = "<group>"; };
 		022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationLoader.cpp; sourceTree = "<group>"; };
 		022FF1FA2FE3206600716982 /* TextUpdateSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextUpdateSystem.hpp; sourceTree = "<group>"; };
@@ -184,6 +185,7 @@
 		022FF2072FF2B9C600716982 /* hamster */ = {
 			isa = PBXGroup;
 			children = (
+				02245F05301E58E600B33707 /* HM_StatesComponents.hpp */,
 			);
 			path = hamster;
 			sourceTree = "<group>";
