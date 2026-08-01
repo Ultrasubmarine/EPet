@@ -17,16 +17,16 @@ SYSTEM_CPP(TimerSystem);
 
 void TimerSystem::Init()
 {
-    entt::entity entity;
-    if(CreateTimer(10.0, &entity))
-    {
-        _registry.emplace<Text>(entity);
-        _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
-        
-        _registry.emplace<RendererObject>(entity);
-        _registry.emplace<Sorting>(entity, 1000);
-        _registry.emplace<Transform>(entity, IPoint(50, 50));
-    }
+//    entt::entity entity;
+//    if(CreateTimer(10.0, &entity))
+//    {
+//        _registry.emplace<Text>(entity);
+//        _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
+//        
+//        _registry.emplace<RendererObject>(entity);
+//        _registry.emplace<Sorting>(entity, 1000);
+//        _registry.emplace<Transform>(entity, IPoint(50, 50));
+//    }
 }
 
 void TimerSystem::Update(double dt){

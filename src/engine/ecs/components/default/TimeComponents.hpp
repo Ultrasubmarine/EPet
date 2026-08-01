@@ -47,7 +47,12 @@ struct TimerFinished
 {
 };
 
-/// arg duration - in seconds. 
+
+struct UnusedTimer // Mark that timer could be deleted. 
+{
+};
+
+/// arg duration - in seconds.
 /// true - if creating is succesefull
 bool CreateTimer(double duration, entt::entity* outCreatedEntity = nullptr, Timer* outCreatedTimer = nullptr);
 

@@ -12,11 +12,11 @@
 
 void FrameRate::FirstInitialization()
 {
-    _delta = std::chrono::nanoseconds::zero();
-    _lastClock = std::chrono::steady_clock::now();
-    
     _fixedDelta = std::chrono::seconds(1);
     _fixedDelta /= _fps;
+
+    _delta = _fixedDelta; // first frame has no previous one: report expected frame time, not 0
+    _lastClock = std::chrono::steady_clock::now();
 }
 
 void FrameRate::SetFixedFrame(int fps)

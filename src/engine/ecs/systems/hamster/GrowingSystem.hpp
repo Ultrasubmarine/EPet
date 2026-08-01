@@ -29,19 +29,17 @@ private:
     
     Level* Load();
     
-    
     // for moving to other class
     virtual void RecalculateParametrs(std::time_t lastUpdate);
     
     virtual std::time_t GetDuration() {return std::time_t(5.0 * 60);};
     virtual bool IsPossibleToChange() {return true;};
+    
+    virtual void ApplyTimerByStartRecalculation(const std::time_t& updateTime); // maybe different
+    virtual void ApplyTimerByGameProgress(const std::time_t& updateTime);
     // ______________________________
     
-    void ApplyTimerByStartRecalculation(const std::time_t& updateTime); // maybe different
-    void ApplyTimerByGameProgress(const std::time_t& updateTime);
-    
-private:
-    int _level = 0; // tmp place 
+    entt::entity CreateNextTimer(std::time_t& lastUpdate);
 };
 
 #endif /* GrowingSystem_hpp */
