@@ -9,6 +9,7 @@
 #define Time_hpp
 
 #include <chrono>
+#include <ctime>
 #include <functional>
 #include <unordered_map>
 #include <cstdint>
@@ -22,7 +23,7 @@ struct IClockSource {
     virtual ~IClockSource() = default;
     virtual void Init() {}
     virtual void Update(double dt) = 0;
-    virtual std::int64_t GetNow() const = 0; // in milliseconds
+    virtual std::time_t GetNow() const = 0; // unix time, in seconds
 };
 
 
@@ -34,10 +35,10 @@ public:
     void Update(double dt);
     
     // session
-    double GetSessionDuration() const { return _session;}
+    double GetSessionDuration() const { return _session;} // in seconds
 
     // clock
-    std::int64_t GetClockTime() const { return _clock->GetNow();}
+    std::time_t GetClockTime() const { return _clock->GetNow();} // unix time, in seconds
     std::string GetClockTimeString() const;
 
 private:
@@ -50,23 +51,23 @@ private:
 // 1 type of clock. system
 struct SystemClockSource : IClockSource {
     void Update(double) override {} // nothing to do
-    std::int64_t GetNow() const override {
+    std::time_t GetNow() const override {
         const auto now = std::chrono::system_clock::now().time_since_epoch();
-        return std::chrono::duration_cast<std::chrono::milliseconds>(now).count();
+        return std::chrono::duration_cast<std::chrono::seconds>(now).count();
     }
 };
 
 // 2 type of clock. custom, increasing in update()
 struct AccumulatedClockSource : IClockSource {
-    std::int64_t _unixTime = 0; // текущее «виртуальное» реальное время
-    void Init() override { /* опционально: _unixMs = seed */ }
+    double _unixTime = 0.0; // текущее «виртуальное» реальное время, in seconds
+    void Init() override { /* опционально: _unixTime = seed */ }
     void Update(double dt) override {
         if (dt < 0) dt = 0;
         // можно клампить слишком большие шаги
-        _unixTime += static_cast<std::int64_t>(dt * 1000.0); // dt in seconds, _unixTime in ms
+        _unixTime += dt;
     }
     // TODO: set clock
-    std::int64_t GetNow() const override { return _unixTime; }
+    std::time_t GetNow() const override { return static_cast<std::time_t>(_unixTime); }
 };
 
 #endif /* Time_hpp */

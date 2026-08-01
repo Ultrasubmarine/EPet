@@ -31,6 +31,7 @@ public:
 };
 
 
+/// lastUpdate - unix time, in seconds
 inline bool GetAttribute(json* from, const char* attribute_name, int& value, std::time_t& lastUpdate)
 {
     if(!from)
@@ -52,6 +53,7 @@ inline bool GetAttribute(json* from, const char* attribute_name, int& value, std
     return true;
 }
 
+/// lastUpdate - unix time, in seconds
 inline void SetAttribute(json* from, const char* attribute_name, const int& value, const std::time_t& lastUpdate)
 {
     if(!from)

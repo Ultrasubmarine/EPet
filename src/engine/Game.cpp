@@ -47,11 +47,11 @@ bool Game::Init()
         _playerSave->Save();
     }
     
+    Time::Instance().Init(); // before scenes!
+
     _sceneManager = new SceneManager(_resourceManager);
     _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
 
-    Time::Instance().Init();
-    
     std::string font_name = std::string(DEFAULT_FONT);
     auto font_object = _resourceManager->GetFont(font_name);
   //  _sceneManager->SaveScene();

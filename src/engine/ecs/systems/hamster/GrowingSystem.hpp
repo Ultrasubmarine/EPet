@@ -8,6 +8,8 @@
 #ifndef GrowingSystem_hpp
 #define GrowingSystem_hpp
 
+#include <ctime>
+
 #include "ISystem.hpp"
 
 class PlayerSave;
@@ -25,7 +27,7 @@ public:
 private:
     void RecalculateParametrs(const int& currentValue, const std::time_t& lastUpdate, int& nextValue, std::time_t& nextUpdate);
     
-    double GetDuration(); // in seconds
+    std::time_t GetDuration();
     bool IsPossibleToChange();
     
     void ApplyTimerByStartRecalculation(const std::time_t& updateTime); // maybe different

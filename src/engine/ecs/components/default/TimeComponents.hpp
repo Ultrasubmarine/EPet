@@ -35,8 +35,8 @@
 
 struct Timer
 {
-    double timeLeft;
-    double duration;
+    double timeLeft;    // in seconds
+    double duration;    // in seconds
 };
 
 struct TimerFinished_OF /// one shot

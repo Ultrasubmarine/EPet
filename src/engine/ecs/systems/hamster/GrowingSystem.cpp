@@ -7,6 +7,8 @@
 
 #include "GrowingSystem.hpp"
 
+#include <cmath>
+
 #include "TimeComponents.hpp"
 #include "CommonComponents.hpp"
 
@@ -41,10 +43,14 @@ void GrowingSystem::Init()
     _level = lastAge; // tmp
     
     //Recalculate current parametrs
+    
+  //  auto duration = GetDuration();
     if(lastUpdate)
     {
-        auto duration = static_cast<std::time_t>(std::round(GetDuration()));
-        while(IsPossibleToChange() && lastUpdate + duration <= Time::Instance().GetClockTime())
+        const auto now = Time::Instance().GetClockTime();
+        auto duration = GetDuration();
+
+        while(IsPossibleToChange() && duration > 0 && lastUpdate + duration <= now)
         {
             lastUpdate += duration;
             ApplyTimerByStartRecalculation(lastUpdate);
@@ -55,6 +61,7 @@ void GrowingSystem::Init()
     
     if(IsPossibleToChange() && lastUpdate > Time::Instance().GetClockTime())
     {
+    //    CreateTimer(dur)
         // create new timer for next update;
     }
     
@@ -100,9 +107,9 @@ bool GrowingSystem::IsPossibleToChange()
     return true;
 }
 
-double GrowingSystem::GetDuration() // in seconds
+std::time_t GrowingSystem::GetDuration() // in seconds
 {
-    return 5 * 60.0;
+    return std::time_t(5.0 * 60);
 }
 
 void GrowingSystem::ApplyTimerByStartRecalculation(const std::time_t& updateTime)

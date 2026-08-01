@@ -30,8 +30,7 @@ void Time::Update(double dt)
 }
 
 std::string Time::GetClockTimeString() const {
-    std::int64_t ms = _clock->GetNow();
-    std::time_t t = ms / 1000;
+    std::time_t t = _clock->GetNow();
     std::tm tm{};
 #if defined(_WIN32)
     localtime_s(&tm, &t);
