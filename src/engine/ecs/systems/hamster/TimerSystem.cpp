@@ -31,11 +31,15 @@ void TimerSystem::Init()
 
 void TimerSystem::Update(double dt){
 
-    // delete all one frame components
+    // Delete all one frame components
     _registry.clear<TimerFinished_OF>();
     
+    // Delete timer that not use anymore
+    for(auto entity : _registry.view<UnusedTimer>()) {
+        _registry.destroy(entity);
+    }
     
-    //update timers
+    // Update timers
     for( auto [ent, timer] : _registry.view<Timer>(entt::exclude<TimerFinished>).each())
     {
         timer.timeLeft -= dt;
@@ -48,10 +52,17 @@ void TimerSystem::Update(double dt){
         }
     }
     
-    //show timers
+    // Show timers
     for( auto [ent, timer, text] : _registry.view<Timer, Text>().each())
     {
-        _registry.emplace_or_replace<SetNewText>(ent, std::to_string(timer.timeLeft));
+        int totalSeconds = static_cast<int>(std::round(std::max(0.0, timer.timeLeft)));
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+
+        char buf[6];
+        std::snprintf(buf, sizeof(buf), "%2d:%02d", minutes, seconds);
+
+        _registry.emplace_or_replace<SetNewText>(ent, buf);
     }
 };
 

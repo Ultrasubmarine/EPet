@@ -32,7 +32,7 @@ private:
     // for moving to other class
     virtual void RecalculateParametrs(std::time_t lastUpdate);
     
-    virtual std::time_t GetDuration() {return std::time_t(5.0 * 60);};
+    virtual std::time_t GetDuration() {return std::time_t(1.0 * 60);};
     virtual bool IsPossibleToChange() {return true;};
     
     virtual void ApplyTimerByStartRecalculation(const std::time_t& updateTime); // maybe different
