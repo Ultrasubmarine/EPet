@@ -24,6 +24,8 @@ void SavingSystem::Init()
         LOG_ERROR("SavingSystem::Init() saveData doesn't exist.");
         return;
     }
+    
+    Update(0.0); // because other system in init could update their states
 }
 
 void SavingSystem::Update(double dt)

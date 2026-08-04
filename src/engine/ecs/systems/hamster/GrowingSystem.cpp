@@ -54,6 +54,8 @@ void GrowingSystem::Init()
         return;
     }
 
+    int loadValue = level->value;
+    
     //Update hamster level for current time
     RecalculateParametrs(level->lastUpdate);
     
