@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0208008F302B83F00082CA97 /* IStateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0208008E302B83F00082CA97 /* IStateSystem.cpp */; };
+		0208008F302B83F00082CA97 /* StateTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0208008E302B83F00082CA97 /* StateTicker.cpp */; };
 		02245F0A301F7F1400B33707 /* SavingSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02245F09301F7F1400B33707 /* SavingSystem.cpp */; };
 		022ED2F22F5DEFC70095E697 /* AnimationLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022ED2F12F5DEFC70095E697 /* AnimationLoader.cpp */; };
 		022FF1FC2FE3206A00716982 /* TextUpdateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022FF1FB2FE3206A00716982 /* TextUpdateSystem.cpp */; };
@@ -61,8 +61,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0208008D302B83F00082CA97 /* IStateSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IStateSystem.hpp; sourceTree = "<group>"; };
-		0208008E302B83F00082CA97 /* IStateSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IStateSystem.cpp; sourceTree = "<group>"; };
+		0208008D302B83F00082CA97 /* StateTicker.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateTicker.hpp; sourceTree = "<group>"; };
+		0208008E302B83F00082CA97 /* StateTicker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateTicker.cpp; sourceTree = "<group>"; };
 		02117BFC2E10750E001D1E06 /* SceneUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneUtils.hpp; sourceTree = "<group>"; };
 		02245F05301E58E600B33707 /* HM_StatesComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HM_StatesComponents.hpp; sourceTree = "<group>"; };
 		02245F08301F7F1400B33707 /* SavingSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SavingSystem.hpp; sourceTree = "<group>"; };
@@ -186,8 +186,8 @@
 				02DA5935300BD7FC004C7691 /* GrowingSystem.cpp */,
 				022FF2032FF2B86500716982 /* TimerSystem.hpp */,
 				022FF2042FF2B86500716982 /* TimerSystem.cpp */,
-				0208008D302B83F00082CA97 /* IStateSystem.hpp */,
-				0208008E302B83F00082CA97 /* IStateSystem.cpp */,
+				0208008D302B83F00082CA97 /* StateTicker.hpp */,
+				0208008E302B83F00082CA97 /* StateTicker.cpp */,
 			);
 			path = hamster;
 			sourceTree = "<group>";
@@ -515,7 +515,7 @@
 				022FF2022FE71E6000716982 /* SortingUpdateSystem.cpp in Sources */,
 				02DB3C0D2DA80F7C00BE90D1 /* JsonLoader.cpp in Sources */,
 				02DB3C112DA80F7C00BE90D1 /* FrameRate.cpp in Sources */,
-				0208008F302B83F00082CA97 /* IStateSystem.cpp in Sources */,
+				0208008F302B83F00082CA97 /* StateTicker.cpp in Sources */,
 				02DB3C142DA80F7C00BE90D1 /* SDLWindow.cpp in Sources */,
 				0268FF052F129B00004AD2D8 /* Time.cpp in Sources */,
 				027725612F63596800E8F256 /* AnimationSystems.cpp in Sources */,
