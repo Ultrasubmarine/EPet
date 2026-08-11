@@ -61,31 +61,18 @@ void GrowingSystem::Init()
     
     //Create new timer
     auto entity = CreateNextTimer(level->lastUpdate);
+    
+// tmp place
+//    _registry.emplace<Text>(entity);
+//    _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
+//
+//    _registry.emplace<RendererObject>(entity);
+//    _registry.emplace<Sorting>(entity, 1000);
+//    _registry.emplace<Transform>(entity, IPoint(150, 150));
     _registry.emplace<LevelTimer>(entity);
 }
 
-void GrowingSystem::RecalculateParametrs(std::time_t lastUpdate)
-{
-    //Recalculate current parametrs that was save long time ago
-    if(lastUpdate) {
-        const auto now = Time::Instance().GetClockTime();
-        auto duration = GetDuration();
-
-        while(IsPossibleToChange() && duration > 0 && lastUpdate + duration <= now) {
-            lastUpdate += duration;
-            ApplyTimerByStartRecalculation(lastUpdate);
-
-            duration = GetDuration(); // maybe changed
-        }
-    }
-}
-
-void GrowingSystem::ApplyTimerByStartRecalculation(const std::time_t& updateTime)
-{
-    ApplyTimerByGameProgress(updateTime); // maybe different but now it's the same
-}
-
-void GrowingSystem::ApplyTimerByGameProgress(const std::time_t& updateTime)
+void GrowingSystem::OnTimerEndedInGame(const std::time_t& updateTime)
 {
     for(auto [ent, level] : _registry.view<Level>().each())
     {
@@ -98,18 +85,13 @@ void GrowingSystem::ApplyTimerByGameProgress(const std::time_t& updateTime)
 
 void GrowingSystem::Update(double dt){
 
-    // delete all one frame components
-    _registry.clear<LevelChanged_OF>();
-    for(auto entity : _registry.view<Empty_Level_OF>()) {
-        _registry.destroy(entity);
-    }
-    //--------------------------------
+    DeleteOneFrameComponent();
     
     for(auto [ent, timer] : _registry.view<Timer, TimerFinished_OF, LevelTimer>().each())
     {
         //Apply changes
         auto now = Time::Instance().GetClockTime();
-        ApplyTimerByGameProgress(now);
+        OnTimerEndedInGame(now);
         
         //Mark
         _registry.emplace_or_replace<UnusedTimer>(ent);
@@ -120,31 +102,12 @@ void GrowingSystem::Update(double dt){
     }
 };
 
-entt::entity GrowingSystem::CreateNextTimer(std::time_t& lastUpdate)
+void GrowingSystem::DeleteOneFrameComponent()
 {
-    if(IsPossibleToChange())
-    {
-        auto timeThatAlreadyGone = Time::Instance().GetClockTime() - lastUpdate;
-        auto neededDuration = GetDuration() - timeThatAlreadyGone;
-        if(neededDuration < 0)
-        {
-            LOG_ERROR("GrowingSystem::CreateNextTimer() calculated duration for timer <0. RecalculateParametrs() doesn't cover all timeline");
-            neededDuration = GetDuration();
-        }
-        
-        entt::entity entity;
-        if(CreateTimer(neededDuration, &entity))
-        {
-            _registry.emplace<Text>(entity);
-            _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
-
-            _registry.emplace<RendererObject>(entity);
-            _registry.emplace<Sorting>(entity, 1000);
-            _registry.emplace<Transform>(entity, IPoint(150, 150));
-            return entity;
-        }
+    _registry.clear<LevelChanged_OF>();
+    for(auto entity : _registry.view<Empty_Level_OF>()) {
+        _registry.destroy(entity);
     }
-    return entt::null;
 }
 
 

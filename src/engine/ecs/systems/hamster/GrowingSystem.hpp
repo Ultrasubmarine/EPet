@@ -11,11 +11,12 @@
 #include <ctime>
 
 #include "ISystem.hpp"
+#include "StateTicker.hpp"
 
 class PlayerSave;
 struct Level;
 
-class GrowingSystem: public ISystem {
+class GrowingSystem: public ISystem, private StateTicker {
     SYSTEM_BODY(GrowingSystem)
     
 public:
@@ -28,18 +29,9 @@ public:
 private:
     
     Level* Load();
+    virtual void OnTimerEndedInGame(const std::time_t& updateTime) override;
     
-    // for moving to other class
-    virtual void RecalculateParametrs(std::time_t lastUpdate);
-    
-    virtual std::time_t GetDuration() {return std::time_t(1.0 * 60);};
-    virtual bool IsPossibleToChange() {return true;};
-    
-    virtual void ApplyTimerByStartRecalculation(const std::time_t& updateTime); // maybe different
-    virtual void ApplyTimerByGameProgress(const std::time_t& updateTime);
-    // ______________________________
-    
-    entt::entity CreateNextTimer(std::time_t& lastUpdate);
+    void DeleteOneFrameComponent();
 };
 
 #endif /* GrowingSystem_hpp */
