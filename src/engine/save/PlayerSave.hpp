@@ -39,7 +39,7 @@ inline bool GetAttribute(json* from, const char* attribute_name, int& value, std
         //error
         return false;
     }
-    
+
     if((*from).contains(attribute_name) && (*from)[attribute_name].is_object()) {
         const auto& levelObj = (*from)[attribute_name];
         if(levelObj.contains("value") && levelObj["value"].is_number_integer()) {
@@ -48,6 +48,10 @@ inline bool GetAttribute(json* from, const char* attribute_name, int& value, std
         if(levelObj.contains("lastUpdate") && levelObj["lastUpdate"].is_number_integer()) {
             lastUpdate = levelObj["lastUpdate"];
         }
+    }
+    else
+    {
+        return false;
     }
     
     return true;

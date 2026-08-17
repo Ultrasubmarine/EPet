@@ -12,11 +12,7 @@
 
 #include "ISystem.hpp"
 #include "StateTicker.hpp"
-
-class PlayerSave;
-
-struct Level;
-struct LevelTimer;
+#include "HM_StatesComponents.hpp"
 
 class GrowingSystem: public ISystem, private StateTicker<LevelTimer> {
     SYSTEM_BODY(GrowingSystem, StateTicker<LevelTimer>(registry))
@@ -25,16 +21,14 @@ public:
     void Init() override;
     void DeInit() override {};
     void Update(double dt) override;
-    
-    PlayerSave* _playerSave;
 
 private:
     
-    Level* Load();
+    bool Load(); // true if success 
     
     virtual void ApplyStep(std::time_t updateTime) override;
-    virtual const std::time_t GetLastUpdate() override;
-    virtual const std::time_t GetDuration() override;
+    virtual std::time_t GetLastUpdate() const override;
+    virtual std::time_t GetDuration() const override;
     
     void DeleteOneFrameComponent();
 };

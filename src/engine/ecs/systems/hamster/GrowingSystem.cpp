@@ -7,10 +7,6 @@
 
 #include "GrowingSystem.hpp"
 
-#include <cmath>
-
-#include "TimeComponents.hpp"
-#include "CommonComponents.hpp"
 #include "HM_StatesComponents.hpp"
 
 #include "Time.hpp"
@@ -20,55 +16,37 @@
 
 SYSTEM_CPP(GrowingSystem);
 
-Level* GrowingSystem::Load()
+bool GrowingSystem::Load()
 {
     // need to move it?
-    _playerSave = Game::Instance().GetPlayerSave();
-    if(!_playerSave || !_playerSave->GetData())
+    auto playerSave = Game::Instance().GetPlayerSave();
+    if(!playerSave || !playerSave->GetData())
     {
         // TODO think about errors. maybe optimize it. some how
         LOG_ERROR("GrowingSystem::LoadAge() saveData doesn't exist. Loading hamster level skipped");
-        return nullptr;
+        return false;
     }
-    
+
     int lastAge = 0;
-    std::time_t lastUpdate = 0;
-    if(!GetAttribute(_playerSave->GetData(), "level", lastAge, lastUpdate))
+    std::time_t lastUpdate = Time::Instance().GetClockTime();
+    if(!GetAttribute(playerSave->GetData(), "level", lastAge, lastUpdate))
     {
         // NEW PLAYER. DOESN'T HAVE A "Level" IN DATA
         _registry.emplace<Empty_Level_OF>(_registry.create());
     }
     
-    // for test
-    // ApplyTimerByStartRecalculation(Time::Instance().GetClockTime());
-    
-    auto& level = _registry.emplace<Level>(_registry.create(), lastAge, lastUpdate);
-    return &level;
+    _registry.emplace<Level>(_registry.create(), lastAge, lastUpdate);
+    return true;
 }
 
 
 void GrowingSystem::Init()
 {
-    auto level = Load();
-    if(!level) {
+    if(!Load()) {
         return;
     }
 
     InitState();
-    //Update hamster level for current time
-//    RecalculateParametrs(level->lastUpdate);
-//    
-//    //Create new timer
-//    auto entity = StartTimer(level->lastUpdate);
-    
-// tmp place
-//    _registry.emplace<Text>(entity);
-//    _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
-//
-//    _registry.emplace<RendererObject>(entity);
-//    _registry.emplace<Sorting>(entity, 1000);
-//    _registry.emplace<Transform>(entity, IPoint(150, 150));
- //   _registry.emplace<LevelTimer>(entity);
 }
 
 void GrowingSystem::ApplyStep(const std::time_t updateTime)
@@ -82,7 +60,7 @@ void GrowingSystem::ApplyStep(const std::time_t updateTime)
     }
 }
 
-const std::time_t GrowingSystem::GetLastUpdate()
+std::time_t GrowingSystem::GetLastUpdate() const
 {
     for(auto [ent, level] :_registry.view<Level>().each())
     {
@@ -91,7 +69,7 @@ const std::time_t GrowingSystem::GetLastUpdate()
     return 0;
 }
 
-const std::time_t GrowingSystem::GetDuration()
+std::time_t GrowingSystem::GetDuration() const
 {
     return 60 * 1;
 }
@@ -101,21 +79,7 @@ void GrowingSystem::Update(double dt){
     DeleteOneFrameComponent();
     
     UpdateState();
-//
-//    for(auto [ent, timer] : _registry.view<Timer, TimerFinished_OF, LevelTimer>().each())
-//    {
-//        //Apply changes
-//        auto now = Time::Instance().GetClockTime();
-//        OnTimerEndedInGame(now);
-//        
-//        //Mark
-//        _registry.emplace_or_replace<UnusedTimer>(ent);
-//        
-//        //CreateNextTimer
-//        auto entity = StartTimer(now);
-//        _registry.emplace<LevelTimer>(entity);
-//    }
-};
+}
 
 void GrowingSystem::DeleteOneFrameComponent()
 {

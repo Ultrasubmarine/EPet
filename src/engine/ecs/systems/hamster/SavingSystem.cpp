@@ -25,22 +25,32 @@ void SavingSystem::Init()
         return;
     }
     
-    Update(0.0); // because other system in init could update their states
+    // because other system in init could update their states
+    SaveChangedStates();
 }
 
 void SavingSystem::Update(double dt)
+{
+    SaveChangedStates();
+}
+
+void SavingSystem::SaveChangedStates()
 {
     if(!_playerSave || !_playerSave->GetData()) {
         return;
     }
     
+    bool dirty = false;
     for(auto [ent, level] : _registry.view<Level, LevelChanged_OF>().each())
     {
         SetAttribute(_playerSave->GetData(), "level", level.value, level.lastUpdate);
-        _playerSave->Save();
+        dirty = true;
     }
-};
-
+    
+    if(dirty && !_playerSave->Save()) {
+        LOG_ERROR("SavingSystem::SaveChangedStates() failed to write save file");
+    }
+}
 
 
 

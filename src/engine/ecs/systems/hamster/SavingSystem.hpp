@@ -8,8 +8,6 @@
 #ifndef SavingSystem_hpp
 #define SavingSystem_hpp
 
-#include <ctime>
-
 #include "ISystem.hpp"
 
 class PlayerSave;
@@ -20,7 +18,9 @@ class SavingSystem: public ISystem {
 public:
     void Init() override;
     void Update(double dt) override;
-    
+  
+private:
+    void SaveChangedStates();
     PlayerSave* _playerSave;
 };
 

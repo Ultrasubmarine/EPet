@@ -1,14 +1,13 @@
 //
-//  IStateSystem.hpp
+//  StateTicker.hpp
 //  EPet
 //
 //  Created by marina porkhunova on 11.08.2026.
 //
 
-#ifndef IStateSystem_hpp
-#define IStateSystem_hpp
+#ifndef StateTicker_hpp
+#define StateTicker_hpp
 
-#include <stdio.h>
 #include <ctime>
 
 #include "registry.hpp"
@@ -16,29 +15,26 @@
 #include "Logging.hpp"
 
 #include "Time.hpp"
-#include "Game.hpp"
-
 #include "TimeComponents.hpp"
-#include "CommonComponents.hpp"
-#include "HM_StatesComponents.hpp"
-
 
 template<class TTimerTag>
 class StateTicker {
     
 protected:
     StateTicker(entt::registry& registry) : _reg(registry){};
+    ~StateTicker() = default;
     
-    /// call in Init() and Update()  in ISystem class
+    /// call in Init() and Update()  in inheritor class
     void InitState();
     void UpdateState();
     ///______________________________
     
     void RecalculateParameter();
     
-    virtual const std::time_t GetLastUpdate() = 0;
-    virtual const std::time_t GetDuration() = 0; // in seconds
-    virtual bool IsPossibleToChange() { return true; };
+    /// 0 means "state has no history yet"
+    virtual std::time_t GetLastUpdate() const = 0;
+    virtual std::time_t GetDuration() const = 0; // in seconds
+    virtual bool IsPossibleToChange() const { return true; };
     
     virtual void ApplyStep(std::time_t updateTime) = 0;
     virtual void ApplyOfflineStep(std::time_t updateTime) { ApplyStep(updateTime); };
@@ -73,6 +69,13 @@ void StateTicker<TTimerTag>::UpdateState()
         //CreateNextTimer
         StartTimer();
     }
+    
+    // timer doesn't exist. smth blocked it.
+    // try to start timer again
+    if (_reg.view<Timer, TTimerTag>().front() == entt::null)
+    {
+        StartTimer();
+    }
 }
 
 template<class TTimerTag>
@@ -98,16 +101,22 @@ template<class TTimerTag>
 entt::entity StateTicker<TTimerTag>::StartTimer()
 {
     auto lastUpdate = GetLastUpdate();
+    
     if(IsPossibleToChange())
     {
-        auto timeThatAlreadyGone = Time::Instance().GetClockTime() - lastUpdate;
+        auto timeThatAlreadyGone = lastUpdate == 0 ? 0 : Time::Instance().GetClockTime() - lastUpdate;
+        if (timeThatAlreadyGone < 0) {
+            LOG_MESSAGE("StateTicker::StartTimer() lastUpdate is in the future. Clock was probably changed.");
+            timeThatAlreadyGone = 0;
+        }
+        
         auto neededDuration = GetDuration() - timeThatAlreadyGone;
         if(neededDuration < 0) {
             LOG_ERROR("StateTicker<TTimerTag>::StartTimer() Сalculated duration for timer <0. RecalculateParametrs() doesn't cover all timeline");
             neededDuration = GetDuration();
         }
-        
-        entt::entity ent;
+
+        entt::entity ent = entt::null;
         if (CreateTimer(neededDuration, &ent) && ent != entt::null) {
            _reg.emplace<TTimerTag>(ent);
             return ent;
@@ -116,10 +125,8 @@ entt::entity StateTicker<TTimerTag>::StartTimer()
             LOG_ERROR("StateTicker<TTimerTag>::StartTimer() Error with creating timer.");
         }
     }
-    else{
-        LOG_MESSAGE("StateTicker<TTimerTag>::StartTimer() State couldn't change. Creating timer was skipped.");
-    }
+    // no log for blocked state: UpdateState() retries every frame
     return entt::null;
 }
 
-#endif /* IStateSystem_hpp */
+#endif /* StateTicker_hpp */
