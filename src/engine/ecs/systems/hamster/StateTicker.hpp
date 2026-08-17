@@ -13,31 +13,113 @@
 
 #include "registry.hpp"
 
+#include "Logging.hpp"
 
-/// USE IN
-///void YOUR_SYSTEM_NAME:Init()
-/// {   ... other code...
-///
-///     RecalculateParametrs(state->lastUpdate); //  for update parametrs after loading game
-///
-///     auto entity = CreateNextTimer(level->lastUpdate); // for creating new timer for next updates
-///     _registry.emplace<YOUR_STATE_NAME_Timer>(entity); // to marl your timer loke spechial state to control
-///
-/// ... other code...
-/// }
+#include "Time.hpp"
+#include "Game.hpp"
 
+#include "TimeComponents.hpp"
+#include "CommonComponents.hpp"
+#include "HM_StatesComponents.hpp"
+
+
+template<class TTimerTag>
 class StateTicker {
+    
 protected:
+    StateTicker(entt::registry& registry) : _reg(registry){};
     
-    void RecalculateParametrs(std::time_t lastUpdate);
+    /// call in Init() and Update()  in ISystem class
+    void InitState();
+    void UpdateState();
+    ///______________________________
     
-    virtual std::time_t GetDuration() { return std::time_t(1.0 /* minutes */ * 60); }; // in seconds
+    void RecalculateParameter();
+    
+    virtual const std::time_t GetLastUpdate() = 0;
+    virtual const std::time_t GetDuration() = 0; // in seconds
     virtual bool IsPossibleToChange() { return true; };
     
-    virtual void OnTimerEndedInOutOffGame(const std::time_t& updateTime); // defalult: call ApplyTimerByGameProgress(...)
-    virtual void OnTimerEndedInGame(const std::time_t& updateTime) = 0;
+    virtual void ApplyStep(std::time_t updateTime) = 0;
+    virtual void ApplyOfflineStep(std::time_t updateTime) { ApplyStep(updateTime); };
 
-    entt::entity CreateNextTimer(std::time_t& lastUpdate);
+private:
+    entt::entity StartTimer();
+    
+private:
+    entt::registry& _reg;
 };
+
+
+template<class TTimerTag>
+void StateTicker<TTimerTag>::InitState()
+{
+    RecalculateParameter();
+    StartTimer();
+}
+
+template<class TTimerTag>
+void StateTicker<TTimerTag>::UpdateState()
+{
+    for(auto [ent, timer] : _reg.view<Timer, TimerFinished_OF, TTimerTag>().each())
+    {
+        //Apply changes
+        auto now = Time::Instance().GetClockTime();
+        ApplyStep(now);
+        
+        //Mark
+        _reg.emplace_or_replace<UnusedTimer>(ent);
+        
+        //CreateNextTimer
+        StartTimer();
+    }
+}
+
+template<class TTimerTag>
+void StateTicker<TTimerTag>::RecalculateParameter()
+{
+    auto lastUpdate = GetLastUpdate();
+    
+    //Recalculate current parametrs that was saved long time ago
+    if(lastUpdate) {
+        const auto now = Time::Instance().GetClockTime();
+        auto duration = GetDuration();
+
+        while(IsPossibleToChange() && duration > 0 && lastUpdate + duration <= now) {
+            lastUpdate += duration;
+            ApplyOfflineStep(lastUpdate);
+
+            duration = GetDuration(); // maybe changed
+        }
+    }
+}
+
+template<class TTimerTag>
+entt::entity StateTicker<TTimerTag>::StartTimer()
+{
+    auto lastUpdate = GetLastUpdate();
+    if(IsPossibleToChange())
+    {
+        auto timeThatAlreadyGone = Time::Instance().GetClockTime() - lastUpdate;
+        auto neededDuration = GetDuration() - timeThatAlreadyGone;
+        if(neededDuration < 0) {
+            LOG_ERROR("StateTicker<TTimerTag>::StartTimer() Сalculated duration for timer <0. RecalculateParametrs() doesn't cover all timeline");
+            neededDuration = GetDuration();
+        }
+        
+        entt::entity ent;
+        if (CreateTimer(neededDuration, &ent) && ent != entt::null) {
+           _reg.emplace<TTimerTag>(ent);
+            return ent;
+        }
+        else {
+            LOG_ERROR("StateTicker<TTimerTag>::StartTimer() Error with creating timer.");
+        }
+    }
+    else{
+        LOG_MESSAGE("StateTicker<TTimerTag>::StartTimer() State couldn't change. Creating timer was skipped.");
+    }
+    return entt::null;
+}
 
 #endif /* IStateSystem_hpp */

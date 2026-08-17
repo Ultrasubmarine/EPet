@@ -54,13 +54,12 @@ void GrowingSystem::Init()
         return;
     }
 
-    int loadValue = level->value;
-    
+    InitState();
     //Update hamster level for current time
-    RecalculateParametrs(level->lastUpdate);
-    
-    //Create new timer
-    auto entity = CreateNextTimer(level->lastUpdate);
+//    RecalculateParametrs(level->lastUpdate);
+//    
+//    //Create new timer
+//    auto entity = StartTimer(level->lastUpdate);
     
 // tmp place
 //    _registry.emplace<Text>(entity);
@@ -69,10 +68,10 @@ void GrowingSystem::Init()
 //    _registry.emplace<RendererObject>(entity);
 //    _registry.emplace<Sorting>(entity, 1000);
 //    _registry.emplace<Transform>(entity, IPoint(150, 150));
-    _registry.emplace<LevelTimer>(entity);
+ //   _registry.emplace<LevelTimer>(entity);
 }
 
-void GrowingSystem::OnTimerEndedInGame(const std::time_t& updateTime)
+void GrowingSystem::ApplyStep(const std::time_t updateTime)
 {
     for(auto [ent, level] : _registry.view<Level>().each())
     {
@@ -83,23 +82,39 @@ void GrowingSystem::OnTimerEndedInGame(const std::time_t& updateTime)
     }
 }
 
+const std::time_t GrowingSystem::GetLastUpdate()
+{
+    for(auto [ent, level] :_registry.view<Level>().each())
+    {
+        return level.lastUpdate;
+    }
+    return 0;
+}
+
+const std::time_t GrowingSystem::GetDuration()
+{
+    return 60 * 1;
+}
+
 void GrowingSystem::Update(double dt){
 
     DeleteOneFrameComponent();
     
-    for(auto [ent, timer] : _registry.view<Timer, TimerFinished_OF, LevelTimer>().each())
-    {
-        //Apply changes
-        auto now = Time::Instance().GetClockTime();
-        OnTimerEndedInGame(now);
-        
-        //Mark
-        _registry.emplace_or_replace<UnusedTimer>(ent);
-        
-        //CreateNextTimer
-        auto entity = CreateNextTimer(now);
-        _registry.emplace<LevelTimer>(entity);
-    }
+    UpdateState();
+//
+//    for(auto [ent, timer] : _registry.view<Timer, TimerFinished_OF, LevelTimer>().each())
+//    {
+//        //Apply changes
+//        auto now = Time::Instance().GetClockTime();
+//        OnTimerEndedInGame(now);
+//        
+//        //Mark
+//        _registry.emplace_or_replace<UnusedTimer>(ent);
+//        
+//        //CreateNextTimer
+//        auto entity = StartTimer(now);
+//        _registry.emplace<LevelTimer>(entity);
+//    }
 };
 
 void GrowingSystem::DeleteOneFrameComponent()
