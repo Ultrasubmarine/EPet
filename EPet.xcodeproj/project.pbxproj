@@ -18,6 +18,8 @@
 		0268FF052F129B00004AD2D8 /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0268FF042F129B00004AD2D8 /* Time.cpp */; };
 		027009A82FB2595500100C05 /* IFontLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027009A72FB2595500100C05 /* IFontLoader.cpp */; };
 		027725612F63596800E8F256 /* AnimationSystems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027725602F63596800E8F256 /* AnimationSystems.cpp */; };
+		027F373F3057FDA100BC6597 /* HamsterAnimationDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027F373E3057FDA100BC6597 /* HamsterAnimationDictionary.cpp */; };
+		E86D53F782C2BBE1C1485083 /* HamsterGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F3C7D9664F77B5F19BCEA4E /* HamsterGame.cpp */; };
 		0284CCE42E7720D700BFBE96 /* RegisterComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0284CCE32E7720D700BFBE96 /* RegisterComponents.cpp */; };
 		02A143FF2E1C5F34000B7535 /* CommonComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02A143FE2E1C5F34000B7535 /* CommonComponents.cpp */; };
 		02AC90BF2D2AE12A00B75A8C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC90BE2D2AE12A00B75A8C /* CoreFoundation.framework */; };
@@ -87,6 +89,10 @@
 		0271F9E62E12E407000958E1 /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
 		0277255F2F63596800E8F256 /* AnimationSystems.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationSystems.hpp; sourceTree = "<group>"; };
 		027725602F63596800E8F256 /* AnimationSystems.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationSystems.cpp; sourceTree = "<group>"; };
+		027F373D3057FDA100BC6597 /* HamsterAnimationDictionary.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HamsterAnimationDictionary.hpp; sourceTree = "<group>"; };
+		027F373E3057FDA100BC6597 /* HamsterAnimationDictionary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HamsterAnimationDictionary.cpp; sourceTree = "<group>"; };
+		93C0D7F97513234884828141 /* HamsterGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HamsterGame.hpp; sourceTree = "<group>"; };
+		2F3C7D9664F77B5F19BCEA4E /* HamsterGame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HamsterGame.cpp; sourceTree = "<group>"; };
 		0284CCE22E7720D700BFBE96 /* RegisterComponents.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RegisterComponents.hpp; sourceTree = "<group>"; };
 		0284CCE32E7720D700BFBE96 /* RegisterComponents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RegisterComponents.cpp; sourceTree = "<group>"; };
 		02A143FB2E1ACCB0000B7535 /* PointSerialization.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointSerialization.hpp; sourceTree = "<group>"; };
@@ -217,9 +223,21 @@
 			path = common;
 			sourceTree = "<group>";
 		};
+		027F373C3057FCCF00BC6597 /* hamster */ = {
+			isa = PBXGroup;
+			children = (
+				027F373D3057FDA100BC6597 /* HamsterAnimationDictionary.hpp */,
+				027F373E3057FDA100BC6597 /* HamsterAnimationDictionary.cpp */,
+				93C0D7F97513234884828141 /* HamsterGame.hpp */,
+				2F3C7D9664F77B5F19BCEA4E /* HamsterGame.cpp */,
+			);
+			path = hamster;
+			sourceTree = "<group>";
+		};
 		02BFA8E32BD840970074A6D4 = {
 			isa = PBXGroup;
 			children = (
+				027F373C3057FCCF00BC6597 /* hamster */,
 				02DB3C052DA80F7C00BE90D1 /* engine */,
 				02D24A6D2BD84125008E7DCF /* patterns */,
 				025F2E8D2D88AD5A0090AE59 /* utils */,
@@ -518,6 +536,8 @@
 				02C8868A2E50AF5F00B47F76 /* RenderSystem.cpp in Sources */,
 				02DB3C152DA80F7C00BE90D1 /* ISystem.cpp in Sources */,
 				022FF1FF2FE712B300716982 /* ImageLoadSystem.cpp in Sources */,
+				027F373F3057FDA100BC6597 /* HamsterAnimationDictionary.cpp in Sources */,
+				E86D53F782C2BBE1C1485083 /* HamsterGame.cpp in Sources */,
 				02D24A732BD84125008E7DCF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,6 +20,9 @@
 
 #include "IFontLoader.hpp"
 
+#include "HamsterGame.hpp"
+#include "Animation.hpp"
+
 bool Game::Init()
 {
     Time::Instance().Init();
@@ -41,7 +44,15 @@ bool Game::Init()
     _frameRate->SetFixedFrame(5);
     
     _resourceManager = new ResourceManager();
-    
+
+    HamsterGame::Instance().Init(_resourceManager);
+
+    // temp test: HamsterAnimationDictionary Load/Get
+//    if (auto anim = HamsterGame::Instance().GetAnimationDictionary().Get(0, "normal"))
+//    {
+//        LOG_MESSAGE("HamsterGame test: got animation [" << anim->_name << "] with " << anim->_frames.size() << " frames");
+//    }
+
     _playerSave = new PlayerSave();
     if(!_playerSave->Load()) {
         _playerSave->Save();
