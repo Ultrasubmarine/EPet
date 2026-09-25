@@ -9,11 +9,14 @@
 #define AnimationSystems_hpp
 
 #include <stdio.h>
+#include <memory>
 #include "ISystem.hpp"
 
 struct Animator;
 struct Image;
 struct RendererObject;
+struct Animation;
+
 
 class AnimationUpdateSystem: public ISystem {
     SYSTEM_BODY(AnimationUpdateSystem)
@@ -37,5 +40,17 @@ class AnimationFinishSystem: public ISystem {
     
 public:
     void Update(double dt) override;
+};
+
+
+class AnimationSwitchSystem: public ISystem {
+    SYSTEM_BODY(AnimationSwitchSystem)
+    
+public:
+    void Update(double dt) override;
+    
+private:
+    void ChangeAnimation(entt::entity, std::shared_ptr<const Animation> newAnimation, Animator& animator);
+
 };
 #endif /* AnimationSystems_hpp */

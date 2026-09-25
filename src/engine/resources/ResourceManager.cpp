@@ -144,6 +144,11 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src, Resourc
 //Animation
 std::shared_ptr<const Animation> ResourceManager::GetAnimation(const std::string& title)
 {
+    if (title.empty())
+    {
+        LOG_ERROR("name of animation is empty");
+    }
+    
     if (auto a = _animationLoader->GetAnimation(title)) {
         return a;
     }

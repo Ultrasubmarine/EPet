@@ -71,7 +71,7 @@ std::time_t GrowingSystem::GetLastUpdate() const
 
 std::time_t GrowingSystem::GetDuration() const
 {
-    return 60 * 1;
+    return 60 * 60 * 9; // 9 hours 
 }
 
 void GrowingSystem::Update(double dt){

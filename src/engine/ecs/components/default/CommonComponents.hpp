@@ -73,6 +73,16 @@ struct AnimationFinished_OF /// one shot
     std::string resoursesId;
 };
 
+struct SwitchAnimation /// request, runtime only
+{
+    std::shared_ptr<const Animation> animation;
+};
+
+struct AnimationSwitched_OF /// one shot
+{
+    std::string resoursesId; /// new animation
+};
+
 struct RendererObject
 {
     std::shared_ptr<Texture> resource;

@@ -19,10 +19,13 @@
                },
                {
                    "id": "Animator",
-                   "animationId": "Idle"
+                   "animationId": ""
                },
                {
                    "id": "RendererObject"
+               },
+               {
+                   "id": "Avatar"
                }
            ]
        },
@@ -83,13 +86,17 @@
        "AAATestSystem",
        
        "GrowingSystem",
+       "AvatarSystem",
        "SavingSystem",
    
+       "AnimationSwitchSystem",
        "AnimationUpdateSystem",
        "AnimationFinishSystem",
 
        "SortingUpdateSystem",
        "TestSystem",
-       "RenderSystem"
+       "RenderSystem",
+       
+       "AvatarSystem"
    ]
 }

@@ -72,8 +72,11 @@ Animator Animator::Load(const json& data)
         obj.resoursesId = data["animationId"].get<std::string>();
     }
     
-    //TODO: Load resource callback;
-    obj.animation = Game::Instance().GetResourceManager()->GetAnimation(obj.resoursesId);
+    if(!obj.resoursesId.empty())
+    {
+        //TODO: Load resource callback;
+        obj.animation = Game::Instance().GetResourceManager()->GetAnimation(obj.resoursesId);
+    }
     return obj;
 }
 

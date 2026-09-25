@@ -14,6 +14,7 @@
 
 SYSTEM_CPP(AnimationUpdateSystem);
 SYSTEM_CPP(AnimationFinishSystem);
+SYSTEM_CPP(AnimationSwitchSystem);
 
 void AnimationUpdateSystem::Update(double dt)
 {
@@ -21,6 +22,10 @@ void AnimationUpdateSystem::Update(double dt)
     
     for(auto [entt, animator, image, rObj] :_registry.view<Animator, Image, RendererObject>(entt::exclude<AnimationFinished>).each())
     {
+        if(!animator.animation)
+        {
+            continue;
+        }
         if(animator.timer >= animator.animation->_duration)
         {
             if(!animator.animation->_loop)
@@ -96,7 +101,7 @@ void AnimationUpdateSystem::SwitchFrame(entt::entity, Animator& animator, Render
         return;
     }
     
-    LOG_MESSAGE("AnimationSystem::SwitchFrame() Set animation frame"<< frameIndex<< " ["<< image.resoursesId<< "]");
+    //LOG_MESSAGE("AnimationSystem::SwitchFrame() Set animation frame"<< frameIndex<< " ["<< image.resoursesId<< "]");
     rObj.resource = animator.animation->_frames[frameIndex];
     image.resoursesId = animator.animation->_frames[frameIndex]->name;
     
@@ -120,4 +125,35 @@ void AnimationFinishSystem::Update(double)
         //mark us finished
         _registry.emplace_or_replace<AnimationFinished>(entt, animator.resoursesId);
     }
+}
+
+
+
+// SWITCH ANIMATION
+void AnimationSwitchSystem::Update(double)
+{
+    _registry.clear<AnimationSwitched_OF>();
+
+    for(auto [entt, animator, newAnimation ] :_registry.view<Animator, SwitchAnimation>().each())
+    {
+        ChangeAnimation(entt, newAnimation.animation, animator);
+    }
+}
+
+void AnimationSwitchSystem::ChangeAnimation(entt::entity entity, std::shared_ptr<const Animation> animation, Animator& animator)
+{
+    if(!animation)
+    {
+        _registry.remove<SwitchAnimation>(entity);
+        LOG_ERROR("AnimationSwitchSystem::ChangeAnimation() empty animation. Animator wasn't changed");
+        return;
+    }
+
+    animator.animation = animation;
+    animator.resoursesId = animation->_name;
+    animator.timer = 0;
+    animator.frame = 0;
+
+    _registry.remove<SwitchAnimation, AnimationFinished, AnimationFinished_OF>(entity);
+    _registry.emplace_or_replace<AnimationSwitched_OF>(entity, animation->_name);
 }

@@ -11,6 +11,8 @@
 #include "SaveComponents.hpp"
 #include "LoadComponents.hpp"
 
+#include "HM_AvatarComponents.hpp"
+
 void RegisterComponents()
 {
     GenerateLoadingFunction<Sorting>("Sorting", &Sorting::Load);
@@ -30,4 +32,6 @@ void RegisterComponents()
     
     GenerateLoadingFunction<RendererObject>("RendererObject", &RendererObject::Load);
     GenerateSaveFunction<RendererObject>("RendererObject", &RendererObject::Save);
+
+    GenerateLoadingFunction<Avatar>("Avatar", &Avatar::Load);
 }
