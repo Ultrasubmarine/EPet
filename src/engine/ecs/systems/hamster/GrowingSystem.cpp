@@ -29,13 +29,15 @@ bool GrowingSystem::Load()
 
     int lastAge = 0;
     std::time_t lastUpdate = Time::Instance().GetClockTime();
+    auto levelEntity = _registry.create();
+    
     if(!GetAttribute(playerSave->GetData(), "level", lastAge, lastUpdate))
     {
         // NEW PLAYER. DOESN'T HAVE A "Level" IN DATA
-        _registry.emplace<Empty_Level_OF>(_registry.create());
+        _registry.emplace<Empty_Level_OF>(levelEntity);
     }
     
-    _registry.emplace<Level>(_registry.create(), lastAge, lastUpdate);
+    _registry.emplace<Level>(levelEntity, lastAge, lastUpdate);
     return true;
 }
 
@@ -84,9 +86,7 @@ void GrowingSystem::Update(double dt){
 void GrowingSystem::DeleteOneFrameComponent()
 {
     _registry.clear<LevelChanged_OF>();
-    for(auto entity : _registry.view<Empty_Level_OF>()) {
-        _registry.destroy(entity);
-    }
+    _registry.clear<Empty_Level_OF>();
 }
 
 

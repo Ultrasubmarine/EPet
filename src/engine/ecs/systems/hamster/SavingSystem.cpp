@@ -46,6 +46,11 @@ void SavingSystem::SaveChangedStates()
         SetAttribute(_playerSave->GetData(), "level", level.value, level.lastUpdate);
         dirty = true;
     }
+    for(auto [ent, level] : _registry.view<Level, Empty_Level_OF>().each())
+    {
+        SetAttribute(_playerSave->GetData(), "level", level.value, level.lastUpdate);
+        dirty = true;
+    }
     
     if(dirty && !_playerSave->Save()) {
         LOG_ERROR("SavingSystem::SaveChangedStates() failed to write save file");
