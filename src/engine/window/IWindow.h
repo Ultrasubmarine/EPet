@@ -29,7 +29,8 @@ public:
     virtual int GetHeight() const = 0;
     virtual int GetWidth() const = 0;
     virtual bool IsWindowExist() const = 0;
-    
+    virtual bool IsCloseRequested() const = 0; /// true after user closed the window
+
     // TODO: has focus;
     // TODO: smth with render;
 };

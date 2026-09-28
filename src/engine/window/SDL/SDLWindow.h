@@ -15,7 +15,8 @@ class SDL_Window;
 class SDLWindow : public IWindow
 {
     SDL_Window* _window;
-    
+    bool _closeRequested = false;
+
 public:
     SDLWindow();
     ~SDLWindow() override;
@@ -30,7 +31,8 @@ public:
     int GetHeight() const override;
     int GetWidth() const override;
     bool IsWindowExist() const override;
-    
+    bool IsCloseRequested() const override { return _closeRequested; }
+
     SDL_Window* GetSDLWindow() {return _window;};
 };
 

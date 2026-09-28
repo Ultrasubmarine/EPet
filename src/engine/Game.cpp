@@ -77,6 +77,9 @@ void Game::Deinit()
     delete _render;
     _render = nullptr;
     
+    if(_window) {
+        _window->DestroyWindow();
+    }
     delete _window;
     _window = nullptr;
     
@@ -127,8 +130,7 @@ void Game::Loop()
 {
     _frameRate->FirstInitialization();
     
-    bool isPlay = true;
-    while(isPlay)
+    while(!_window->IsCloseRequested())
     {
         Input();
         float dt = _frameRate->GetDeltaTime(); // in seconds

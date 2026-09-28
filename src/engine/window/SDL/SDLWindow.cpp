@@ -56,11 +56,12 @@ void SDLWindow::DestroyWindow()
 void SDLWindow::HandleEvent()
 {
     SDL_Event event;
-    if(SDL_PollEvent(&event))
+    while(SDL_PollEvent(&event))
     {
         switch (event.type)
         {
             case SDL_QUIT:
+                _closeRequested = true;
                 break;
             case SDL_KEYDOWN:
             {

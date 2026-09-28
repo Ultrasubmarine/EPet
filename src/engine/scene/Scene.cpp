@@ -59,9 +59,4 @@ void Scene::Destroy()
     {
         s->DeInit();
     }
-    
-    for(auto s: _allSystems)
-    {
-        delete s;
-    }
 }
