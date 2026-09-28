@@ -1,3 +1,10 @@
 [
-    { "normal": "Idle" }
+    {
+        "level": 0,
+        "animations": { "normal": "Shell_idle" }
+    },
+    {
+        "level": 1,
+        "animations": { "normal": "Idle" }
+    }
 ]
