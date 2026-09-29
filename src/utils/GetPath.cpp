@@ -13,6 +13,7 @@
 // ________APPLE REALISATION________
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 fs::path GetExecutablePath()
 {

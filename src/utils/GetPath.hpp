@@ -12,8 +12,6 @@
 #include <filesystem>
 #include <string>
 
-#include <CoreFoundation/CoreFoundation.h>
-
 namespace fs = std::filesystem;
 //
 ///// use free() to returned string
