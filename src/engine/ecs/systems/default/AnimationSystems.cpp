@@ -41,7 +41,7 @@ void AnimationUpdateSystem::Update(double dt)
         
         if(animator.animation->_frames.empty())
         {
-            LOG_ERROR("AnimationSystem::Update() animation ["<<animator.animation->_name<<"] doesn't have any frames");
+            LOG_ERROR("animation ["<<animator.animation->_name<<"] doesn't have any frames");
             FinishAnimation(entt, animator);
             return;
         }
@@ -101,7 +101,7 @@ void AnimationUpdateSystem::SwitchFrame(entt::entity, Animator& animator, Render
         return;
     }
     
-    //LOG_MESSAGE("AnimationSystem::SwitchFrame() Set animation frame"<< frameIndex<< " ["<< image.resoursesId<< "]");
+    //LOG_MESSAGE("Set animation frame"<< frameIndex<< " ["<< image.resoursesId<< "]");
     rObj.resource = animator.animation->_frames[frameIndex];
     image.resoursesId = animator.animation->_frames[frameIndex]->name;
     
@@ -145,7 +145,7 @@ void AnimationSwitchSystem::ChangeAnimation(entt::entity entity, std::shared_ptr
     if(!animation)
     {
         _registry.remove<SwitchAnimation>(entity);
-        LOG_ERROR("AnimationSwitchSystem::ChangeAnimation() empty animation. Animator wasn't changed");
+        LOG_ERROR("empty animation. Animator wasn't changed");
         return;
     }
 

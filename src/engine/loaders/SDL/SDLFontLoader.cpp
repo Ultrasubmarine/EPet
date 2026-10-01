@@ -32,7 +32,7 @@ SDLFontLoader::SDLFontLoader()
     _render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
     
     if (TTF_Init()==-1) {
-        LOG_ERROR("SDLFontLoader::SDLFontLoader() " << SDL_GetError());
+        LOG_ERROR(SDL_GetError());
         return ;
     }
 }
@@ -41,7 +41,7 @@ Font* SDLFontLoader::_LoadFont(const std::string& name, const char *fullPath)
 {
     auto f = TTF_OpenFont(fullPath, 24);
     if(!f) {
-        LOG_ERROR("SDLFontLoader::_LoadFont() error with open ttf font ");
+        LOG_ERROR("error with open ttf font ");
         return nullptr;
     }
     
@@ -64,12 +64,12 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
     }
 
     if (!ttf) {
-        LOG_ERROR("GetTextTexture: null TTF_Font");
+        LOG_ERROR("null TTF_Font");
         return nullptr;
     }
 
     if (TTF_SetFontSize(ttf, settings.size) == -1) {
-        LOG_ERROR("GetTextTexture: TTF_SetFontSize failed: " << TTF_GetError());
+        LOG_ERROR("TTF_SetFontSize failed: " << TTF_GetError());
         return nullptr;
     }
 
@@ -77,7 +77,7 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
     SDL_Color sdlColor = ToSDLColor(settings.color);
     SDL_Surface* surfaceText = TTF_RenderText_Solid(ttf, text.c_str(), sdlColor);
     if (!surfaceText) {
-        LOG_ERROR("GetTextTexture: TTF_RenderText_Solid failed: " << TTF_GetError());
+        LOG_ERROR("TTF_RenderText_Solid failed: " << TTF_GetError());
         return nullptr;
     }
 
@@ -87,7 +87,7 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
     SDL_FreeSurface(surfaceText);
 
     if (!textTex) {
-        LOG_ERROR("GetTextTexture: SDL_CreateTextureFromSurface failed: " << SDL_GetError());
+        LOG_ERROR("SDL_CreateTextureFromSurface failed: " << SDL_GetError());
         return nullptr;
     }
 

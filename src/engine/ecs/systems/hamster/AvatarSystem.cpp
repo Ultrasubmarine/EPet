@@ -28,7 +28,7 @@ void AvatarSystem::Init()
     }
     else
     {
-        LOG_MESSAGE("AvatarSystem::Init() Avatar doesn't exist on scene.");
+        LOG_MESSAGE("Avatar doesn't exist on scene.");
     }
 }
 

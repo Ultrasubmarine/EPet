@@ -8,8 +8,11 @@
 #include "Game.hpp"
 #include <stdio.h>
 #include <iostream>
+#include "Logging.hpp"
 
 int main(int argc, const char *argv[]) {
+    
+    Logger::Instance().Initialize();
     
     Game& myGame = Game::Instance();
     

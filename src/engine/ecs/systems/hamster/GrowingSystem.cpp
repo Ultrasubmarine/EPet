@@ -23,7 +23,7 @@ bool GrowingSystem::Load()
     if(!playerSave || !playerSave->GetData())
     {
         // TODO think about errors. maybe optimize it. some how
-        LOG_ERROR("GrowingSystem::LoadAge() saveData doesn't exist. Loading hamster level skipped");
+        LOG_ERROR("saveData doesn't exist. Loading hamster level skipped");
         return false;
     }
 

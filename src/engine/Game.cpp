@@ -29,14 +29,14 @@ bool Game::Init()
     _window = new Window();
     if(!_window->CreateWindow(320, 240, "my Gotchi"))
     {
-        LOG_ERROR("Game::Init() Window didn't create. Game initialization was canceled");
+        LOG_ERROR("Window didn't create. Game initialization was canceled");
         return false;
     }
     
     _render = new Render();
     if(!_render->Init(_window))
     {
-        LOG_ERROR("Game::Init() Render didn't create. Game initialization was canceled");
+        LOG_ERROR("Render didn't create. Game initialization was canceled");
         return false;
     }
 

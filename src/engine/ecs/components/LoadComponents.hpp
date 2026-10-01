@@ -34,11 +34,11 @@ private:
     {
         if(const auto it = GetLoaders().find(typeId); it != GetLoaders().end())
         {
-            LOG_ERROR("ComponentLoader::RegisterLoader: Component loader ["<<typeId<<"] already exist. Loader registration was ignored");
+            LOG_ERROR("Component loader ["<<typeId<<"] already exist. Loader registration was ignored");
             return;
         }
         GetLoaders()[typeId] = loadingFunction;
-        LOG_MESSAGE("ComponentLoader::RegisterLoader: Component loader ["<<typeId<<"] registred");
+        LOG_MESSAGE("Component loader ["<<typeId<<"] registred");
     };
     
     template <typename T>
@@ -69,7 +69,7 @@ inline void LoadComponent(const char* typeId, LOAD_FUNCTION_PARAMS)
     }
     else
     {
-        LOG_ERROR("Load: Component loader ["<<typeId<<"] didn't find. Loading component canceled");
+        LOG_ERROR("Component loader ["<<typeId<<"] didn't find. Loading component canceled");
     }
 }
 

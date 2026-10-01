@@ -38,7 +38,7 @@ T& Singleton<T>::Instance()
 template<class T>
 void Singleton<T>::Destroy()
 {
-    if(!_instance)
+    if(_instance)
     {
         delete _instance;
         _instance = nullptr;

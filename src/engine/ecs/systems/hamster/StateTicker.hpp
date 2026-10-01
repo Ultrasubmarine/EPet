@@ -106,13 +106,13 @@ entt::entity StateTicker<TTimerTag>::StartTimer()
     {
         auto timeThatAlreadyGone = lastUpdate == 0 ? 0 : Time::Instance().GetClockTime() - lastUpdate;
         if (timeThatAlreadyGone < 0) {
-            LOG_MESSAGE("StateTicker::StartTimer() lastUpdate is in the future. Clock was probably changed.");
+            LOG_MESSAGE("lastUpdate is in the future. Clock was probably changed.");
             timeThatAlreadyGone = 0;
         }
         
         auto neededDuration = GetDuration() - timeThatAlreadyGone;
         if(neededDuration < 0) {
-            LOG_ERROR("StateTicker<TTimerTag>::StartTimer() Сalculated duration for timer <0. RecalculateParametrs() doesn't cover all timeline");
+            LOG_ERROR("Сalculated duration for timer <0. RecalculateParametrs() doesn't cover all timeline");
             neededDuration = GetDuration();
         }
 
@@ -122,7 +122,7 @@ entt::entity StateTicker<TTimerTag>::StartTimer()
             return ent;
         }
         else {
-            LOG_ERROR("StateTicker<TTimerTag>::StartTimer() Error with creating timer.");
+            LOG_ERROR("Error with creating timer.");
         }
     }
     // no log for blocked state: UpdateState() retries every frame

@@ -106,7 +106,7 @@ Text Text::Load(const json& data)
     }
     else
     {
-        LOG_ERROR("TextImage::Load() field [text] didn't find");
+        LOG_ERROR("field [text] didn't find");
     }
     
     if(data.contains("size") && data["size"].is_number_integer())
@@ -115,7 +115,7 @@ Text Text::Load(const json& data)
     }
     else
     {
-        LOG_ERROR("TextImage::Load() field [size] didn't find");
+        LOG_ERROR("field [size] didn't find");
     }
     
     // color expects array [r,g,b]; default is black
@@ -137,12 +137,12 @@ Text Text::Load(const json& data)
         }
         else
         {
-            LOG_ERROR("TextImage::Load() field [color] has invalid values; using default (black)");
+            LOG_ERROR("field [color] has invalid values; using default (black)");
         }
     }
     else
     {
-        LOG_ERROR("TextImage::Load() field [color] didn't find or has invalid format; using default (black)");
+        LOG_ERROR("field [color] didn't find or has invalid format; using default (black)");
     }
     
     std::string fontName = DEFAULT_FONT;
@@ -152,7 +152,7 @@ Text Text::Load(const json& data)
     }
     else
     {
-        LOG_ERROR("TextImage::Load() field [font] didn't find. using default");
+        LOG_ERROR("field [font] didn't find. using default");
     }
     
     //TODO: Load resource callback;

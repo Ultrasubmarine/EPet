@@ -62,7 +62,7 @@ inline void SetAttribute(json* from, const char* attribute_name, const int& valu
 {
     if(!from)
     {
-        LOG_ERROR("GrowingSystem::LoadAge() saveData doesn't exist. Loading hamster level skipped");
+        LOG_ERROR("saveData doesn't exist. Loading hamster level skipped");
         //TODO do smth for player + share logs
         return;
     }

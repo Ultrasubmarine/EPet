@@ -28,11 +28,11 @@ void* SDLRender::Init(IWindow *w) {
     }
     else
     {
-        LOG_ERROR("SDLRender::Init Window is empty");
+        LOG_ERROR("Window is empty");
         return nullptr;
     }
     
-    LOG_MESSAGE("SDLRender::Init Render was created");
+    LOG_MESSAGE("Render was created");
     return _render;
 }
 
@@ -41,7 +41,7 @@ void SDLRender::Deinit() {
     {
         SDL_DestroyRenderer(_render);
         _render = nullptr;
-        LOG_MESSAGE("SDLRender::Deinit Render was destroyed");
+        LOG_MESSAGE("Render was destroyed");
     }
 }
 

@@ -40,7 +40,7 @@ inline std::vector<std::string> GetSystemsIds(const json* data)
                 systemIds.push_back(systemId);
             }
             else{
-                LOG_MESSAGE("LoadSystems() Empty system in json data");
+                LOG_MESSAGE("Empty system in json data");
             }
         }
     }
@@ -54,7 +54,7 @@ inline void LoadSystems(Scene* scene, const std::vector<std::string>& systemIds,
         ISystem* sys = SystemFactory::Instance().Create(systemId, registry);
         if(!sys)
         {
-            LOG_ERROR("LoadSystems() System with id \""<<systemId<<"\" didn't find in SystemFactory. system didn't added.");
+            LOG_ERROR("System with id \""<<systemId<<"\" didn't find in SystemFactory. system didn't added.");
             continue;
         }
         scene->AddSystem(sys); // create system

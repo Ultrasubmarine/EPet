@@ -21,7 +21,7 @@ void SavingSystem::Init()
     if(!_playerSave || !_playerSave->GetData())
     {
         // TODO think about errors. maybe optimize it. some how
-        LOG_ERROR("SavingSystem::Init() saveData doesn't exist.");
+        LOG_ERROR("saveData doesn't exist.");
         return;
     }
     
@@ -53,7 +53,7 @@ void SavingSystem::SaveChangedStates()
     }
     
     if(dirty && !_playerSave->Save()) {
-        LOG_ERROR("SavingSystem::SaveChangedStates() failed to write save file");
+        LOG_ERROR("failed to write save file");
     }
 }
 

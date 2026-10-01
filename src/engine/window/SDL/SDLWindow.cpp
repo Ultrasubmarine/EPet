@@ -24,7 +24,7 @@ void* SDLWindow::CreateWindow(int width, int height, const char *title)
 {
     if(SDL_Init(SDL_INIT_EVERYTHING ^ SDL_INIT_AUDIO))
     {
-        LOG_ERROR("Window::CreateWindow(): SDL_Init() error");
+        LOG_ERROR("SDL_Init() error");
         return nullptr;
     }
     
@@ -35,11 +35,11 @@ void* SDLWindow::CreateWindow(int width, int height, const char *title)
                      SDL_WINDOW_RESIZABLE);
     if(!_window)
     {
-        LOG_ERROR("Window::CreateWindow(): Fail creating window");
+        LOG_ERROR("Fail creating window");
         return nullptr;
     
     }
-    LOG_MESSAGE("Window::CreateWindow(): Window sucsesefull created");
+    LOG_MESSAGE("Window sucsesefull created");
     return _window;
 }
 

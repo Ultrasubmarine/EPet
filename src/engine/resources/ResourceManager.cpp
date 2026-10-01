@@ -76,7 +76,7 @@ std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
         return f;
     }
     
-    LOG_ERROR("ResourceManager::GetFont() font " << title <<"didn't find");
+    LOG_ERROR("font " << title <<"didn't find");
     return nullptr;
 }
 
@@ -115,7 +115,7 @@ json* ResourceManager::GetJson(const std::string& title, ResourceType type) cons
         return j;
     }
     
-    LOG_ERROR("ResourceManager::GetJson() json file (" << title <<") didn't found");
+    LOG_ERROR("json file (" << title <<") didn't found");
     return nullptr;
 }
 
@@ -128,14 +128,14 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src, Resourc
     auto path = GetResourcePath(empt, nullptr, type); // check only directory path
     if(path.empty())
     {
-        LOG_ERROR("ResourceManager::SaveJson() Empty path file(" << title <<"). Saving was canceled.");
+        LOG_ERROR("Empty path file(" << title <<"). Saving was canceled.");
         return false;
     }
     
     std::string fullPath = path / (title + format);
     if(_jsonLoader->SaveJson(fullPath.c_str(), src))
     {
-        LOG_MESSAGE("ResourceManager::SaveJson() file (" << title <<") was saved.");
+        LOG_MESSAGE("file (" << title <<") was saved.");
         return true;
     }
     return false;
@@ -202,6 +202,6 @@ std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, 
         return candidate;
     }
    
-    LOG_ERROR("ResourceManager::GetResourcePath() file (name:" << name <<" format:"<< format << ") didn't found. searching directory:"<< candidate);
+    LOG_ERROR("file (name:" << name <<" format:"<< format << ") didn't found. searching directory:"<< candidate);
     return std::filesystem::path();
 }

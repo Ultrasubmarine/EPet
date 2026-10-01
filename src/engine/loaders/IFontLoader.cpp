@@ -22,7 +22,7 @@ void IFontLoader::DeleteFont(const std::string& fontName)
     {
         if( it->second.use_count() > 1)
         {
-            LOG_MESSAGE("IFontLoader::DeleteFont(). font ["<<fontName<<"] still have "<<it->second.use_count()-1<<" users");
+            LOG_MESSAGE("font ["<<fontName<<"] still have "<<it->second.use_count()-1<<" users");
         }
         _fonts.erase(it);
     }
@@ -46,7 +46,7 @@ std::shared_ptr<Font> IFontLoader::LoadFont(const std::string& name, const char 
         return font;
     }
     
-    LOG_ERROR("IFontLoader::LoadFont() font:"<<name);
+    LOG_ERROR("font:"<<name);
     return NULL;
 }
 

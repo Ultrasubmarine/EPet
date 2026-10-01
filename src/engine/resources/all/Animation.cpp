@@ -23,7 +23,7 @@ Animation::Animation(const std::vector<std::shared_ptr<Texture>>& frames, float 
 
 Animation::~Animation()
 {
-    LOG_MESSAGE("Animation::~Animation() Delete animation ["<< _name <<"]");
+    LOG_MESSAGE("Delete animation ["<< _name <<"]");
 }
 
 

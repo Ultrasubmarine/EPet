@@ -14,7 +14,7 @@ void HamsterGame::Init(ResourceManager* resourceManager)
 {
     if (!resourceManager)
     {
-        LOG_ERROR("HamsterGame::Init() empty ResourceManager");
+        LOG_ERROR("empty ResourceManager");
         return;
     }
 
@@ -24,6 +24,6 @@ void HamsterGame::Init(ResourceManager* resourceManager)
     }
     else
     {
-        LOG_ERROR("HamsterGame::Init() hamster_animations.json didn't load");
+        LOG_ERROR("hamster_animations.json didn't load");
     }
 }

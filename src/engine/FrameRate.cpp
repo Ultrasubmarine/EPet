@@ -26,7 +26,7 @@ void FrameRate::SetFixedFrame(int fps)
     _fixedDelta = std::chrono::seconds(1);
     _fixedDelta /= fps;
     _fps = fps;
-    LOG_MESSAGE("FrameRate::SetFixedFrame set fps="<<fps);
+    LOG_MESSAGE("set fps="<<fps);
 }
 
 void FrameRate::WaitFrame()

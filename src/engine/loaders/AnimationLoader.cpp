@@ -15,7 +15,7 @@ AnimationLoader::AnimationLoader(ResourceManager* manager): _resourceManager(man
 {
     if(!_resourceManager)
     {
-        LOG_ERROR("AnimationLoader::AnimationLoader() empty ResourceManager. Impossible to load animations");
+        LOG_ERROR("empty ResourceManager. Impossible to load animations");
     }
 }
 
@@ -36,7 +36,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
 {
     if(!_resourceManager)
     {
-        LOG_ERROR("AnimationLoader::GetAnimation() empty ResourceManager. Impossible to load animations");
+        LOG_ERROR("empty ResourceManager. Impossible to load animations");
         return std::shared_ptr<const Animation>{};
     }
     
@@ -70,7 +70,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
 
                 if(!it.value().is_string())
                 {
-                    LOG_MESSAGE("AnimationLoader::LoadAnimation() incorrect frame in animation json data [" << name << ".json]");
+                    LOG_MESSAGE("incorrect frame in animation json data [" << name << ".json]");
                     continue;
                 }
                 if(auto currentFrame = it.value().get<std::string>(); !currentFrame.empty())
@@ -78,7 +78,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
                     frameNames.push_back(std::move(currentFrame));
                 }
                 else{
-                    LOG_MESSAGE("AnimationLoader::LoadAnimation() Empty animation in animation json data [" << name << ".json]");
+                    LOG_MESSAGE("Empty animation in animation json data [" << name << ".json]");
                 }
             }
         }
@@ -90,7 +90,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
             if( playMode == PlayMode::None)
             {
                 auto str = (*animationData)["playMode"].get<std::string>();
-                LOG_ERROR("AnimationLoader::LoadAnimation() unknown playMode ["<<str<<"] in [" << name << ".json]");
+                LOG_ERROR("unknown playMode ["<<str<<"] in [" << name << ".json]");
             }
         }
         // finish loading from json data
@@ -109,7 +109,7 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
         return resource_ptr;
     }
     
-    LOG_ERROR("AnimationLoader::GetAnimation() json file for animation [" << name << ".json] didn't find");
+    LOG_ERROR("json file for animation [" << name << ".json] didn't find");
     return nullptr;
 }
 

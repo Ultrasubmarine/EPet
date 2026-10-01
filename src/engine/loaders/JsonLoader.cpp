@@ -47,7 +47,7 @@ json* JsonLoader::GetJson(const char *fullPath)
     }
     else
     {
-        LOG_ERROR(" JsonLoader::GetJson() couldn't open file. error: " <<std::system_category().message(errno));
+        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno));
     }
     return j;
 }
@@ -56,7 +56,7 @@ bool JsonLoader::SaveJson(const char *fullPath, const json* src)
 {
     std::ofstream file(fullPath, std::ios::out | std::ios::trunc);
     if (!file.is_open()) {
-        LOG_ERROR("ResourceManager::SaveJson couldn't open file. error: " <<std::system_category().message(errno)<<"\n path:"<<fullPath);
+        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno)<<"\n path:"<<fullPath);
         return false;
     }
     
