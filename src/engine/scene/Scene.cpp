@@ -8,7 +8,7 @@
 #include "Scene.hpp"
 #include <iostream>
 #include "ISystem.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 Scene::Scene(std::string& id) : _id(id)
 {

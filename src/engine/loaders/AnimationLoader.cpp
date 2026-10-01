@@ -9,7 +9,7 @@
 #include "ResourceManager.hpp"
 #include "PlayModeJSON.hpp"
 
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 AnimationLoader::AnimationLoader(ResourceManager* manager): _resourceManager(manager)
 {

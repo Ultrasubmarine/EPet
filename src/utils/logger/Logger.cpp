@@ -1,11 +1,11 @@
 //
-//  Logging.cpp
+//  Logger.cpp
 //  EPet
 //
 //  Created by marina porkhunova on 01.10.2026.
 //
 
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 #include <cerrno>
 #include <system_error>
@@ -14,19 +14,15 @@
 #include <iomanip>
 
 #include "GetPath.hpp"
+#include "LogOutputs.hpp"
 
 Logger::Logger()
 {
-    CreateTerminalOutput();
+    CreateTerminalOutput({LogType::Error,LogType::Warning});
+    //CreateTerminalOutput({LogType::Error, LogType::Warning, LogType::Message});
 }
 
-Logger::~Logger()
-{
-    if (_file.is_open())
-    {
-        _file.close();
-    }
-}
+Logger::~Logger() = default;
 
 void Logger::Initialize()
 {
@@ -34,37 +30,35 @@ void Logger::Initialize()
         return;
     }
 
-   // CreateTerminalOutput();
-    CreateFileOutput();
-
+    CreateFileOutput({LogType::Error, LogType::Warning, LogType::Message}, "last_session.log", "prev_session.log");
+    CreateFileOutput({LogType::Error}, "errors.log", "errors_prev_session.log");
     _initialize = true;
 }
 
-void Logger::CreateTerminalOutput()
+void Logger::CreateTerminalOutput(const std::vector<LogType>& acceptionTypes)
 {
-    _outputs.push_back(&std::cout);
+    auto output = std::make_unique<ConsoleOutput>();
+    for(auto t: acceptionTypes)
+    {
+        output->Set(t, true);
+    }
+    _outputs.push_back(std::move(output));
+    
 }
 
-void Logger::CreateFileOutput()
+void Logger::CreateFileOutput(const std::vector<LogType>& acceptionTypes, const std::string& fileName, const std::string& prevFileName)
 {
-    auto path = GetSavePath() / _fileName;
-    auto prevPath = GetSavePath() / _prevFileName;
-
-    if (fs::exists(path)) {
-        std::error_code error;
-      fs::rename(path, prevPath, error);
-      if (error) {
-          LOG_ERROR("couldn't rename old log: " << error.message());
-      }
-    }
-
-    _file.open(path, std::ios::out | std::ios::trunc);
-    if (!_file.is_open()) {
-        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno)<<" path: "<<path);
+    auto output = std::make_unique<FileOutput>(fileName, prevFileName);
+    if(!output->IsOpen())
+    {
+        LOG_ERROR("couldn't create logging file ["<<fileName<<"]");
         return;
     }
-
-    _outputs.push_back(&_file);
+    for(auto t: acceptionTypes)
+    {
+        output->Set(t, true);
+    }
+    _outputs.push_back(std::move(output));
 }
 
 void Logger::Write(LogType type, const char* file, int line, const char* func, const char* text)
@@ -75,7 +69,10 @@ void Logger::Write(LogType type, const char* file, int line, const char* func, c
     std::string message_str = message.str();
     for(auto& o: _outputs)
     {
-        *o<< message_str <<std::endl;
+        if(o->Accepts(type))
+        {
+            o->Write(message_str);
+        }
     }
 }
 
@@ -86,6 +83,7 @@ const char* Logger::GetTypeString(LogType type)
         case LogType::Message: return "[LOG]    ";
         case LogType::Warning: return "[WARNING]";
         case LogType::Error:   return "[ERROR]  ";
+        case LogType::Count:   break;
     }
     return "[?]      ";
 }

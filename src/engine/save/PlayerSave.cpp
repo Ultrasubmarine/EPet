@@ -10,7 +10,7 @@
 
 #include "Game.hpp"
 #include "ResourceManager.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 bool PlayerSave::Save()
 {

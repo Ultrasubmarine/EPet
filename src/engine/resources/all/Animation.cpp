@@ -6,7 +6,7 @@
 //
 
 #include "Animation.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 Animation::Animation(const std::vector<std::shared_ptr<Texture>>& frames, float duration, bool loop, PlayMode mode, const std::string& name):
     _frames(frames),

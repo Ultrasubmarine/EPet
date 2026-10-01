@@ -8,7 +8,7 @@
 #include "ITextureLoader.hpp"
 
 #include <string>
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 void ITextureLoader::DeleteTexture(Texture* texture)
 {

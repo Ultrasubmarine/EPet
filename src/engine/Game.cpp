@@ -7,7 +7,7 @@
 
 #include "Game.hpp"
 
-#include "Logging.hpp"
+#include "Logger.hpp"
 #include "EngineSettings.h"
 
 #include "FrameRate.hpp"

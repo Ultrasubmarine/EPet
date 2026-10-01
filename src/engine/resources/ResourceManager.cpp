@@ -8,7 +8,7 @@
 #include <fstream>
 #include "ResourceManager.hpp"
 #include "GetPath.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 #include "JsonLoader.hpp"
 #include "AnimationLoader.hpp"

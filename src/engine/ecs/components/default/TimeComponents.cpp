@@ -12,7 +12,7 @@
 #include "Game.hpp"
 #include "SceneManager.hpp"
 
-#include "Logging.hpp"
+#include "Logger.hpp"
 #include "registry.hpp"
 
 /// true - if creating is succesefull

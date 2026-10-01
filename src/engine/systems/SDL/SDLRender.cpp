@@ -11,7 +11,7 @@
 #include <SDL2/SDL_render.h>
 
 #include "SDLWindow.h"
-#include "Logging.hpp"
+#include "Logger.hpp"
 #include "Texture.hpp"
 #include "SDLTexture.hpp"
 

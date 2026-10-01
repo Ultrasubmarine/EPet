@@ -10,7 +10,7 @@
 #include "SDL2/SDL.h"
 
 #include "Input.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 SDLWindow::SDLWindow()
 {

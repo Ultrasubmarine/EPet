@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-#include "Logging.hpp"
+#include "Logger.hpp"
 #include "Scene.hpp"
 
 #include "SystemFactory.hpp"
@@ -54,7 +54,7 @@ inline void LoadSystems(Scene* scene, const std::vector<std::string>& systemIds,
         ISystem* sys = SystemFactory::Instance().Create(systemId, registry);
         if(!sys)
         {
-            LOG_ERROR("System with id \""<<systemId<<"\" didn't find in SystemFactory. system didn't added.");
+            LOG_WARNING("System with id \""<<systemId<<"\" didn't find in SystemFactory. system didn't added.");
             continue;
         }
         scene->AddSystem(sys); // create system

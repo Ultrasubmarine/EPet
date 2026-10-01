@@ -10,7 +10,7 @@
 
 #include "Animation.hpp"
 #include "Texture.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 SYSTEM_CPP(AnimationUpdateSystem);
 SYSTEM_CPP(AnimationFinishSystem);

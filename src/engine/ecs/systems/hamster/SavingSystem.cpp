@@ -11,7 +11,7 @@
 
 #include "Game.hpp"
 #include "PlayerSave.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 SYSTEM_CPP(SavingSystem);
 

@@ -7,7 +7,7 @@
 
 #include "JsonLoader.hpp"
 #include <fstream>
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 json JsonLoader::gameSettings{};
 

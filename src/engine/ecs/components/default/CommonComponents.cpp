@@ -11,7 +11,7 @@
 #include "Game.hpp"
 #include "ResourceManager.hpp"
 #include "PointSerialization.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 Transform Transform::Load(const json& data)
 {

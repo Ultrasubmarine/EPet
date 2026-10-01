@@ -12,7 +12,7 @@
 #include <string>
 #include <map>
 
-#include "Logging.hpp"
+#include "Logger.hpp"
 #include "registry.hpp"
 #include "json.hpp"
 

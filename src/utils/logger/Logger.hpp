@@ -1,19 +1,19 @@
 //
-//  logging.hpp
+//  Logger.hpp
 //  EPet
 //
 //  Created by marina porkhunova on 03.01.2025.
 //
 
-#ifndef Logging_hpp
-#define Logging_hpp
+#ifndef Logger_hpp
+#define Logger_hpp
 
 #include <stdio.h>
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "Singleton.hpp"
 
@@ -30,18 +30,21 @@
 
 enum class LogType
 {
-    Message,
-    Warning,
-    Error
+    Message = 0,
+    Warning = 1,
+    Error = 2,
+    Count
 };
+
+class ILogOutput;
 
 class Logger: public Singleton<Logger>
 {
     Logger();
     ~Logger();
 
-    void CreateTerminalOutput();
-    void CreateFileOutput();
+    void CreateTerminalOutput(const std::vector<LogType>& acceptionTypes);
+    void CreateFileOutput(const std::vector<LogType>& acceptionTypes, const std::string& fileName, const std::string& prevFileName);
 
     static const char* GetTypeString(LogType type);
     /// local time, "HH:MM:SS.mmm"
@@ -54,13 +57,9 @@ public:
 private:
 
     bool _initialize = false;
-    std::vector<std::ostream*> _outputs;
-    std::ofstream _file;
-
-    const std::string _fileName = "last_session.log";
-    const std::string _prevFileName = "prev_session.log";
+    std::vector<std::unique_ptr<ILogOutput>> _outputs;
 
     friend class Singleton<Logger>;
 };
 
-#endif /* logging_hpp */
+#endif /* Logger_hpp */

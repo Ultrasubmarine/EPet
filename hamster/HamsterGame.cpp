@@ -8,7 +8,7 @@
 #include "HamsterGame.hpp"
 
 #include "ResourceManager.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 void HamsterGame::Init(ResourceManager* resourceManager)
 {

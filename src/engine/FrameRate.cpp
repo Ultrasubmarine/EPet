@@ -6,7 +6,7 @@
 //
 
 #include "FrameRate.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 #include <thread>
 

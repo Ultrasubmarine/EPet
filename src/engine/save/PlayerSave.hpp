@@ -13,7 +13,7 @@
 #include <string>
 
 #include "json.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 using json = nlohmann::json;
 

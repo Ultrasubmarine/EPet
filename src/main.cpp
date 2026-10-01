@@ -8,7 +8,7 @@
 #include "Game.hpp"
 #include <stdio.h>
 #include <iostream>
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 int main(int argc, const char *argv[]) {
     

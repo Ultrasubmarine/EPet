@@ -12,7 +12,7 @@
 
 #include "registry.hpp"
 
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 #include "Time.hpp"
 #include "TimeComponents.hpp"

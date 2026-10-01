@@ -15,7 +15,8 @@
 		022FF2052FF2B86500716982 /* TimerSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022FF2042FF2B86500716982 /* TimerSystem.cpp */; };
 		022FF20A2FF2B9D500716982 /* TimeComponents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022FF2092FF2B9D500716982 /* TimeComponents.cpp */; };
 		025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */; };
-		7D55A4BC5FB754406E5C15BF /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89E512E9300D758AC11A60 /* Logging.cpp */; };
+		7D55A4BC5FB754406E5C15BF /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89E512E9300D758AC11A60 /* Logger.cpp */; };
+		C603DFDF078E6CCF3E67A794 /* LogOutputs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3A037E6EAF2E6B40583CD6 /* LogOutputs.cpp */; };
 		0268FF052F129B00004AD2D8 /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0268FF042F129B00004AD2D8 /* Time.cpp */; };
 		027009A82FB2595500100C05 /* IFontLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027009A72FB2595500100C05 /* IFontLoader.cpp */; };
 		027725612F63596800E8F256 /* AnimationSystems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027725602F63596800E8F256 /* AnimationSystems.cpp */; };
@@ -84,8 +85,10 @@
 		022FF2092FF2B9D500716982 /* TimeComponents.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeComponents.cpp; sourceTree = "<group>"; };
 		025F2E892D88AD5A0090AE59 /* GetPath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GetPath.hpp; sourceTree = "<group>"; };
 		025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GetPath.cpp; sourceTree = "<group>"; };
-		025F2E8C2D88AD5A0090AE59 /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
-		CD89E512E9300D758AC11A60 /* Logging.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logging.cpp; sourceTree = "<group>"; };
+		025F2E8C2D88AD5A0090AE59 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		CD89E512E9300D758AC11A60 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		0EA49DE9806CC2BC9D663F6D /* LogOutputs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LogOutputs.hpp; sourceTree = "<group>"; };
+		BF3A037E6EAF2E6B40583CD6 /* LogOutputs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LogOutputs.cpp; sourceTree = "<group>"; };
 		0268FF032F129B00004AD2D8 /* Time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Time.hpp; sourceTree = "<group>"; };
 		0268FF042F129B00004AD2D8 /* Time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Time.cpp; sourceTree = "<group>"; };
 		027009A62FB2595500100C05 /* IFontLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IFontLoader.hpp; sourceTree = "<group>"; };
@@ -217,11 +220,21 @@
 			children = (
 				025F2E892D88AD5A0090AE59 /* GetPath.hpp */,
 				025F2E8A2D88AD5A0090AE59 /* GetPath.cpp */,
-				025F2E8C2D88AD5A0090AE59 /* Logging.hpp */,
-				CD89E512E9300D758AC11A60 /* Logging.cpp */,
+				920A6EDF1026644B2D791F6D /* logger */,
 			);
 			name = utils;
 			path = src/utils;
+			sourceTree = "<group>";
+		};
+		920A6EDF1026644B2D791F6D /* logger */ = {
+			isa = PBXGroup;
+			children = (
+				025F2E8C2D88AD5A0090AE59 /* Logger.hpp */,
+				CD89E512E9300D758AC11A60 /* Logger.cpp */,
+				0EA49DE9806CC2BC9D663F6D /* LogOutputs.hpp */,
+				BF3A037E6EAF2E6B40583CD6 /* LogOutputs.cpp */,
+			);
+			path = logger;
 			sourceTree = "<group>";
 		};
 		0271F9E52E12E3D3000958E1 /* common */ = {
@@ -527,7 +540,8 @@
 				027F37D8306469B500BC6597 /* AvatarSystem.cpp in Sources */,
 				02245F0A301F7F1400B33707 /* SavingSystem.cpp in Sources */,
 				025F2E8E2D88AD5A0090AE59 /* GetPath.cpp in Sources */,
-				7D55A4BC5FB754406E5C15BF /* Logging.cpp in Sources */,
+				7D55A4BC5FB754406E5C15BF /* Logger.cpp in Sources */,
+				C603DFDF078E6CCF3E67A794 /* LogOutputs.cpp in Sources */,
 				02DB3C082DA80F7C00BE90D1 /* Scene.cpp in Sources */,
 				022FF1FC2FE3206A00716982 /* TextUpdateSystem.cpp in Sources */,
 				02DB3C0A2DA80F7C00BE90D1 /* SceneManager.cpp in Sources */,

@@ -8,7 +8,7 @@
 #include "HamsterAnimationDictionary.hpp"
 
 #include "ResourceManager.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 void HamsterAnimationDictionary::Load(ResourceManager* resourceManager, json* from)
 {

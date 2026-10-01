@@ -16,7 +16,7 @@
 #include "SDLTextTexture.hpp" // TODO: Delete this
 
 #include "Game.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 #include "Texture.hpp"
 #include "SDLTexture.hpp"

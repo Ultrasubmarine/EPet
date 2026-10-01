@@ -9,7 +9,7 @@
 
 #include "IFontLoader.hpp"
 #include "Font.hpp"
-#include "Logging.hpp"
+#include "Logger.hpp"
 
 void IFontLoader::DeleteFont(Font* font)
 {
