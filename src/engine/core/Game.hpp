@@ -9,6 +9,8 @@
 #define Game_hpp
 
 #include <stdio.h>
+#include <string>
+
 #include "Singleton.hpp"
 
 class IWindow;
@@ -30,7 +32,9 @@ public:
     Game(Game&&) = delete;
     
     bool Init(); /// true - if init was successful
+    void Start(const std::string& startSceneName); /// after init() but before Loop()
     void Deinit();
+
     void Loop();
     
     SceneManager* GetSceneManager() { return _sceneManager;};

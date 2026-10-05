@@ -17,7 +17,7 @@ class ResourceManager;
 class HamsterGame final: public Singleton<HamsterGame>
 {
 public:
-    void Init(ResourceManager* resourceManager);
+    bool Init(ResourceManager* resourceManager);
 
     HamsterAnimationDictionary& GetAnimationDictionary() { return _animationDictionary; }
 

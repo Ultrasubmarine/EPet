@@ -51,7 +51,7 @@ class Logger: public Singleton<Logger>
     static std::string GetTimeString();
     
 public:
-    void Initialize();
+    void Init();
     void Write(LogType type, const char* file, int line, const char* func, const char* text);
 
 private:

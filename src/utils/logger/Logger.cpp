@@ -24,7 +24,7 @@ Logger::Logger()
 
 Logger::~Logger() = default;
 
-void Logger::Initialize()
+void Logger::Init()
 {
     if(_initialize) {
         return;

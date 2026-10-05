@@ -20,12 +20,8 @@
 
 #include "IFontLoader.hpp"
 
-#include "HamsterGame.hpp"
-#include "Animation.hpp"
-
 bool Game::Init()
 {
-    Time::Instance().Init();
     _window = new Window();
     if(!_window->CreateWindow(320, 240, "my Gotchi"))
     {
@@ -40,36 +36,25 @@ bool Game::Init()
         return false;
     }
 
+    _resourceManager = new ResourceManager();
+    
+    Time::Instance().Init(); // before scenes!
+
     _frameRate = new FrameRate();
     _frameRate->SetFixedFrame(5);
     
-    _resourceManager = new ResourceManager();
-
-    HamsterGame::Instance().Init(_resourceManager);
-
-    // temp test: HamsterAnimationDictionary Load/Get
-//    if (auto anim = HamsterGame::Instance().GetAnimationDictionary().Get(0, "normal"))
-//    {
-//        LOG_MESSAGE("HamsterGame test: got animation [" << anim->_name << "] with " << anim->_frames.size() << " frames");
-//    }
-
     _playerSave = new PlayerSave();
     if(!_playerSave->Load()) {
         _playerSave->Save();
     }
     
-    Time::Instance().Init(); // before scenes!
-
     _sceneManager = new SceneManager(_resourceManager);
-    _sceneManager->LoadScene("scene2"); // TODO: load abstruct scene from spechial file
-
-    std::string font_name = std::string(DEFAULT_FONT);
-    auto font_object = _resourceManager->GetFont(font_name);
-  //  _sceneManager->SaveScene();
-    
- //   std::string animName = "idle";
- //  auto anim = _resourceManager->GetAnimation(animName);
     return true;
+}
+
+void Game::Start(const std::string& startSceneName)
+{
+    _sceneManager->LoadScene(startSceneName);
 }
 
 void Game::Deinit()

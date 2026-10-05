@@ -8,14 +8,16 @@
 #include "HamsterGame.hpp"
 
 #include "ResourceManager.hpp"
+#include "RegisterHamsterComponents.hpp"
+
 #include "Logger.hpp"
 
-void HamsterGame::Init(ResourceManager* resourceManager)
+bool HamsterGame::Init(ResourceManager* resourceManager)
 {
     if (!resourceManager)
     {
         LOG_ERROR("empty ResourceManager");
-        return;
+        return false;
     }
 
     if (auto manifest = resourceManager->GetJson("hamster_animations", ResourceType::settings))
@@ -25,5 +27,9 @@ void HamsterGame::Init(ResourceManager* resourceManager)
     else
     {
         LOG_ERROR("hamster_animations.json didn't load");
+        return false;
     }
+    
+    RegisterHamsterComponents();
+    return true;
 }
