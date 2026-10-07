@@ -22,6 +22,8 @@
 
 bool Game::Init()
 {
+    _resourceManager = new ResourceManager();
+    
     _window = new Window();
     if(!_window->CreateWindow(320, 240, "my Gotchi"))
     {
@@ -35,8 +37,6 @@ bool Game::Init()
         LOG_ERROR("Render didn't create. Game initialization was canceled");
         return false;
     }
-
-    _resourceManager = new ResourceManager();
     
     Time::Instance().Init(); // before scenes!
 

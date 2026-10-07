@@ -9,30 +9,12 @@
 #include <fstream>
 #include "Logger.hpp"
 
-json JsonLoader::gameSettings{};
-
 JsonLoader::~JsonLoader()
 {
 }
 
 void JsonLoader::ConvertToData()
 {
-}
-
-const json* JsonLoader::LoadGameSettings(const char *fullPath)
-{
-    std::ifstream buff(fullPath);
-    gameSettings = json::parse(buff);
-    buff.close();
-    
-    return &gameSettings;
-}
-
-const json* JsonLoader::GetGameSettings()
-{
-    if(gameSettings.empty())
-        return nullptr;
-    return &gameSettings;
 }
 
 json* JsonLoader::GetJson(const char *fullPath)
@@ -42,12 +24,20 @@ json* JsonLoader::GetJson(const char *fullPath)
     json* j = nullptr;
     if(buff.is_open())
     {
-        j = new json(json::parse(buff));
+        json parsed = json(json::parse(buff, nullptr, false));
         buff.close();
+        
+        if(parsed.is_discarded())
+        {
+            LOG_ERROR("json parse failed. file: "<< fullPath);
+            return nullptr;
+        }
+        
+        j = new json(std::move(parsed));
     }
     else
     {
-        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno));
+        LOG_ERROR("couldn't open file. file: "<< fullPath <<". error: " <<std::system_category().message(errno));
     }
     return j;
 }
@@ -56,7 +46,7 @@ bool JsonLoader::SaveJson(const char *fullPath, const json* src)
 {
     std::ofstream file(fullPath, std::ios::out | std::ios::trunc);
     if (!file.is_open()) {
-        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno)<<"\n path:"<<fullPath);
+        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno)<<". path:"<<fullPath);
         return false;
     }
     

@@ -13,14 +13,10 @@
 
 #include "ITextureLoader.hpp"
 
-
-class SDLRender;
 struct Texture;
 
 class SDLTextureLoader : public ITextureLoader
 {
-    SDLRender* _render;
-    
 public:
     SDLTextureLoader();
   

@@ -1,8 +1,8 @@
-
 {
     "window" : {
-        "name": "Labirint",
-        "screen" : { "width" : 700, "height" : 400}
-    },  
-    "main_scene": "test_scene"
+        "name": "my Gotchi",
+        "screen" : { "width" : 320, "height" : 240}
+    },
+    "fps": 5,
+    "main_scene": "scene2"
 }

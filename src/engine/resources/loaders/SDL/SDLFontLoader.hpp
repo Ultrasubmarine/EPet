@@ -15,8 +15,6 @@ class SDLRender;
 
 class SDLFontLoader : public IFontLoader
 {
-    SDLRender* _render;
-    
 public:
     SDLFontLoader();
     virtual ~SDLFontLoader() override {};

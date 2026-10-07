@@ -29,8 +29,6 @@ SDL_Color ToSDLColor(const RGBA& c) {
 
 SDLFontLoader::SDLFontLoader()
 {
-    _render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
-    
     if (TTF_Init()==-1) {
         LOG_ERROR(SDL_GetError());
         return ;
@@ -53,6 +51,7 @@ Font* SDLFontLoader::_LoadFont(const std::string& name, const char *fullPath)
 
 std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::shared_ptr<Font> font, const FontSettings& settings)
 {
+ 
     TTF_Font* ttf = nullptr;
     if (auto sdlUPtr = std::get_if<std::unique_ptr<SDLFont>>(&font->resource)) {
         SDLFont* sdlFont = sdlUPtr->get(); // sdlUPtr имеет тип std::unique_ptr<SDLFont>*
@@ -81,7 +80,13 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
         return nullptr;
     }
 
-    SDL_Texture* textTex = SDL_CreateTextureFromSurface(_render->GetRender(), surfaceText);
+    auto render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
+    if(!render)
+    {
+        LOG_ERROR("render is empty");
+        return nullptr;
+    }
+    SDL_Texture* textTex = SDL_CreateTextureFromSurface(render->GetRender(), surfaceText);
 
     SDL_Rect rect{0, 0, surfaceText->w, surfaceText->h};
     SDL_FreeSurface(surfaceText);

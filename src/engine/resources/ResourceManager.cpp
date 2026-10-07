@@ -80,31 +80,6 @@ std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
     return nullptr;
 }
 
-//std::shared_ptr<TextTexture> ResourceManager::GetTextTexture(std::string& text, std::string& fontName, int fsize, SDL_Color color)
-//{
-//    auto font = GetFont(fontName);
-//    if(!font)
-//        return nullptr;
-//
-//    return _fontLoader->GetText(text, font, fsize, color);
-//}
-//
-//const json* ResourceManager::GetGameSettings()
-//{
-//    auto j = JsonLoader::GetGameSettings();
-//    if(j)
-//        return j;
-//    
-//    std::string r_path ="resources/game_settings";
-//    std::string type = "json";
-//    
-//    char *json_path = GetPath(r_path, type);
-//    j = JsonLoader::LoadGameSettings(json_path);
-//    delete json_path;
-//    
-//    return j;
-//}
-
 json* ResourceManager::GetJson(const std::string& title, ResourceType type) const
 {
     std::string format = ".json";
