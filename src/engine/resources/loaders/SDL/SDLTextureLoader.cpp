@@ -29,6 +29,11 @@ Texture* SDLTextureLoader::_LoadTexture(const std::string& name, const char *ful
     }
     
     SDL_Surface *bmpSurf = SDL_LoadBMP(fullPath);
+    if(!bmpSurf)
+    {
+        LOG_ERROR("["<<fullPath<<"]"<< " error with loading bmp texture");
+        return nullptr;
+    }
     
     SDL_Texture *bmpTex = SDL_CreateTextureFromSurface(render->GetRender(), bmpSurf);
     

@@ -28,7 +28,7 @@ int main(int argc, const char *argv[]) {
         return -1;
     }
     
-    myGame.Start("scene2"); // TODO: change to abstruct scene name
+    myGame.Start();
     myGame.Loop();
     myGame.Deinit();
 

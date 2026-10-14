@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <memory>
 
 #include "Singleton.hpp"
 
@@ -21,18 +22,19 @@ class SceneManager;
 class ResourceManager;
 
 class PlayerSave;
+class GameSettings;
 
 class Game final: public Singleton<Game>
 {
 public:
-    Game() = default;
+    Game();
     ~Game();
     
     Game(const Game& ) = delete;
     Game(Game&&) = delete;
     
     bool Init(); /// true - if init was successful
-    void Start(const std::string& startSceneName); /// after init() but before Loop()
+    void Start(); /// after init() but before Loop()
     void Deinit();
 
     void Loop();
@@ -55,5 +57,8 @@ private:
     ResourceManager *_resourceManager = nullptr;
     
     PlayerSave* _playerSave = nullptr; // TODO: temp place
+    
+    std::unique_ptr<GameSettings> _settings = nullptr;
+    const std::string _gameSettingsFileName = "game_settings";
 };
 #endif /* Game_hpp */

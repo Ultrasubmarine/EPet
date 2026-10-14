@@ -72,6 +72,13 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
         return nullptr;
     }
 
+    auto render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
+    if(!render)
+    {
+        LOG_ERROR("render is empty");
+        return nullptr;
+    }
+
     // render
     SDL_Color sdlColor = ToSDLColor(settings.color);
     SDL_Surface* surfaceText = TTF_RenderText_Solid(ttf, text.c_str(), sdlColor);
@@ -80,12 +87,6 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
         return nullptr;
     }
 
-    auto render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
-    if(!render)
-    {
-        LOG_ERROR("render is empty");
-        return nullptr;
-    }
     SDL_Texture* textTex = SDL_CreateTextureFromSurface(render->GetRender(), surfaceText);
 
     SDL_Rect rect{0, 0, surfaceText->w, surfaceText->h};

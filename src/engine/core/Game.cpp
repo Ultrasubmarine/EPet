@@ -10,6 +10,7 @@
 #include "Logger.hpp"
 #include "EngineSettings.h"
 
+#include "GameSettings.hpp"
 #include "FrameRate.hpp"
 #include "SceneManager.hpp"
 #include "ResourceManager.hpp"
@@ -20,12 +21,18 @@
 
 #include "IFontLoader.hpp"
 
+Game::Game() = default;
+
 bool Game::Init()
 {
     _resourceManager = new ResourceManager();
     
+    auto file = _resourceManager->GetJson(_gameSettingsFileName, ResourceType::settings);
+    _settings = std::make_unique<GameSettings>(GameSettings::Load(file));
+    delete file; // TODO: move to smart pointers for json
+
     _window = new Window();
-    if(!_window->CreateWindow(320, 240, "my Gotchi"))
+    if(!_window->CreateWindow(_settings->GetWidth(), _settings->GetHeight(), _settings->GetTitle().c_str()))
     {
         LOG_ERROR("Window didn't create. Game initialization was canceled");
         return false;
@@ -41,7 +48,7 @@ bool Game::Init()
     Time::Instance().Init(); // before scenes!
 
     _frameRate = new FrameRate();
-    _frameRate->SetFixedFrame(5);
+    _frameRate->SetFixedFrame(_settings->GetFps());
     
     _playerSave = new PlayerSave();
     if(!_playerSave->Load()) {
@@ -52,9 +59,9 @@ bool Game::Init()
     return true;
 }
 
-void Game::Start(const std::string& startSceneName)
+void Game::Start()
 {
-    _sceneManager->LoadScene(startSceneName);
+    _sceneManager->LoadScene(_settings->GetStartScene());
 }
 
 void Game::Deinit()
@@ -76,6 +83,8 @@ void Game::Deinit()
     
     delete _resourceManager;
     _resourceManager = nullptr;
+    
+    _settings.reset();
 }
 
 Game::~Game()
