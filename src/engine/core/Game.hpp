@@ -8,7 +8,6 @@
 #ifndef Game_hpp
 #define Game_hpp
 
-#include <stdio.h>
 #include <string>
 #include <memory>
 
@@ -26,10 +25,10 @@ class GameSettings;
 
 class Game final: public Singleton<Game>
 {
-public:
     Game();
     ~Game();
-    
+
+public:
     Game(const Game& ) = delete;
     Game(Game&&) = delete;
     
@@ -39,26 +38,30 @@ public:
 
     void Loop();
     
-    SceneManager* GetSceneManager() { return _sceneManager;};
-    ResourceManager* GetResourceManager() { return _resourceManager;};
-    IRender* GetRender() { return _render;};
-    PlayerSave* GetPlayerSave() { return _playerSave;};
+    SceneManager* GetSceneManager() const { return _sceneManager.get();}
+    ResourceManager* GetResourceManager() const { return _resourceManager.get();}
+    IRender* GetRender() const { return _render.get();}
+    PlayerSave* GetPlayerSave() const { return _playerSave.get();}
     
 private:
-    void Input();
-    void RenderAll();
+    void HandleInput();
     
 private:
-    IWindow *_window = nullptr;
-    IRender *_render = nullptr;
+//systems
+    std::unique_ptr<IWindow> _window;
+    std::unique_ptr<IRender> _render;
     
-    FrameRate *_frameRate = nullptr;
-    SceneManager *_sceneManager = nullptr;
-    ResourceManager *_resourceManager = nullptr;
+    std::unique_ptr<FrameRate> _frameRate;
+    std::unique_ptr<SceneManager> _sceneManager;
+    std::unique_ptr<ResourceManager> _resourceManager;
     
-    PlayerSave* _playerSave = nullptr; // TODO: temp place
+//save
+    std::unique_ptr<PlayerSave> _playerSave;
     
-    std::unique_ptr<GameSettings> _settings = nullptr;
+//settings
+    std::unique_ptr<GameSettings> _settings;
     const std::string _gameSettingsFileName = "game_settings";
+
+    friend class Singleton<Game>;
 };
 #endif /* Game_hpp */

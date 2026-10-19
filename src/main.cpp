@@ -20,11 +20,13 @@ int main(int argc, const char *argv[]) {
     Game& myGame = Game::Instance();
     if(!myGame.Init())
     {
+        myGame.Deinit();
         return -1;
     }
     
     if(!HamsterGame::Instance().Init(myGame.GetResourceManager()))
     {
+        myGame.Deinit();
         return -1;
     }
     

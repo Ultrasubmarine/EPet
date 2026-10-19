@@ -28,8 +28,8 @@ public:
     void SetFixedFrame(int fps);
     void WaitFrame();
     
-    float GetDeltaTime(); /// in seconds
-    float GetFixedDeltaTime();
+    double GetDeltaTime(); /// in seconds
+    double GetFixedDeltaTime(); /// in seconds
     
     FrameRate() :_fps(DEFAULT_FPS){};
 };

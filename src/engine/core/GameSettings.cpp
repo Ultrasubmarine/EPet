@@ -10,30 +10,28 @@
 #include "Logger.hpp"
 #include "JsonUtils.hpp"
 
-GameSettings GameSettings::Load(const json* data)
+
+GameSettings::GameSettings(const json* data)
 {
-    GameSettings settings;
     if(!data) {
         LOG_WARNING("settings data is empty. all values are default");
-        return settings;
+        return;
     }
 
-    ReadValue(*data, "/window/name", settings._title);
-    ReadValue(*data, "/window/screen/width", settings._width);
-    ReadValue(*data, "/window/screen/height", settings._height);
-    ReadValue(*data, "/fps", settings._fps);
-    ReadValue(*data, "/main_scene", settings._startScene);
+    ReadValue(*data, "/window/name", _title);
+    ReadValue(*data, "/window/screen/width", _width);
+    ReadValue(*data, "/window/screen/height", _height);
+    ReadValue(*data, "/fps", _fps);
+    ReadValue(*data, "/main_scene", _startScene);
 
-    const GameSettings defaults;
-    if(settings._width <= 0 || settings._height <= 0) {
-        LOG_WARNING("invalid window size " << settings._width << "x" << settings._height << ". use default");
-        settings._width = defaults._width;
-        settings._height = defaults._height;
+    if(_width <= 0 || _height <= 0) {
+        LOG_WARNING("invalid window size " << _width << "x" << _height << ". use default");
+        _width = WINDOW_DEFAULT_WIDTH;
+        _height = WINDOW_DEFAULT_HEIGHT;
     }
-    if(settings._fps <= 0) {
-        LOG_WARNING("invalid fps " << settings._fps << ". use default");
-        settings._fps = defaults._fps;
+    
+    if(_fps <= 0) {
+        LOG_WARNING("invalid fps " << _fps << ". use default");
+        _fps = DEFAULT_FPS;
     }
-
-    return settings;
 }

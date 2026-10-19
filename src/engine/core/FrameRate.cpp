@@ -48,12 +48,12 @@ void FrameRate::WaitFrame()
     _lastClock = end;
 }
 
-float FrameRate::GetDeltaTime()
+double FrameRate::GetDeltaTime()
 {
-    return _delta.count()/ static_cast<float>(std::nano::den);
+    return std::chrono::duration<double>(_delta).count();
 }
 
-float FrameRate::GetFixedDeltaTime()
+double FrameRate::GetFixedDeltaTime()
 {
-    return _fixedDelta.count()/ static_cast<float>(std::nano::den);
+    return std::chrono::duration<double>(_fixedDelta).count();
 }

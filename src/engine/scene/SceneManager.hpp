@@ -15,11 +15,9 @@
 #include "registry.hpp" // TODO: think about place
 
 class Scene;
-class ResourceManager;
 
 class SceneManager
-{    
-    ResourceManager* _resourceManager;
+{
     Scene* _currentScene;
     
     Signal<Scene*> OnCreate;
@@ -29,7 +27,7 @@ class SceneManager
 
 public:
     
-    SceneManager(ResourceManager* r);
+    SceneManager();
     ~SceneManager();
     
     void LoadScene(std::string id);

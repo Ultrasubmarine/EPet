@@ -22,7 +22,6 @@ public:
     virtual void* CreateWindow(int width = WINDOW_DEFAULT_WIDTH,
                               int height = WINDOW_DEFAULT_WIDTH,
                               const char *title = WINDOW_DEFAULT_TITLE) = 0;
-    virtual void DestroyWindow() = 0;
     
     virtual void HandleEvent() = 0;
     
@@ -30,6 +29,8 @@ public:
     virtual int GetWidth() const = 0;
     virtual bool IsWindowExist() const = 0;
     virtual bool IsCloseRequested() const = 0; /// true after user closed the window
+private:
+    virtual void DestroyWindow() = 0;
 
     // TODO: has focus;
     // TODO: smth with render;

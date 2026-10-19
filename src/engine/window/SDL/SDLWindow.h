@@ -24,7 +24,6 @@ public:
     void* CreateWindow(int width = WINDOW_DEFAULT_WIDTH,
                       int height = WINDOW_DEFAULT_WIDTH,
                       const char *title = WINDOW_DEFAULT_TITLE) override;
-    void DestroyWindow() override;
     
     void HandleEvent() override;
 
@@ -34,6 +33,8 @@ public:
     bool IsCloseRequested() const override { return _closeRequested; }
 
     SDL_Window* GetSDLWindow() {return _window;};
+private:
+    void DestroyWindow() override;
 };
 
 using Window = SDLWindow;

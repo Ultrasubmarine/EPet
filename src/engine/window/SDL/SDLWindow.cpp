@@ -18,6 +18,7 @@ SDLWindow::SDLWindow()
 
 SDLWindow::~SDLWindow()
 {
+    DestroyWindow();
 }
 
 void* SDLWindow::CreateWindow(int width, int height, const char *title)

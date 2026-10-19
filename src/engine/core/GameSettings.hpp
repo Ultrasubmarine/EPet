@@ -12,14 +12,15 @@
 
 #include "json.hpp"
 #include "IWindow.h"
+#include "FrameRate.hpp"
 
 using json = nlohmann::json;
 
 class GameSettings
 {
 public:
-    /// if data == nullptr  => all values are default
-    static GameSettings Load(const json* data);
+    GameSettings() = default;
+    explicit GameSettings(const json* data);
 
     const std::string& GetTitle() const { return _title; }
     int GetWidth() const { return _width; }
@@ -31,7 +32,8 @@ private:
     std::string _title = WINDOW_DEFAULT_TITLE;
     int _width = WINDOW_DEFAULT_WIDTH;
     int _height = WINDOW_DEFAULT_HEIGHT;
-    int _fps = 60;
+    int _fps = DEFAULT_FPS;
+    
     std::string _startScene;
 };
 

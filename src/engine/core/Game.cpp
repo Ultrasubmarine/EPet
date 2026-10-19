@@ -15,31 +15,29 @@
 #include "SceneManager.hpp"
 #include "ResourceManager.hpp"
 #include "Input.hpp"
-#include "Scene.hpp"
 #include "PlayerSave.hpp"
 #include "Time.hpp"
-
-#include "IFontLoader.hpp"
 
 Game::Game() = default;
 
 bool Game::Init()
 {
-    _resourceManager = new ResourceManager();
+    _resourceManager = std::make_unique<ResourceManager>();
     
+    // load game settings
     auto file = _resourceManager->GetJson(_gameSettingsFileName, ResourceType::settings);
-    _settings = std::make_unique<GameSettings>(GameSettings::Load(file));
+    _settings = std::make_unique<GameSettings>(file);
     delete file; // TODO: move to smart pointers for json
 
-    _window = new Window();
+    _window = std::make_unique<Window>();
     if(!_window->CreateWindow(_settings->GetWidth(), _settings->GetHeight(), _settings->GetTitle().c_str()))
     {
         LOG_ERROR("Window didn't create. Game initialization was canceled");
         return false;
     }
     
-    _render = new Render();
-    if(!_render->Init(_window))
+    _render = std::make_unique<Render>();
+    if(!_render->Init(_window.get()))
     {
         LOG_ERROR("Render didn't create. Game initialization was canceled");
         return false;
@@ -47,15 +45,15 @@ bool Game::Init()
     
     Time::Instance().Init(); // before scenes!
 
-    _frameRate = new FrameRate();
+    _frameRate = std::make_unique<FrameRate>();
     _frameRate->SetFixedFrame(_settings->GetFps());
     
-    _playerSave = new PlayerSave();
+    _playerSave = std::make_unique<PlayerSave>();
     if(!_playerSave->Load()) {
         _playerSave->Save();
     }
     
-    _sceneManager = new SceneManager(_resourceManager);
+    _sceneManager = std::make_unique<SceneManager>();
     return true;
 }
 
@@ -66,25 +64,14 @@ void Game::Start()
 
 void Game::Deinit()
 {
-    delete _render;
-    _render = nullptr;
-    
-    if(_window) {
-        _window->DestroyWindow();
-    }
-    delete _window;
-    _window = nullptr;
-    
-    delete _frameRate;
-    _frameRate = nullptr;
-    
-    delete _sceneManager;
-    _sceneManager = nullptr;
-    
-    delete _resourceManager;
-    _resourceManager = nullptr;
-    
+    _sceneManager.reset();
+    _playerSave.reset();
+    _frameRate.reset();
     _settings.reset();
+    _resourceManager.reset();
+    
+    _render.reset();
+    _window.reset();
 }
 
 Game::~Game()
@@ -92,32 +79,28 @@ Game::~Game()
     Deinit();
 }
 
-void Game::Input()
+void Game::HandleInput()
 {
+    //TODO: handle some events
+    
     _window->HandleEvent();
     Input::Instance().Update();
-    
-    for(auto& key : Input::Instance().GetEvents())
-    {
-      //  std::cout<< key;
-        if(key.State == KeyState::Pressed)
-        {
-            std::cout<<key.Name<<" [Pressed]\n";
-            if(key.Name == "BUTTON_D"){
-                Input::Instance().UnbindKey("BUTTON_A");
-            }
-        }
-            
-        if(key.State== KeyState::Released)
-            std::cout<<key.Name<<" [Released]\n";
-        
-    }
-}
 
-void Game::RenderAll()
-{
-   // _render->Clear();
-   // _render->Present();
+//    for(auto& key : Input::Instance().GetEvents())
+//    {
+//      //  std::cout<< key;
+//        if(key.State == KeyState::Pressed)
+//        {
+//            std::cout<<key.Name<<" [Pressed]\n";
+//            if(key.Name == "BUTTON_D"){
+//                Input::Instance().UnbindKey("BUTTON_A");
+//            }
+//        }
+//            
+//        if(key.State== KeyState::Released)
+//            std::cout<<key.Name<<" [Released]\n";
+//        
+//    }
 }
 
 void Game::Loop()
@@ -126,13 +109,12 @@ void Game::Loop()
     
     while(!_window->IsCloseRequested())
     {
-        Input();
-        float dt = _frameRate->GetDeltaTime(); // in seconds
+        HandleInput();
+        double dt = _frameRate->GetDeltaTime(); // in seconds
 
         Time::Instance().Update(dt);
         _sceneManager->Update(dt);
-        
-        RenderAll();
+
         _frameRate->WaitFrame();
     }
 }

@@ -13,11 +13,12 @@
 #include "RegisterComponents.hpp"
 #include "ResourceManager.hpp"
 #include "SceneUtils.hpp"
+#include "Game.hpp"
 #include "Scene.hpp"
 
 using json = nlohmann::json;
 
-SceneManager::SceneManager(ResourceManager* r): _resourceManager(r)
+SceneManager::SceneManager()
 {
     RegisterComponents();
 }
@@ -32,12 +33,13 @@ SceneManager::~SceneManager()
 
 void SceneManager::LoadScene(std::string id)
 {
-    if(!_resourceManager){
+    auto resourceManager = Game::Instance().GetResourceManager();
+    if(!resourceManager){
         LOG_ERROR("resourceManager didn't find. Scene Loading canceled.");
         return;
     }
     
-    auto data = _resourceManager->GetJson(id, ResourceType::scene);
+    auto data = resourceManager->GetJson(id, ResourceType::scene);
     if(!data) {
         LOG_ERROR("scene \""<<id<<"\" didn't find. Scene Loading canceled.");
         return;
@@ -75,7 +77,13 @@ void SceneManager::SaveScene()
     
     std::string dataScene = data.dump(1, '\t');
    // LOG_MESSAGE(dataScene);
-    _resourceManager->SaveJson(_currentScene->GetSceneId() + "1", &data, ResourceType::scene);
+    
+    auto resourceManager = Game::Instance().GetResourceManager();
+    if(!resourceManager){
+        LOG_ERROR("resourceManager didn't find. Scene Saving canceled.");
+        return;
+    }
+    resourceManager->SaveJson(_currentScene->GetSceneId() + "1", &data, ResourceType::scene);
 }
 
 void SceneManager::DeleteScene()
