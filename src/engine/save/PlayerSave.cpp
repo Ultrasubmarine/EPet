@@ -17,7 +17,7 @@ bool PlayerSave::Save()
     auto manager = Game::Instance().GetResourceManager();
     if(!manager)
     {
-        LOG_ERROR("ResourceManager didn't find.");
+        LOG_ERROR("Resource manager is null. Saving canceled");
         return false;
     }
     
@@ -35,7 +35,7 @@ bool PlayerSave::Load()
     auto manager = Game::Instance().GetResourceManager();
     if(!manager)
     {
-        LOG_ERROR("ResourceManager didn't find.");
+        LOG_ERROR("Resource manager is null. Loading canceled");
         return false;
     }
     
@@ -46,7 +46,7 @@ bool PlayerSave::Load()
     }
     else  // create new empty save 
     {
-        LOG_MESSAGE("Save file didn't find. Start new game");
+        LOG_MESSAGE("Save file not found. Start new game");
         _saveData = std::unique_ptr<json>(new json({})); // accept saving empty json
     }
 

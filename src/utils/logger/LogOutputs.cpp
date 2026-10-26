@@ -37,13 +37,13 @@ FileOutput::FileOutput(const std::string& fileName, const std::string& prevFileN
         std::error_code error;
       fs::rename(path, prevPath, error);
       if (error) {
-          LOG_ERROR("couldn't rename old log: " << error.message());
+          LOG_ERROR("Failed to rename old log [" << path.string() << "] to [" << prevPath.string() << "]: " << error.message());
       }
     }
 
     _file.open(path, std::ios::out | std::ios::trunc);
     if (!_file.is_open()) {
-        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno)<<" path: "<<path);
+        LOG_ERROR("Failed to open log file [" << path.string() << "]: " << std::system_category().message(errno));
         return;
     }
 }

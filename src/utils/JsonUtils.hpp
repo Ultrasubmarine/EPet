@@ -21,7 +21,7 @@ bool ReadValue(const json& from, const std::string& path, T& out)
 {
     const json::json_pointer ptr(path);
     if (!from.contains(ptr)) {
-        LOG_WARNING("[" << path << "] not found. use default");
+        LOG_WARNING("Field [" << path << "] not found. Use default");
         return false;
     }
 
@@ -29,7 +29,7 @@ bool ReadValue(const json& from, const std::string& path, T& out)
         out = from[ptr].get<T>();
     }
     catch (const json::exception& e) {
-        LOG_WARNING("[" << path << "] has wrong type. use default. " << e.what());
+        LOG_WARNING("Field [" << path << "] has wrong type. Use default: " << e.what());
         return false;
     }
     return true;

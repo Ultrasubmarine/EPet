@@ -51,7 +51,7 @@ void Logger::CreateFileOutput(const std::vector<LogType>& acceptionTypes, const 
     auto output = std::make_unique<FileOutput>(fileName, prevFileName);
     if(!output->IsOpen())
     {
-        LOG_ERROR("couldn't create logging file ["<<fileName<<"]");
+        LOG_ERROR("Failed to create log file [" << fileName << "]");
         return;
     }
     for(auto t: acceptionTypes)

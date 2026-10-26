@@ -35,13 +35,13 @@ void SceneManager::LoadScene(std::string id)
 {
     auto resourceManager = Game::Instance().GetResourceManager();
     if(!resourceManager){
-        LOG_ERROR("resourceManager didn't find. Scene Loading canceled.");
+        LOG_ERROR("Resource manager is null. Scene loading canceled");
         return;
     }
     
     auto data = resourceManager->GetJson(id, ResourceType::scene);
     if(!data) {
-        LOG_ERROR("scene \""<<id<<"\" didn't find. Scene Loading canceled.");
+        LOG_ERROR("Scene [" << id << "] not found. Scene loading canceled");
         return;
     }
     
@@ -60,7 +60,7 @@ void SceneManager::LoadScene(std::string id)
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);
     
-    LOG_MESSAGE("scene \""<<id<<"\" was created.");
+    LOG_MESSAGE("Scene [" << id << "] loaded");
 };
 
 void SceneManager::SaveScene()
@@ -76,7 +76,7 @@ void SceneManager::SaveScene()
     
     auto resourceManager = Game::Instance().GetResourceManager();
     if(!resourceManager){
-        LOG_ERROR("resourceManager didn't find. Scene Saving canceled.");
+        LOG_ERROR("Resource manager is null. Scene saving canceled");
         return;
     }
     resourceManager->SaveJson(_currentScene->GetSceneId() + "1", &data, ResourceType::scene);

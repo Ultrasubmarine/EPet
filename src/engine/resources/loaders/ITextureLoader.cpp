@@ -12,7 +12,7 @@
 
 void ITextureLoader::DeleteTexture(Texture* texture)
 {
-    LOG_MESSAGE("Texture ["<< texture->name <<"]");
+    LOG_MESSAGE("Texture [" << texture->name << "] deleted");
     _textures.erase(texture->name);
     delete texture;
 }
@@ -40,6 +40,6 @@ std::shared_ptr<Texture> ITextureLoader::LoadTexture(const std::string& name, co
         return texture;
     }
     
-    LOG_ERROR("texture:"<<name);
+    LOG_ERROR("Failed to load texture [" << name << "]");
     return NULL;
 }

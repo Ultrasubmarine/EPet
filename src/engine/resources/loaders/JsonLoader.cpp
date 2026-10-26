@@ -20,14 +20,14 @@ std::unique_ptr<json> JsonLoader::GetJson(const char *fullPath)
         
         if(parsed.is_discarded())
         {
-            LOG_ERROR("json parse failed. file: ["<< fullPath<<"]");
+            LOG_ERROR("Failed to parse json [" << fullPath << "]");
             return nullptr;
         }        
         return std::make_unique<json>(std::move(parsed));
     }
     else
     {
-        LOG_ERROR("couldn't open file. file: ["<< fullPath <<"]. error: " <<std::system_category().message(errno));
+        LOG_ERROR("Failed to open file [" << fullPath << "]: " << std::system_category().message(errno));
     }
     return nullptr;
 }
@@ -36,7 +36,7 @@ bool JsonLoader::SaveJson(const char *fullPath, const json* src)
 {
     std::ofstream file(fullPath, std::ios::out | std::ios::trunc);
     if (!file.is_open()) {
-        LOG_ERROR("couldn't open file. error: " <<std::system_category().message(errno)<<". path:"<<fullPath);
+        LOG_ERROR("Failed to open file [" << fullPath << "] for writing: " << std::system_category().message(errno));
         return false;
     }
     

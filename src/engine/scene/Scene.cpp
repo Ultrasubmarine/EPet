@@ -12,7 +12,7 @@
 
 Scene::Scene(std::string& id) : _id(id)
 {
-    LOG_MESSAGE("Scene was created. id = "  << id);
+    LOG_MESSAGE("Scene [" << id << "] created");
 }
 
 Scene::~Scene()

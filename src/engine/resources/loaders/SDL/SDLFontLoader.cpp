@@ -30,7 +30,7 @@ SDL_Color ToSDLColor(const RGBA& c) {
 SDLFontLoader::SDLFontLoader()
 {
     if (TTF_Init()==-1) {
-        LOG_ERROR(SDL_GetError());
+        LOG_ERROR("TTF_Init failed: " << TTF_GetError());
         return ;
     }
 }
@@ -39,7 +39,7 @@ Font* SDLFontLoader::_LoadFont(const std::string& name, const char *fullPath)
 {
     auto f = TTF_OpenFont(fullPath, 24);
     if(!f) {
-        LOG_ERROR("error with open ttf font ");
+        LOG_ERROR("TTF_OpenFont failed [" << fullPath << "]: " << TTF_GetError());
         return nullptr;
     }
     
@@ -63,7 +63,7 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
     }
 
     if (!ttf) {
-        LOG_ERROR("null TTF_Font");
+        LOG_ERROR("TTF_Font is null");
         return nullptr;
     }
 
@@ -75,7 +75,7 @@ std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::share
     auto render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
     if(!render)
     {
-        LOG_ERROR("render is empty");
+        LOG_ERROR("Render is null. Text texture not created");
         return nullptr;
     }
 

@@ -14,7 +14,7 @@
 GameSettings::GameSettings(const json* data)
 {
     if(!data) {
-        LOG_WARNING("settings data is empty. all values are default");
+        LOG_WARNING("Settings data is null. Use default for all values");
         return;
     }
 
@@ -25,13 +25,13 @@ GameSettings::GameSettings(const json* data)
     ReadValue(*data, "/main_scene", _startScene);
 
     if(_width <= 0 || _height <= 0) {
-        LOG_WARNING("invalid window size " << _width << "x" << _height << ". use default");
+        LOG_WARNING("Invalid window size [" << _width << "x" << _height << "]. Use default");
         _width = WINDOW_DEFAULT_WIDTH;
         _height = WINDOW_DEFAULT_HEIGHT;
     }
     
     if(_fps <= 0) {
-        LOG_WARNING("invalid fps " << _fps << ". use default");
+        LOG_WARNING("Invalid fps [" << _fps << "]. Use default");
         _fps = DEFAULT_FPS;
     }
 }

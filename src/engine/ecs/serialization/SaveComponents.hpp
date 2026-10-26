@@ -34,11 +34,11 @@ private:
     {
         if(const auto it = GetSavers().find(typeId); it != GetSavers().end())
         {
-            LOG_ERROR("Component saver ["<<typeId<<"] already exist. Saver registration was ignored");
+            LOG_WARNING("Component saver [" << typeId << "] already exists. Registration ignored");
             return;
         }
         GetSavers()[typeId] = saveFunction;
-        LOG_MESSAGE("Component saver ["<<typeId<<"] registred");
+        LOG_MESSAGE("Component saver [" << typeId << "] registered");
     };
     
     template <typename T>
@@ -78,7 +78,7 @@ inline void Save(const char* typeId, SAVE_FUNCTION_PARAMS)
     }
     else
     {
-        LOG_ERROR("Component saver ["<<typeId<<"] didn't find. Saving component canceled");
+        LOG_ERROR("Component saver [" << typeId << "] not found. Component not saved");
     }
 }
 

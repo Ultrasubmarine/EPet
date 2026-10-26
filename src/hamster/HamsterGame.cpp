@@ -16,7 +16,7 @@ bool HamsterGame::Init(ResourceManager* resourceManager)
 {
     if (!resourceManager)
     {
-        LOG_ERROR("empty ResourceManager");
+        LOG_ERROR("Resource manager is null");
         return false;
     }
 
@@ -26,7 +26,7 @@ bool HamsterGame::Init(ResourceManager* resourceManager)
     }
     else
     {
-        LOG_ERROR("hamster_animations.json didn't load");
+        LOG_ERROR("Animation manifest [hamster_animations.json] not loaded");
         return false;
     }
     

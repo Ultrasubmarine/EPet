@@ -106,7 +106,7 @@ Text Text::Load(const json& data)
     }
     else
     {
-        LOG_ERROR("field [text] didn't find");
+        LOG_WARNING("Field [text] not found. Use default");
     }
     
     if(data.contains("size") && data["size"].is_number_integer())
@@ -115,7 +115,7 @@ Text Text::Load(const json& data)
     }
     else
     {
-        LOG_ERROR("field [size] didn't find");
+        LOG_WARNING("Field [size] not found. Use default");
     }
     
     // color expects array [r,g,b]; default is black
@@ -137,12 +137,12 @@ Text Text::Load(const json& data)
         }
         else
         {
-            LOG_ERROR("field [color] has invalid values; using default (black)");
+            LOG_WARNING("Field [color] has invalid values. Use default [black]");
         }
     }
     else
     {
-        LOG_ERROR("field [color] didn't find or has invalid format; using default (black)");
+        LOG_WARNING("Field [color] not found or has invalid format. Use default [black]");
     }
     
     std::string fontName = DEFAULT_FONT;
@@ -152,7 +152,7 @@ Text Text::Load(const json& data)
     }
     else
     {
-        LOG_ERROR("field [font] didn't find. using default");
+        LOG_WARNING("Field [font] not found. Use default");
     }
     
     //TODO: Load resource callback;

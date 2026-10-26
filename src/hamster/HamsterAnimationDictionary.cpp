@@ -14,13 +14,13 @@ void HamsterAnimationDictionary::Load(ResourceManager* resourceManager, json* fr
 {
     if (!resourceManager)
     {
-        LOG_ERROR("empty ResourceManager. Impossible to load animations");
+        LOG_ERROR("Resource manager is null. Animations not loaded");
         return;
     }
 
     if (!from || !from->is_array())
     {
-        LOG_ERROR("manifest json is missing or is not an array of levels");
+        LOG_ERROR("Manifest is missing or is not an array of levels");
         return;
     }
 
@@ -30,20 +30,20 @@ void HamsterAnimationDictionary::Load(ResourceManager* resourceManager, json* fr
     {
         if (!levelData.is_object() || !levelData.contains("level") || !levelData["level"].is_number_integer())
         {
-            LOG_ERROR("entry without integer \"level\" was skipped");
+            LOG_WARNING("Entry without integer [level]. Skipped");
             continue;
         }
 
         const int level = levelData["level"].get<int>();
         if (level < 0)
         {
-            LOG_ERROR("negative level [" << level << "] was skipped");
+            LOG_WARNING("Negative level [" << level << "]. Skipped");
             continue;
         }
 
         if (!levelData.contains("animations") || !levelData["animations"].is_object())
         {
-            LOG_ERROR("level [" << level << "] doesn't have \"animations\" object");
+            LOG_WARNING("Level [" << level << "] has no [animations] object. Skipped");
             continue;
         }
 
@@ -55,7 +55,7 @@ void HamsterAnimationDictionary::Load(ResourceManager* resourceManager, json* fr
         auto& tags = _data[level];
         if (!tags.empty())
         {
-            LOG_ERROR("level [" << level << "] is duplicated. Second entry was skipped");
+            LOG_WARNING("Level [" << level << "] is duplicated. Second entry skipped");
             continue;
         }
 
@@ -64,7 +64,7 @@ void HamsterAnimationDictionary::Load(ResourceManager* resourceManager, json* fr
         {
             if (!it.value().is_string())
             {
-                LOG_MESSAGE("incorrect animation name for tag [" << it.key() << "] level [" << level << "]");
+                LOG_WARNING("Animation name for tag [" << it.key() << "] level [" << level << "] is not a string. Skipped");
                 continue;
             }
 
@@ -75,7 +75,7 @@ void HamsterAnimationDictionary::Load(ResourceManager* resourceManager, json* fr
             }
             else
             {
-                LOG_ERROR("animation [" << name << "] for tag [" << it.key() << "] level [" << level << "] didn't load");
+                LOG_WARNING("Animation [" << name << "] for tag [" << it.key() << "] level [" << level << "] not loaded. Skipped");
             }
         }
     }
@@ -85,7 +85,7 @@ std::shared_ptr<const Animation> HamsterAnimationDictionary::Get(int level, cons
 {
     if (level < 0 || level >= (int)_data.size())
     {
-        LOG_ERROR("level [" << level << "] is out of range");
+        LOG_ERROR("Level [" << level << "] is out of range");
         return nullptr;
     }
 
@@ -95,6 +95,6 @@ std::shared_ptr<const Animation> HamsterAnimationDictionary::Get(int level, cons
         return it->second;
     }
 
-    LOG_ERROR("tag [" << tag << "] not found for level [" << level << "]");
+    LOG_ERROR("Tag [" << tag << "] not found for level [" << level << "]");
     return nullptr;
 }

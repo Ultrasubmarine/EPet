@@ -24,14 +24,14 @@ Texture* SDLTextureLoader::_LoadTexture(const std::string& name, const char *ful
     auto render = dynamic_cast<SDLRender*>(Game::Instance().GetRender());
     if(!render)
     {
-        LOG_ERROR("Render is empty. loading texture was breaked");
+        LOG_ERROR("Render is null. Texture not loaded");
         return nullptr;
     }
     
     SDL_Surface *bmpSurf = SDL_LoadBMP(fullPath);
     if(!bmpSurf)
     {
-        LOG_ERROR("["<<fullPath<<"]"<< " error with loading bmp texture");
+        LOG_ERROR("SDL_LoadBMP failed [" << fullPath << "]: " << SDL_GetError());
         return nullptr;
     }
     
@@ -50,7 +50,7 @@ Texture* SDLTextureLoader::_LoadTexture(const std::string& name, const char *ful
         return new Texture{name, res};
     }
     
-    LOG_ERROR("Loading texture failed. texture:"<<name);
+    LOG_ERROR("Failed to create texture [" << name << "]: " << SDL_GetError());
     return NULL;
 }
 

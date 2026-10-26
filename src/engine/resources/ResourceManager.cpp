@@ -45,7 +45,7 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
         return t;
     }
   
-    LOG_ERROR("image " << title <<"didn't find");
+    LOG_ERROR("Image [" << title << "] not found");
     return nullptr;
 }
 
@@ -76,7 +76,7 @@ std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
         return f;
     }
     
-    LOG_ERROR("font " << title <<"didn't find");
+    LOG_ERROR("Font [" << title << "] not found");
     return nullptr;
 }
 
@@ -90,7 +90,7 @@ std::unique_ptr<json> ResourceManager::GetJson(const std::string& title, Resourc
         return j;
     }
     
-    LOG_ERROR("json file (" << title <<") didn't found");
+    LOG_ERROR("JSON [" << title << "] not found");
     return nullptr;
 }
 
@@ -103,14 +103,14 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src, Resourc
     auto path = GetResourcePath(empt, nullptr, type); // check only directory path
     if(path.empty())
     {
-        LOG_ERROR("Empty path file(" << title <<"). Saving was canceled.");
+        LOG_ERROR("Directory for [" << title << "] not found. Saving canceled");
         return false;
     }
     
     std::string fullPath = path / (title + format);
     if(_jsonLoader->SaveJson(fullPath.c_str(), src))
     {
-        LOG_MESSAGE("file (" << title <<") was saved.");
+        LOG_MESSAGE("File [" << title << "] saved");
         return true;
     }
     return false;
@@ -121,7 +121,7 @@ std::shared_ptr<const Animation> ResourceManager::GetAnimation(const std::string
 {
     if (title.empty())
     {
-        LOG_ERROR("name of animation is empty");
+        LOG_ERROR("Animation name is empty");
     }
     
     if (auto a = _animationLoader->GetAnimation(title)) {
@@ -134,7 +134,7 @@ std::shared_ptr<const Animation> ResourceManager::GetAnimation(const std::string
         return a;
     }
   
-    LOG_ERROR("animation " << title <<"didn't find");
+    LOG_ERROR("Animation [" << title << "] not found");
     return nullptr;
 }
 
@@ -177,6 +177,6 @@ std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, 
         return candidate;
     }
    
-    LOG_ERROR("file (name:" << name <<" format:"<< format << ") didn't found. searching directory:"<< candidate);
+    LOG_ERROR("File [" << name << (format ? *format : "") << "] not found. Path [" << candidate.string() << "]");
     return std::filesystem::path();
 }

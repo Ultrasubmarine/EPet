@@ -31,14 +31,14 @@ bool Game::Init()
     _window = std::make_unique<Window>();
     if(!_window->CreateWindow(_settings->GetWidth(), _settings->GetHeight(), _settings->GetTitle().c_str()))
     {
-        LOG_ERROR("Window didn't create. Game initialization was canceled");
+        LOG_ERROR("Failed to create window. Game init canceled");
         return false;
     }
     
     _render = std::make_unique<Render>();
     if(!_render->Init(_window.get()))
     {
-        LOG_ERROR("Render didn't create. Game initialization was canceled");
+        LOG_ERROR("Failed to create render. Game init canceled");
         return false;
     }
     

@@ -62,7 +62,7 @@ inline void SetAttribute(json* from, const char* attribute_name, const int& valu
 {
     if(!from)
     {
-        LOG_ERROR("saveData doesn't exist. Loading hamster level skipped");
+        LOG_ERROR("Save data is null. Attribute [" << attribute_name << "] not saved");
         //TODO do smth for player + share logs
         return;
     }
