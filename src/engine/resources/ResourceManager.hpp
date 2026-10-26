@@ -9,8 +9,9 @@
 #define ResourceManager_hpp
 
 #include <stdio.h>
-#include "json.hpp"
+#include <memory>
 
+#include "json.hpp"
 #include "RenderSystem.hpp"
 
 using json = nlohmann::json;
@@ -50,7 +51,7 @@ public:
     ~ResourceManager();
     
     //Json
-    json* GetJson(const std::string& title, ResourceType type) const;
+    std::unique_ptr<json> GetJson(const std::string& title, ResourceType type) const;
     bool SaveJson(const std::string& title, const json* src, ResourceType type) const;
     
     //Texture

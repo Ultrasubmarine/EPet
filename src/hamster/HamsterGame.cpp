@@ -22,7 +22,7 @@ bool HamsterGame::Init(ResourceManager* resourceManager)
 
     if (auto manifest = resourceManager->GetJson("hamster_animations", ResourceType::settings))
     {
-        _animationDictionary.Load(resourceManager, manifest);
+        _animationDictionary.Load(resourceManager, manifest.get());
     }
     else
     {

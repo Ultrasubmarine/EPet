@@ -26,8 +26,7 @@ bool Game::Init()
     
     // load game settings
     auto file = _resourceManager->GetJson(_gameSettingsFileName, ResourceType::settings);
-    _settings = std::make_unique<GameSettings>(file);
-    delete file; // TODO: move to smart pointers for json
+    _settings = std::make_unique<GameSettings>(file.get());
 
     _window = std::make_unique<Window>();
     if(!_window->CreateWindow(_settings->GetWidth(), _settings->GetHeight(), _settings->GetTitle().c_str()))

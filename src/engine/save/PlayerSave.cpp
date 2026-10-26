@@ -41,7 +41,7 @@ bool PlayerSave::Load()
     
     if(auto data = manager->GetJson(_fileName, ResourceType::save))
     {
-        _saveData = std::unique_ptr<json>(data);
+        _saveData = std::move(data);
         saveFinded = true;
     }
     else  // create new empty save 

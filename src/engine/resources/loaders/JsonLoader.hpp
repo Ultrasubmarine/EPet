@@ -17,13 +17,9 @@ using json = nlohmann::json;
 class JsonLoader
 {
 public:
-    ~JsonLoader();
 
-    json* GetJson(const char *fullPath);
+    std::unique_ptr<json> GetJson(const char *fullPath);
     bool SaveJson(const char *fullPath, const json* src);
-    
-    void ConvertToData();
-    
 };
 
 #endif /* JsonLoader_hpp */

@@ -80,7 +80,7 @@ std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
     return nullptr;
 }
 
-json* ResourceManager::GetJson(const std::string& title, ResourceType type) const
+std::unique_ptr<json> ResourceManager::GetJson(const std::string& title, ResourceType type) const
 {
     std::string format = ".json";
     

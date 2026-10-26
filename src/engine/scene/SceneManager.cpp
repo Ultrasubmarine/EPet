@@ -52,18 +52,14 @@ void SceneManager::LoadScene(std::string id)
     
     _currentScene = new Scene(id);
     
-    //load systems
-    std::vector systemIds = GetSystemsIds(data);
+    std::vector systemIds = GetSystemsIds(data.get());
     LoadSystems(_currentScene, systemIds, _registry);
-    
-   //load objects
-    LoadObjects(data, _registry);
+    LoadObjects(data.get(), _registry);
 
     // end of loadding
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);
     
-    delete data;
     LOG_MESSAGE("scene \""<<id<<"\" was created.");
 };
 
