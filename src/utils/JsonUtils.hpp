@@ -25,7 +25,7 @@ namespace detail {
     };
 
     template<class T>
-    ReadResult ReadValueImpl(const json& from, const std::string& path, T& out, std::source_location loc = std::source_location::current())
+    ReadResult ReadValueImpl(const json& from, const std::string& path, T& out, std::source_location loc)
     {
         const json::json_pointer ptr(path);
         if (!from.contains(ptr)) {
