@@ -25,7 +25,7 @@ namespace detail {
     };
 
     template<class T>
-    ReadResult ReadValueImpl(const json& from, const std::string& path, T& out)
+    ReadResult ReadValueImpl(const json& from, const std::string& path, T& out, std::source_location loc = std::source_location::current())
     {
         const json::json_pointer ptr(path);
         if (!from.contains(ptr)) {
@@ -36,7 +36,7 @@ namespace detail {
             out = from[ptr].get<T>();
         }
         catch (const json::exception& e) {
-            LOG_WARNING("Field [" << path << "] has wrong type. Use default: " << e.what());
+            LOG_WARNING_AT(loc, "Field [" << path << "] has wrong type. Use default: " << e.what());
             return ReadResult::WrongType;
         }
         return ReadResult::Success;
@@ -45,16 +45,16 @@ namespace detail {
 
 /// path - json pointer, e.g. "/window/screen/width". out is untouched on failure
 template<class T>
-bool ReadValue(const json& from, const std::string& path, T& out)
+bool ReadValue(const json& from, const std::string& path, T& out, std::source_location loc = std::source_location::current())
 {
-    auto result = detail::ReadValueImpl(from, path, out);
+    auto result = detail::ReadValueImpl(from, path, out, loc);
     
     switch (result) {
         case detail::ReadResult::Success: {
             return true;
         }
         case detail::ReadResult::NoField: {
-            LOG_WARNING("Field [" << path << "] not found. Use default");
+            LOG_WARNING_AT(loc, "Field [" << path << "] not found. Use default");
             return false;
         }
         case detail::ReadResult::WrongType: {
@@ -65,9 +65,9 @@ bool ReadValue(const json& from, const std::string& path, T& out)
 
 /// path - json pointer, e.g. "/window/screen/width". out is untouched on failure
 template<class T>
-bool ReadOptionalValue(const json& from, const std::string& path, T& out)
+bool ReadOptionalValue(const json& from, const std::string& path, T& out, std::source_location loc = std::source_location::current())
 {
-    return detail::ReadValueImpl(from, path, out) == detail::ReadResult::Success;
+    return detail::ReadValueImpl(from, path, out, loc) == detail::ReadResult::Success;
 }
 
 #endif /* JsonUtils_hpp */

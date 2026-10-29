@@ -12,6 +12,7 @@
 #include <chrono>
 #include <ctime>
 #include <iomanip>
+#include <string_view>
 
 #include "GetPath.hpp"
 #include "LogOutputs.hpp"
@@ -61,10 +62,15 @@ void Logger::CreateFileOutput(const std::vector<LogType>& acceptionTypes, const 
     _outputs.push_back(std::move(output));
 }
 
-void Logger::Write(LogType type, const char* file, int line, const char* func, const char* text)
+void Logger::Write(LogType type, const char* text, std::source_location loc)
 {
     std::ostringstream message;
-    message<<"[" <<GetTimeString()<<"]"<<GetTypeString(type)<<"["<<file<<':'<<line<<' '<<func<<"]" <<'\t'<<text;
+    message<<"[" 
+        <<GetTimeString()<<"]"<<GetTypeString(type)<<"["
+        <<GetShortFileName(loc)
+        <<':'<<loc.line()
+        <<' '<<GetShortFunctionName(loc)<<"()"
+        <<"]" <<'\t'<<text;
 
     std::string message_str = message.str();
     for(auto& o: _outputs)
@@ -74,6 +80,35 @@ void Logger::Write(LogType type, const char* file, int line, const char* func, c
             o->Write(message_str);
         }
     }
+}
+
+std::string_view Logger::GetShortFileName(std::source_location loc)
+{
+    std::string_view view = loc.file_name();
+    if( auto p = view.find_last_of('/'); p != view.npos)
+    {
+        return view.substr(p + 1);
+    }
+    return view;
+}
+
+std::string_view Logger::GetShortFunctionName(std::source_location loc)
+{
+    std::string_view view = loc.function_name();
+    
+    auto fin_pos = view.find_first_of('(');
+    if(fin_pos != view.npos)
+    {
+        view.remove_suffix(view.size() - fin_pos);
+    }
+    
+    auto start_pos = view.find_last_of(" *&");
+    if(start_pos != view.npos)
+    {
+        view.remove_prefix(start_pos + 1);
+    }
+    
+    return view;
 }
 
 const char* Logger::GetTypeString(LogType type)
