@@ -8,6 +8,8 @@
 #ifndef Point_h
 #define Point_h
 
+#include <ostream>
+
 template<typename T>
 struct Point {
     T x;
@@ -41,7 +43,7 @@ struct Point {
     }
     
     friend std::ostream& operator<<(std::ostream& os, const Point& p) {
-        os << "(x:" << p.x << " y:" << p.y << ")";
+        os << "Point<T>(x=" << p.x << " y=" << p.y << ")";
         return os;
     }
 };

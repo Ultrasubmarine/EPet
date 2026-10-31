@@ -51,7 +51,11 @@ Font* SDLFontLoader::_LoadFont(const std::string& name, const char *fullPath)
 
 std::shared_ptr<Texture> SDLFontLoader::GetTexture(std::string& text, std::shared_ptr<Font> font, const FontSettings& settings)
 {
- 
+    if (!font) {
+        LOG_ERROR("Font is null. Text texture [" << text << "] not created");
+        return nullptr;
+    }
+
     TTF_Font* ttf = nullptr;
     if (auto sdlUPtr = std::get_if<std::unique_ptr<SDLFont>>(&font->resource)) {
         SDLFont* sdlFont = sdlUPtr->get(); // sdlUPtr имеет тип std::unique_ptr<SDLFont>*

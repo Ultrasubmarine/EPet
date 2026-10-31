@@ -15,6 +15,8 @@
 
 struct Texture;
 
+#define DEFAULT_ANIMATION_DURATION 1.0f /// in seconds
+
 enum class PlayMode
 {
     None, // for unresolving files
@@ -26,7 +28,7 @@ enum class PlayMode
 struct Animation
 {
     std::vector<std::shared_ptr<Texture>> _frames;
-    float _duration = 1.0f;
+    float _duration = DEFAULT_ANIMATION_DURATION;
     bool _loop = false;
     PlayMode _mode = PlayMode::Forward;
     

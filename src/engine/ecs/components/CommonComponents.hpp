@@ -21,7 +21,7 @@ struct Texture;
 
 struct Sorting
 {
-    int layer;
+    int layer = 0;
     
     static Sorting Load(const json& data);
     static void Save(Sorting& obj, json& data);

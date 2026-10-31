@@ -70,4 +70,18 @@ bool ReadOptionalValue(const json& from, const std::string& path, T& out, std::s
     return detail::ReadValueImpl(from, path, out, loc) == detail::ReadResult::Success;
 }
 
+template<class T>
+bool WriteValue(json& to, const std::string& path, const T& value,std::source_location loc = std::source_location::current())
+{
+    try {
+        const json::json_pointer ptr(path);
+        to[ptr] = value;
+    }
+    catch (const json::exception& e) {
+        LOG_ERROR_AT(loc, "Failed to write field [" << path << "]: " << e.what());
+        return false;
+    }
+    return true;
+}
+
 #endif /* JsonUtils_hpp */

@@ -6,72 +6,64 @@
 //
 
 #include <stdio.h>
+#include <algorithm>
+#include <array>
 
 #include "CommonComponents.hpp"
 #include "Game.hpp"
 #include "ResourceManager.hpp"
-#include "PointSerialization.hpp"
-#include "Logger.hpp"
+#include "JsonUtils.hpp"
+#include "PointJSON.hpp"
+
 
 Transform Transform::Load(const json& data)
 {
     Transform obj;
-    if(data.contains("position"))
-    {
-        obj.position = LoadPoint<int>(data["position"]);
-    }
-    
+
+    ReadOptionalValue<Point<int>>(data, "/position", obj.position);
     return obj;
 }
 
 void Transform::Save(Transform& obj, json& data)
 {
-    json posData;
-    SavePoint<int>(obj.position, posData);
-    data["position"] = posData;
+    WriteValue<Point<int>>(data, "/position", obj.position);
 }
 
 Sorting Sorting::Load(const json& data)
 {
     Sorting obj;
     
-    obj.layer= data["layer"].get<int>();
-    
+    ReadValue<int>(data, "/layer", obj.layer);
     return obj;
 }
 
 void Sorting::Save(Sorting& obj, json& data)
 {
-    data["layer"] = obj.layer;
+    WriteValue<int>(data, "/layer", obj.layer);
 }
 
 Image Image::Load(const json& data)
 {
     Image obj;
-    if(data.contains("imageId"))
-    {
-        obj.resoursesId = data["imageId"].get<std::string>();
-    }
+    
+    ReadValue<std::string>(data, "/imageId", obj.resoursesId);
+    return obj;
     
     //TODO: Load resource callback;
    // obj.resource = Game::Instance().GetResourceManager()->GetTexture(obj.resoursesId);
-    return obj;
 }
     
 void Image::Save(Image& obj, json& data)
 {
-    data["imageId"] = obj.resoursesId;
+    WriteValue<std::string>(data, "/imageId", obj.resoursesId);
 }
 
 
 Animator Animator::Load(const json& data)
 {
     Animator obj;
-    if(data.contains("animationId") && data["animationId"].is_string())
-    {
-        obj.resoursesId = data["animationId"].get<std::string>();
-    }
-    
+    ReadOptionalValue<std::string>(data, "/animationId", obj.resoursesId);
+
     if(!obj.resoursesId.empty())
     {
         //TODO: Load resource callback;
@@ -82,7 +74,7 @@ Animator Animator::Load(const json& data)
 
 void Animator::Save(Animator& obj, json& data)
 {
-    data["animationId"] = obj.resoursesId;
+    WriteValue<std::string>(data, "/animationId", obj.resoursesId);
 }
 
 
@@ -100,60 +92,20 @@ void RendererObject::Save(RendererObject& obj,  json& data)
 Text Text::Load(const json& data)
 {
     Text obj;
-    if (data.contains("text") && data["text"].is_string())
-    {
-        obj.text = data["text"].get<std::string>();
-    }
-    else
-    {
-        LOG_WARNING("Field [text] not found. Use default");
-    }
+    ReadOptionalValue<std::string>(data, "/text", obj.text);
+    ReadOptionalValue<int>(data, "/size", obj.settings.size);
     
-    if(data.contains("size") && data["size"].is_number_integer())
+    if(std::array<int, 3> color; ReadOptionalValue<std::array<int, 3>>(data, "/color", color))
     {
-        obj.settings.size = data["size"].get<int>();
-    }
-    else
-    {
-        LOG_WARNING("Field [size] not found. Use default");
-    }
-    
-    // color expects array [r,g,b]; default is black
-    obj.settings.color = {0,0,0};
-    if (data.contains("color") && data["color"].is_array() && data["color"].size() == 3)
-    {
-        const auto& arr = data["color"];
-        bool ok = arr[0].is_number_integer() && arr[1].is_number_integer() && arr[2].is_number_integer();
-        if (ok)
-        {
-            int r = arr[0].get<int>();
-            int g = arr[1].get<int>();
-            int b = arr[2].get<int>();
-            // clamp to [0,255]
-            r = r < 0 ? 0 : (r > 255 ? 255 : r);
-            g = g < 0 ? 0 : (g > 255 ? 255 : g);
-            b = b < 0 ? 0 : (b > 255 ? 255 : b);
-            obj.settings.color = { (uint8_t)r, (uint8_t)g, (uint8_t)b };
-        }
-        else
-        {
-            LOG_WARNING("Field [color] has invalid values. Use default [black]");
-        }
-    }
-    else
-    {
-        LOG_WARNING("Field [color] not found or has invalid format. Use default [black]");
+        obj.settings.color = {
+            (std::uint8_t)std::clamp(color[0], 0, 255),
+            (std::uint8_t)std::clamp(color[1], 0, 255),
+            (std::uint8_t)std::clamp(color[2], 0, 255)
+        };
     }
     
     std::string fontName = DEFAULT_FONT;
-    if(data.contains("font") && data["font"].is_string())
-    {
-        fontName = data["font"].get<std::string>();
-    }
-    else
-    {
-        LOG_WARNING("Field [font] not found. Use default");
-    }
+    ReadOptionalValue<std::string>(data, "/font", fontName);
     
     //TODO: Load resource callback;
     obj.font = Game::Instance().GetResourceManager()->GetFont(fontName);

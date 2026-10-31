@@ -8,6 +8,7 @@
 #include "AnimationLoader.hpp"
 #include "ResourceManager.hpp"
 #include "PlayModeJSON.hpp"
+#include "JsonUtils.hpp"
 
 #include "Logger.hpp"
 
@@ -51,15 +52,17 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
 //        "loop": false,
 //        "duration": 2.0
         
-        // start loading from json data
+        
+        // loading from json data
         bool loop = false;
-        if ((*animationData).contains("loop") && (*animationData)["loop"].is_boolean()) {
-            loop = (*animationData)["loop"].get<bool>();
-        }
+        ReadOptionalValue<bool>(*animationData, "/loop", loop);
 
-        float duration = 0.f;
-        if ((*animationData).contains("duration") && (*animationData)["duration"].is_number()) {
-            duration = (*animationData)["duration"].get<float>();
+        float duration = DEFAULT_ANIMATION_DURATION;
+        ReadOptionalValue<float>(*animationData, "/duration", duration);
+        if (duration <= 0.f)
+        {
+            LOG_WARNING("Invalid duration [" << duration << "] in [" << name << ".json]. Use default");
+            duration = DEFAULT_ANIMATION_DURATION;
         }
         
         std::vector<std::string> frameNames;
@@ -84,16 +87,13 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
         }
         
         PlayMode playMode = PlayMode::Forward;
-        if (animationData->contains("playMode") && (*animationData)["playMode"].is_string()) {
-            
-            playMode = (*animationData)["playMode"].get<PlayMode>();
-            if( playMode == PlayMode::None)
-            {
-                auto str = (*animationData)["playMode"].get<std::string>();
-                LOG_ERROR("Unknown playMode [" << str << "] in [" << name << ".json]");
-            }
+        ReadOptionalValue<PlayMode>(*animationData, "/playMode", playMode);
+        if( playMode == PlayMode::None)
+        {
+            LOG_ERROR("Unknown playMode in [" << name << ".json]. Use default");
+            playMode = PlayMode::Forward;
         }
-        // finish loading from json data
+        // _____________________finish loading from json data
         
         std::vector<std::shared_ptr<Texture>> frames;
         for(auto& f : frameNames)
