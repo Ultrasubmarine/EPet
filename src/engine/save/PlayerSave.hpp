@@ -14,6 +14,7 @@
 
 #include "json.hpp"
 #include "Logger.hpp"
+#include "JsonUtils.hpp"
 
 using json = nlohmann::json;
 
@@ -36,39 +37,37 @@ inline bool GetAttribute(json* from, const char* attribute_name, int& value, std
 {
     if(!from)
     {
-        //error
+        LOG_ERROR("Save data is null. Attribute [" << attribute_name << "] not loaded");
         return false;
     }
 
-    if((*from).contains(attribute_name) && (*from)[attribute_name].is_object()) {
-        const auto& levelObj = (*from)[attribute_name];
-        if(levelObj.contains("value") && levelObj["value"].is_number_integer()) {
-            value = levelObj["value"].get<int>();
-        }
-        if(levelObj.contains("lastUpdate") && levelObj["lastUpdate"].is_number_integer()) {
-            lastUpdate = levelObj["lastUpdate"];
-        }
-    }
-    else
+    const std::string attr = std::string("/") + attribute_name;
+    if(!from->contains(json::json_pointer(attr)))
     {
         return false;
     }
     
-    return true;
+    auto success = false;
+    success = ReadValue<int>(*from, attr + "/value", value);
+    success &= ReadValue<std::time_t>(*from, attr + "/lastUpdate", lastUpdate);
+    
+    return success;
 }
 
 /// lastUpdate - unix time, in seconds
-inline void SetAttribute(json* from, const char* attribute_name, const int& value, const std::time_t& lastUpdate)
+inline void SetAttribute(json* to, const char* attribute_name, const int value, const std::time_t lastUpdate)
 {
-    if(!from)
+    if(!to)
     {
         LOG_ERROR("Save data is null. Attribute [" << attribute_name << "] not saved");
         //TODO do smth for player + share logs
         return;
     }
     
-    // Устанавливаем объект атрибута с value и lastUpdate
-    (*from)[attribute_name] = json{{"value", value}, {"lastUpdate", lastUpdate}};
+    const std::string attr = std::string("/") + attribute_name;
+    
+    WriteValue<int>(*to, attr + "/value", value);
+    WriteValue<std::time_t>(*to, attr + "/lastUpdate", lastUpdate);
 }
 
 // TODO: Add function for easy get common atributes
