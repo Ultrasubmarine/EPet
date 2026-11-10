@@ -5,8 +5,8 @@
                {
                    "id": "Transform",
                    "position": {
-                       "x": 180,
-                       "y": 135
+                       "x": 124,
+                       "y": 45
                    }
                },
                {
@@ -75,6 +75,53 @@
                 "id": "RendererObject"
             }
          ]
+       },
+       {
+         "components": [
+            {
+                 "id": "Transform",
+                 "position": {
+                     "x": 178,
+                     "y": 64
+                 }
+            },
+            {
+                "id": "Sorting",
+                "layer": 11
+            },
+            {
+                "id": "Image",
+                "imageId": "Field"
+            },
+            {
+                "id": "RendererObject"
+            }
+         ]
+       },
+       {
+         "components": [
+            {
+                 "id": "Transform",
+                 "position": {
+                     "x": 192,
+                     "y": 73
+                 }
+            },
+            {
+                "id": "Sorting",
+                "layer": 12
+            },
+            {
+                "id": "TextImage",
+                "text": "02:00",
+                "size": 20,
+                "color": [72, 94, 150],
+                "font": "Minecraft"
+            },
+            {
+                "id": "RendererObject"
+            }
+         ]
        }
    ],
    "scene": "scene2",
@@ -86,6 +133,7 @@
        "AAATestSystem",
        
        "GrowingSystem",
+       "ShellSystem",
        "AvatarSystem",
        "SavingSystem",
    
@@ -94,7 +142,6 @@
        "AnimationFinishSystem",
 
        "SortingUpdateSystem",
-       "TestSystem",
        "RenderSystem",
        
        "AvatarSystem"

@@ -1,8 +1,9 @@
 {
    "frames": [
-       "Shell"
+       "Shell_idle/Shell",
+       "Shell_idle/Shell_open"
    ],
    "loop": true,
-   "duration": 1.0,
+   "duration": 3.0,
    "playMode": "Forward"
 }

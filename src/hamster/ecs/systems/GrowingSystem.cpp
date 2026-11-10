@@ -73,7 +73,16 @@ std::time_t GrowingSystem::GetLastUpdate() const
 
 std::time_t GrowingSystem::GetDuration() const
 {
-    return 60 * 60 * 9; // 9 hours 
+    for(auto [ent, level] :_registry.view<Level>().each())
+    {
+        switch( level.value){
+            case 0:
+                return 60 * 2; // 2 min
+            default:
+                return 60 * 60 * 9; // 9 hours
+        }
+    }
+    return 60 * 60 * 9; // 9 hours
 }
 
 void GrowingSystem::Update(double dt){
