@@ -25,7 +25,7 @@ public:
     void Deinit() override;
     
     void Clear() override;
-    void Draw(Texture* texture, const int& x, const int& y) override; // TODO: add scale
+    void Draw(Texture* texture, int x, int y, const Point<float>& pivot) override; // TODO: add scale
     void Present() override;
     
     bool IsRenderExist() override;

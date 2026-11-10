@@ -31,7 +31,8 @@ void RenderSystem::Update(double dt)
     
     for(auto [entt, _, trasform, rObj] :_registry.view<Sorting, Transform, RendererObject>().each())
     {
-        _render->Draw(rObj.resource.get(), trasform.position.x, trasform.position.y);
+        const auto* pivot = _registry.try_get<Pivot>(entt);
+        _render->Draw(rObj.resource.get(), trasform.position.x, trasform.position.y, pivot ? pivot->point : Pivot::TopLeft);
     }
     
     _render->Present();

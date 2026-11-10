@@ -40,6 +40,25 @@ struct Transform
     static void Save(Transform& obj, json& data);
 };
 
+/// point - in parts of texture size: (0,0) - top left, (1,1) - bottom right
+struct Pivot
+{
+    static constexpr Point<float> TopLeft{0.f, 0.f};
+    static constexpr Point<float> TopCenter{0.5f, 0.f};
+    static constexpr Point<float> TopRight{1.f, 0.f};
+    static constexpr Point<float> CenterLeft{0.f, 0.5f};
+    static constexpr Point<float> Center{0.5f, 0.5f};
+    static constexpr Point<float> CenterRight{1.f, 0.5f};
+    static constexpr Point<float> BottomLeft{0.f, 1.f};
+    static constexpr Point<float> BottomCenter{0.5f, 1.f};
+    static constexpr Point<float> BottomRight{1.f, 1.f};
+    
+    Point<float> point = TopLeft;
+    
+    static Pivot Load(const json& data);
+    static void Save(Pivot& obj, json& data);
+};
+
 struct Image
 {
     std::string resoursesId;

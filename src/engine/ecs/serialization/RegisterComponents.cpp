@@ -19,6 +19,9 @@ void RegisterComponents()
     GenerateLoadingFunction<Transform>("Transform", &Transform::Load);
     GenerateSaveFunction<Transform>("Transform", &Transform::Save);
 
+    GenerateLoadingFunction<Pivot>("Pivot", &Pivot::Load);
+    GenerateSaveFunction<Pivot>("Pivot", &Pivot::Save);
+
     GenerateLoadingFunction<Image>("Image", &Image::Load);
     GenerateSaveFunction<Image>("Image", &Image::Save);
     

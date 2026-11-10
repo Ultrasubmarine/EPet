@@ -29,6 +29,19 @@ void Transform::Save(Transform& obj, json& data)
     WriteValue<Point<int>>(data, "/position", obj.position);
 }
 
+Pivot Pivot::Load(const json& data)
+{
+    Pivot obj;
+    
+    ReadOptionalValue<Point<float>>(data, "/point", obj.point);
+    return obj;
+}
+
+void Pivot::Save(Pivot& obj, json& data)
+{
+    WriteValue<Point<float>>(data, "/point", obj.point);
+}
+
 Sorting Sorting::Load(const json& data)
 {
     Sorting obj;

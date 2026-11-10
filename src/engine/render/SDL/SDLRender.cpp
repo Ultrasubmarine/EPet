@@ -6,6 +6,7 @@
 //
 
 #include "SDLRender.hpp"
+#include <cmath>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
@@ -50,7 +51,7 @@ void SDLRender::Clear() {
     SDL_RenderClear(_render);
 }
 
-void SDLRender::Draw(Texture* texture, const int& x, const int& y) {
+void SDLRender::Draw(Texture* texture, int x, int y, const Point<float>& pivot) {
     
     if(!texture)
     {
@@ -58,7 +59,13 @@ void SDLRender::Draw(Texture* texture, const int& x, const int& y) {
     }
     if (SDLTexture** txt = std::get_if<SDLTexture*>(&texture->resource))
     {
-        SDL_Rect r_dst(x, y, (*txt)->src.w, (*txt)->src.h);
+        int w = (*txt)->src.w;
+        int h = (*txt)->src.h;
+        
+        x -= std::lround(w * pivot.x);
+        y -= std::lround(h * pivot.y);
+        
+        SDL_Rect r_dst(x, y, w, h);
         SDL_RenderCopy(_render, (*txt)->texture, &(*txt)->src, &r_dst);
     }
 }

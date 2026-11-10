@@ -16,7 +16,7 @@ struct Point {
     T y;
 
     Point() = default;
-    Point(T _x, T _y)
+    constexpr Point(T _x, T _y)
     {
         x = _x;
         y = _y;

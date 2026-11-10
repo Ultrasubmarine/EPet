@@ -12,6 +12,7 @@
 #include <set>
 
 #include "IWindow.h"
+#include "Point.h"
 
 struct Texture;
 class IWindow;
@@ -24,7 +25,8 @@ public:
     virtual void Deinit() = 0;
     
     virtual void Clear() = 0;
-    virtual void Draw(Texture* texture, const int& x, const int& y) = 0;
+    /// pivot. (0,0) - top left, (1,1) - bottom right
+    virtual void Draw(Texture* texture, int x, int y, const Point<float>& pivot) = 0;
     virtual void Present() = 0;
     
     virtual bool IsRenderExist() = 0;
