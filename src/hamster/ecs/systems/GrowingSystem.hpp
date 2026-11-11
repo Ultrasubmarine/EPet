@@ -14,6 +14,8 @@
 #include "StateTicker.hpp"
 #include "HM_StatesComponents.hpp"
 
+#define MAX_HAMSTER_LEVEL 2
+
 class GrowingSystem: public ISystem, private StateTicker<LevelTimer> {
     SYSTEM_BODY(GrowingSystem, StateTicker<LevelTimer>(registry))
     
@@ -29,6 +31,7 @@ private:
     virtual void ApplyStep(std::time_t updateTime) override;
     virtual std::time_t GetLastUpdate() const override;
     virtual std::time_t GetDuration() const override;
+    virtual bool IsPossibleToChange() const override;
     
     void DeleteOneFrameComponent();
 };

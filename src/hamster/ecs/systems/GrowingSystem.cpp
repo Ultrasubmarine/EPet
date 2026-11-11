@@ -85,6 +85,15 @@ std::time_t GrowingSystem::GetDuration() const
     return 60 * 60 * 9; // 9 hours
 }
 
+bool GrowingSystem::IsPossibleToChange() const
+{
+    for(auto [ent, level] :_registry.view<Level>().each())
+    {
+        return level.value < MAX_HAMSTER_LEVEL;
+    }
+    return false;
+}
+
 void GrowingSystem::Update(double dt){
 
     DeleteOneFrameComponent();

@@ -6,5 +6,9 @@
     {
         "level": 1,
         "animations": { "normal": "Idle" }
+    },
+    {
+        "level": 2,
+        "animations": { "normal": "Hamster_idle" }
     }
 ]
