@@ -48,9 +48,7 @@ bool Game::Init()
     _frameRate->SetFixedFrame(_settings->GetFps());
     
     _playerSave = std::make_unique<PlayerSave>();
-    if(!_playerSave->Load()) {
-        _playerSave->Save();
-    }
+    _playerSave->Load();
     
     _sceneManager = std::make_unique<SceneManager>();
     return true;

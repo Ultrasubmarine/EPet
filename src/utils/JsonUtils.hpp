@@ -22,18 +22,22 @@ namespace detail {
         Success,
         WrongType,
         NoField,
+        InvalidPath,
     };
 
     template<class T>
     ReadResult ReadValueImpl(const json& from, const std::string& path, T& out, std::source_location loc)
     {
-        const json::json_pointer ptr(path);
-        if (!from.contains(ptr)) {
-            return ReadResult::NoField;
-        }
-        
         try {
+            const json::json_pointer ptr(path);
+            if (!from.contains(ptr)) {
+                return ReadResult::NoField;
+            }
             out = from[ptr].get<T>();
+        }
+        catch (const json::parse_error& e) {
+            LOG_ERROR_AT(loc, "Invalid path [" << path << "]: " << e.what());
+            return ReadResult::InvalidPath;
         }
         catch (const json::exception& e) {
             LOG_WARNING_AT(loc, "Field [" << path << "] has wrong type. Use default: " << e.what());
@@ -57,7 +61,8 @@ bool ReadValue(const json& from, const std::string& path, T& out, std::source_lo
             LOG_WARNING_AT(loc, "Field [" << path << "] not found. Use default");
             return false;
         }
-        case detail::ReadResult::WrongType: {
+        case detail::ReadResult::WrongType:
+        case detail::ReadResult::InvalidPath: {
             return false;
         }
     }

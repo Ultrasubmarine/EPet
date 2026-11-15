@@ -4,7 +4,7 @@
 //
 //  Created by marina porkhunova on 27.09.2025.
 //
-#include  <memory>
+#include <memory>
 #include <filesystem>
 
 #include "PlayerSave.hpp"
@@ -25,15 +25,15 @@ bool PlayerSave::Save()
     
     if(!_saveData)
     {
-        _saveData = std::unique_ptr<json>(new json()); // accept saving empty json
+        _saveData = std::unique_ptr<json>(new json({})); // accept saving empty json
     }
     
     return manager->SaveJson(_fileName, _saveData.get(), ResourceType::save);
-};
+}
 
 bool PlayerSave::Load()
 {
-    bool saveFinded = false;
+    bool saveFound = false;
     auto manager = Game::Instance().GetResourceManager();
     if(!manager)
     {
@@ -44,11 +44,17 @@ bool PlayerSave::Load()
     JsonReadingResult result = JsonReadingResult::None;
     auto data = manager->GetJson(_fileName, ResourceType::save, &result);
     
+    if(result == JsonReadingResult::Success && !data->is_object())
+    {
+        LOG_ERROR("Save file [" << _fileName << ".json] root is not an object");
+        result = JsonReadingResult::BrokenFile;
+    }
+    
     switch(result) {
         case JsonReadingResult::Success:
         {
             _saveData = std::move(data);
-            saveFinded = true;
+            saveFound = true;
             break;
         }
         case JsonReadingResult::BrokenFile:
@@ -67,6 +73,7 @@ bool PlayerSave::Load()
         case JsonReadingResult::OpenProblem:
         {
             //TODO: ask player to reload or start new game. 
+            [[fallthrough]];
         }
         default:
         {
@@ -76,8 +83,8 @@ bool PlayerSave::Load()
         }
     }
             
-    return saveFinded;
-};
+    return saveFound;
+}
 
 bool PlayerSave::BackupBrokenSave(ResourceManager* manager)
 {

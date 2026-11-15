@@ -42,7 +42,7 @@ private:
     };
     
     template <typename T>
-    friend void GenerateSaveFunction(const char* typeId, std::function<void(T&, data&)> saver);
+    friend void GenerateSaveFunction(const char* typeId, std::function<void(const T&, data&)> saver);
    
     friend void Save(const char* typeId, SAVE_FUNCTION_PARAMS);
     friend void SaveAllComponentInEntity(entt::registry& registry, entt::entity entity, data& saveData);
@@ -50,7 +50,7 @@ private:
 
 /// function for component registration
 template<class T>
-void GenerateSaveFunction(const char* typeId, std::function<void(T&, data&)> saver)
+void GenerateSaveFunction(const char* typeId, std::function<void(const T&, data&)> saver)
 {
     static std::function<saveFunction> f =
     [saver](SAVE_FUNCTION_PARAMS)

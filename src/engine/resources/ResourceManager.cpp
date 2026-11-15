@@ -112,26 +112,27 @@ std::unique_ptr<json> ResourceManager::GetJson(const std::filesystem::path& path
         return j;
     }
     
-    LOG_ERROR("JSON from path [" << path << "] not found");
-    if (result) *result = JsonReadingResult::NotFound;
+    if (result) {
+        *result = JsonReadingResult::NotFound; // caller handles it
+    }
+    else {
+        LOG_ERROR("JSON [" << path.string() << "] not found");
+    }
     return nullptr;
 }
 
 bool ResourceManager::SaveJson(const std::string& title, const json* src, ResourceType type) const
 {
-    std::string empt = "";
     std::string format = ".json";
     
-    //TODO: really bad solution to use 2 ifs where first - negative/error behaviour, second - positive. it's mess.
-    auto path = BuildResourcePath(empt, nullptr, type); // check only directory path
-    if(!HasFile(path))
+    auto path = BuildResourcePath(title, &format, type);
+    if(!HasFile(path.parent_path()))
     {
-        LOG_ERROR("Directory for [" << title << "] not found. Saving canceled");
+        LOG_ERROR("Directory [" << path.parent_path().string() << "] for [" << title << "] not found. Saving canceled");
         return false;
     }
     
-    std::string fullPath = path / (title + format);
-    if(_jsonLoader->SaveJson(fullPath.c_str(), src))
+    if(_jsonLoader->SaveJson(path.string().c_str(), src))
     {
         LOG_MESSAGE("File [" << title << "] saved");
         return true;
@@ -164,7 +165,13 @@ std::shared_ptr<const Animation> ResourceManager::GetAnimation(const std::string
 
 bool ResourceManager::HasFile(const std::filesystem::path& file) const
 {
-    return fs::exists(file);
+    std::error_code error;
+    const bool exists = fs::exists(file, error);
+    if (error) {
+        LOG_ERROR("Failed to check file [" << file.string() << "]: " << error.message());
+        return false;
+    }
+    return exists;
 }
 
 std::filesystem::path ResourceManager::BuildResourcePath(const std::string& name, const std::string* format, ResourceType type) const
@@ -201,6 +208,6 @@ std::filesystem::path ResourceManager::BuildResourcePath(const std::string& name
             break;
     }
     
-    candidate += name.empty()? "" : ("/" + name + *format);
+    candidate += name.empty()? "" : ("/" + name + (format? *format : ""));
     return candidate;
 }

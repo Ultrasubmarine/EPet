@@ -24,7 +24,7 @@ struct Sorting
     int layer = 0;
     
     static Sorting Load(const json& data);
-    static void Save(Sorting& obj, json& data);
+    static void Save(const Sorting& obj, json& data);
 };
 
 struct UpdateSorting
@@ -37,7 +37,7 @@ struct Transform
     IPoint position = IPoint(0, 0);
     
     static Transform Load(const json& data);
-    static void Save(Transform& obj, json& data);
+    static void Save(const Transform& obj, json& data);
 };
 
 /// point - in parts of texture size: (0,0) - top left, (1,1) - bottom right
@@ -56,7 +56,7 @@ struct Pivot
     Point<float> point = TopLeft;
     
     static Pivot Load(const json& data);
-    static void Save(Pivot& obj, json& data);
+    static void Save(const Pivot& obj, json& data);
 };
 
 struct Image
@@ -65,7 +65,7 @@ struct Image
     //std::shared_ptr<Texture> resource;
     
     static Image Load(const json& data);
-    static void Save(Image& obj, json& data);
+    static void Save(const Image& obj, json& data);
 };
 
 struct Animation;
@@ -79,7 +79,7 @@ struct Animator
     int frame = 0;
     
     static Animator Load(const json& data);
-    static void Save(Animator& obj, json& data);
+    static void Save(const Animator& obj, json& data);
 };
 
 struct AnimationFinished
@@ -106,7 +106,7 @@ struct RendererObject
 {
     std::shared_ptr<Texture> resource;
     static RendererObject Load(const json& data);
-    static void Save(RendererObject& obj, json& data);
+    static void Save(const RendererObject& obj, json& data);
 };
 
 #include "IFontLoader.hpp"
@@ -121,7 +121,7 @@ private:
     
 public:
     static Text Load(const json& data);
-    static void Save(Text& obj, json& data);
+    static void Save(const Text& obj, json& data);
     
     friend TextUpdateSystem;
 };

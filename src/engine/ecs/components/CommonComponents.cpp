@@ -24,7 +24,7 @@ Transform Transform::Load(const json& data)
     return obj;
 }
 
-void Transform::Save(Transform& obj, json& data)
+void Transform::Save(const Transform& obj, json& data)
 {
     WriteValue<Point<int>>(data, "/position", obj.position);
 }
@@ -37,7 +37,7 @@ Pivot Pivot::Load(const json& data)
     return obj;
 }
 
-void Pivot::Save(Pivot& obj, json& data)
+void Pivot::Save(const Pivot& obj, json& data)
 {
     WriteValue<Point<float>>(data, "/point", obj.point);
 }
@@ -50,7 +50,7 @@ Sorting Sorting::Load(const json& data)
     return obj;
 }
 
-void Sorting::Save(Sorting& obj, json& data)
+void Sorting::Save(const Sorting& obj, json& data)
 {
     WriteValue<int>(data, "/layer", obj.layer);
 }
@@ -66,7 +66,7 @@ Image Image::Load(const json& data)
    // obj.resource = Game::Instance().GetResourceManager()->GetTexture(obj.resoursesId);
 }
     
-void Image::Save(Image& obj, json& data)
+void Image::Save(const Image& obj, json& data)
 {
     WriteValue<std::string>(data, "/imageId", obj.resoursesId);
 }
@@ -85,7 +85,7 @@ Animator Animator::Load(const json& data)
     return obj;
 }
 
-void Animator::Save(Animator& obj, json& data)
+void Animator::Save(const Animator& obj, json& data)
 {
     WriteValue<std::string>(data, "/animationId", obj.resoursesId);
 }
@@ -97,7 +97,7 @@ RendererObject RendererObject::Load(const json& data)
     return obj;
 }
 
-void RendererObject::Save(RendererObject& obj,  json& data)
+void RendererObject::Save(const RendererObject& obj,  json& data)
 {
     // skip
 }
@@ -126,7 +126,7 @@ Text Text::Load(const json& data)
     return obj;
 }
     
-void Text::Save(Text& obj, json& data)
+void Text::Save(const Text& obj, json& data)
 {
    // skip for now
 }
