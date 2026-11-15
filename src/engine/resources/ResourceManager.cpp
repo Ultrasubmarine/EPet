@@ -40,7 +40,9 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
     }
     
     std::string format = ".bmp";
-    if (auto path = GetResourcePath(title, &format, ResourceType::texture); !path.empty()) {
+    
+    auto path = BuildResourcePath(title, &format, ResourceType::texture);
+    if (HasFile(path)) {
         auto t = _textureLoader->LoadTexture(title, path.c_str());
         return t;
     }
@@ -71,7 +73,9 @@ std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
     }
         
     std::string format = ".ttf";
-    if (auto path = GetResourcePath(title, &format, ResourceType::font); !path.empty()) {
+    
+    auto path = BuildResourcePath(title, &format, ResourceType::font);
+    if (HasFile(path)) {
         auto f = _fontLoader->LoadFont(title, path.c_str());
         return f;
     }
@@ -80,17 +84,36 @@ std::shared_ptr<Font> ResourceManager::GetFont(std::string& title)
     return nullptr;
 }
 
-std::unique_ptr<json> ResourceManager::GetJson(const std::string& title, ResourceType type) const
+std::unique_ptr<json> ResourceManager::GetJson(const std::string& title, ResourceType type, JsonReadingResult* result) const
 {
     std::string format = ".json";
     
-    if(auto json_path = GetResourcePath(title, &format, type); !json_path.empty())
+    auto json_path = BuildResourcePath(title, &format, type);
+    if(HasFile(json_path))
     {
-        auto j = _jsonLoader->GetJson(json_path.string().c_str());
+        auto j = _jsonLoader->GetJson(json_path.string().c_str(), result);
         return j;
     }
     
-    LOG_ERROR("JSON [" << title << "] not found");
+    if (result) {
+        *result = JsonReadingResult::NotFound; // caller handles it
+    }
+    else {
+        LOG_ERROR("JSON [" << title << "] not found");
+    }
+    return nullptr;
+}
+
+std::unique_ptr<json> ResourceManager::GetJson(const std::filesystem::path& path, JsonReadingResult* result) const
+{
+    if(HasFile(path))
+    {
+        auto j = _jsonLoader->GetJson(path.string().c_str(), result);
+        return j;
+    }
+    
+    LOG_ERROR("JSON from path [" << path << "] not found");
+    if (result) *result = JsonReadingResult::NotFound;
     return nullptr;
 }
 
@@ -100,8 +123,8 @@ bool ResourceManager::SaveJson(const std::string& title,const json* src, Resourc
     std::string format = ".json";
     
     //TODO: really bad solution to use 2 ifs where first - negative/error behaviour, second - positive. it's mess.
-    auto path = GetResourcePath(empt, nullptr, type); // check only directory path
-    if(path.empty())
+    auto path = BuildResourcePath(empt, nullptr, type); // check only directory path
+    if(!HasFile(path))
     {
         LOG_ERROR("Directory for [" << title << "] not found. Saving canceled");
         return false;
@@ -129,7 +152,8 @@ std::shared_ptr<const Animation> ResourceManager::GetAnimation(const std::string
     }
     
     std::string format = ".json";
-    if (auto path = GetResourcePath(title, &format, ResourceType::animation); !path.empty()) {
+    auto path = BuildResourcePath(title, &format, ResourceType::animation);
+    if (HasFile(path)) {
         auto a = _animationLoader->LoadAnimation(title, path.c_str());
         return a;
     }
@@ -138,7 +162,12 @@ std::shared_ptr<const Animation> ResourceManager::GetAnimation(const std::string
     return nullptr;
 }
 
-std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, const std::string* format, ResourceType type) const
+bool ResourceManager::HasFile(const std::filesystem::path& file) const
+{
+    return fs::exists(file);
+}
+
+std::filesystem::path ResourceManager::BuildResourcePath(const std::string& name, const std::string* format, ResourceType type) const
 {
     auto candidate = _path;
     
@@ -173,10 +202,5 @@ std::filesystem::path ResourceManager::GetResourcePath(const std::string& name, 
     }
     
     candidate += name.empty()? "" : ("/" + name + *format);
-    if (fs::exists(candidate)) {
-        return candidate;
-    }
-   
-    LOG_ERROR("File [" << name << (format ? *format : "") << "] not found. Path [" << candidate.string() << "]");
-    return std::filesystem::path();
+    return candidate;
 }

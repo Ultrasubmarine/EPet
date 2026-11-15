@@ -13,6 +13,7 @@
 
 #include "json.hpp"
 #include "RenderSystem.hpp"
+#include "JsonReadingResult.hpp"
 
 using json = nlohmann::json;
 
@@ -51,7 +52,8 @@ public:
     ~ResourceManager();
     
     //Json
-    std::unique_ptr<json> GetJson(const std::string& title, ResourceType type) const;
+    std::unique_ptr<json> GetJson(const std::string& title, ResourceType type, JsonReadingResult* result = nullptr) const;
+    std::unique_ptr<json> GetJson(const std::filesystem::path& path, JsonReadingResult* result = nullptr) const;
     bool SaveJson(const std::string& title, const json* src, ResourceType type) const;
     
     //Texture
@@ -67,7 +69,8 @@ public:
     std::shared_ptr<const Animation> GetAnimation(const std::string& title);
     
     //Helper functions
-    std::filesystem::path GetResourcePath(const std::string& name, const std::string* format /* could be nullptr */, ResourceType type) const;
+    bool HasFile(const std::filesystem::path& path) const;
+    std::filesystem::path BuildResourcePath(const std::string& name, const std::string* format /* could be nullptr */, ResourceType type) const;
     
 };
 #endif /* ResourceManager_hpp */

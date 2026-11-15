@@ -39,7 +39,7 @@ public:
 
     // clock
     std::time_t GetClockTime() const { return _clock->GetNow();} // unix time, in seconds
-    std::string GetClockTimeString() const;
+    std::string GetClockTimeString(const char* format = "%H:%M:%S") const; /// format - as in std::put_time
 
 private:
     double _session = 0.0; // in seconds

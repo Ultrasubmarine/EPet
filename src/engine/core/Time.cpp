@@ -29,7 +29,7 @@ void Time::Update(double dt)
     _clock->Update(dt);
 }
 
-std::string Time::GetClockTimeString() const {
+std::string Time::GetClockTimeString(const char* format) const {
     std::time_t t = _clock->GetNow();
     std::tm tm{};
 #if defined(_WIN32)
@@ -38,8 +38,7 @@ std::string Time::GetClockTimeString() const {
     localtime_r(&t, &tm);
 #endif
     std::ostringstream oss;
-    oss << std::put_time(&tm, "%H:%M:%S");
-    //oss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
+    oss << std::put_time(&tm, format);
     return oss.str();
 }
 

@@ -11,13 +11,15 @@
 #include <stdio.h>
 #include <memory>
 #include "json.hpp"
+#include "JsonReadingResult.hpp"
 
 using json = nlohmann::json;
 
 class JsonLoader
 {
 public:
-    std::unique_ptr<json> GetJson(const char *fullPath);
+    
+    std::unique_ptr<json> GetJson(const char *fullPath, JsonReadingResult* result = nullptr);
     bool SaveJson(const char *fullPath, const json* src);
 };
 

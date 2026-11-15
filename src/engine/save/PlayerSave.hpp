@@ -18,6 +18,8 @@
 
 using json = nlohmann::json;
 
+class ResourceManager;
+
 class PlayerSave
 {
     const std::string _fileName = "save";
@@ -29,6 +31,9 @@ public:
     bool Load();
     
     json* GetData() { return _saveData.get();}
+    
+private:
+    bool BackupBrokenSave(ResourceManager* manager); /// true - if success
 };
 
 

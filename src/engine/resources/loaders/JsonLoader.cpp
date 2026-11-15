@@ -9,7 +9,7 @@
 #include <fstream>
 #include "Logger.hpp"
 
-std::unique_ptr<json> JsonLoader::GetJson(const char *fullPath)
+std::unique_ptr<json> JsonLoader::GetJson(const char *fullPath, JsonReadingResult* result)
 {
     std::ifstream buff(fullPath);
     
@@ -21,12 +21,15 @@ std::unique_ptr<json> JsonLoader::GetJson(const char *fullPath)
         if(parsed.is_discarded())
         {
             LOG_ERROR("Failed to parse json [" << fullPath << "]");
+            if (result) *result = JsonReadingResult::BrokenFile;
             return nullptr;
-        }        
+        }
+        if (result) *result = JsonReadingResult::Success;
         return std::make_unique<json>(std::move(parsed));
     }
     else
     {
+        if (result) *result = JsonReadingResult::OpenProblem;
         LOG_ERROR("Failed to open file [" << fullPath << "]: " << std::system_category().message(errno));
     }
     return nullptr;
