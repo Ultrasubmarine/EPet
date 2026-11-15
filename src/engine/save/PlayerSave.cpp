@@ -31,27 +31,6 @@ bool PlayerSave::Save()
     return manager->SaveJson(_fileName, _saveData.get(), ResourceType::save);
 };
 
-bool PlayerSave::BackupBrokenSave(ResourceManager* manager)
-{
-    const std::string format = ".json";
-    const auto path = manager->BuildResourcePath(_fileName, &format, ResourceType::save);
-    
-    auto backupPath = path;
-    const auto date = Time::Instance().GetClockTimeString("%Y-%m-%d_%H-%M-%S");
-    backupPath.replace_filename(_fileName + "_broken_" + date + format);
-    
-    std::error_code error;
-    std::filesystem::rename(path, backupPath, error);
-    if(error)
-    {
-        LOG_ERROR("Failed to rename file [" << path.string() << "] to [" << backupPath.string() << "]: " << error.message());
-        return false;
-    }
-    
-    LOG_MESSAGE("Broken save moved to [" << backupPath.string() << "]");
-    return true;
-}
-
 bool PlayerSave::Load()
 {
     bool saveFinded = false;
@@ -99,6 +78,27 @@ bool PlayerSave::Load()
             
     return saveFinded;
 };
+
+bool PlayerSave::BackupBrokenSave(ResourceManager* manager)
+{
+    const std::string format = ".json";
+    const auto path = manager->BuildResourcePath(_fileName, &format, ResourceType::save);
+    
+    auto backupPath = path;
+    const auto date = Time::Instance().GetClockTimeString("%Y-%m-%d_%H-%M-%S");
+    backupPath.replace_filename(_fileName + "_broken_" + date + format);
+    
+    std::error_code error;
+    std::filesystem::rename(path, backupPath, error);
+    if(error)
+    {
+        LOG_ERROR("Failed to rename file [" << path.string() << "] to [" << backupPath.string() << "]: " << error.message());
+        return false;
+    }
+    
+    LOG_MESSAGE("Broken save moved to [" << backupPath.string() << "]");
+    return true;
+}
 
 
 

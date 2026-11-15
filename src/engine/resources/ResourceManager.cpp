@@ -117,7 +117,7 @@ std::unique_ptr<json> ResourceManager::GetJson(const std::filesystem::path& path
     return nullptr;
 }
 
-bool ResourceManager::SaveJson(const std::string& title,const json* src, ResourceType type) const
+bool ResourceManager::SaveJson(const std::string& title, const json* src, ResourceType type) const
 {
     std::string empt = "";
     std::string format = ".json";
