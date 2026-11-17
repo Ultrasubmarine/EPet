@@ -76,7 +76,7 @@
        "AnimationUpdateSystem",
        "AnimationFinishSystem",
 
-       "SortingUpdateSystem",
+       "SortingSystem",
        "RenderSystem"
    ]
 }

@@ -14,7 +14,7 @@ SYSTEM_CPP(TestSystem);
 void TestSystem::Update(double dt){
     for( auto [ent, sort] : _registry.view<Sorting>().each())
     {
-        int layer = sort.layer;
+        int layer = sort.GetLayer();
     }
     for( auto [ent, text] : _registry.view<Text>().each())
     {

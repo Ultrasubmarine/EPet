@@ -1,11 +1,12 @@
-//  TextSystem.hpp
+//
+//  TextUpdateSystem.hpp
 //  EPet
 //
-//  Создано по аналогии с RenderSystem.hpp
+//  Created by marina porkhunova on 03.10.2026.
 //
 
-#ifndef TextSystem_hpp
-#define TextSystem_hpp
+#ifndef TextUpdateSystem_hpp
+#define TextUpdateSystem_hpp
 
 #include "ISystem.hpp"
 #include "CommonComponents.hpp"
@@ -30,4 +31,4 @@ private:
     ResourceManager* _resourceManager;
 };
 
-#endif /* TextSystem_hpp */
+#endif /* TextUpdateSystem_hpp */

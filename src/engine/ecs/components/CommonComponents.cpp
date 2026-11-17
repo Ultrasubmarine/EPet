@@ -42,6 +42,23 @@ void Pivot::Save(const Pivot& obj, json& data)
     WriteValue<Point<float>>(data, "/point", obj.point);
 }
 
+
+void Sorting::SetLayer(entt::registry& registry, entt::entity entity, int value)
+{
+    auto* sorting = registry.try_get<Sorting>(entity);
+    if(!sorting)
+    {
+        LOG_ERROR("Sorting not found. Layer [" << value << "] not set");
+        return;
+    }
+    
+    if(sorting->layer == value)
+        return;
+    
+    sorting->layer = value;
+    registry.ctx().insert_or_assign(SortingState{true});
+}
+
 Sorting Sorting::Load(const json& data)
 {
     Sorting obj;

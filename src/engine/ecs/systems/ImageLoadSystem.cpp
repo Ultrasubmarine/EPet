@@ -1,7 +1,8 @@
-//  TextSystem.cpp
+//
+//  ImageLoadSystem.cpp
 //  EPet
 //
-//  Создано по аналогии с RenderSystem.cpp
+//  Created by marina porkhunova on 03.10.2026.
 //
 
 #include "ImageLoadSystem.hpp"
@@ -28,8 +29,7 @@ void ImageLoadSystem::Init()
         
        // auto& rObj = _registry.emplace_or_replace<RendererObject>(entt);
         rObj.resource = _resourceManager->GetTexture(image.resoursesId);
-        
-     //   _registry.emplace_or_replace<UpdateSorting>(entt);
+
     }
 }
 

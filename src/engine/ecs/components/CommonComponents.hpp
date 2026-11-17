@@ -14,6 +14,7 @@
 #include "Point.h"
 
 #include "json.hpp"
+#include "registry.hpp"
 
 using json = nlohmann::json;
 struct Texture;
@@ -21,15 +22,23 @@ struct Texture;
 
 struct Sorting
 {
+    Sorting() = default;
+    explicit Sorting(int layer): layer(layer) {}
+    
+private:
     int layer = 0;
+    
+public:
+    int GetLayer() const { return layer;}
+    static void SetLayer(entt::registry& registry, entt::entity entity, int value);
     
     static Sorting Load(const json& data);
     static void Save(const Sorting& obj, json& data);
 };
 
-struct UpdateSorting
-{
-    
+// for _registry.ctx. It's not usual component
+struct SortingState {
+    bool dirty = false;
 };
 
 struct Transform

@@ -1,7 +1,8 @@
-//  TextSystem.cpp
+//
+//  TextUpdateSystem.cpp
 //  EPet
 //
-//  Создано по аналогии с RenderSystem.cpp
+//  Created by marina porkhunova on 03.10.2026.
 //
 
 #include "TextUpdateSystem.hpp"
