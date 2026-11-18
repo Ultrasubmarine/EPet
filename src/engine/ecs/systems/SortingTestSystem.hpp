@@ -18,7 +18,7 @@ class SortingTestSystem: public ISystem {
     SYSTEM_BODY(SortingTestSystem)
     
 public:
-    void Init() override {};
+    void Start() override {};
     void Update(double dt) override;
     
 private:

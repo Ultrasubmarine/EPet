@@ -14,7 +14,7 @@ class ShellSystem: public ISystem {
     SYSTEM_BODY(ShellSystem)
     
 public:
-    void Init() override;
+    void Start() override;
     void Update(double dt) override;
 };
 

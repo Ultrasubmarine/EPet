@@ -20,7 +20,7 @@ class GrowingSystem: public ISystem, private StateTicker<LevelTimer> {
     SYSTEM_BODY(GrowingSystem, StateTicker<LevelTimer>(registry))
     
 public:
-    void Init() override;
+    void Start() override;
     void DeInit() override {};
     void Update(double dt) override;
 

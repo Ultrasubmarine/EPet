@@ -12,7 +12,7 @@
 
 SYSTEM_CPP(TextUpdateSystem);
 
-void TextUpdateSystem::Init()
+void TextUpdateSystem::Start()
 {
     _resourceManager = Game::Instance().GetResourceManager();
     

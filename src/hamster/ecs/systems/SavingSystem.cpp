@@ -15,7 +15,7 @@
 
 SYSTEM_CPP(SavingSystem);
 
-void SavingSystem::Init()
+void SavingSystem::Start()
 {
     _playerSave = Game::Instance().GetPlayerSave();
     if(!_playerSave || !_playerSave->GetData())

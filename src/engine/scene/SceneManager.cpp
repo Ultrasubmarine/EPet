@@ -54,8 +54,11 @@ void SceneManager::LoadScene(std::string id)
     
     std::vector systemIds = GetSystemsIds(data.get());
     LoadSystems(_currentScene, systemIds, _registry);
+    _currentScene->OnSystemsLoaded();
+    
     LoadObjects(data.get(), _registry);
-
+    _currentScene->OnComponentsLoaded();
+    
     // end of loadding
     _currentScene->Start();
     OnCreate.Broadcast(_currentScene);

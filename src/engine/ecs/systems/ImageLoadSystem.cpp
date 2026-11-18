@@ -12,7 +12,7 @@
 
 SYSTEM_CPP(ImageLoadSystem);
 
-void ImageLoadSystem::Init()
+void ImageLoadSystem::Start()
 {
     _resourceManager = Game::Instance().GetResourceManager();
     

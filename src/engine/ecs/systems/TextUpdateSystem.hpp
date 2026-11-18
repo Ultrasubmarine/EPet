@@ -18,7 +18,7 @@ class TextUpdateSystem : public ISystem
 {
     SYSTEM_BODY(TextUpdateSystem)
 public:
-    void Init() override;
+    void Start() override;
     void Update(double dt) override;
     
 private:

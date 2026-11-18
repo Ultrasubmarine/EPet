@@ -42,7 +42,10 @@ public:
     ISystem(entt::registry& registry) : _registry(registry) {};
     virtual ~ISystem() {};
     
-    virtual void Init() {};
+    virtual void OnSystemsLoaded() {}; // systems in scene loaded
+    virtual void OnComponentsLoaded() {}; // components in scene loaded
+    
+    virtual void Start() {};
     virtual void DeInit() {};
     virtual void Update(double dt) {};
     virtual const char*  GetSystemId() const { return "ISystem";};

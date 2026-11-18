@@ -34,12 +34,28 @@ void Scene::AddEntity(std::string& systemId)
     
 }
 
+void Scene::OnSystemsLoaded()
+{
+    for(auto s: _allSystems)
+    {
+        s->OnSystemsLoaded();
+    }
+}
+
+void Scene::OnComponentsLoaded()
+{
+    for(auto s: _allSystems)
+    {
+        s->OnComponentsLoaded();
+    }
+}
+
 void Scene::Start()
 {
     //TODO: call only overrided functions
     for(auto s: _allSystems)
     {
-        s->Init();
+        s->Start();
     }
 }
 

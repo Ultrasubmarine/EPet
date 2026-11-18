@@ -42,7 +42,7 @@ bool GrowingSystem::Load()
 }
 
 
-void GrowingSystem::Init()
+void GrowingSystem::Start()
 {
     if(!Load()) {
         return;

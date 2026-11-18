@@ -13,7 +13,7 @@
 
 SYSTEM_CPP(RenderSystem);
 
-void RenderSystem::Init()
+void RenderSystem::Start()
 {
     _render = Game::Instance().GetRender();
 }
@@ -21,18 +21,14 @@ void RenderSystem::Init()
 void RenderSystem::Update(double dt)
 {
     _render->Clear();
+
+    auto view = _registry.view<Sorting, Transform, RendererObject>();
+    view.use<Sorting>();
     
-    //without sorting
-//    for(auto [entt, trasform, rObj] :_registry.view<Transform, RendererObject>(entt::exclude<Sorting>).each())
-//    {
-//        _render->Draw(rObj.resource.get(), trasform.position.x, trasform.position.y);
-//    }
-    //auto fff = _registry.view<Sorting, Transform, RendererObject>();
-    
-    for(auto [entt, _, trasform, rObj] :_registry.view<Sorting, Transform, RendererObject>().each())
+    for(auto [entity, _, transform, rObj] : view.each())
     {
-        const auto* pivot = _registry.try_get<Pivot>(entt);
-        _render->Draw(rObj.resource.get(), trasform.position.x, trasform.position.y, pivot ? pivot->point : Pivot::TopLeft);
+        const auto* pivot = _registry.try_get<Pivot>(entity);
+        _render->Draw(rObj.resource.get(), transform.position.x, transform.position.y, pivot ? pivot->point : Pivot::TopLeft);
     }
     
     _render->Present();

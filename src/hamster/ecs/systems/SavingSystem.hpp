@@ -16,7 +16,7 @@ class SavingSystem: public ISystem {
     SYSTEM_BODY(SavingSystem)
     
 public:
-    void Init() override;
+    void Start() override;
     void Update(double dt) override;
   
 private:

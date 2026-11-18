@@ -14,7 +14,7 @@ class TestSystem: public ISystem {
     SYSTEM_BODY(TestSystem)
     
 public:
-    void Init() override {};
+    void Start() override {};
     void DeInit() override {};
     void Update(double dt) override;
 };

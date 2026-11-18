@@ -13,7 +13,7 @@
 
 SYSTEM_CPP(ShellSystem);
 
-void ShellSystem::Init()
+void ShellSystem::Start()
 {
     // TODO: 
 }

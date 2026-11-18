@@ -24,7 +24,7 @@ protected:
     StateTicker(entt::registry& registry) : _reg(registry){};
     ~StateTicker() = default;
     
-    /// call in Init() and Update()  in inheritor class
+    /// call in Start() and Update()  in inheritor class
     void InitState();
     void UpdateState();
     ///______________________________

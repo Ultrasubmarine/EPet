@@ -18,7 +18,11 @@ class SortingSystem : public ISystem
 {
     SYSTEM_BODY(SortingSystem)
 public:
-    void Init() override;
+    
+    void OnSystemsLoaded() override;
+    void OnComponentsLoaded() override;
+    
+    void Start() override;
     void DeInit() override;
     
     void Update(double dt) override;

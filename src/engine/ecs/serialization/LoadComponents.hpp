@@ -54,7 +54,7 @@ void GenerateLoadingFunction(const char* typeId, std::function<T(const data&)> l
     static std::function<loadFunction> f =
     [loader](LOAD_FUNCTION_PARAMS)
     {
-        registry.emplace<T>(entity, std::move(loader(data)));
+        registry.emplace_or_replace<T>(entity, loader(data));
     };
     
     ComponentLoader::RegisterLoader(typeId, f);

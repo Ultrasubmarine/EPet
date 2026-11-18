@@ -16,7 +16,7 @@ class AvatarSystem: public ISystem {
     SYSTEM_BODY(AvatarSystem)
     
 public:
-    void Init() override;
+    void Start() override;
     void Update(double dt) override;
     
     bool UpdateAvatar();

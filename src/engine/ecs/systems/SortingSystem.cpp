@@ -12,21 +12,31 @@
 
 SYSTEM_CPP(SortingSystem);
 
-void SortingSystem::Init()
+void SortingSystem::OnSystemsLoaded()
 {
     _registry.on_construct<Sorting>().connect<&SortingSystem::OnSortingChanged>(this);
+    _registry.on_update<Sorting>().connect<&SortingSystem::OnSortingChanged>(this);
     _registry.on_destroy<Sorting>().connect<&SortingSystem::OnSortingChanged>(this);
     
     // components are bound with Sorting component
     _registry.on_construct<Image>().connect<&SortingSystem::OnSpecialComponentAdded>(this);
     _registry.on_construct<Text>().connect<&SortingSystem::OnSpecialComponentAdded>(this);
-    
+}
+
+void SortingSystem::OnComponentsLoaded()
+{
+}
+
+void SortingSystem::Start()
+{
     UpdateObjectsSorting();
+    _registry.ctx().insert_or_assign(SortingState{false});
 }
 
 void SortingSystem::DeInit()
 {
     _registry.on_construct<Sorting>().disconnect<&SortingSystem::OnSortingChanged>(this);
+    _registry.on_update<Sorting>().disconnect<&SortingSystem::OnSortingChanged>(this);
     _registry.on_destroy<Sorting>().disconnect<&SortingSystem::OnSortingChanged>(this);
     
     _registry.on_construct<Image>().disconnect<&SortingSystem::OnSpecialComponentAdded>(this);
@@ -46,7 +56,7 @@ void SortingSystem::UpdateObjectsSorting()
 {
     _registry.sort<Sorting>([](const auto &lhs, const auto &rhs) {
         return lhs.GetLayer() < rhs.GetLayer();
-    });
+    }, entt::insertion_sort{});
 }
 
 void SortingSystem::OnSortingChanged(entt::registry& registry, entt::entity entity)

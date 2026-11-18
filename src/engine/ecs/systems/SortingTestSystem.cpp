@@ -63,7 +63,7 @@ entt::entity SortingTestSystem::AddImage(const std::string& imageId, int layer, 
 {
     auto ent = _registry.create();
     _registry.emplace<Transform>(ent, position);
-    _registry.emplace<Sorting>(ent, layer);
+    _registry.emplace_or_replace<Sorting>(ent, layer);
     _registry.emplace<Image>(ent, imageId);
     _registry.emplace<RendererObject>(ent);
     return ent;
@@ -86,7 +86,9 @@ void SortingTestSystem::LogDrawOrder(const char* step)
 {
     // same view as in RenderSystem
     std::ostringstream order;
-    for(auto [ent, sorting, transform, rObj] : _registry.view<Sorting, Transform, RendererObject>().each())
+    auto view = _registry.view<Sorting, Transform, RendererObject>();
+    view.use<Sorting>();
+    for(auto [ent, sorting, transform, rObj] : view.each())
     {
         const auto* image = _registry.try_get<Image>(ent);
         order << "[" << (image ? image->resoursesId : "?") << " layer " << sorting.GetLayer() << (rObj.resource ? "" : " NO TEXTURE") << "] ";

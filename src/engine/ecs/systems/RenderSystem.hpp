@@ -17,7 +17,7 @@ class RenderSystem: public ISystem {
     SYSTEM_BODY(RenderSystem)
     
 public:
-    void Init() override;
+    void Start() override;
     void DeInit() override {};
     void Update(double dt) override;
     

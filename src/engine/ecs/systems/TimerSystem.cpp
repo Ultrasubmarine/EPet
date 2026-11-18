@@ -15,7 +15,7 @@
 SYSTEM_CPP(TimerSystem);
 
 
-void TimerSystem::Init()
+void TimerSystem::Start()
 {
 //    entt::entity entity;
 //    if(CreateTimer(10.0, &entity))
@@ -24,7 +24,7 @@ void TimerSystem::Init()
 //        _registry.emplace<SetNewFont>(entity, DEFAULT_FONT);
 //        
 //        _registry.emplace<RendererObject>(entity);
-//        _registry.emplace<Sorting>(entity, 1000);
+//        _registry.emplace_or_replace<Sorting>(entity, 1000);
 //        _registry.emplace<Transform>(entity, IPoint(50, 50));
 //    }
 }

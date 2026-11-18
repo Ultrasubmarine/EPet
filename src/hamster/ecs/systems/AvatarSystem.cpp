@@ -20,7 +20,7 @@
 
 SYSTEM_CPP(AvatarSystem);
 
-void AvatarSystem::Init()
+void AvatarSystem::Start()
 {
     if(!_registry.storage<Avatar>().empty())
     {

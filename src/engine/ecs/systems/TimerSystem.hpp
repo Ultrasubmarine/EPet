@@ -14,7 +14,7 @@ class TimerSystem: public ISystem {
     SYSTEM_BODY(TimerSystem)
     
 public:
-    void Init() override;
+    void Start() override;
     void DeInit() override {};
     void Update(double dt) override;
 };

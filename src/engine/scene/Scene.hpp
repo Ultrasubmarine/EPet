@@ -35,6 +35,9 @@ public:
     
     void AddEntity(std::string& systemId);
     
+    void OnSystemsLoaded(); // after loading systems
+    void OnComponentsLoaded(); // after loading objects/components
+    
     void Start();
     void Update(double dt);
     void Destroy();

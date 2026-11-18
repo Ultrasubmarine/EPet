@@ -18,7 +18,7 @@ class ImageLoadSystem : public ISystem
 {
     SYSTEM_BODY(ImageLoadSystem)
 public:
-    void Init() override;
+    void Start() override;
     void Update(double dt) override;
     
 private:
