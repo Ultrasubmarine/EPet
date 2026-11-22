@@ -65,7 +65,6 @@
        
        "TimerSystem",
        "TextUpdateSystem",
-       "AAATestSystem",
        
        "GrowingSystem",
        "ShellSystem",

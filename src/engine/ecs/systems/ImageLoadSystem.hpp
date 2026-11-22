@@ -18,12 +18,16 @@ class ImageLoadSystem : public ISystem
 {
     SYSTEM_BODY(ImageLoadSystem)
 public:
+    void OnSystemsLoaded() override;
     void Start() override;
+    void DeInit() override;
     void Update(double dt) override;
     
 private:
+    void LoadImage(Image& image, RendererObject& obj);
+    void OnImageChanged(entt::registry& registry, entt::entity entity);
     
-    ResourceManager* _resourceManager;
+    ResourceManager* _resourceManager = nullptr;
 };
 
 #endif /* ImageLoadSystem_hpp */

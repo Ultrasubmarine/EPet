@@ -72,6 +72,24 @@ void Sorting::Save(const Sorting& obj, json& data)
     WriteValue<int>(data, "/layer", obj.layer);
 }
 
+void Image::SetImage(entt::registry& registry, entt::entity entity, std::string resourceId)
+{
+    auto* image = registry.try_get<Image>(entity);
+    if(!image)
+    {
+        LOG_ERROR("Image not found. New image [" << resourceId << "] not set");
+        return;
+    }
+    
+    if(image->resoursesId == resourceId)
+    {
+        return;
+    }
+    
+    image->resoursesId = std::move(resourceId);
+    registry.emplace_or_replace<UpdateImage>(entity);
+}
+
 Image Image::Load(const json& data)
 {
     Image obj;

@@ -70,11 +70,22 @@ struct Pivot
 
 struct Image
 {
+    Image() = default;
+    explicit Image(const std::string& resoursesId): resoursesId(resoursesId) {}
+    
+private:
     std::string resoursesId;
-    //std::shared_ptr<Texture> resource;
+ 
+public:
+    const std::string& GetImageId() const { return resoursesId;}
+    static void SetImage(entt::registry& registry, entt::entity entity, std::string resourceId);
     
     static Image Load(const json& data);
     static void Save(const Image& obj, json& data);
+};
+
+struct UpdateImage
+{
 };
 
 struct Animation;

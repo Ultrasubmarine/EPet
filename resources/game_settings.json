@@ -4,5 +4,5 @@
         "screen" : { "width" : 320, "height" : 240}
     },
     "fps": 5,
-    "main_scene": "sorting_test"
+    "main_scene": "scene2"
 }

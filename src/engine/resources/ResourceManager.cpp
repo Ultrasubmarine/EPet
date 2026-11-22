@@ -33,7 +33,7 @@ ResourceManager::~ResourceManager()
     delete _textureLoader;
 }
 
-std::shared_ptr<Texture> ResourceManager::GetTexture(std::string& title)
+std::shared_ptr<Texture> ResourceManager::GetTexture(const std::string& title)
 {
     if (auto t = _textureLoader->GetTexture(title)) {
         return t;

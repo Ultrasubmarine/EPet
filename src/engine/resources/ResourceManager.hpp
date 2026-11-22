@@ -57,7 +57,7 @@ public:
     bool SaveJson(const std::string& title, const json* src, ResourceType type) const;
     
     //Texture
-    std::shared_ptr<Texture> GetTexture(std::string& title);
+    std::shared_ptr<Texture> GetTexture(const std::string& title);
     
     //TextTexture
     std::shared_ptr<Texture> GetTextTexture(std::string& title, std::shared_ptr<Font> font, const FontSettings &settings);

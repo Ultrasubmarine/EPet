@@ -98,7 +98,13 @@ std::shared_ptr<const Animation> AnimationLoader::LoadAnimation(const std::strin
         std::vector<std::shared_ptr<Texture>> frames;
         for(auto& f : frameNames)
         {
-            frames.push_back(_resourceManager->GetTexture(f));
+            auto texture = _resourceManager->GetTexture(f);
+            if(!texture)
+            {
+                LOG_WARNING("Frame [" << f << "] not found in [" << name << ".json]. Skipped");
+                continue;
+            }
+            frames.push_back(std::move(texture));
         }
         
         

@@ -43,11 +43,11 @@ void AnimationUpdateSystem::Update(double dt)
         {
             LOG_ERROR("Animation [" << animator.animation->_name << "] has no frames");
             FinishAnimation(entt, animator);
-            return;
+            continue;
         }
         
         int currentFrameIndex = CalculateCurrentFrame(entt, animator);
-        SwitchFrame(entt, animator, rObj, image, currentFrameIndex);
+        SwitchFrame(entt, animator, currentFrameIndex);
         
         animator.timer += dt;
     }
@@ -94,17 +94,9 @@ int AnimationUpdateSystem::CalculateCurrentFrame(entt::entity, Animator& animato
     return currentFrameIndex;
 }
 
-void AnimationUpdateSystem::SwitchFrame(entt::entity, Animator& animator, RendererObject& rObj, Image& image, int frameIndex) const
+void AnimationUpdateSystem::SwitchFrame(entt::entity entity, Animator& animator, int frameIndex) const
 {
-    if(rObj.resource == animator.animation->_frames[frameIndex])
-    {
-        return;
-    }
-    
-    //LOG_MESSAGE("Frame [" << frameIndex << "] set to [" << image.resoursesId << "]");
-    rObj.resource = animator.animation->_frames[frameIndex];
-    image.resoursesId = animator.animation->_frames[frameIndex]->name;
-    
+    Image::SetImage(_registry, entity, animator.animation->_frames[frameIndex]->name);
     animator.frame = frameIndex;
 }
 

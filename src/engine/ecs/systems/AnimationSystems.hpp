@@ -13,8 +13,6 @@
 #include "ISystem.hpp"
 
 struct Animator;
-struct Image;
-struct RendererObject;
 struct Animation;
 
 
@@ -26,7 +24,7 @@ public:
     
 private:
     
-    void SwitchFrame(entt::entity, Animator& animator, RendererObject& rObj, Image& image, int frameIndex) const;
+    void SwitchFrame(entt::entity entity, Animator& animator, int frameIndex) const;
     int CalculateCurrentFrame(entt::entity, Animator& animator) const;
     void FinishAnimation(entt::entity, Animator& animator) const;
     
